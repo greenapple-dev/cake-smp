@@ -5,7 +5,6 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cake SMP</title>
 <link rel="icon" href="Cake.jpeg" type="image/jpeg">
-
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -22,10 +21,9 @@
     --shadow: 0 10px 30px rgba(0,0,0,0.5);
     --font-display: 'Press Start 2P', monospace;
   }
-
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0; height:100%;}
-  
+ 
   .bg-video {
     position: fixed;
     right: 0;
@@ -35,23 +33,20 @@
     z-index: -2;
     object-fit: cover;
   }
-  
+ 
   .bg-overlay {
     position: fixed;
     inset: 0;
     background: rgba(28, 17, 22, 0.4);
     z-index: -1;
   }
-
   body{
     color: var(--cream);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
     overflow-x:hidden;
   }
-
   .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; }
-
   header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:14px; }
   .brand-mark{
@@ -65,34 +60,38 @@
   .brand-mark img { width:70%; height:70%; object-fit:contain; image-rendering: pixelated; }
   .brand-text h1{ font-family: var(--font-display); font-size: 18px; margin:0; font-weight:600; color: var(--cream); text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .brand-text p{ margin:4px 0 0; font-size:11px; color:var(--text-dim); font-family: var(--font-display); }
-
   .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; }
-
   .grid{ display:grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 18px; }
-  
+ 
   /* Osnovni stil kartice */
-  .card{ 
-    position:relative; 
-    border-radius: var(--radius); 
-    overflow:hidden; 
-    background: var(--card-bg); 
-    backdrop-filter: blur(8px); 
-    border:1px solid var(--card-border); 
-    box-shadow: var(--shadow); 
+  .card{
+    position:relative;
+    border-radius: var(--radius);
+    overflow:hidden;
+    background: var(--card-bg);
+    backdrop-filter: blur(8px);
+    border:1px solid var(--card-border);
+    box-shadow: var(--shadow);
   }
-  
+ 
   .card-icon{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; }
-  
-  /* Store i Stats kartice koje potpuno ispunjavaju okvir sa slikom */
+ 
+  /* Store i Stats – slike ispunjavaju cijeli okvir */
   .card-store, .card-stats {
     grid-column: span 2;
     grid-row: span 2;
-    background-size: cover !important;
-    background-position: center !important;
-    background-repeat: no-repeat !important;
     cursor: pointer;
   }
-
+  .card-bg-img {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    z-index: 0;
+    display: block;
+  }
   /* Tamni gradijent preko slike da se tekst savršeno vidi */
   .card-store::after, .card-stats::after {
     content: '';
@@ -100,8 +99,8 @@
     inset: 0;
     background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.65) 100%);
     pointer-events: none;
+    z-index: 1;
   }
-
   .card-content-over {
     position: absolute;
     inset: 0;
@@ -111,7 +110,6 @@
     justify-content: flex-start;
     z-index: 2;
   }
-
   .media-label {
     font-family: var(--font-display);
     font-weight: 600;
@@ -119,30 +117,24 @@
     color: #fff;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
-
   .card-discord{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:18px; gap:6px; }
   .card-join{ grid-column: span 2; grid-row: span 2; background: rgba(36, 21, 28, 0.9); padding: 20px 22px; display:flex; flex-direction:column; justify-content:center; gap: 10px; }
   .card-countdown{ grid-column: span 4; grid-row: span 1; min-height:150px; display:flex; align-items:center; justify-content:space-between; padding: 22px 28px; background: rgba(42, 25, 34, 0.85); flex-wrap:wrap; gap:16px; }
-
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
     .card-icon,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
     .card-countdown{ grid-column: span 2; }
   }
-
   .icon-media{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; }
   .copy-row{ display:flex; align-items:center; gap:10px; padding: 14px 16px; background: rgba(0,0,0,0.4); cursor:pointer; user-select:none; }
   .copy-row span{ font-weight:700; font-family: var(--font-display); font-size:11px; letter-spacing:0.5px; }
-
   .discord-icon{ width:42px; height:42px; margin-bottom:4px; }
   .discord-count{ font-family: var(--font-display); font-size:20px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .discord-sub{ display:flex; align-items:center; gap:6px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
   .dot-live{ width:8px; height:8px; border-radius:50%; background: var(--mint); box-shadow:0 0 8px var(--mint); }
   .discord-join{ margin-top:8px; font-size:11px; color: var(--frosting-pink); text-decoration:none; font-weight:600; font-family: var(--font-display); }
-
   .field-label{ font-family: var(--font-display); font-size:9.5px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:3px; }
   .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 7px 10px; font-family:'JetBrains Mono', monospace; font-size:12px; color:#fff; }
-
   .cd-left{ display:flex; flex-direction:column; gap:4px; }
   .cd-title{ font-family: var(--font-display); font-size:15px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .cd-sub{ font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
@@ -150,9 +142,7 @@
   .cd-unit{ background: rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding: 10px 14px; text-align:center; min-width: 68px; }
   .cd-unit .num{ font-family: var(--font-display); font-size:16px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .cd-unit .lbl{ font-size:8px; letter-spacing:1px; color: var(--text-dim); text-transform:uppercase; font-family: var(--font-display); margin-top: 4px; }
-
   footer{ text-align:center; margin-top:40px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
-
   .modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.7); display:none; align-items:center; justify-content:center; z-index:100; backdrop-filter: blur(4px); }
   .modal-overlay.show{ display:flex; }
   .modal{ background: #2a1922; border:1px solid var(--card-border); border-radius:20px; padding:28px; width:420px; box-shadow: var(--shadow); max-height: 90vh; overflow-y: auto; }
@@ -161,23 +151,19 @@
   .modal-actions{ display:flex; gap:10px; margin-top:14px; }
   .modal-actions button{ flex:1; padding:10px 12px; border-radius:10px; border:none; cursor:pointer; font-weight:600; font-size:11px; font-family: var(--font-display); }
   .btn-ghost{ background: transparent; color: var(--text-dim); border:1px solid rgba(255,255,255,0.15) !important; }
-
   .passes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; max-height: 250px; overflow-y: auto; }
   .pass-item { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
   .pass-info { flex: 1; display:flex; flex-direction:column; gap:4px; }
   .pass-buy-btn { background: var(--mint); color: #142a24; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; font-family: var(--font-display); }
-
   .toast{ position:fixed; bottom:24px; left:50%; transform: translateX(-50%) translateY(20px); background: #2a1922; border:1px solid var(--card-border); padding:12px 20px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; pointer-events:none; transition: all .25s ease; z-index:200; box-shadow: var(--shadow); font-family: var(--font-display); }
   .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
-
 <video autoplay muted loop playsinline class="bg-video">
   <source src="BackgroundWebsite.mp4" type="video/mp4">
 </video>
 <div class="bg-overlay"></div>
-
 <div class="wrap">
   <header class="top">
     <div class="brand">
@@ -190,11 +176,9 @@
       </div>
     </div>
   </header>
-
   <svg class="drip-divider" viewBox="0 0 1180 14" preserveAspectRatio="none">
     <path d="M0,0 L1180,0 L1180,4 C1100,12 1060,2 1000,8 C940,14 900,2 840,7 C780,12 740,2 680,7 C620,12 580,2 520,7 C460,12 420,2 360,7 C300,12 260,2 200,7 C140,12 100,2 40,7 C20,9 10,4 0,4 Z" fill="#ff7fab" opacity="0.55"/>
   </svg>
-
   <div class="grid">
     <!-- Prva kartica (Lijevo gore) -->
     <div class="card card-icon">
@@ -207,8 +191,9 @@
       </div>
     </div>
 
-    <!-- Store kartica (Slika ispunjava cijeli okvir) -->
-    <div class="card card-store" id="openStoreBtn" style="background-image: url('StoreIcon2.png');">
+    <!-- Store kartica – slika ispunjava cijeli okvir -->
+    <div class="card card-store" id="openStoreBtn">
+      <img src="StoreIcon2.png" alt="Store" class="card-bg-img">
       <div class="card-content-over">
         <span class="media-label">Store</span>
       </div>
@@ -225,8 +210,9 @@
       <a class="discord-join" href="https://discord.gg/uZbNkQv9c" target="_blank">Join Discord →</a>
     </div>
 
-    <!-- Stats kartica (Slika ispunjava cijeli okvir) -->
-    <div class="card card-stats" style="background-image: url('StatsIcon.png');">
+    <!-- Stats kartica – slika ispunjava cijeli okvir -->
+    <div class="card card-stats">
+      <img src="StatsIcon.png" alt="Stats" class="card-bg-img">
       <div class="card-content-over">
         <span class="media-label">Stats</span>
       </div>
@@ -247,7 +233,6 @@
         <div class="field-box" id="bedrockAddressField">185.207.164.151:25565</div>
       </div>
     </div>
-
     <div class="card card-countdown">
       <div class="cd-left">
         <div class="cd-title">End fight</div>
@@ -260,11 +245,9 @@
         <div class="cd-unit"><div class="num" id="cdSecs">--</div><div class="lbl">sec</div></div>
       </div>
     </div>
-
   </div>
   <footer>Made for Cake SMP 🍰</footer>
 </div>
-
 <div class="modal-overlay" id="storeModalOverlay">
   <div class="modal">
     <h3>Cake SMP Store</h3>
@@ -275,9 +258,7 @@
     </div>
   </div>
 </div>
-
 <div class="toast" id="toast"></div>
-
 <script>
 (function(){
   const config = {
@@ -288,14 +269,12 @@
       { name: 'Support', price: '$1.00', type: 'One-time Payment' }
     ]
   };
-
   function showToast(msg){
     const t = document.getElementById('toast');
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(()=>t.classList.remove('show'), 2000);
   }
-
   function renderPasses(){
     const container = document.getElementById('passesListContainer');
     container.innerHTML = '';
@@ -315,20 +294,15 @@
       container.appendChild(item);
     });
   }
-
   renderPasses();
-
   const storeModalOverlay = document.getElementById('storeModalOverlay');
   document.getElementById('openStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.add('show'));
   document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
-
   function updateCountdown(){
     if(!config.countdownDate) return;
     const target = new Date(config.countdownDate).getTime();
     const diff = target - Date.now();
-
     document.getElementById('countdownDateDisplay').textContent = new Date(config.countdownDate).toLocaleString();
-
     if(diff <= 0){
       document.getElementById('cdDays').textContent = '00';
       document.getElementById('cdHours').textContent = '00';
@@ -336,12 +310,10 @@
       document.getElementById('cdSecs').textContent = '00';
       return;
     }
-
     const days = Math.floor(diff / (1000 * 60 * 60 * 24));
     const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
     const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
     const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
     document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
     document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
     document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
@@ -349,12 +321,10 @@
   }
   setInterval(updateCountdown, 1000);
   updateCountdown();
-
   document.getElementById('copyRow').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
     showToast('IP kopiran!');
   });
-
   async function fetchServerStatus(){
     try {
       const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress);
