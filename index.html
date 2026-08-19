@@ -124,7 +124,7 @@
     grid-column: span 4; grid-row: span 1;
     min-height: 150px; display: flex; align-items: center; justify-content: space-between;
     padding: 22px 28px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), url('end_fight.jfif');
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), url('end_fight.png');
     background-size: cover; background-position: center; background-repeat: no-repeat;
     flex-wrap: wrap; gap: 16px;
   }
@@ -284,7 +284,6 @@
       </div>
     </div>
 
-    <!-- SERVER STATUS I ODVOJENI IP/PORT -->
     <div class="card card-join">
       <div style="font-family:var(--font-display); font-size:11px; font-weight:600;">Server Status & IP</div>
       <div>
@@ -458,7 +457,8 @@
 
   async function fetchServerStatus(){
     try {
-      const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress);
+      // Dodan vremenski žig (?_=[time]) da spriječimo browser cache i povučemo svježe podatke
+      const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress + '?_=' + new Date().getTime());
       const data = await res.json();
       const countEl = document.getElementById('smpPlayersCount');
       if(data.online){
@@ -471,7 +471,7 @@
     }
   }
   fetchServerStatus();
-  setInterval(fetchServerStatus, 30000);
+  setInterval(fetchServerStatus, 5000); // Provjerava se svakih 5 sekundi
 
   function verifyBackgroundImage(selector, url){
     const img = new Image();
@@ -484,7 +484,7 @@
   verifyBackgroundImage('.card-icon', 'Cakelogo.png');
   verifyBackgroundImage('.card-store', 'store_icon.png');
   verifyBackgroundImage('.card-stats', 'StatsIcon.png');
-  verifyBackgroundImage('.card-countdown', 'end_fight.jfif'); // Ispravljeno na .jfif
+  verifyBackgroundImage('.card-countdown', 'end_fight.png');
 
   const bgVideo = document.getElementById('bgVideo');
   if (bgVideo) {
