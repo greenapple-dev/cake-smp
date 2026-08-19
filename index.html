@@ -39,7 +39,7 @@
   .bg-overlay {
     position: fixed;
     inset: 0;
-    background: rgba(28, 17, 22, 0.75);
+    background: rgba(28, 17, 22, 0.6);
     z-index: -1;
   }
 
@@ -131,7 +131,7 @@
 </head>
 <body>
 
-<video autoplay muted loop class="bg-video">
+<video autoplay muted loop playsinline class="bg-video">
   <source src="BackgroundWebsite.mp4" type="video/mp4">
 </video>
 <div class="bg-overlay"></div>
@@ -315,7 +315,7 @@
       const data = await res.json();
       const countEl = document.getElementById('smpPlayersCount');
       if(data.online){
-        countEl.textContent = data.players.online + ' / ' + data.players.max;
+        countEl.textContent = data.players.online + ' / ' + data.players.max + ' online';
       } else {
         countEl.textContent = 'Server Offline';
       }
