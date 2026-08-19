@@ -197,8 +197,9 @@
 </head>
 <body>
 
+<!-- OVDJE JE PROMIJENJENO: back.mp4 -->
 <video id="bgVideo" class="bg-video" autoplay muted loop playsinline poster="Cakelogo.png">
-  <source src="BackgroundWebsite.mp4" type="video/mp4">
+  <source src="back.mp4" type="video/mp4">
 </video>
 <div class="bg-overlay"></div>
 
@@ -414,13 +415,13 @@
   verifyBackgroundImage('.card-stats', 'StatsIcon.png');
   verifyBackgroundImage('.card-countdown', 'end_fight.png');
 
+  // Osigurava da se video automatski pokrene
   const bgVideo = document.getElementById('bgVideo');
   if (bgVideo) {
     bgVideo.muted = true;
-    const playPromise = bgVideo.play();
-    if (playPromise !== undefined) {
-      playPromise.catch(() => {});
-    }
+    bgVideo.play().catch(() => {
+        console.log("Autoplay blokiran od strane preglednika, korisnik treba kliknuti na stranicu.");
+    });
   }
 })();
 </script>
