@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Cake SMP</title>
+<link rel="icon" href="Cake.jpeg" type="image/jpeg">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
@@ -28,9 +29,7 @@
   html,body{margin:0;padding:0;}
   body{
     background-color: var(--bg);
-    background-image:
-      radial-gradient(circle at 15% 8%, rgba(255,127,171,0.10), transparent 40%),
-      radial-gradient(circle at 85% 92%, rgba(127,224,196,0.08), transparent 40%);
+    background-image: linear-gradient(rgba(28, 17, 22, 0.75), rgba(28, 17, 22, 0.85)), url('image_1bcd0e.png');
     color: var(--cream);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
@@ -41,27 +40,19 @@
     background-attachment: fixed;
   }
 
-  #bgVideo {
-    position: fixed;
-    top: 50%; left: 50%;
-    min-width: 100%; min-height: 100%;
-    width: auto; height: auto;
-    transform: translate(-50%, -50%);
-    z-index: -1; object-fit: cover; display: none;
-  }
-
   .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; }
 
   header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:14px; }
   .brand-mark{
     width:52px;height:52px;border-radius:14px;
-    background: linear-gradient(180deg, #1fa2ff 0%, #12d8fa 50%, #a6ffcb 100%);
+    background: linear-gradient(180deg, #3a2318 0%, #24151c 100%);
     display:flex;align-items:center;justify-content:center;
-    box-shadow: 0 6px 16px rgba(31,162,255,0.35);
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
     position:relative; overflow:hidden; flex-shrink:0;
+    border: 1px solid var(--card-border);
   }
-  .brand-mark img { width:80%; height:80%; object-fit:contain; }
+  .brand-mark img { width:70%; height:70%; object-fit:contain; image-rendering: pixelated; }
   .brand-text h1{ font-family: var(--font-display); font-size: 18px; margin:0; font-weight:600; color: var(--cream); text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .brand-text p{ margin:4px 0 0; font-size:11px; color:var(--text-dim); font-family: var(--font-display); }
 
@@ -83,7 +74,7 @@
     .card-countdown{ grid-column: span 2; }
   }
 
-  .icon-media{ flex:1; background: linear-gradient(160deg, #33bdf2, #1f8fd6); display:flex; align-items:center; justify-content:center; position:relative; background-size:cover; background-position:center; }
+  .icon-media{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; background-color: #24151c; }
   .copy-row{ display:flex; align-items:center; gap:10px; padding: 14px 16px; background: rgba(0,0,0,0.25); cursor:pointer; user-select:none; }
   .copy-row span{ font-weight:700; font-family: var(--font-display); font-size:11px; letter-spacing:0.5px; }
 
@@ -117,7 +108,6 @@
   .modal p{ margin:0 0 16px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
   .modal-actions{ display:flex; gap:10px; margin-top:14px; }
   .modal-actions button{ flex:1; padding:10px 12px; border-radius:10px; border:none; cursor:pointer; font-weight:600; font-size:11px; font-family: var(--font-display); }
-  .btn-primary{ background: linear-gradient(145deg, var(--frosting-pink), var(--frosting-pink-deep)); color:#2a1017; }
   .btn-ghost{ background: transparent; color: var(--text-dim); border:1px solid rgba(255,255,255,0.15) !important; }
 
   .passes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; max-height: 250px; overflow-y: auto; }
@@ -131,13 +121,11 @@
 </head>
 <body>
 
-<video id="bgVideo" autoplay muted loop></video>
-
 <div class="wrap">
   <header class="top">
     <div class="brand">
-      <div class="brand-mark" id="brandMark">
-        <img id="brandImg" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHpJREFUeNpi/P//P8NQA6wMIMAAJgYQZIAhC0wD2GagKYYaYAgyMAQZIMggwEBAcICBYIMgM04D2L2gA2Yg2ADdEa4XhA92Q3QzAGYj1DQAw0C6E6E6kI6E7QO41AFAdo4CIBc4z2A7E1b7C8AGACzOEVW919y6AAAAAElFTkSuQmCC" alt="Logo">
+      <div class="brand-mark">
+        <img src="Cake.jpeg" alt="Cake Logo">
       </div>
       <div class="brand-text">
         <h1 id="siteTitle">CAKE SMP</h1>
@@ -152,8 +140,8 @@
 
   <div class="grid">
     <div class="card card-icon">
-      <div class="icon-media" id="iconMedia">
-        <img id="iconImgEl" style="width:100%; height:100%; object-fit:cover;" src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAHpJREFUeNpi/P//P8NQA6wMIMAAJgYQZIAhC0wD2GagKYYaYAgyMAQZIMggwEBAcICBYIMgM04D2L2gA2Yg2ADdEa4XhA92Q3QzAGYj1DQAw0C6E6E6kI6E7QO41AFAdo4CIBc4z2A7E1b7C8AGACzOEVW919y6AAAAAElFTkSuQmCC" alt="Icon">
+      <div class="icon-media">
+        <img src="Cake.jpeg" style="width: 70%; height: 70%; object-fit: contain; image-rendering: pixelated;" alt="Cake Icon">
       </div>
       <div class="copy-row" id="copyRow">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -162,7 +150,7 @@
     </div>
 
     <div class="card card-store" id="openStoreBtn">
-      <div class="media-card" id="storeMedia" style="background-image:url('https://images.unsplash.com/photo-1607346256330-dee7af15f7c5?q=80&w=1200&auto=format&fit=crop');">
+      <div class="media-card" id="storeMedia" style="background-image:url('StoreIcon2.png');">
         <span class="media-label" id="storeLabel">Store</span>
       </div>
     </div>
@@ -178,7 +166,7 @@
     </div>
 
     <div class="card card-stats">
-      <div class="media-card" id="statsMedia" style="background-image:url('https://images.unsplash.com/photo-1618609255910-503527edd7f3?q=80&w=1200&auto=format&fit=crop');">
+      <div class="media-card" id="statsMedia" style="background-image:url('StatsIcon.png');">
         <span class="media-label" id="statsLabel">Stats</span>
       </div>
     </div>
@@ -201,7 +189,7 @@
 
     <div class="card card-countdown">
       <div class="cd-left">
-        <div class="cd-title" id="countdownName">Season 3 Launch</div>
+        <div class="cd-title" id="countdownName">End fight</div>
         <div class="cd-sub" id="countdownDateDisplay">Loading…</div>
       </div>
       <div class="cd-timer" id="cdTimer">
@@ -220,9 +208,7 @@
   <div class="modal" style="width: 420px;">
     <h3>Cake SMP Store</h3>
     <p>Purchase server ranks and items.</p>
-    
     <div class="passes-list" id="passesListContainer"></div>
-
     <div class="modal-actions" style="margin-top: 14px;">
       <button class="btn-ghost" id="closeStoreBtn">Close</button>
     </div>
@@ -233,23 +219,14 @@
 
 <script>
 (function(){
-  // OVDJE MIJENJAŠ PODATKE KOJI SU TRAJNI ZA SVE LJUDE ZAUVIJEK:
+  // Ovdje su fiksno upisane sve tvoje postavke za sve ljude:
   const config = {
-    siteTitle: 'CAKE SMP',
-    tagline: 'Minecraft Survival Multiplayer',
-    addressLabel: 'cakesmp.minecraft.co.com',
-    storeLabel: 'Store',
-    statsLabel: 'Stats',
-    discordCount: '137',
-    discordOnline: '46 Online',
     serverAddress: 'cakesmp.minecraft.co.com',
-    bedrockAddress: '185.207.164.151:25565',
-    countdownName: 'Season 3 Launch',
-    countdownDate: '2026-12-31T23:59', // Ovdje možeš promijeniti datum i vrijeme odbrojavanja
+    countdownName: 'End fight',
+    countdownDate: '2026-08-20T20:00', // Sutra u 20:00
     passes: [
-      { name: 'VIP Rank', price: '$5.00', type: 'One-time Payment' },
-      { name: 'MVP Rank', price: '$12.00', type: 'Monthly Subscription' },
-      { name: 'Mystery Crate Key x5', price: '$3.50', type: 'One-time Payment' }
+      { name: 'Premium', price: '$5.00', type: 'Monthly Subscription' },
+      { name: 'Support', price: '$1.00', type: 'One-time Payment' }
     ]
   };
 
@@ -258,21 +235,6 @@
     t.textContent = msg;
     t.classList.add('show');
     setTimeout(()=>t.classList.remove('show'), 2000);
-  }
-
-  function renderAll(){
-    document.getElementById('siteTitle').textContent = config.siteTitle;
-    document.getElementById('tagline').textContent = config.tagline;
-    document.getElementById('addressLabel').textContent = config.addressLabel;
-    document.getElementById('storeLabel').textContent = config.storeLabel;
-    document.getElementById('statsLabel').textContent = config.statsLabel;
-    document.getElementById('discordCount').textContent = config.discordCount;
-    document.getElementById('discordOnline').textContent = config.discordOnline;
-    document.getElementById('serverAddressField').textContent = config.serverAddress;
-    document.getElementById('bedrockAddressField').textContent = config.bedrockAddress;
-    document.getElementById('countdownName').textContent = config.countdownName;
-
-    renderPasses();
   }
 
   function renderPasses(){
@@ -288,31 +250,27 @@
         </div>
         <div style="display:flex; align-items:center; gap:8px;">
           <span style="font-weight:700; color:var(--gold); font-size:12px; font-family:var(--font-display);">${pass.price}</span>
-          <button class="pass-buy-btn" onclick="alert('Uspješno odabrano: ${pass.name}')">Buy</button>
+          <button class="pass-buy-btn" onclick="alert('Odabrano: ${pass.name}')">Buy</button>
         </div>
       `;
       container.appendChild(item);
     });
   }
 
-  renderAll();
+  renderPasses();
 
   // Store modal listeners
   const storeModalOverlay = document.getElementById('storeModalOverlay');
-  document.getElementById('openStoreBtn').addEventListener('click', ()=>{
-    storeModalOverlay.classList.add('show');
-  });
+  document.getElementById('openStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.add('show'));
   document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
 
   // Countdown logic
   function updateCountdown(){
     if(!config.countdownDate) return;
     const target = new Date(config.countdownDate).getTime();
-    const now = Date.now();
-    const diff = target - now;
+    const diff = target - Date.now();
 
-    const dateDisp = document.getElementById('countdownDateDisplay');
-    dateDisp.textContent = new Date(config.countdownDate).toLocaleString();
+    document.getElementById('countdownDateDisplay').textContent = new Date(config.countdownDate).toLocaleString();
 
     if(diff <= 0){
       document.getElementById('cdDays').textContent = '00';
@@ -337,8 +295,7 @@
 
   // Copy IP handler
   document.getElementById('copyRow').addEventListener('click', ()=>{
-    const text = document.getElementById('addressLabel').textContent;
-    navigator.clipboard.writeText(text);
+    navigator.clipboard.writeText(config.serverAddress);
     showToast('IP kopiran u međuspremnik!');
   });
 
