@@ -80,7 +80,16 @@
     box-shadow: var(--shadow); 
   }
   
-  .card-icon{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; }
+  /* Prva kartica uređena da bude poput Store i Stats kartica */
+  .card-icon{ 
+    grid-column: span 1; 
+    grid-row: span 2; 
+    background-image: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%), url('Cakelogo.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    cursor: pointer;
+  }
   
   .card-store {
     grid-column: span 2;
@@ -129,12 +138,6 @@
     .card-icon,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
     .card-countdown{ grid-column: span 2; }
   }
-
-  .icon-media{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; }
-  
-  /* Ispravljeno: manji font i prilagođen padding da IP adresa stane u potpunosti */
-  .copy-row{ display:flex; align-items:center; gap:6px; padding: 12px 10px; background: rgba(0,0,0,0.5); cursor:pointer; user-select:none; white-space: nowrap; overflow: hidden; }
-  .copy-row span{ font-weight:700; font-family: var(--font-display); font-size: 7.5px; letter-spacing: 0px; }
 
   .discord-icon{ width:42px; height:42px; margin-bottom:4px; }
   .discord-count{ font-family: var(--font-display); font-size:20px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
@@ -198,14 +201,10 @@
   </svg>
 
   <div class="grid">
-    <!-- Prva kartica -->
-    <div class="card card-icon">
-      <div class="icon-media">
-        <img src="Cakelogo.png" style="width: 65%; height: 65%; object-fit: contain; image-rendering: pixelated;" alt="Cake Icon">
-      </div>
-      <div class="copy-row" id="copyRow">
-        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-        <span id="addressLabel">cakesmp.minecraft.co.com</span>
+    <!-- Prva kartica uređena da ispunjava cijeli prostor poput Store i Stats kartica -->
+    <div class="card card-icon" id="copyCardBtn">
+      <div class="card-content-over">
+        <span class="media-label">Cake SMP</span>
       </div>
     </div>
 
@@ -352,7 +351,8 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  document.getElementById('copyRow').addEventListener('click', ()=>{
+  // Klikom na prvu karticu sada se kopira IP adresa
+  document.getElementById('copyCardBtn').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
     showToast('IP kopiran!');
   });
