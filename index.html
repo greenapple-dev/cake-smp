@@ -10,34 +10,45 @@
 <style>
   :root{
     --bg: #1c1116;
-    --bg-soft: #24151c;
     --frosting-pink: #ff7fab;
     --frosting-pink-deep: #ff4f8b;
     --cream: #fff2df;
-    --choc: #3a2318;
     --gold: #f0b93d;
     --mint: #7fe0c4;
-    --card-bg: #2a1922;
-    --card-border: rgba(255,242,223,0.08);
-    --text-dim: rgba(255,242,223,0.55);
+    --card-bg: rgba(42, 25, 34, 0.85);
+    --card-border: rgba(255,242,223,0.12);
+    --text-dim: rgba(255,242,223,0.65);
     --radius: 22px;
-    --shadow: 0 10px 30px rgba(0,0,0,0.35);
+    --shadow: 0 10px 30px rgba(0,0,0,0.5);
     --font-display: 'Press Start 2P', monospace;
   }
 
   *{box-sizing:border-box;}
-  html,body{margin:0;padding:0;}
+  html,body{margin:0;padding:0; height:100%;}
+  
+  /* Pozadinski video */
+  .bg-video {
+    position: fixed;
+    right: 0;
+    bottom: 0;
+    min-width: 100%;
+    min-height: 100%;
+    z-index: -2;
+    object-fit: cover;
+  }
+  
+  .bg-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(28, 17, 22, 0.75);
+    z-index: -1;
+  }
+
   body{
-    background-color: var(--bg);
-    background-image: linear-gradient(rgba(28, 17, 22, 0.75), rgba(28, 17, 22, 0.85)), url('image_1bcd0e.png');
     color: var(--cream);
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
-    position: relative;
     overflow-x:hidden;
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
   }
 
   .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; }
@@ -59,14 +70,14 @@
   .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; }
 
   .grid{ display:grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 18px; }
-  .card{ position:relative; border-radius: var(--radius); overflow:hidden; background: var(--card-bg); border:1px solid var(--card-border); box-shadow: var(--shadow); }
+  .card{ position:relative; border-radius: var(--radius); overflow:hidden; background: var(--card-bg); backdrop-filter: blur(8px); border:1px solid var(--card-border); box-shadow: var(--shadow); }
   
   .card-icon{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; }
   .card-store{ grid-column: span 2; grid-row: span 2; cursor: pointer; }
   .card-discord{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:18px; gap:6px; }
   .card-stats{ grid-column: span 2; grid-row: span 2; }
-  .card-join{ grid-column: span 2; grid-row: span 2; background: linear-gradient(150deg, rgba(58,35,24,0.9), rgba(20,12,16,0.95)); padding: 20px 22px; display:flex; flex-direction:column; justify-content:center; gap: 10px; }
-  .card-countdown{ grid-column: span 4; grid-row: span 1; min-height:150px; display:flex; align-items:center; justify-content:space-between; padding: 22px 28px; background: linear-gradient(120deg, rgba(255,127,171,0.12), rgba(240,185,61,0.08)); flex-wrap:wrap; gap:16px; }
+  .card-join{ grid-column: span 2; grid-row: span 2; background: rgba(36, 21, 28, 0.9); padding: 20px 22px; display:flex; flex-direction:column; justify-content:center; gap: 10px; }
+  .card-countdown{ grid-column: span 4; grid-row: span 1; min-height:150px; display:flex; align-items:center; justify-content:space-between; padding: 22px 28px; background: rgba(42, 25, 34, 0.85); flex-wrap:wrap; gap:16px; }
 
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
@@ -74,12 +85,12 @@
     .card-countdown{ grid-column: span 2; }
   }
 
-  .icon-media{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; background-color: #24151c; }
-  .copy-row{ display:flex; align-items:center; gap:10px; padding: 14px 16px; background: rgba(0,0,0,0.25); cursor:pointer; user-select:none; }
+  .icon-media{ flex:1; display:flex; align-items:center; justify-content:center; position:relative; }
+  .copy-row{ display:flex; align-items:center; gap:10px; padding: 14px 16px; background: rgba(0,0,0,0.4); cursor:pointer; user-select:none; }
   .copy-row span{ font-weight:700; font-family: var(--font-display); font-size:11px; letter-spacing:0.5px; }
 
   .media-card{ width:100%; height:100%; background-size:cover; background-position:center; display:flex; align-items:flex-start; padding:18px; position:relative; }
-  .media-card::after{ content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.35) 0%, rgba(0,0,0,0.05) 35%, rgba(0,0,0,0.55) 100%); pointer-events:none; }
+  .media-card::after{ content:''; position:absolute; inset:0; background: linear-gradient(180deg, rgba(0,0,0,0.4) 0%, rgba(0,0,0,0.1) 40%, rgba(0,0,0,0.6) 100%); pointer-events:none; }
   .media-label{ position:relative; z-index:2; font-family: var(--font-display); font-weight:600; font-size:18px; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
 
   .discord-icon{ width:42px; height:42px; margin-bottom:4px; }
@@ -89,21 +100,21 @@
   .discord-join{ margin-top:8px; font-size:11px; color: var(--frosting-pink); text-decoration:none; font-weight:600; font-family: var(--font-display); }
 
   .field-label{ font-family: var(--font-display); font-size:9.5px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:3px; }
-  .field-box{ background: rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.12); border-radius:8px; padding: 7px 10px; font-family:'JetBrains Mono', monospace; font-size:12px; color:#fff; }
+  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 7px 10px; font-family:'JetBrains Mono', monospace; font-size:12px; color:#fff; }
 
   .cd-left{ display:flex; flex-direction:column; gap:4px; }
   .cd-title{ font-family: var(--font-display); font-size:15px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .cd-sub{ font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
   .cd-timer{ display:flex; gap:12px; }
-  .cd-unit{ background: rgba(0,0,0,0.35); border:1px solid rgba(255,255,255,0.1); border-radius:14px; padding: 10px 14px; text-align:center; min-width: 68px; }
+  .cd-unit{ background: rgba(0,0,0,0.4); border:1px solid rgba(255,255,255,0.12); border-radius:14px; padding: 10px 14px; text-align:center; min-width: 68px; }
   .cd-unit .num{ font-family: var(--font-display); font-size:16px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .cd-unit .lbl{ font-size:8px; letter-spacing:1px; color: var(--text-dim); text-transform:uppercase; font-family: var(--font-display); margin-top: 4px; }
 
   footer{ text-align:center; margin-top:40px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
 
-  .modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.6); display:none; align-items:center; justify-content:center; z-index:100; backdrop-filter: blur(3px); }
+  .modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.7); display:none; align-items:center; justify-content:center; z-index:100; backdrop-filter: blur(4px); }
   .modal-overlay.show{ display:flex; }
-  .modal{ background: var(--card-bg); border:1px solid var(--card-border); border-radius:20px; padding:28px; width:360px; box-shadow: var(--shadow); max-height: 90vh; overflow-y: auto; }
+  .modal{ background: #2a1922; border:1px solid var(--card-border); border-radius:20px; padding:28px; width:420px; box-shadow: var(--shadow); max-height: 90vh; overflow-y: auto; }
   .modal h3{ font-family: var(--font-display); margin:0 0 6px; font-size:15px; }
   .modal p{ margin:0 0 16px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
   .modal-actions{ display:flex; gap:10px; margin-top:14px; }
@@ -111,15 +122,20 @@
   .btn-ghost{ background: transparent; color: var(--text-dim); border:1px solid rgba(255,255,255,0.15) !important; }
 
   .passes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; max-height: 250px; overflow-y: auto; }
-  .pass-item { background: rgba(0,0,0,0.25); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .pass-item { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; }
   .pass-info { flex: 1; display:flex; flex-direction:column; gap:4px; }
   .pass-buy-btn { background: var(--mint); color: #142a24; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; font-family: var(--font-display); }
 
-  .toast{ position:fixed; bottom:24px; left:50%; transform: translateX(-50%) translateY(20px); background: var(--card-bg); border:1px solid var(--card-border); padding:12px 20px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; pointer-events:none; transition: all .25s ease; z-index:200; box-shadow: var(--shadow); font-family: var(--font-display); }
+  .toast{ position:fixed; bottom:24px; left:50%; transform: translateX(-50%) translateY(20px); background: #2a1922; border:1px solid var(--card-border); padding:12px 20px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; pointer-events:none; transition: all .25s ease; z-index:200; box-shadow: var(--shadow); font-family: var(--font-display); }
   .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
+
+<video autoplay muted loop class="bg-video">
+  <source src="BackgroundWebsite.mp4" type="video/mp4">
+</video>
+<div class="bg-overlay"></div>
 
 <div class="wrap">
   <header class="top">
@@ -141,7 +157,7 @@
   <div class="grid">
     <div class="card card-icon">
       <div class="icon-media">
-        <img src="Cake.jpeg" style="width: 70%; height: 70%; object-fit: contain; image-rendering: pixelated;" alt="Cake Icon">
+        <img src="Cake.jpeg" style="width: 65%; height: 65%; object-fit: contain; image-rendering: pixelated;" alt="Cake Icon">
       </div>
       <div class="copy-row" id="copyRow">
         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
@@ -150,8 +166,8 @@
     </div>
 
     <div class="card card-store" id="openStoreBtn">
-      <div class="media-card" id="storeMedia" style="background-image:url('StoreIcon2.png');">
-        <span class="media-label" id="storeLabel">Store</span>
+      <div class="media-card" style="background-image:url('StoreIcon2.png');">
+        <span class="media-label">Store</span>
       </div>
     </div>
 
@@ -166,12 +182,12 @@
     </div>
 
     <div class="card card-stats">
-      <div class="media-card" id="statsMedia" style="background-image:url('StatsIcon.png');">
-        <span class="media-label" id="statsLabel">Stats</span>
+      <div class="media-card" style="background-image:url('StatsIcon.png');">
+        <span class="media-label">Stats</span>
       </div>
     </div>
 
-    <div class="card card-join">
+    <div class="card card-join" style="background-image: linear-gradient(rgba(36, 21, 28, 0.85), rgba(20, 12, 16, 0.9)), url('image_1bdbf1.png'); background-size: cover; background-position: center;">
       <div style="font-family:var(--font-display); font-size:13px; font-weight:600;">Server Status & IP</div>
       <div>
         <div class="field-label">Online Players</div>
@@ -205,11 +221,11 @@
 </div>
 
 <div class="modal-overlay" id="storeModalOverlay">
-  <div class="modal" style="width: 420px;">
+  <div class="modal">
     <h3>Cake SMP Store</h3>
-    <p>Purchase server ranks and items.</p>
+    <p>Purchase server ranks and support.</p>
     <div class="passes-list" id="passesListContainer"></div>
-    <div class="modal-actions" style="margin-top: 14px;">
+    <div class="modal-actions">
       <button class="btn-ghost" id="closeStoreBtn">Close</button>
     </div>
   </div>
@@ -219,7 +235,6 @@
 
 <script>
 (function(){
-  // Ovdje su fiksno upisane sve tvoje postavke za sve ljude:
   const config = {
     serverAddress: 'cakesmp.minecraft.co.com',
     countdownName: 'End fight',
@@ -259,12 +274,12 @@
 
   renderPasses();
 
-  // Store modal listeners
+  // Store modal
   const storeModalOverlay = document.getElementById('storeModalOverlay');
   document.getElementById('openStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.add('show'));
   document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
 
-  // Countdown logic
+  // Countdown
   function updateCountdown(){
     if(!config.countdownDate) return;
     const target = new Date(config.countdownDate).getTime();
@@ -293,13 +308,13 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Copy IP handler
+  // Copy IP
   document.getElementById('copyRow').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
-    showToast('IP kopiran u međuspremnik!');
+    showToast('IP kopiran!');
   });
 
-  // Fetch online players count
+  // Server status
   async function fetchServerStatus(){
     try {
       const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress);
@@ -312,12 +327,3 @@
       }
     } catch(e) {
       document.getElementById('smpPlayersCount').textContent = 'N/A';
-    }
-  }
-  fetchServerStatus();
-  setInterval(fetchServerStatus, 30000);
-
-})();
-</script>
-</body>
-</html>
