@@ -11,7 +11,6 @@
   :root{
     --bg: #1c1116;
     --frosting-pink: #ff7fab;
-    --frosting-pink-deep: #ff4f8b;
     --cream: #fff2df;
     --gold: #f0b93d;
     --mint: #7fe0c4;
@@ -26,7 +25,6 @@
   *{box-sizing:border-box;}
   html,body{margin:0;padding:0; height:100%;}
   
-  /* Pozadinski video */
   .bg-video {
     position: fixed;
     right: 0;
@@ -144,8 +142,8 @@
         <img src="Cake.jpeg" alt="Cake Logo">
       </div>
       <div class="brand-text">
-        <h1 id="siteTitle">CAKE SMP</h1>
-        <p id="tagline">Minecraft Survival Multiplayer</p>
+        <h1>CAKE SMP</h1>
+        <p>Minecraft Survival Multiplayer</p>
       </div>
     </div>
   </header>
@@ -187,7 +185,7 @@
       </div>
     </div>
 
-    <div class="card card-join" style="background-image: linear-gradient(rgba(36, 21, 28, 0.85), rgba(20, 12, 16, 0.9)), url('image_1bdbf1.png'); background-size: cover; background-position: center;">
+    <div class="card card-join">
       <div style="font-family:var(--font-display); font-size:13px; font-weight:600;">Server Status & IP</div>
       <div>
         <div class="field-label">Online Players</div>
@@ -205,7 +203,7 @@
 
     <div class="card card-countdown">
       <div class="cd-left">
-        <div class="cd-title" id="countdownName">End fight</div>
+        <div class="cd-title">End fight</div>
         <div class="cd-sub" id="countdownDateDisplay">Loading…</div>
       </div>
       <div class="cd-timer" id="cdTimer">
@@ -237,8 +235,7 @@
 (function(){
   const config = {
     serverAddress: 'cakesmp.minecraft.co.com',
-    countdownName: 'End fight',
-    countdownDate: '2026-08-20T20:00', // Sutra u 20:00
+    countdownDate: '2026-08-20T20:00',
     passes: [
       { name: 'Premium', price: '$5.00', type: 'Monthly Subscription' },
       { name: 'Support', price: '$1.00', type: 'One-time Payment' }
@@ -274,12 +271,10 @@
 
   renderPasses();
 
-  // Store modal
   const storeModalOverlay = document.getElementById('storeModalOverlay');
   document.getElementById('openStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.add('show'));
   document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
 
-  // Countdown
   function updateCountdown(){
     if(!config.countdownDate) return;
     const target = new Date(config.countdownDate).getTime();
@@ -308,13 +303,11 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Copy IP
   document.getElementById('copyRow').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
     showToast('IP kopiran!');
   });
 
-  // Server status
   async function fetchServerStatus(){
     try {
       const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress);
@@ -327,3 +320,11 @@
       }
     } catch(e) {
       document.getElementById('smpPlayersCount').textContent = 'N/A';
+    }
+  }
+  fetchServerStatus();
+  setInterval(fetchServerStatus, 30000);
+})();
+</script>
+</body>
+</html>
