@@ -332,7 +332,7 @@
   </div>
 </div>
 
-<input type="file" id="fileInput" accept="image/*">
+<input type="file" id="fileInput" accept="image/*" style="display:none">
 <input type="file" id="bgFileInput" accept="image/*,video/*" style="display:none">
 <div class="toast" id="toast"></div>
 
@@ -503,7 +503,6 @@
 
   renderAll();
 
-  // Ovdje automatski spremamo svako slovo čim ga upišeš u editable elemente
   document.querySelectorAll('.editable-text, .field-box[contenteditable]').forEach(el => {
     el.addEventListener('input', () => {
       saveState();
@@ -544,7 +543,7 @@
     document.body.classList.add('edit-active');
     document.getElementById('editBtnLabel').textContent = '✓ Save';
     document.querySelectorAll('.editable-text, .field-box[contenteditable]').forEach(el => el.contentEditable = 'true');
-    document.getElementById('bgPanel').classList.add('open');
+    showToast('Uređivanje otključano');
   }
 
   function disableEditing(){
@@ -553,12 +552,36 @@
     document.getElementById('editBtnLabel').textContent = '✎ Edit';
     document.querySelectorAll('.editable-text, .field-box[contenteditable]').forEach(el => el.contentEditable = 'false');
     document.getElementById('bgPanel').classList.remove('open');
-    
     saveState();
-    renderPasses();
-    showToast('Promjene trajno spremljene!');
+    showToast('Spremljeno!');
   }
 
+  // Store modal listeners
+  const storeModalOverlay = document.getElementById('storeModalOverlay');
+  document.getElementById('openStoreBtn').addEventListener('click', (e)=>{
+    if(e.target.closest('.img-edit-btn')) return;
+    storeModalOverlay.classList.add('show');
+  });
+  document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
+
+  // Add new pass
+  document.getElementById('addNewPassBtn').addEventListener('click', ()=>{
+    const name = document.getElementById('newPassName').value.trim();
+    const price = document.getElementById('newPassPrice.value') || document.getElementById('newPassPrice').value.trim();
+    const type = document.getElementById('newPassType').value;
+    if(!name || !price){
+      showToast('Ispunite naziv i cijenu!');
+      return;
+    }
+    state.passes.push({ name, price, type });
+    saveState();
+    renderPasses();
+    document.getElementById('newPassName').value = '';
+    document.getElementById('newPassPrice').value = '';
+    showToast('Artikl dodan!');
+  });
+
+  // Background panel toggles
   const bgToggleBtn = document.getElementById('bgToggleBtn');
   const bgPanel = document.getElementById('bgPanel');
   bgToggleBtn.addEventListener('click', (e)=>{
@@ -571,26 +594,6 @@
     }
   });
 
-  const storeModalOverlay = document.getElementById('storeModalOverlay');
-  document.getElementById('openStoreBtn').addEventListener('click', (e)=>{
-    if(e.target.closest('.img-edit-btn')) return;
-    storeModalOverlay.classList.add('show');
-  });
-  document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
-
-  document.getElementById('addNewPassBtn').addEventListener('click', ()=>{
-    const name = document.getElementById('newPassName').value.trim();
-    const price = document.getElementById('newPassPrice').value.trim();
-    const type = document.getElementById('newPassType').value;
-    if(!name || !price) return;
-    state.passes.push({ name, price, type });
-    saveState();
-    renderPasses();
-    document.getElementById('newPassName').value = '';
-    document.getElementById('newPassPrice').value = '';
-    showToast('Artikl dodan u store!');
-  });
-
   document.getElementById('bgColorInput').addEventListener('input', (e)=>{
     state.bgColor = e.target.value;
     state.bgVideo = '';
@@ -598,42 +601,6 @@
     renderAll();
   });
 
-  document.getElementById('bgVideoInput').addEventListener('input', (e)=>{
-    state.bgVideo = e.target.value;
-    saveState();
-    renderAll();
-  });
-
-  const bgFileInput = document.getElementById('bgFileInput');
-  document.getElementById('bgFileBtn').addEventListener('click', ()=>{
-    bgFileInput.click();
-  });
-
-  bgFileInput.addEventListener('change', (e)=>{
-    const file = e.target.files[0];
-    if(!file) return;
-    const reader = new FileReader();
-    reader.onload = function(event){
-      if(file.type.startsWith('video/')){
-        state.bgVideo = event.target.result;
-      } else {
-        state.bgColor = event.target.result;
-        state.bgVideo = '';
-      }
-      saveState();
-      renderAll();
-      showToast('Pozadina učitana!');
-    };
-    reader.readAsDataURL(file);
-    bgFileInput.value = '';
-  });
-
-  document.getElementById('bgVideoTogglePlay').addEventListener('click', ()=>{
-    const v = document.getElementById('bgVideo');
-    if(v.paused) { v.play(); showToast('Video pokrenut'); }
-    else { v.pause(); showToast('Video pauziran'); }
-  });
-  
   document.getElementById('bgClearBtn').addEventListener('click', ()=>{
     state.bgColor = '#1c1116';
     state.bgVideo = '';
@@ -642,80 +609,113 @@
     showToast('Pozadina resetirana');
   });
 
-  let activeTarget = null;
+  document.getElementById('bgVideoInput').addEventListener('input', (e)=>{
+    state.bgVideo = e.target.value;
+    saveState();
+    renderAll();
+  });
+
+  document.getElementById('bgVideoTogglePlay').addEventListener('click', ()=>{
+    const v = document.getElementById('bgVideo');
+    if(v.paused) v.play(); else v.pause();
+  });
+
+  // Image editing handler
+  let activeImageTarget = null;
   const fileInput = document.getElementById('fileInput');
   document.querySelectorAll('.img-edit-btn').forEach(btn => {
     btn.addEventListener('click', (e)=>{
       e.stopPropagation();
-      activeTarget = btn.dataset.target;
+      activeImageTarget = btn.dataset.target;
       fileInput.click();
     });
   });
 
   fileInput.addEventListener('change', (e)=>{
     const file = e.target.files[0];
-    if(!file || !activeTarget) return;
+    if(!file) return;
     const reader = new FileReader();
-    reader.onload = function(event){
-      if(activeTarget === 'brand') {
-        state.images.brand = event.target.result;
-        state.images.icon = event.target.result;
+    reader.onload = function(evt){
+      const res = evt.target.result;
+      if(activeImageTarget === 'brand' || activeImageTarget === 'icon'){
+        state.images[activeImageTarget] = res;
       } else {
-        state.images[activeTarget] = event.target.result;
+        state.images[activeImageTarget] = res;
       }
       saveState();
       renderAll();
-      showToast('Slika promijenjena!');
+      showToast('Slika promijenjena');
     };
     reader.readAsDataURL(file);
     fileInput.value = '';
   });
 
-  async function fetchStats(isFirst = false){
-    try {
-      let res = await fetch("https://api.mcsrvstat.us/2/cakesmp.minecraft.co.com");
-      let data = await res.json();
-      if(data && data.online){
-        document.getElementById('smpPlayersCount').textContent = data.players.online + " / " + data.players.max + " online";
-      } else {
-        document.getElementById('smpPlayersCount').textContent = "Server je Offline";
-      }
-    } catch(e) {
-      if(isFirst) document.getElementById('smpPlayersCount').textContent = "Status nedostupan";
-    }
-  }
-  fetchStats(true);
-  setInterval(() => fetchStats(false), 5000);
-
-  function updateCountdown(){
-    const diff = new Date(state.countdownDate).getTime() - Date.now();
-    if(diff <= 0) return;
-    document.getElementById('cdDays').textContent = String(Math.floor(diff / (1000*60*60*24))).padStart(2,'0');
-    document.getElementById('cdHours').textContent = String(Math.floor((diff % (1000*60*60*24)) / (1000*60*60))).padStart(2,'0');
-    document.getElementById('cdMins').textContent = String(Math.floor((diff % (1000*60*60)) / (1000*60))).padStart(2,'0');
-    document.getElementById('cdSecs').textContent = String(Math.floor((diff % (1000*60)) / 1000)).padStart(2,'0');
-    document.getElementById('countdownDateDisplay').textContent = new Date(state.countdownDate).toLocaleString();
-  }
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
+  // Countdown logic
   document.getElementById('cdNameInput').addEventListener('input', (e)=>{
     state.countdownName = e.target.value;
     document.getElementById('countdownName').textContent = state.countdownName;
     saveState();
   });
-  document.getElementById('cdDateInput').addEventListener('input', (e)=>{
-    if(e.target.value){
-      state.countdownDate = e.target.value;
-      saveState();
-      updateCountdown();
-    }
+  document.getElementById('cdDateInput').addEventListener('change', (e)=>{
+    state.countdownDate = e.target.value;
+    saveState();
   });
 
+  function updateCountdown(){
+    if(!state.countdownDate) return;
+    const target = new Date(state.countdownDate).getTime();
+    const now = Date.now();
+    const diff = target - now;
+
+    const dateDisp = document.getElementById('countdownDateDisplay');
+    dateDisp.textContent = new Date(state.countdownDate).toLocaleString();
+
+    if(diff <= 0){
+      document.getElementById('cdDays').textContent = '00';
+      document.getElementById('cdHours').textContent = '00';
+      document.getElementById('cdMins').textContent = '00';
+      document.getElementById('cdSecs').textContent = '00';
+      return;
+    }
+
+    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+    const secs = Math.floor((diff % (1000 * 60)) / 1000);
+
+    document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
+    document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
+    document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
+    document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+  }
+  setInterval(updateCountdown, 1000);
+  updateCountdown();
+
+  // Copy IP handler
   document.getElementById('copyRow').addEventListener('click', ()=>{
-    navigator.clipboard.writeText('cakesmp.minecraft.co.com');
-    showToast('IP kopiran!');
+    const text = document.getElementById('addressLabel').textContent;
+    navigator.clipboard.writeText(text);
+    showToast('IP kopiran u međuspremnik!');
   });
+
+  // Fetch online players count
+  async function fetchServerStatus(){
+    try {
+      const res = await fetch('https://api.mcsrvstat.us/3/' + state.serverAddress);
+      const data = await res.json();
+      const countEl = document.getElementById('smpPlayersCount');
+      if(data.online){
+        countEl.textContent = data.players.online + ' / ' + data.players.max;
+      } else {
+        countEl.textContent = 'Server Offline';
+      }
+    } catch(e) {
+      document.getElementById('smpPlayersCount').textContent = 'N/A';
+    }
+  }
+  fetchServerStatus();
+  setInterval(fetchServerStatus, 30000);
+
 })();
 </script>
 </body>
