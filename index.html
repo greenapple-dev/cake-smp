@@ -145,7 +145,8 @@
   .discord-join{ margin-top:8px; font-size:11px; color: var(--frosting-pink); text-decoration:none; font-weight:600; font-family: var(--font-display); }
 
   .field-label{ font-family: var(--font-display); font-size:9px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:2px; }
-  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 6px 10px; font-family:'JetBrains Mono', monospace; font-size:11.5px; color:#fff; }
+  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 6px 10px; font-family:'JetBrains Mono', monospace; font-size:11.5px; color:#fff; cursor: pointer; transition: background 0.2s; }
+  .field-box:hover{ background: rgba(255,255,255,0.1); }
 
   .cd-left{ display:flex; flex-direction:column; gap:4px; }
   .cd-title{ font-family: var(--font-display); font-size:15px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
@@ -232,13 +233,12 @@
       <div style="font-family:var(--font-display); font-size:12px; font-weight:600;">Server Status & IP</div>
       <div>
         <div class="field-label">Online Players</div>
-        <div class="field-box" id="smpPlayersCount" style="color: var(--mint); font-weight: bold;">Loading...</div>
+        <div class="field-box" id="smpPlayersCount" style="color: var(--mint); font-weight: bold; cursor: default;">Loading...</div>
       </div>
       <div>
-        <div class="field-label">Java IP</div>
+        <div class="field-label">Java IP (Klikni za kopiranje)</div>
         <div class="field-box" id="serverAddressField">cakesmp.minecraft.co.com</div>
       </div>
-      <!-- Odvojeni Bedrock IP i Port -->
       <div style="display:flex; gap:8px;">
         <div style="flex:3;">
           <div class="field-label">Bedrock IP</div>
@@ -285,6 +285,8 @@
 (function(){
   const config = {
     serverAddress: 'cakesmp.minecraft.co.com',
+    bedrockIp: '185.207.164.151',
+    bedrockPort: '25565',
     countdownDate: '2026-08-20T20:00',
     passes: [
       { name: 'Premium', price: '$5.00', type: 'Monthly Subscription' },
@@ -353,9 +355,28 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
+  // Kopiranje klikom na prvu karticu
   document.getElementById('copyCardBtn').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
-    showToast('IP kopiran!');
+    showToast('Java IP kopiran!');
+  });
+
+  // Kopiranje klikom na Java IP polje
+  document.getElementById('serverAddressField').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(config.serverAddress);
+    showToast('Java IP kopiran!');
+  });
+
+  // Kopiranje klikom na Bedrock IP polje
+  document.getElementById('bedrockIpField').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(config.bedrockIp);
+    showToast('Bedrock IP kopiran!');
+  });
+
+  // Kopiranje klikom na Port polje
+  document.getElementById('bedrockPortField').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(config.bedrockPort);
+    showToast('Port kopiran!');
   });
 
   async function fetchServerStatus(){
