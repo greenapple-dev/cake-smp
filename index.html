@@ -25,98 +25,53 @@
 
   *{box-sizing:border-box;}
   
-  html {
-    background-color: var(--bg);
-    min-height: 100%;
-  }
+  html { background-color: var(--bg); min-height: 100%; }
   
   body {
-    margin: 0;
-    padding: 0;
-    min-height: 100vh;
-    background-color: transparent; 
-    color: var(--cream);
-    font-family: 'Inter', sans-serif;
-    overflow-x: hidden;
+    margin: 0; padding: 0; min-height: 100vh;
+    background-color: transparent; color: var(--cream);
+    font-family: 'Inter', sans-serif; overflow-x: hidden;
   }
 
   .bg-video {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    z-index: -2;
-    object-fit: cover;
-    pointer-events: none;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    z-index: -2; object-fit: cover; pointer-events: none;
   }
 
   .bg-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background: rgba(28, 17, 22, 0.55);
-    z-index: -1;
-    pointer-events: none;
+    position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+    background: rgba(28, 17, 22, 0.55); z-index: -1; pointer-events: none;
   }
 
-  /* CREDITS & CONFETTI STYLES */
   #creditsOverlay { 
-    position: fixed; 
-    inset: 0; 
-    background: #000; 
-    z-index: 9999; 
-    display: none; 
-    overflow: hidden; 
-    text-align: center; 
+    position: fixed; inset: 0; background: #000; z-index: 9999; 
+    display: none; overflow: hidden; text-align: center; 
   }
   #creditsOverlay.show { display: block; }
   .credits-scroll-container { 
-    position: absolute; 
-    width: 100%; 
-    top: 100%; 
-    animation: scrollUp 18s linear forwards; 
-    padding-bottom: 50vh; 
+    position: absolute; width: 100%; top: 100%; 
+    animation: scrollUp 18s linear forwards; padding-bottom: 50vh; 
   }
   @keyframes scrollUp { 
     0% { transform: translateY(0); } 
     100% { transform: translateY(-160vh); } 
   }
   .credits-title { 
-    font-family: var(--font-display); 
-    font-size: 3rem; 
-    margin-bottom: 20px; 
-    color: var(--mint); 
-    text-shadow: 0 0 20px var(--mint); 
+    font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; 
+    color: var(--mint); text-shadow: 0 0 20px var(--mint); 
   }
   .credits-text { 
-    font-size: 1.1rem; 
-    color: #ccc; 
-    max-width: 700px; 
-    margin: 0 auto; 
-    padding: 0 20px; 
-    line-height: 1.8; 
-    font-family: 'Inter', sans-serif; 
+    font-size: 1.1rem; color: #ccc; max-width: 700px; margin: 0 auto; 
+    padding: 0 20px; line-height: 1.8; font-family: 'Inter', sans-serif; 
   }
   .credits-section { margin-bottom: 40px; }
   .credits-section h3 { 
-    font-family: var(--font-display); 
-    color: var(--frosting-pink); 
-    font-size: 1.2rem; 
-    margin-bottom: 10px; 
+    font-family: var(--font-display); color: var(--frosting-pink); 
+    font-size: 1.2rem; margin-bottom: 10px; 
   }
 
-  .confetti { 
-    position: absolute; 
-    width: 12px; 
-    height: 12px; 
-    z-index: 10000; 
-  }
-  @keyframes fall { 
-    to { transform: translateY(100vh) rotate(360deg); } 
-  }
+  .confetti { position: absolute; width: 12px; height: 12px; z-index: 10000; }
+  @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
 
   .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; }
 
@@ -126,8 +81,7 @@
     width:52px; height:52px; border-radius:14px;
     background: linear-gradient(180deg, #4dc4ff 0%, var(--mint) 100%);
     display:flex; align-items:center; justify-content:center;
-    box-shadow: 0 6px 16px rgba(0,0,0,0.35);
-    position:relative; overflow:hidden; flex-shrink:0;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.35); position:relative; overflow:hidden; flex-shrink:0;
     border: 1px solid var(--card-border);
   }
   .brand-mark img { width:70%; height:70%; object-fit:contain; image-rendering: pixelated; }
@@ -139,94 +93,57 @@
   .grid{ display:grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 18px; }
 
   .card{
-    position:relative;
-    border-radius: var(--radius);
-    overflow:hidden;
-    background: var(--card-bg);
-    border:1px solid var(--card-border);
+    position:relative; border-radius: var(--radius); overflow:hidden;
+    background: var(--card-bg); border:1px solid var(--card-border);
     box-shadow: var(--shadow);
     transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.3s ease;
   }
-
-  /* Opći hover efekt za kartice */
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 15px 35px rgba(0,0,0,0.6);
-  }
+  .card:hover { transform: translateY(-4px); box-shadow: 0 15px 35px rgba(0,0,0,0.6); }
 
   .card-icon{
-    grid-column: span 1;
-    grid-row: span 2;
+    grid-column: span 1; grid-row: span 2;
     background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%), url('Cakelogo.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
   }
 
-  /* Posebna animacija za Store karticu */
   .card-store {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-column: span 2; grid-row: span 2;
     background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%), url('store_icon.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
     cursor: pointer;
   }
-  .card-store:hover {
-    transform: translateY(-6px) scale(1.01);
-  }
+  .card-store:hover { transform: translateY(-6px) scale(1.01); }
 
   .card-stats {
-    grid-column: span 2;
-    grid-row: span 2;
+    grid-column: span 2; grid-row: span 2;
     background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%), url('StatsIcon.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
+    background-size: cover; background-position: center; background-repeat: no-repeat;
   }
 
   .card-countdown {
-    grid-column: span 4;
-    grid-row: span 1;
-    min-height: 150px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    grid-column: span 4; grid-row: span 1;
+    min-height: 150px; display: flex; align-items: center; justify-content: space-between;
     padding: 22px 28px;
-    background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.3) 100%), url('end_fight.png');
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    flex-wrap: wrap;
-    gap: 16px;
+    background: linear-gradient(180deg, rgba(0,0,0,0.2) 0%, rgba(0,0,0,0.6) 100%), url('end_fight.jfif');
+    background-size: cover; background-position: center; background-repeat: no-repeat;
+    flex-wrap: wrap; gap: 16px;
   }
 
-  .img-missing{
-    background-image: linear-gradient(135deg, rgba(255,127,171,0.25), rgba(240,185,61,0.25)) !important;
-  }
+  .img-missing{ background-image: linear-gradient(135deg, rgba(255,127,171,0.25), rgba(240,185,61,0.25)) !important; }
 
   .card-content-over {
-    position: absolute;
-    inset: 0;
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    z-index: 2;
-    pointer-events: none;
+    position: absolute; inset: 0; padding: 20px;
+    display: flex; flex-direction: column; justify-content: flex-start;
+    z-index: 2; pointer-events: none;
   }
 
   .media-label {
-    font-family: var(--font-display);
-    font-weight: 600;
-    font-size: 18px;
-    color: #fff;
+    font-family: var(--font-display); font-weight: 600; font-size: 18px; color: #fff;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
 
   .card-discord{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:18px; gap:6px; background: rgba(42, 25, 34, 0.85); backdrop-filter: blur(8px); }
-  .card-join{ grid-column: span 2; grid-row: span 2; background: rgba(36, 21, 28, 0.9); padding: 18px 22px; display:flex; flex-direction:column; justify-content:center; gap: 8px; backdrop-filter: blur(8px); }
+  .card-join{ grid-column: span 2; grid-row: span 2; background: rgba(36, 21, 28, 0.9); padding: 18px 22px; display:flex; flex-direction:column; justify-content:center; gap: 6px; backdrop-filter: blur(8px); }
 
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
@@ -235,23 +152,17 @@
   }
 
   .discord-icon{ width:42px; height:42px; margin-bottom:4px; transition: transform 0.3s ease; }
-  .card-discord:hover .discord-icon {
-    transform: scale(1.15) rotate(5deg);
-  }
+  .card-discord:hover .discord-icon { transform: scale(1.15) rotate(5deg); }
 
   .discord-count{ font-family: var(--font-display); font-size:20px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .discord-sub{ display:flex; align-items:center; gap:6px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); }
   .dot-live{ width:8px; height:8px; border-radius:50%; background: var(--mint); box-shadow:0 0 8px var(--mint); }
   
-  /* Animirani link za Discord */
   .discord-join{ margin-top:8px; font-size:11px; color: var(--frosting-pink); text-decoration:none; font-weight:600; font-family: var(--font-display); transition: transform 0.2s ease, color 0.2s ease; display: inline-block; }
-  .discord-join:hover {
-    transform: translateX(4px);
-    color: #ff9ec2;
-  }
+  .discord-join:hover { transform: translateX(4px); color: #ff9ec2; }
 
-  .field-label{ font-family: var(--font-display); font-size:9px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:2px; }
-  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 6px 10px; font-family:'JetBrains Mono', monospace; font-size:11.5px; color:#fff; cursor: pointer; transition: all 0.2s ease; }
+  .field-label{ font-family: var(--font-display); font-size:8px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:1px; }
+  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 5px 10px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#fff; cursor: pointer; transition: all 0.2s ease; }
   .field-box:hover{ background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); transform: scale(1.01); }
 
   .cd-left{ display:flex; flex-direction:column; gap:4px; }
@@ -283,13 +194,10 @@
   .btn-ghost:hover { background: rgba(255,255,255,0.05); color: #fff; }
 
   .passes-list { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; max-height: 250px; overflow-y: auto; }
-  
   .pass-item { background: rgba(0,0,0,0.3); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 12px; display: flex; justify-content: space-between; align-items: center; gap: 10px; transition: all 0.2s ease; }
   .pass-item:hover { background: rgba(0,0,0,0.5); border-color: rgba(255,255,255,0.2); transform: translateX(3px); }
-  
   .pass-info { flex: 1; display:flex; flex-direction:column; gap:4px; }
   
-  /* Animirani Buy gumb */
   .pass-buy-btn { background: var(--mint); color: #142a24; border: none; padding: 6px 12px; border-radius: 8px; font-weight: 600; cursor: pointer; font-size: 11px; font-family: var(--font-display); transition: all 0.2s ease; }
   .pass-buy-btn:hover { background: #9bf3d9; transform: scale(1.08); box-shadow: 0 0 12px rgba(127,224,196,0.5); }
   .pass-buy-btn:active { transform: scale(0.95); }
@@ -300,7 +208,6 @@
 </head>
 <body>
 
-<!-- CREDITS OVERLAY WITH CONFETTI CONTAINER -->
 <div id="creditsOverlay">
   <div id="confettiContainer"></div>
   <div class="credits-scroll-container">
@@ -377,8 +284,9 @@
       </div>
     </div>
 
+    <!-- SERVER STATUS I ODVOJENI IP/PORT -->
     <div class="card card-join">
-      <div style="font-family:var(--font-display); font-size:12px; font-weight:600;">Server Status & IP</div>
+      <div style="font-family:var(--font-display); font-size:11px; font-weight:600;">Server Status & IP</div>
       <div>
         <div class="field-label">Online Players</div>
         <div class="field-box" id="smpPlayersCount" style="color: var(--mint); font-weight: bold; cursor: default;">Loading...</div>
@@ -387,9 +295,15 @@
         <div class="field-label">Java IP</div>
         <div class="field-box" id="serverAddressField">cakesmp.minecraft.co.com</div>
       </div>
-      <div>
-        <div class="field-label">Bedrock IP / Port</div>
-        <div class="field-box" id="bedrockIpField">185.207.164.151:25565</div>
+      <div style="display: flex; gap: 8px;">
+        <div style="flex: 2;">
+          <div class="field-label">Bedrock IP</div>
+          <div class="field-box" id="bedrockIpField">185.207.164.151</div>
+        </div>
+        <div style="flex: 1;">
+          <div class="field-label">Port</div>
+          <div class="field-box" id="bedrockPortField">25565</div>
+        </div>
       </div>
     </div>
 
@@ -533,8 +447,13 @@
   });
 
   document.getElementById('bedrockIpField').addEventListener('click', ()=>{
-    navigator.clipboard.writeText(config.bedrockIp + ':' + config.bedrockPort);
-    showToast('Bedrock IP:Port kopiran!');
+    navigator.clipboard.writeText(config.bedrockIp);
+    showToast('Bedrock IP kopiran!');
+  });
+
+  document.getElementById('bedrockPortField').addEventListener('click', ()=>{
+    navigator.clipboard.writeText(config.bedrockPort);
+    showToast('Bedrock Port kopiran!');
   });
 
   async function fetchServerStatus(){
@@ -565,7 +484,7 @@
   verifyBackgroundImage('.card-icon', 'Cakelogo.png');
   verifyBackgroundImage('.card-store', 'store_icon.png');
   verifyBackgroundImage('.card-stats', 'StatsIcon.png');
-  verifyBackgroundImage('.card-countdown', 'end_fight.png');
+  verifyBackgroundImage('.card-countdown', 'end_fight.jfif'); // Ispravljeno na .jfif
 
   const bgVideo = document.getElementById('bgVideo');
   if (bgVideo) {
