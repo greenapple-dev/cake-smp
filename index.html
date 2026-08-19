@@ -13,14 +13,33 @@
   .bg-video { position:fixed; top:0; left:0; width:100vw; height:100vh; z-index:-2; object-fit:cover; }
   .bg-overlay { position:fixed; inset:0; background:rgba(28,17,22,0.6); z-index:-1; }
 
-  /* Event Credits */
-  #creditsOverlay { position:fixed; inset:0; background:#000; z-index:9999; display:none; flex-direction:column; align-items:center; justify-content:center; text-align:center; opacity:0; transition:opacity 2s; }
-  #creditsOverlay.show { display:flex; opacity:1; }
-  .credits-title { font-family:var(--font-display); font-size:3rem; margin-bottom:20px; color:var(--mint); text-shadow:0 0 20px var(--mint); }
-  .credits-text { font-size:1.2rem; color:#ccc; max-width:600px; padding:20px; line-height:1.6; font-family:'Inter', sans-serif; }
+  /* Event Credits Scrolling Overlay */
+  #creditsOverlay { 
+    position: fixed; inset: 0; background: #000; z-index: 9999; 
+    display: none; overflow: hidden; text-align: center; 
+  }
+  #creditsOverlay.show { display: block; }
+  
+  .credits-scroll-container {
+    position: absolute;
+    width: 100%;
+    top: 100%;
+    animation: scrollUp 18s linear forwards;
+    padding-bottom: 50vh;
+  }
+
+  @keyframes scrollUp {
+    0% { transform: translateY(0); }
+    100% { transform: translateY(-160vh); }
+  }
+
+  .credits-title { font-family: var(--font-display); font-size: 3rem; margin-bottom: 20px; color: var(--mint); text-shadow: 0 0 20px var(--mint); }
+  .credits-text { font-size: 1.1rem; color: #ccc; max-width: 700px; margin: 0 auto; padding: 0 20px; line-height: 1.8; font-family: 'Inter', sans-serif; }
+  .credits-section { margin-bottom: 40px; }
+  .credits-section h3 { font-family: var(--font-display); color: var(--frosting-pink); font-size: 1.2rem; margin-bottom: 10px; }
 
   /* Konfete */
-  .confetti { position:absolute; width:12px; height:12px; animation: fall linear infinite; }
+  .confetti { position: absolute; width: 12px; height: 12px; animation: fall linear infinite; z-index: 10000; }
   @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
 
   /* Kartice */
@@ -38,8 +57,24 @@
 
 <div id="creditsOverlay">
   <div id="confettiContainer"></div>
-  <h1 class="credits-title">Cake SMP</h1>
-  <p class="credits-text">This event is part of normal vanilla lifecycle. The server is resetting for new adventures. Thank you for playing!</p>
+  <div class="credits-scroll-container" id="scrollContainer">
+    <h1 class="credits-title">Cake SMP</h1>
+    
+    <div class="credits-section">
+      <h3>The End Event</h3>
+      <p class="credits-text">This magnificent event is part of the normal vanilla gameplay lifecycle and community milestones. Epic battles have been fought, dragons defeated, and new legends born within our world.</p>
+    </div>
+
+    <div class="credits-section">
+      <h3>Special Thanks</h3>
+      <p class="credits-text">Thank you to every single player, builder, explorer, and community member who made this chapter unforgettable. Your creativity and passion keep Cake SMP alive and sweet!</p>
+    </div>
+
+    <div class="credits-section">
+      <h3>The Journey Continues</h3>
+      <p class="credits-text">As one chapter closes, adventures await us all. Stay tuned for upcoming updates, community events, and much more. Thank you for playing on Cake SMP! 🍰</p>
+    </div>
+  </div>
 </div>
 
 <video class="bg-video" autoplay muted loop playsinline><source src="back.mp4" type="video/mp4"></video>
@@ -63,12 +98,15 @@
 
 <script>
 (function(){
-  // PROBA: Podesio na 00:58:00
+  // PROBA: Podesio na 01:01:00
   const targetTime = new Date();
-  targetTime.setHours(0, 58, 0, 0);
+  targetTime.setHours(1, 1, 0, 0);
+
+  let eventTriggered = false;
 
   function createConfetti() {
     const container = document.getElementById('confettiContainer');
+    container.innerHTML = '';
     for(let i=0; i<150; i++){
       const c = document.createElement('div');
       c.className = 'confetti';
@@ -80,12 +118,24 @@
   }
 
   function update() {
+    if (eventTriggered) return;
+
     const now = new Date();
     const diff = targetTime - now;
 
     if(diff <= 0) {
-      document.getElementById('creditsOverlay').classList.add('show');
-      if(!document.getElementById('confettiContainer').hasChildNodes()) createConfetti();
+      eventTriggered = true;
+      const overlay = document.getElementById('creditsOverlay');
+      overlay.classList.add('show');
+      createConfetti();
+
+      // Kada animacija završi (nakon 18 sekundi), vrati sve na normalu
+      setTimeout(() => {
+        overlay.classList.remove('show');
+        document.getElementById('confettiContainer').innerHTML = '';
+        eventTriggered = false; // Može se ponovno pokrenuti ili prilagoditi po želji
+      }, 18000);
+
       return;
     }
 
