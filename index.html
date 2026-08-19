@@ -80,6 +80,7 @@
     box-shadow: var(--shadow); 
   }
   
+  /* Prva kartica - puna slika */
   .card-icon{ 
     grid-column: span 1; 
     grid-row: span 2; 
@@ -87,7 +88,24 @@
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
+  }
+
+  /* Mali zasebni frame za brzo kopiranje IP-a */
+  .card-quick-ip {
+    grid-column: span 1;
+    grid-row: span 2;
+    background: rgba(42, 25, 34, 0.9);
+    padding: 20px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
     cursor: pointer;
+    transition: border-color 0.2s;
+  }
+  .card-quick-ip:hover {
+    border-color: var(--frosting-pink);
   }
   
   .card-store {
@@ -134,7 +152,7 @@
 
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
-    .card-icon,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
+    .card-icon,.card-quick-ip,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
     .card-countdown{ grid-column: span 2; }
   }
 
@@ -201,12 +219,21 @@
   </svg>
 
   <div class="grid">
-    <div class="card card-icon" id="copyCardBtn">
+    <!-- Prva kartica: Full-bleed slika -->
+    <div class="card card-icon">
       <div class="card-content-over">
         <span class="media-label">Cake SMP</span>
       </div>
     </div>
 
+    <!-- Mali zasebni frame za brzo kopiranje IP-a -->
+    <div class="card card-quick-ip" id="quickIpBtn">
+      <div style="font-family:var(--font-display); font-size:10px; color:var(--text-dim); margin-bottom:6px;">QUICK IP</div>
+      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#fff; word-break:break-all; background:rgba(0,0,0,0.4); padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">cakesmp.minecraft.co.com</div>
+      <div style="font-family:var(--font-display); font-size:8.5px; color:var(--frosting-pink); margin-top:8px;">Klikni za kopiranje!</div>
+    </div>
+
+    <!-- Store kartica -->
     <div class="card card-store" id="openStoreBtn">
       <div class="card-content-over">
         <span class="media-label">Store</span>
@@ -236,7 +263,7 @@
         <div class="field-box" id="smpPlayersCount" style="color: var(--mint); font-weight: bold; cursor: default;">Loading...</div>
       </div>
       <div>
-        <div class="field-label">Java IP (Klikni za kopiranje)</div>
+        <div class="field-label">Java IP</div>
         <div class="field-box" id="serverAddressField">cakesmp.minecraft.co.com</div>
       </div>
       <div style="display:flex; gap:8px;">
@@ -355,25 +382,22 @@
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  // Kopiranje klikom na prvu karticu
-  document.getElementById('copyCardBtn').addEventListener('click', ()=>{
+  // Kopiranje klikom na brzi IP okvir
+  document.getElementById('quickIpBtn').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
     showToast('Java IP kopiran!');
   });
 
-  // Kopiranje klikom na Java IP polje
   document.getElementById('serverAddressField').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
     showToast('Java IP kopiran!');
   });
 
-  // Kopiranje klikom na Bedrock IP polje
   document.getElementById('bedrockIpField').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.bedrockIp);
     showToast('Bedrock IP kopiran!');
   });
 
-  // Kopiranje klikom na Port polje
   document.getElementById('bedrockPortField').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.bedrockPort);
     showToast('Port kopiran!');
