@@ -56,9 +56,10 @@
   header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:14px; }
   .brand-mark{
-    width:52px;height:52px;border-radius:14px;
-    background: linear-gradient(180deg, #3a2318 0%, #24151c 100%);
-    display:flex;align-items:center;justify-content:center;
+    width:52px; height:52px; border-radius:14px;
+    /* Ažuriran plavo-mint gradijent */
+    background: linear-gradient(180deg, #4dc4ff 0%, var(--mint) 100%);
+    display:flex; align-items:center; justify-content:center;
     box-shadow: 0 6px 16px rgba(0,0,0,0.35);
     position:relative; overflow:hidden; flex-shrink:0;
     border: 1px solid var(--card-border);
@@ -109,7 +110,6 @@
     background-repeat: no-repeat;
   }
 
-  /* Fallback ako se neka pozadinska slika ne učita - umjesto praznog/crnog polja dobiješ suptilan gradient */
   .img-missing{
     background-image: linear-gradient(135deg, rgba(255,127,171,0.30), rgba(240,185,61,0.30)) !important;
   }
@@ -381,13 +381,11 @@
   fetchServerStatus();
   setInterval(fetchServerStatus, 30000);
 
-  // --- Provjera pozadinskih slika: ako neka ne postoji/ne učita se, kartica dobije
-  // suptilan fallback gradient umjesto da ostane prazna, i u konzoli piše koja datoteka fali.
   function verifyBackgroundImage(selector, url){
     const img = new Image();
     img.onerror = () => {
       document.querySelectorAll(selector).forEach(el => el.classList.add('img-missing'));
-      console.warn('[Cake SMP] Nije moguce ucitati sliku: "' + url + '". Provjeri da li se datoteka nalazi u istom folderu kao index.html i da je naziv TOCNO isti (velika/mala slova su bitna).');
+      console.warn('[Cake SMP] Nije moguce ucitati sliku: "' + url + '". Provjeri da li se datoteka nalazi u istom folderu kao index.html.');
     };
     img.src = url;
   }
@@ -395,19 +393,17 @@
   verifyBackgroundImage('.card-store', 'store_icon.png');
   verifyBackgroundImage('.card-stats', 'StatsIcon.png');
 
-  // --- Osiguraj da video pozadina zapravo krene (neki preglednici traze
-  // da .muted bude postavljen preko JS-a, ne samo kao HTML atribut).
   const bgVideo = document.getElementById('bgVideo');
   if (bgVideo) {
     bgVideo.muted = true;
     const playPromise = bgVideo.play();
     if (playPromise !== undefined) {
       playPromise.catch(() => {
-        console.warn('[Cake SMP] Video pozadina se nije mogla automatski pokrenuti (autoplay blokiran ili "BackgroundWebsite.mp4" nije pronaden).');
+        console.warn('[Cake SMP] Video pozadina se nije mogla automatski pokrenuti.');
       });
     }
     bgVideo.addEventListener('error', () => {
-      console.warn('[Cake SMP] Video "BackgroundWebsite.mp4" nije pronaden ili ne moze biti ucitan.');
+      console.warn('[Cake SMP] Video "BackgroundWebsite.mp4" nije pronadjen.');
     });
   }
 })();
