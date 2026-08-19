@@ -88,23 +88,6 @@
     background-position: center;
     background-repeat: no-repeat;
   }
-
-  .card-quick-ip {
-    grid-column: span 1;
-    grid-row: span 2;
-    background: rgba(42, 25, 34, 0.9);
-    padding: 20px 16px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    cursor: pointer;
-    transition: border-color 0.2s;
-  }
-  .card-quick-ip:hover {
-    border-color: var(--frosting-pink);
-  }
   
   .card-store {
     grid-column: span 2;
@@ -150,7 +133,7 @@
 
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
-    .card-icon,.card-quick-ip,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
+    .card-icon,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
     .card-countdown{ grid-column: span 2; }
   }
 
@@ -221,12 +204,6 @@
       <div class="card-content-over">
         <span class="media-label">Cake SMP</span>
       </div>
-    </div>
-
-    <div class="card card-quick-ip" id="quickIpBtn">
-      <div style="font-family:var(--font-display); font-size:10px; color:var(--text-dim); margin-bottom:6px;">QUICK IP</div>
-      <div style="font-family:'JetBrains Mono',monospace; font-size:10.5px; color:#fff; word-break:break-all; background:rgba(0,0,0,0.4); padding:8px 10px; border-radius:8px; border:1px solid rgba(255,255,255,0.1);">cakesmp.minecraft.co.com</div>
-      <div style="font-family:var(--font-display); font-size:8.5px; color:var(--frosting-pink); margin-top:8px;">Klikni za kopiranje!</div>
     </div>
 
     <div class="card card-store" id="openStoreBtn">
@@ -376,11 +353,6 @@
   }
   setInterval(updateCountdown, 1000);
   updateCountdown();
-
-  document.getElementById('quickIpBtn').addEventListener('click', ()=>{
-    navigator.clipboard.writeText(config.serverAddress);
-    showToast('Java IP kopiran!');
-  });
 
   document.getElementById('serverAddressField').addEventListener('click', ()=>{
     navigator.clipboard.writeText(config.serverAddress);
