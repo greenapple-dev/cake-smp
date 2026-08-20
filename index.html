@@ -496,7 +496,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T15:25:00' // TESTNO VRIJEME: 15:25
+    countdownDate: '2026-08-20T15:25:00'
   };
 
   let eventTriggered = false;
@@ -590,7 +590,7 @@
     const textImg = document.getElementById('eventTextImg');
     const video = document.getElementById('eventVideoPlayer');
 
-    // 1. Prikaži crni overlay i pokreni glazbu od početka
+    // 1. Prikaži crni overlay i pokreni glazbu od početka (da svira slobodno cijelo vrijeme)
     overlay.classList.add('show');
     audio.currentTime = 0;
     audio.play().catch(err => {
@@ -634,12 +634,11 @@
       }, 1500);
     }, 7000);
 
-    // 5. Kad video završi, prikaži završnu sliku (eventtext_end.png)
+    // 5. Kad video završi, sakrij video i prikaži završnu sliku (eventtext_end.png)
     video.onended = () => {
       video.classList.remove('fade-in');
       video.style.display = 'none';
 
-      // Priprema i prikaz završne slike
       textImg.src = 'eventtext_end.png';
       textImg.style.display = 'block';
       textImg.className = 'event-text-img';
@@ -648,7 +647,7 @@
         textImg.classList.add('fade-in');
       }, 100);
 
-      // 6. Nakon što završna slika stoji 4 sekunde, ugasi sve i vrati se u main menu
+      // 6. Nakon što završna slika stoji 4 sekunde, tek tada gasimo glazbu i vraćamo se u main menu
       setTimeout(() => {
         textImg.classList.remove('fade-in');
         textImg.classList.add('fade-out');
