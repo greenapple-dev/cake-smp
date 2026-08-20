@@ -511,7 +511,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-21T20:00:00' // Namješteno na sutra u 20:00 sati
+    countdownDate: '2026-08-21T20:00:00'
   };
 
   let eventTriggered = false;
@@ -720,44 +720,36 @@
     document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
     document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
   }
+
   setInterval(updateCountdown, 1000);
   updateCountdown();
 
-  document.getElementById('serverAddressField').addEventListener('click', ()=>{
-    navigator.clipboard.writeText(config.serverAddress);
-    showToast('Java IP kopiran!');
-  });
-
-  document.getElementById('bedrockIpField').addEventListener('click', ()=>{
-    navigator.clipboard.writeText(config.bedrockIp);
-    showToast('Bedrock IP kopiran!');
-  });
-
-  document.getElementById('bedrockPortField').addEventListener('click', ()=>{
-    navigator.clipboard.writeText(config.bedrockPort);
-    showToast('Bedrock Port kopiran!');
-  });
-
-  async function fetchServerStatus(){
-    try {
-      const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress + '?_=' + new Date().getTime());
-      const data = await res.json();
+  // Dohvat statusa igrača
+  fetch(`https://api.mcsrvstat.us/2/${config.serverAddress}`)
+    .then(res => res.json())
+    .then(data => {
       const countEl = document.getElementById('smpPlayersCount');
       const modalCountEl = document.getElementById('modalPlayersCount');
-      
-      if(data.online){
-        const text = data.players.online + ' / ' + data.players.max + ' online';
-        countEl.textContent = text;
-        modalCountEl.textContent = 'Players Online: ' + text;
+      if(data && data.online) {
+        countEl.textContent = `${data.players.online} / ${data.players.max} Online`;
+        modalCountEl.textContent = `Players Online: ${data.players.online} / ${data.players.max}`;
       } else {
         countEl.textContent = 'Server Offline';
         modalCountEl.textContent = 'Players Online: Server Offline';
       }
-    } catch(e) {
-      document.getElementById('smpPlayersCount').textContent = 'Server Offline';
-    }
-  }
-  fetchServerStatus();
+    })
+    .catch(() => {
+      document.getElementById('smpPlayersCount').textContent = 'Status Unavailable';
+      document.getElementById('modalPlayersCount').textContent = 'Players Online: Status Unavailable';
+    });
+
+  // Kopiranje IP adresa na klik
+  document.querySelectorAll('#serverAddressField, #bedrockIpField').forEach(el => {
+    el.addEventListener('click', () => {
+      navigator.clipboard.writeText(el.textContent.trim());
+      showToast('IP adresa kopirana u međuspremnik!');
+    });
+  });
 })();
 </script>
 </body>
