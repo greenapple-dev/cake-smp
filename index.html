@@ -494,7 +494,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T14:00:00' // Postavljeno na 14:00 za testiranje
+    countdownDate: '2026-08-20T14:10:00' // Postavljeno na 14:10 za testiranje
   };
 
   let eventTriggered = false;
@@ -684,30 +684,10 @@
         modalCountEl.textContent = 'Players Online: Server Offline';
       }
     } catch(e) {
-      document.getElementById('smpPlayersCount').textContent = 'N/A';
-      document.getElementById('modalPlayersCount').textContent = 'Players Online: N/A';
+      document.getElementById('smpPlayersCount').textContent = 'Server Offline';
     }
   }
   fetchServerStatus();
-  setInterval(fetchServerStatus, 5000);
-
-  function verifyBackgroundImage(selector, url){
-    const img = new Image();
-    img.onerror = () => {
-      document.querySelectorAll(selector).forEach(el => el.classList.add('img-missing'));
-    };
-    img.src = url;
-  }
-  verifyBackgroundImage('.card-icon', 'Cakelogo.png');
-  verifyBackgroundImage('.card-store', 'store_icon.png');
-  verifyBackgroundImage('.card-stats', 'StatsIcon.png');
-  verifyBackgroundImage('.card-countdown', 'end_fight.png');
-
-  const bgVideo = document.getElementById('bgVideo');
-  if (bgVideo) {
-    bgVideo.muted = true;
-    bgVideo.play().catch(() => {});
-  }
 })();
 </script>
 </body>
