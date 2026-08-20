@@ -75,7 +75,7 @@
 
   .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px; }
 
-  header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; transition: opacity 0.4s ease, transform 0.4s ease; }
   .brand{ display:flex; align-items:center; gap:14px; }
   .brand-mark{
     width:52px; height:52px; border-radius:14px;
@@ -88,9 +88,16 @@
   .brand-text h1{ font-family: var(--font-display); font-size: 18px; margin:0; font-weight:600; color: var(--cream); text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .brand-text p{ margin:4px 0 0; font-size:11px; color:var(--text-dim); font-family: var(--font-display); }
 
-  .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; }
+  .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; transition: opacity 0.4s ease; }
 
-  .grid{ display:grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 18px; }
+  /* Grid animacije za prebacivanje */
+  .grid{ 
+    display:grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 18px; 
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  .grid.hidden-view {
+    opacity: 0; transform: scale(0.95); pointer-events: none; position: absolute; width: calc(100% - 48px); visibility: hidden;
+  }
 
   .card{
     position:relative; border-radius: var(--radius); overflow:hidden;
@@ -176,8 +183,55 @@
   .cd-unit .num{ font-family: var(--font-display); font-size:16px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .cd-unit .lbl{ font-size:8px; letter-spacing:1px; color: var(--text-dim); text-transform:uppercase; font-family: var(--font-display); margin-top: 4px; }
 
-  footer{ text-align:center; margin-top:40px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); }
+  footer{ text-align:center; margin-top:40px; font-size:11px; color: var(--text-dim); font-family: var(--font-display); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
+  footer.hidden-view { opacity: 0; pointer-events: none; }
 
+  /* Stats Frame preko cijelog ekrana */
+  .stats-frame {
+    position: absolute; top: 0; left: 0; width: 100%;
+    background: rgba(42, 25, 34, 0.9); border: 1px solid var(--card-border);
+    border-radius: var(--radius); padding: 36px; box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    opacity: 0; transform: scale(0.95); pointer-events: none; visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 10;
+  }
+  .stats-frame.active {
+    opacity: 1; transform: scale(1); pointer-events: auto; visibility: visible;
+  }
+
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 8px;
+    background: rgba(0, 0, 0, 0.4); border: 1px solid rgba(255, 255, 255, 0.15);
+    color: var(--cream); padding: 10px 16px; border-radius: 12px;
+    font-family: var(--font-display); font-size: 10px; cursor: pointer;
+    transition: all 0.2s ease; margin-bottom: 24px; text-decoration: none;
+  }
+  .back-btn:hover {
+    background: rgba(255, 255, 255, 0.1); border-color: var(--mint); transform: translateX(-4px);
+    color: var(--mint);
+  }
+  .back-btn span {
+    display: inline-block; transition: transform 0.2s ease;
+  }
+  .back-btn:hover span {
+    transform: translateX(-3px);
+  }
+
+  .stats-content h2 {
+    font-family: var(--font-display); font-size: 20px; color: #fff; margin: 0 0 16px 0;
+    text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
+  }
+  .stats-content p {
+    font-family: 'Inter', sans-serif; font-size: 14px; line-height: 1.7; color: var(--text-dim); margin: 0 0 14px 0;
+  }
+  .stats-online-badge {
+    display: inline-block; background: rgba(127, 224, 196, 0.1); border: 1px solid var(--mint);
+    color: var(--mint); font-family: var(--font-display); font-size: 11px; padding: 8px 14px;
+    border-radius: 10px; margin-bottom: 20px; box-shadow: 0 0 15px rgba(127, 224, 196, 0.15);
+  }
+
+  /* Store Modal */
   .modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.7); display:none; align-items:center; justify-content:center; z-index:100; backdrop-filter: blur(4px); animation: fadeIn 0.3s ease; }
   @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
   .modal-overlay.show{ display:flex; }
@@ -230,7 +284,7 @@
 <div class="bg-overlay"></div>
 
 <div class="wrap">
-  <header class="top">
+  <header class="top" id="mainHeader">
     <div class="brand">
       <div class="brand-mark">
         <img src="Cake.jpeg" alt="Cake Logo">
@@ -242,7 +296,7 @@
     </div>
   </header>
 
-  <svg class="drip-divider" viewBox="0 0 1180 14" preserveAspectRatio="none">
+  <svg class="drip-divider" id="mainDivider" viewBox="0 0 1180 14" preserveAspectRatio="none">
     <defs>
       <linearGradient id="blueMintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#4dc4ff" />
@@ -252,7 +306,8 @@
     <path d="M0,0 L1180,0 L1180,4 C1100,12 1060,2 1000,8 C940,14 900,2 840,7 C780,12 740,2 680,7 C620,12 580,2 520,7 C460,12 420,2 360,7 C300,12 260,2 200,7 C140,12 100,2 40,7 C20,9 10,4 0,4 Z" fill="url(#blueMintGrad)" opacity="0.85"/>
   </svg>
 
-  <div class="grid">
+  <!-- Glavna mreža kartica -->
+  <div class="grid" id="mainGrid">
     <div class="card card-icon">
       <div class="card-content-over">
         <span class="media-label">Cake SMP</span>
@@ -315,9 +370,22 @@
         <div class="cd-unit"><div class="num" id="cdSecs">--</div><div class="lbl">sec</div></div>
       </div>
     </div>
-
   </div>
-  <footer>Made for Cake SMP 🍰</footer>
+
+  <!-- Stats Frame (Prikazuje se preko cijelog ekrana kad stisneš Stats) -->
+  <div class="stats-frame" id="statsFrame">
+    <button class="back-btn" id="closeStatsBtn">
+      <span>←</span> Back to Home
+    </button>
+    <div class="stats-content">
+      <h2>Server Statistics & Info</h2>
+      <div class="stats-online-badge" id="modalPlayersCount">Players Online: Loading...</div>
+      <p><strong>Welcome to Cake SMP!</strong> On this website, you can find information about our server.</p>
+      <p>It is a normal vanilla server that has an average of 10 players online because we are still small but happy! We disabled crystal PvP, but brought back string dupers and inf trades.</p>
+    </div>
+  </div>
+
+  <footer id="mainFooter">Made for Cake SMP 🍰</footer>
 </div>
 
 <!-- Store Modal -->
@@ -334,21 +402,6 @@
   </div>
 </div>
 
-<!-- Stats Modal -->
-<div class="modal-overlay" id="statsModalOverlay">
-  <div class="modal">
-    <h3>Cake SMP Stats & Info</h3>
-    <div style="text-align: left; font-size: 11px; line-height: 1.6; color: var(--text-dim); font-family: 'Inter', sans-serif; display: flex; flex-direction: column; gap: 10px; margin: 15px 0;">
-      <p style="font-family: var(--font-display); font-size: 11px; color: var(--mint); margin: 0;" id="modalPlayersCount">Players Online: Loading...</p>
-      <p style="margin: 0;">Welcome to Cake SMP website! On this website, you can find information about our server.</p>
-      <p style="margin: 0;">It is a normal vanilla server that has an average of 10 players online because we are still small but happy! We disabled crystal PvP, but brought back string dupers and inf trades.</p>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-ghost" id="closeStatsBtn">Close</button>
-    </div>
-  </div>
-</div>
-
 <div class="toast" id="toast"></div>
 
 <script>
@@ -357,8 +410,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T20:00:00',
-    discordWebhook: 'https://discord.com/api/webhooks/1539774827961786438/g8g8ZBoaU2kcm7rjYPh2ByYPl-SUgtxA0wOh1Bk4azkk-fiX0-oN2sfSRj-hTbIzOKVl'
+    countdownDate: '2026-08-20T20:00:00'
   };
 
   let eventTriggered = false;
@@ -383,14 +435,35 @@
     setTimeout(()=>t.classList.remove('show'), 2000);
   }
 
-  // Modals logic
+  // Store Modal logic
   const storeModalOverlay = document.getElementById('storeModalOverlay');
   document.getElementById('openStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.add('show'));
   document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
 
-  const statsModalOverlay = document.getElementById('statsModalOverlay');
-  document.getElementById('openStatsBtn').addEventListener('click', ()=>statsModalOverlay.classList.add('show'));
-  document.getElementById('closeStatsBtn').addEventListener('click', ()=>statsModalOverlay.classList.remove('show'));
+  // Stats Fullscreen Frame logic
+  const mainGrid = document.getElementById('mainGrid');
+  const mainHeader = document.getElementById('mainHeader');
+  const mainDivider = document.getElementById('mainDivider');
+  const mainFooter = document.getElementById('mainFooter');
+  const statsFrame = document.getElementById('statsFrame');
+
+  document.getElementById('openStatsBtn').addEventListener('click', () => {
+    mainGrid.classList.add('hidden-view');
+    mainHeader.style.opacity = '0';
+    mainHeader.style.transform = 'translateY(-10px)';
+    mainDivider.style.opacity = '0';
+    mainFooter.classList.add('hidden-view');
+    statsFrame.classList.add('active');
+  });
+
+  document.getElementById('closeStatsBtn').addEventListener('click', () => {
+    statsFrame.classList.remove('active');
+    mainGrid.classList.remove('hidden-view');
+    mainHeader.style.opacity = '1';
+    mainHeader.style.transform = 'translateY(0)';
+    mainDivider.style.opacity = '0.85';
+    mainFooter.classList.remove('hidden-view');
+  });
 
   function updateCountdown(){
     if(eventTriggered) return;
@@ -399,7 +472,8 @@
     const target = new Date(config.countdownDate).getTime();
     const diff = target - Date.now();
 
-    document.getElementById('countdownDateDisplay').textContent = new Date(config.countdownDate).toLocaleString();
+    const dateDisplay = document.getElementById('countdownDateDisplay');
+    if(dateDisplay) dateDisplay.textContent = new Date(config.countdownDate).toLocaleString();
 
     if(diff <= 0){
       eventTriggered = true;
