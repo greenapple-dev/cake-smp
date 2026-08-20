@@ -76,7 +76,7 @@
   }
   #eventVideoPlayer.fade-in { opacity: 1; }
 
-  /* Audio Prompt Banner (zaobilazi browser blokadu zvuka) */
+  /* Audio Prompt Banner */
   #audioPromptBanner {
     position: fixed; top: 0; left: 0; width: 100%; background: var(--frosting-pink);
     color: #1c1116; text-align: center; padding: 12px; font-weight: bold;
@@ -318,7 +318,7 @@
 </head>
 <body>
 
-<!-- Audio Prompt Banner (Zaobilazi browser blokadu zvuka) -->
+<!-- Audio Prompt Banner -->
 <div id="audioPromptBanner">🎵 KLIKNITE OVDJE DA OMOGUĆITE ZVUK ZA END FIGHT EVENT! 🎵</div>
 
 <!-- Accessibility Widget -->
@@ -511,13 +511,12 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-25T18:00:00' // Vraćeno na staro željeno vrijeme
+    countdownDate: '2026-08-20T20:00:00' // Namješteno na danas u 20:00 sati
   };
 
   let eventTriggered = false;
   let audioUnlocked = false;
 
-  // Mehanizam za otključavanje zvuka (browser autoplay policy)
   const audio = document.getElementById('eventAudio');
   const banner = document.getElementById('audioPromptBanner');
 
@@ -628,7 +627,6 @@
     const textImg = document.getElementById('eventTextImg');
     const video = document.getElementById('eventVideoPlayer');
 
-    // Prikaži overlay i pokreni glazbu
     overlay.classList.add('show');
     audio.currentTime = 0;
     audio.play().catch(err => {
@@ -636,22 +634,18 @@
       banner.style.display = 'block';
     });
 
-    // Postavi početnu sliku (eventtext.png)
     textImg.src = 'eventtext.png';
     textImg.style.display = 'block';
     textImg.className = 'event-text-img';
 
-    // 1. Nakon 1 sekunde prikaži početni tekst (fade-in)
     setTimeout(() => {
       textImg.classList.add('fade-in');
     }, 1000);
 
-    // 2. Nakon 7 sekundi makni početni tekst (fade-out)
     setTimeout(() => {
       textImg.classList.remove('fade-in');
       textImg.classList.add('fade-out');
       
-      // 3. Nakon fade-out efekta teksta, pokreni video
       setTimeout(() => {
         textImg.style.display = 'none';
         video.style.display = 'block';
@@ -668,7 +662,6 @@
       }, 1500);
     }, 7000);
 
-    // 4. Kad video završi, sakrij video i prikaži završnu sliku (eventtext_end.png)
     video.onended = () => {
       video.classList.remove('fade-in');
       video.style.display = 'none';
@@ -681,7 +674,6 @@
         textImg.classList.add('fade-in');
       }, 100);
 
-      // 5. Nakon što završna slika stoji 4 sekunde, ugasi glazbu i vrati se u meni
       setTimeout(() => {
         textImg.classList.remove('fade-in');
         textImg.classList.add('fade-out');
