@@ -496,7 +496,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T20:00:00' // Vraćeno na staro vrijeme 20:00
+    countdownDate: '2026-08-20T20:00:00' // Vraćeno na 20:00
   };
 
   let eventTriggered = false;
@@ -590,10 +590,9 @@
     const textImg = document.getElementById('eventTextImg');
     const video = document.getElementById('eventVideoPlayer');
 
-    // 1. Prikaz crnog overlayja s fade-in efektom u sjenu
+    // 1. Prikaz crnog overlayja i pokretanje glazbe OD POČETKA
     overlay.classList.add('show');
-    
-    // Pokretanje zvuka eventsound.mp3 i osiguranje da svira do kraja
+    audio.currentTime = 0;
     audio.play().catch(err => {
       console.log("Audio autoplay bio blokiran, pokreće se klikom:", err);
       const unlockAudio = () => {
@@ -613,7 +612,7 @@
       textImg.classList.remove('fade-in');
       textImg.classList.add('fade-out');
       
-      // 4. Nakon završetka fade-out efekta teksta, automatski kreće video s fade-in efektom (dok zvuk i dalje svira do kraja)
+      // 4. Nakon završetka fade-out efekta teksta, automatski kreće video
       setTimeout(() => {
         textImg.style.display = 'none';
         video.style.display = 'block';
@@ -630,30 +629,18 @@
       }, 1500);
     }, 7000);
 
-    // 5. Kada video i zvuk završe, vraća sve u main menu
-    let videoEnded = false;
-    let audioEnded = false;
+    // 5. Kad video završi, glazba se pauzira/resetira i sve se vraća na staro (main menu)
+    video.onended = () => {
+      audio.pause();
+      audio.currentTime = 0;
 
-    function checkSequenceEnd() {
-      if(videoEnded && audioEnded) {
-        overlay.classList.remove('show');
-        video.classList.remove('fade-in');
-        video.style.display = 'none';
-        textImg.style.display = 'block';
-        textImg.classList.remove('fade-out');
-        mainWrap.classList.remove('hidden-view');
-      }
-    }
-
-    video.addEventListener('ended', () => {
-      videoEnded = true;
-      checkSequenceEnd();
-    });
-
-    audio.addEventListener('ended', () => {
-      audioEnded = true;
-      checkSequenceEnd();
-    });
+      overlay.classList.remove('show');
+      video.classList.remove('fade-in');
+      video.style.display = 'none';
+      textImg.style.display = 'block';
+      textImg.classList.remove('fade-out');
+      mainWrap.classList.remove('hidden-view');
+    };
   }
 
   function updateCountdown(){
