@@ -457,7 +457,8 @@
 
   async function fetchServerStatus(){
     try {
-      const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress);
+      // Dodan vremenski žig (?_=[time]) da spriječimo browser cache i povučemo svježe podatke
+      const res = await fetch('https://api.mcsrvstat.us/3/' + config.serverAddress + '?_=' + new Date().getTime());
       const data = await res.json();
       const countEl = document.getElementById('smpPlayersCount');
       if(data.online){
@@ -470,7 +471,7 @@
     }
   }
   fetchServerStatus();
-  setInterval(fetchServerStatus, 30000);
+  setInterval(fetchServerStatus, 5000); // Provjerava se svakih 5 sekundi
 
   function verifyBackgroundImage(selector, url){
     const img = new Image();
@@ -483,7 +484,7 @@
   verifyBackgroundImage('.card-icon', 'Cakelogo.png');
   verifyBackgroundImage('.card-store', 'store_icon.png');
   verifyBackgroundImage('.card-stats', 'StatsIcon.png');
-  verifyBackgroundImage('.card-countdown', 'end_fight.png'); // Vraćeno na .png
+  verifyBackgroundImage('.card-countdown', 'end_fight.png');
 
   const bgVideo = document.getElementById('bgVideo');
   if (bgVideo) {
