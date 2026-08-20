@@ -89,7 +89,7 @@
     .accessibility-widget { left: 10px; top: 10px; }
   }
 
-  /* Accessibility Widget (Lijevo) */
+  /* Accessibility Widget */
   .accessibility-widget {
     position: fixed; left: 20px; top: 30px; z-index: 1000;
     display: flex; flex-direction: column; align-items: flex-start;
@@ -128,8 +128,8 @@
     border: 1px solid var(--card-border);
   }
   .brand-mark img { width:70%; height:70%; object-fit:contain; image-rendering: pixelated; }
-  .brand-text h1{ font-size: 14px; margin:0; font-weight:600; color: var(--cream); text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
-  .brand-text p{ margin:6px 0 0; font-size:9px; color:var(--text-dim); }
+  .brand-text h1{ font-size: 16px; margin:0; font-weight:600; color: var(--cream); text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
+  .brand-text p{ margin:6px 0 0; font-size:10px; color:var(--text-dim); }
 
   .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; transition: opacity 0.4s ease; }
 
@@ -189,7 +189,7 @@
   }
 
   .media-label {
-    font-size: 13px; color: #fff;
+    font-size: 15px; color: #fff;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
 
@@ -205,40 +205,41 @@
   .discord-icon{ width:42px; height:42px; margin-bottom:4px; transition: transform 0.3s ease; }
   .card-discord:hover .discord-icon { transform: scale(1.15) rotate(5deg); }
 
-  .discord-count{ font-size:15px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
-  .discord-sub{ display:flex; align-items:center; gap:6px; font-size:9px; color: var(--text-dim); }
+  .discord-count{ font-size:16px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
+  .discord-sub{ display:flex; align-items:center; gap:6px; font-size:10px; color: var(--text-dim); }
   .dot-live{ width:8px; height:8px; border-radius:50%; background: var(--mint); box-shadow:0 0 8px var(--mint); }
   
-  .discord-join{ margin-top:8px; font-size:9px; color: var(--frosting-pink); text-decoration:none; font-weight:600; transition: transform 0.2s ease, color 0.2s ease; display: inline-block; }
+  .discord-join{ margin-top:8px; font-size:10px; color: var(--frosting-pink); text-decoration:none; font-weight:600; transition: transform 0.2s ease, color 0.2s ease; display: inline-block; }
   .discord-join:hover { transform: translateX(4px); color: #ff9ec2; }
 
-  .field-label{ font-size:8px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:1px; }
-  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 6px 10px; font-family:'JetBrains Mono', monospace; font-size:10px; color:#fff; cursor: pointer; transition: all 0.2s ease; }
+  .field-label{ font-size:9px; color: var(--text-dim); letter-spacing:0.5px; margin-bottom:2px; }
+  .field-box{ background: rgba(0,0,0,0.5); border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding: 8px 12px; font-family:'JetBrains Mono', monospace; font-size:11px; color:#fff; cursor: pointer; transition: all 0.2s ease; }
   .field-box:hover{ background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.3); transform: scale(1.01); }
 
   .cd-left{ display:flex; flex-direction:column; gap:4px; }
-  .cd-title{ font-size:12px; font-weight:600; color:#fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); }
-  .cd-sub{ font-size:9px; color: var(--cream); text-shadow: 1px 1px 3px rgba(0,0,0,0.9); }
+  .cd-title{ font-size:14px; font-weight:600; color:#fff; text-shadow: 2px 2px 4px rgba(0,0,0,0.9); }
+  .cd-sub{ font-size:10px; color: var(--cream); text-shadow: 1px 1px 3px rgba(0,0,0,0.9); }
   .cd-timer{ display:flex; gap:12px; }
   .cd-unit{ background: rgba(0,0,0,0.6); border:1px solid rgba(255,255,255,0.2); border-radius:14px; padding: 10px 14px; text-align:center; min-width: 68px; transition: transform 0.2s ease; }
   .cd-unit:hover { transform: translateY(-2px); border-color: var(--mint); }
-  .cd-unit .num{ font-size:13px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
-  .cd-unit .lbl{ font-size:7px; letter-spacing:1px; color: var(--text-dim); text-transform:uppercase; margin-top: 4px; }
+  .cd-unit .num{ font-size:14px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
+  .cd-unit .lbl{ font-size:8px; letter-spacing:1px; color: var(--text-dim); text-transform:uppercase; margin-top: 4px; }
 
-  footer{ text-align:center; margin-top:40px; font-size:9px; color: var(--text-dim); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
+  footer{ text-align:center; margin-top:40px; font-size:10px; color: var(--text-dim); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
   footer.hidden-view { opacity: 0; pointer-events: none; }
 
-  /* Stats Frame (Prikazuje se preko cijelog ekrana s povećanim tekstom) */
-  .stats-frame {
-    position: absolute; top: 0; left: 0; width: 100%;
+  /* Fullscreen Frames (Stats & Store) - Centrirani, viši i prostraniji */
+  .fullscreen-frame {
+    position: absolute; top: 0; left: 0; width: 100%; min-height: 85vh;
     background: rgba(30, 18, 24, 0.96); border: 2px solid var(--card-border);
-    border-radius: var(--radius); padding: 40px; box-shadow: var(--shadow);
+    border-radius: var(--radius); padding: 50px 60px; box-shadow: var(--shadow);
     backdrop-filter: blur(12px);
     opacity: 0; transform: scale(0.95); pointer-events: none; visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     z-index: 10;
+    display: flex; flex-direction: column; justify-content: center;
   }
-  .stats-frame.active {
+  .fullscreen-frame.active {
     opacity: 1; transform: scale(1); pointer-events: auto; visibility: visible;
   }
 
@@ -246,8 +247,8 @@
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.2);
     color: var(--cream); padding: 12px 18px; border-radius: 12px;
-    font-size: 11px; cursor: pointer;
-    transition: all 0.2s ease; margin-bottom: 28px; text-decoration: none;
+    font-size: 11px; cursor: pointer; align-self: flex-start;
+    transition: all 0.2s ease; margin-bottom: 30px; text-decoration: none;
   }
   .back-btn:hover {
     background: rgba(255, 255, 255, 0.15); border-color: var(--mint); transform: translateX(-4px);
@@ -260,48 +261,30 @@
     transform: translateX(-3px);
   }
 
-  .stats-content h2 {
-    font-size: 22px; color: #fff; margin: 0 0 20px 0;
+  .frame-content h2 {
+    font-size: 26px; color: #fff; margin: 0 0 20px 0;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
-  .stats-content p {
-    font-size: 14px; line-height: 2.0; color: var(--cream); margin: 0 0 16px 0;
+  .frame-content p {
+    font-size: 15px; line-height: 2.2; color: var(--cream); margin: 0 0 18px 0;
   }
   .stats-online-badge {
     display: inline-block; background: rgba(127, 224, 196, 0.15); border: 2px solid var(--mint);
-    color: var(--mint); font-size: 13px; padding: 12px 18px;
+    color: var(--mint); font-size: 14px; padding: 12px 20px;
     border-radius: 12px; margin-bottom: 24px; box-shadow: 0 0 20px rgba(127, 224, 196, 0.2);
   }
 
-  /* Store Modal */
-  .modal-overlay{ position:fixed; inset:0; background: rgba(0,0,0,0.7); display:none; align-items:center; justify-content:center; z-index:100; backdrop-filter: blur(4px); animation: fadeIn 0.3s ease; }
-  @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-  .modal-overlay.show{ display:flex; }
-  
-  .modal{ background: #2a1922; border:1px solid var(--card-border); border-radius:20px; padding:28px; width:440px; box-shadow: var(--shadow); max-height: 90vh; overflow-y: auto; animation: scaleUp 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275); text-align: center; }
-  @keyframes scaleUp { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+  .coming-soon-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 0; gap: 20px; text-align: center; }
+  .coming-soon-img { width: 96px; height: 96px; image-rendering: pixelated; animation: bounce 1.5s infinite ease-in-out; }
+  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
-  .modal h3{ margin:0 0 10px; font-size:13px; }
-  .modal p{ margin:0 0 16px; font-size:10px; color: var(--text-dim); }
-  .modal-actions{ display:flex; gap:10px; margin-top:14px; justify-content: center; }
-  
-  .modal-actions button{ padding:10px 20px; border-radius:10px; border:none; cursor:pointer; font-weight:600; font-size:10px; transition: all 0.2s ease; }
-  .modal-actions button:hover { transform: translateY(-2px); }
-  
-  .btn-ghost{ background: transparent; color: var(--text-dim); border:1px solid rgba(255,255,255,0.15) !important; }
-  .btn-ghost:hover { background: rgba(255,255,255,0.05); color: #fff; }
-
-  .coming-soon-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 20px 0; gap: 15px; }
-  .coming-soon-img { width: 64px; height: 64px; image-rendering: pixelated; animation: bounce 1.5s infinite ease-in-out; }
-  @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-8px); } }
-
-  .toast{ position:fixed; bottom:24px; left:50%; transform: translateX(-50%) translateY(20px); background: #2a1922; border:1px solid var(--card-border); padding:12px 20px; border-radius:12px; font-size:10px; font-weight:600; opacity:0; pointer-events:none; transition: all .25s ease; z-index:200; box-shadow: var(--shadow); }
+  .toast{ position:fixed; bottom:24px; left:50%; transform: translateX(-50%) translateY(20px); background: #2a1922; border:1px solid var(--card-border); padding:12px 20px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; pointer-events:none; transition: all .25s ease; z-index:200; box-shadow: var(--shadow); }
   .toast.show{ opacity:1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
 
-<!-- Accessibility Widget (Lijevo) -->
+<!-- Accessibility Widget -->
 <div class="accessibility-widget" id="accessibilityWidget">
   <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Accessibility Tools">
     <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 1 0 2 2 2 2 0 0 0-2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18z"/></svg>
@@ -397,7 +380,7 @@
     </div>
 
     <div class="card card-join">
-      <div style="font-size:10px; font-weight:600;">Server Status & IP</div>
+      <div style="font-size:11px; font-weight:600;">Server Status & IP</div>
       <div>
         <div class="field-label">Online Players</div>
         <div class="field-box" id="smpPlayersCount" style="color: var(--mint); font-weight: bold; cursor: default;">Loading...</div>
@@ -432,34 +415,36 @@
     </div>
   </div>
 
-  <!-- Stats Frame (Prikazuje se preko cijelog ekrana s povećanim tekstom) -->
-  <div class="stats-frame" id="statsFrame">
+  <!-- Stats Frame (Centriran preko cijelog ekrana, veći i s više teksta) -->
+  <div class="fullscreen-frame" id="statsFrame">
     <button class="back-btn" id="closeStatsBtn">
       <span>←</span> Back to Home
     </button>
-    <div class="stats-content">
-      <h2>Server Statistics & Info</h2>
+    <div class="frame-content">
+      <h2>Server Statistics & Detailed Info</h2>
       <div class="stats-online-badge" id="modalPlayersCount">Players Online: Loading...</div>
-      <p><strong>Welcome to Cake SMP website!</strong> On this website, you can find information about our server.</p>
-      <p>It is a normal vanilla server that has an average of 10 players online because we are still small but happy! We disabled crystal PvP, but brought back string dupers and inf trades.</p>
+      <p><strong>Welcome to Cake SMP!</strong> This is your ultimate destination for pure, unadulterated vanilla Minecraft survival gameplay. Dive into a tight-knit community where every single block placed tells a story.</p>
+      <p>Our server averages around 10 active players online at a time. While we might be smaller in size compared to massive networks, our community is vibrant, friendly, and deeply creative. We focus on genuine player connections and epic long-term building projects.</p>
+      <p>To keep the gameplay dynamic and fun, we have custom rule sets: <strong>crystal PvP is completely disabled</strong> to ensure fair and balanced combat, but we've happily brought back <strong>string dupers and infinite trades</strong> for an extra layer of classic survival freedom!</p>
+    </div>
+  </div>
+
+  <!-- Store Frame (Isti dizajn kao Stats) -->
+  <div class="fullscreen-frame" id="storeFrame">
+    <button class="back-btn" id="closeStoreBtn">
+      <span>←</span> Back to Home
+    </button>
+    <div class="frame-content">
+      <h2>Cake SMP Official Store</h2>
+      <div class="coming-soon-container">
+        <img src="coming_soon.png" alt="Coming Soon" class="coming-soon-img">
+        <p style="font-size: 14px; color: var(--gold); margin: 0; font-family: var(--font-display);">Coming soon maybe...</p>
+      </div>
+      <p style="text-align: center;">Our server store is currently under development. Soon you will be able to support Cake SMP by acquiring exclusive ranks, cosmetic perks, and special community rewards to enhance your gameplay experience!</p>
     </div>
   </div>
 
   <footer id="mainFooter">Made for Cake SMP 🍰</footer>
-</div>
-
-<!-- Store Modal -->
-<div class="modal-overlay" id="storeModalOverlay">
-  <div class="modal">
-    <h3>Cake SMP Store</h3>
-    <div class="coming-soon-container">
-      <img src="coming_soon.png" alt="Coming Soon" class="coming-soon-img">
-      <p style="font-size: 11px; color: var(--gold); margin: 0;">Coming soon maybe</p>
-    </div>
-    <div class="modal-actions">
-      <button class="btn-ghost" id="closeStoreBtn">Close</button>
-    </div>
-  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -532,10 +517,24 @@
     document.body.style.fontSize = '14px';
   });
 
-  // Store Modal logic
-  const storeModalOverlay = document.getElementById('storeModalOverlay');
-  document.getElementById('openStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.add('show'));
-  document.getElementById('closeStoreBtn').addEventListener('click', ()=>storeModalOverlay.classList.remove('show'));
+  // Store Fullscreen Frame logic
+  const storeFrame = document.getElementById('storeFrame');
+  document.getElementById('openStoreBtn').addEventListener('click', () => {
+    mainGrid.classList.add('hidden-view');
+    mainHeader.style.opacity = '0';
+    mainHeader.style.transform = 'translateY(-10px)';
+    mainDivider.style.opacity = '0';
+    mainFooter.classList.add('hidden-view');
+    storeFrame.classList.add('active');
+  });
+  document.getElementById('closeStoreBtn').addEventListener('click', () => {
+    storeFrame.classList.remove('active');
+    mainGrid.classList.remove('hidden-view');
+    mainHeader.style.opacity = '1';
+    mainHeader.style.transform = 'translateY(0)';
+    mainDivider.style.opacity = '0.85';
+    mainFooter.classList.remove('hidden-view');
+  });
 
   // Stats Fullscreen Frame logic
   const mainGrid = document.getElementById('mainGrid');
