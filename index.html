@@ -150,7 +150,9 @@
     grid-column: span 1; grid-row: span 2;
     background: linear-gradient(180deg, rgba(0,0,0,0.1) 0%, rgba(0,0,0,0.5) 100%), url('Cakelogo.png');
     background-size: cover; background-position: center; background-repeat: no-repeat;
+    cursor: pointer;
   }
+  .card-icon:hover { transform: translateY(-6px) scale(1.01); }
 
   .card-store {
     grid-column: span 2; grid-row: span 2;
@@ -224,7 +226,7 @@
 
   footer{ text-align:center; margin-top:40px; font-size:10px; color: var(--text-dim); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); }
 
-  /* Fullscreen Frames - Uvijek savršeno centrirani na ekranu sa skrolanjem ako zatreba */
+  /* Fullscreen Frames */
   .fullscreen-frame {
     position: fixed; inset: 0; margin: auto;
     width: 90%; max-width: 1050px; max-height: 85vh;
@@ -263,7 +265,7 @@
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
   .frame-content p {
-    font-size: 14px; line-height: 2; color: var(--cream); margin: 0 0 16px 0;
+    font-size: 13px; line-height: 1.8; color: var(--cream); margin: 0 0 14px 0;
   }
   .stats-online-badge {
     display: inline-block; background: rgba(127, 224, 196, 0.15); border: 2px solid var(--mint);
@@ -348,7 +350,7 @@
   </svg>
 
   <div class="grid">
-    <div class="card card-icon">
+    <div class="card card-icon" id="openCommandsBtn">
       <div class="card-content-over">
         <span class="media-label">Cake SMP</span>
       </div>
@@ -415,7 +417,23 @@
   <footer>Made for Cake SMP 🍰</footer>
 </div>
 
-<!-- Stats Frame (Centriran na sredinu ekrana izvan wrap-a) -->
+<!-- Commands Frame -->
+<div class="fullscreen-frame" id="commandsFrame">
+  <button class="back-btn" id="closeCommandsBtn">
+    <span>←</span> Back to Home
+  </button>
+  <div class="frame-content">
+    <h2>Commands</h2>
+    <p style="color: var(--gold); font-size: 13px; margin-bottom: 20px;">🚨 Important: some commands will not be in use all the time, only when admin activates it 🚨</p>
+    <p><strong>/reward</strong> — You can claim your playtime rewards</p>
+    <p><strong>/event</strong> — Teleports you to the event location (works only in main server)</p>
+    <p><strong>/vote</strong> — Vote for options for events or future of smp</p>
+    <p><strong>/discord</strong> — Can't get the link of our dc</p>
+    <p><strong>/report &lt;player&gt; &lt;reason&gt;</strong> — You report a player</p>
+  </div>
+</div>
+
+<!-- Stats Frame -->
 <div class="fullscreen-frame" id="statsFrame">
   <button class="back-btn" id="closeStatsBtn">
     <span>←</span> Back to Home
@@ -429,7 +447,7 @@
   </div>
 </div>
 
-<!-- Store Frame (Centriran na sredinu ekrana izvan wrap-a) -->
+<!-- Store Frame -->
 <div class="fullscreen-frame" id="storeFrame">
   <button class="back-btn" id="closeStoreBtn">
     <span>←</span> Back to Home
@@ -517,6 +535,17 @@
   const mainWrap = document.getElementById('mainWrap');
   const storeFrame = document.getElementById('storeFrame');
   const statsFrame = document.getElementById('statsFrame');
+  const commandsFrame = document.getElementById('commandsFrame');
+
+  // Commands Frame logic
+  document.getElementById('openCommandsBtn').addEventListener('click', () => {
+    mainWrap.classList.add('hidden-view');
+    commandsFrame.classList.add('active');
+  });
+  document.getElementById('closeCommandsBtn').addEventListener('click', () => {
+    commandsFrame.classList.remove('active');
+    mainWrap.classList.remove('hidden-view');
+  });
 
   // Store Frame logic
   document.getElementById('openStoreBtn').addEventListener('click', () => {
