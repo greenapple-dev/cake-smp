@@ -53,7 +53,7 @@
     background: rgba(28, 17, 22, 0.6); z-index: -1; pointer-events: none;
   }
 
-  /* Event Cinematic Overlay s glatkim prijelazima u sjenu */
+  /* Event Cinematic Overlay */
   #eventCinematicOverlay {
     position: fixed; inset: 0; background: #000; z-index: 9999;
     display: none; align-items: center; justify-content: center; overflow: hidden;
@@ -75,6 +75,18 @@
     opacity: 0; transition: opacity 1.5s ease-in-out;
   }
   #eventVideoPlayer.fade-in { opacity: 1; }
+
+  /* Audio Prompt Banner (zaobilazi browser blokadu zvuka) */
+  #audioPromptBanner {
+    position: fixed; top: 0; left: 0; width: 100%; background: var(--frosting-pink);
+    color: #1c1116; text-align: center; padding: 12px; font-weight: bold;
+    z-index: 10005; display: none; cursor: pointer; box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+    animation: pulseBanner 1s infinite alternate;
+  }
+  @keyframes pulseBanner {
+    0% { background: var(--frosting-pink); }
+    100% { background: var(--mint); }
+  }
 
   /* Commands Credits Overlay */
   #commandsCreditsOverlay { 
@@ -306,6 +318,9 @@
 </head>
 <body>
 
+<!-- Audio Prompt Banner (Zaobilazi browser blokadu zvuka) -->
+<div id="audioPromptBanner">🎵 KLIKNITE OVDJE DA OMOGUĆITE ZVUK ZA END FIGHT EVENT! 🎵</div>
+
 <!-- Accessibility Widget -->
 <div class="accessibility-widget" id="accessibilityWidget">
   <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Accessibility Tools">
@@ -496,10 +511,34 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T15:30:00' // TESTNO VRIJEME: 15:30
+    countdownDate: '2026-08-25T18:00:00' // Vraćeno na staro željeno vrijeme
   };
 
   let eventTriggered = false;
+  let audioUnlocked = false;
+
+  // Mehanizam za otključavanje zvuka (browser autoplay policy)
+  const audio = document.getElementById('eventAudio');
+  const banner = document.getElementById('audioPromptBanner');
+
+  function unlockAudioEngine() {
+    audio.play().then(() => {
+      audio.pause();
+      audio.currentTime = 0;
+      audioUnlocked = true;
+      banner.style.display = 'none';
+      showToast('Audio uspješno omogućen!');
+    }).catch(e => {
+      console.log("Audio čekanje interakcije:", e);
+    });
+  }
+
+  banner.addEventListener('click', unlockAudioEngine);
+  document.addEventListener('click', () => {
+    if(!audioUnlocked) {
+      unlockAudioEngine();
+    }
+  }, { once: true });
 
   function showToast(msg){
     const t = document.getElementById('toast');
@@ -586,20 +625,15 @@
     eventTriggered = true;
 
     const overlay = document.getElementById('eventCinematicOverlay');
-    const audio = document.getElementById('eventAudio');
     const textImg = document.getElementById('eventTextImg');
     const video = document.getElementById('eventVideoPlayer');
 
-    // 1. Prikaži crni overlay i pokreni glazbu od početka (da svira slobodno cijelo vrijeme)
+    // Prikaži overlay i pokreni glazbu
     overlay.classList.add('show');
     audio.currentTime = 0;
     audio.play().catch(err => {
-      console.log("Audio autoplay bio blokiran, pokreće se klikom:", err);
-      const unlockAudio = () => {
-        audio.play();
-        document.removeEventListener('click', unlockAudio);
-      };
-      document.addEventListener('click', unlockAudio);
+      console.log("Glazba nije mogla krenuti automatski:", err);
+      banner.style.display = 'block';
     });
 
     // Postavi početnu sliku (eventtext.png)
@@ -607,17 +641,17 @@
     textImg.style.display = 'block';
     textImg.className = 'event-text-img';
 
-    // 2. Nakon 1 sekunde prikaži početni tekst (fade-in)
+    // 1. Nakon 1 sekunde prikaži početni tekst (fade-in)
     setTimeout(() => {
       textImg.classList.add('fade-in');
     }, 1000);
 
-    // 3. Nakon 7 sekundi makni početni tekst (fade-out)
+    // 2. Nakon 7 sekundi makni početni tekst (fade-out)
     setTimeout(() => {
       textImg.classList.remove('fade-in');
       textImg.classList.add('fade-out');
       
-      // 4. Nakon fade-out efekta teksta, pokreni video
+      // 3. Nakon fade-out efekta teksta, pokreni video
       setTimeout(() => {
         textImg.style.display = 'none';
         video.style.display = 'block';
@@ -634,7 +668,7 @@
       }, 1500);
     }, 7000);
 
-    // 5. Kad video završi, sakrij video i prikaži završnu sliku (eventtext_end.png)
+    // 4. Kad video završi, sakrij video i prikaži završnu sliku (eventtext_end.png)
     video.onended = () => {
       video.classList.remove('fade-in');
       video.style.display = 'none';
@@ -647,7 +681,7 @@
         textImg.classList.add('fade-in');
       }, 100);
 
-      // 6. Nakon što završna slika stoji 4 sekunde, tek tada gasimo glazbu i vraćamo se u main menu
+      // 5. Nakon što završna slika stoji 4 sekunde, ugasi glazbu i vrati se u meni
       setTimeout(() => {
         textImg.classList.remove('fade-in');
         textImg.classList.add('fade-out');
