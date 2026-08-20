@@ -82,7 +82,8 @@
   .confetti { position: absolute; width: 12px; height: 12px; z-index: 10000; }
   @keyframes fall { to { transform: translateY(100vh) rotate(360deg); } }
 
-  .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px 90px; }
+  .wrap{ position:relative; z-index:1; max-width: 1180px; margin: 0 auto; padding: 40px 24px 100px 90px; transition: opacity 0.4s ease, transform 0.4s ease; }
+  .wrap.hidden-view { opacity: 0; transform: scale(0.95); pointer-events: none; visibility: hidden; position: absolute; width: 100%; }
 
   @media (max-width: 768px) {
     .wrap { padding-left: 24px; }
@@ -106,7 +107,7 @@
     position: absolute; left: 0; top: 58px; background: #ffffff; color: #333;
     border-radius: 12px; box-shadow: 0 10px 30px rgba(0,0,0,0.3); width: 220px;
     padding: 12px 0; display: none; flex-direction: column; gap: 4px;
-    border: 1px solid #ddd;
+    border: 1px solid #ddd; z-index: 1001;
   }
   .accessibility-menu.open { display: flex; animation: fadeIn 0.2s ease; }
   .accessibility-menu h4 { margin: 0 0 8px 14px; font-size: 11px; color: #333; font-family: 'Inter', sans-serif; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
@@ -118,7 +119,7 @@
   .accessibility-btn:hover { background: #f0f0f0; color: #000; }
   .accessibility-btn span { font-size: 14px; width: 18px; text-align: center; }
 
-  header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; transition: opacity 0.4s ease, transform 0.4s ease; }
+  header.top{ display:flex; align-items:center; justify-content:space-between; margin-bottom: 34px; gap:16px; flex-wrap:wrap; }
   .brand{ display:flex; align-items:center; gap:14px; }
   .brand-mark{
     width:52px; height:52px; border-radius:14px;
@@ -131,14 +132,10 @@
   .brand-text h1{ font-size: 16px; margin:0; font-weight:600; color: var(--cream); text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .brand-text p{ margin:6px 0 0; font-size:10px; color:var(--text-dim); }
 
-  .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; transition: opacity 0.4s ease; }
+  .drip-divider{ width:100%; height:14px; margin-bottom:30px; opacity:0.9; }
 
   .grid{ 
     display:grid; grid-template-columns: repeat(4, 1fr); grid-auto-rows: 180px; gap: 18px; 
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-  }
-  .grid.hidden-view {
-    opacity: 0; transform: scale(0.95); pointer-events: none; position: absolute; width: calc(100% - 114px); visibility: hidden;
   }
 
   .card{
@@ -189,7 +186,7 @@
   }
 
   .media-label {
-    font-size: 15px; color: #fff;
+    font-size: 18px; color: #fff; font-weight: bold;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
 
@@ -225,19 +222,19 @@
   .cd-unit .num{ font-size:14px; font-weight:600; color:#fff; text-shadow: 2px 2px 0px rgba(0,0,0,0.8); }
   .cd-unit .lbl{ font-size:8px; letter-spacing:1px; color: var(--text-dim); text-transform:uppercase; margin-top: 4px; }
 
-  footer{ text-align:center; margin-top:40px; font-size:10px; color: var(--text-dim); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); transition: opacity 0.4s ease; }
-  footer.hidden-view { opacity: 0; pointer-events: none; }
+  footer{ text-align:center; margin-top:40px; font-size:10px; color: var(--text-dim); text-shadow: 1px 1px 0px rgba(0,0,0,0.8); }
 
-  /* Fullscreen Frames (Stats & Store) - Centrirani, viši i prostraniji */
+  /* Fullscreen Frames - Uvijek savršeno centrirani na ekranu sa skrolanjem ako zatreba */
   .fullscreen-frame {
-    position: absolute; top: 0; left: 0; width: 100%; min-height: 85vh;
+    position: fixed; inset: 0; margin: auto;
+    width: 90%; max-width: 1050px; max-height: 85vh;
     background: rgba(30, 18, 24, 0.96); border: 2px solid var(--card-border);
-    border-radius: var(--radius); padding: 50px 60px; box-shadow: var(--shadow);
-    backdrop-filter: blur(12px);
+    border-radius: var(--radius); padding: 40px 50px; box-shadow: var(--shadow);
+    backdrop-filter: blur(12px); overflow-y: auto;
     opacity: 0; transform: scale(0.95); pointer-events: none; visibility: hidden;
     transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
-    z-index: 10;
-    display: flex; flex-direction: column; justify-content: center;
+    z-index: 100;
+    display: flex; flex-direction: column;
   }
   .fullscreen-frame.active {
     opacity: 1; transform: scale(1); pointer-events: auto; visibility: visible;
@@ -246,9 +243,9 @@
   .back-btn {
     display: inline-flex; align-items: center; gap: 8px;
     background: rgba(0, 0, 0, 0.6); border: 1px solid rgba(255, 255, 255, 0.2);
-    color: var(--cream); padding: 12px 18px; border-radius: 12px;
+    color: var(--cream); padding: 10px 16px; border-radius: 12px;
     font-size: 11px; cursor: pointer; align-self: flex-start;
-    transition: all 0.2s ease; margin-bottom: 30px; text-decoration: none;
+    transition: all 0.2s ease; margin-bottom: 20px; text-decoration: none;
   }
   .back-btn:hover {
     background: rgba(255, 255, 255, 0.15); border-color: var(--mint); transform: translateX(-4px);
@@ -262,20 +259,20 @@
   }
 
   .frame-content h2 {
-    font-size: 26px; color: #fff; margin: 0 0 20px 0;
+    font-size: 24px; color: #fff; margin: 0 0 16px 0;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
   .frame-content p {
-    font-size: 15px; line-height: 2.2; color: var(--cream); margin: 0 0 18px 0;
+    font-size: 14px; line-height: 2; color: var(--cream); margin: 0 0 16px 0;
   }
   .stats-online-badge {
     display: inline-block; background: rgba(127, 224, 196, 0.15); border: 2px solid var(--mint);
-    color: var(--mint); font-size: 14px; padding: 12px 20px;
-    border-radius: 12px; margin-bottom: 24px; box-shadow: 0 0 20px rgba(127, 224, 196, 0.2);
+    color: var(--mint); font-size: 13px; padding: 10px 18px;
+    border-radius: 12px; margin-bottom: 20px; box-shadow: 0 0 20px rgba(127, 224, 196, 0.2);
   }
 
-  .coming-soon-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 0; gap: 20px; text-align: center; }
-  .coming-soon-img { width: 96px; height: 96px; image-rendering: pixelated; animation: bounce 1.5s infinite ease-in-out; }
+  .coming-soon-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px 0; gap: 15px; text-align: center; }
+  .coming-soon-img { width: 80px; height: 80px; image-rendering: pixelated; animation: bounce 1.5s infinite ease-in-out; }
   @keyframes bounce { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
 
   .toast{ position:fixed; bottom:24px; left:50%; transform: translateX(-50%) translateY(20px); background: #2a1922; border:1px solid var(--card-border); padding:12px 20px; border-radius:12px; font-size:11px; font-weight:600; opacity:0; pointer-events:none; transition: all .25s ease; z-index:200; box-shadow: var(--shadow); }
@@ -327,8 +324,8 @@
 </video>
 <div class="bg-overlay"></div>
 
-<div class="wrap">
-  <header class="top" id="mainHeader">
+<div class="wrap" id="mainWrap">
+  <header class="top">
     <div class="brand">
       <div class="brand-mark">
         <img src="Cake.jpeg" alt="Cake Logo">
@@ -340,7 +337,7 @@
     </div>
   </header>
 
-  <svg class="drip-divider" id="mainDivider" viewBox="0 0 1180 14" preserveAspectRatio="none">
+  <svg class="drip-divider" viewBox="0 0 1180 14" preserveAspectRatio="none">
     <defs>
       <linearGradient id="blueMintGrad" x1="0%" y1="0%" x2="100%" y2="0%">
         <stop offset="0%" stop-color="#4dc4ff" />
@@ -350,7 +347,7 @@
     <path d="M0,0 L1180,0 L1180,4 C1100,12 1060,2 1000,8 C940,14 900,2 840,7 C780,12 740,2 680,7 C620,12 580,2 520,7 C460,12 420,2 360,7 C300,12 260,2 200,7 C140,12 100,2 40,7 C20,9 10,4 0,4 Z" fill="url(#blueMintGrad)" opacity="0.85"/>
   </svg>
 
-  <div class="grid" id="mainGrid">
+  <div class="grid">
     <div class="card card-icon">
       <div class="card-content-over">
         <span class="media-label">Cake SMP</span>
@@ -415,36 +412,36 @@
     </div>
   </div>
 
-  <!-- Stats Frame (Centriran preko cijelog ekrana, veći i s više teksta) -->
-  <div class="fullscreen-frame" id="statsFrame">
-    <button class="back-btn" id="closeStatsBtn">
-      <span>←</span> Back to Home
-    </button>
-    <div class="frame-content">
-      <h2>Server Statistics & Detailed Info</h2>
-      <div class="stats-online-badge" id="modalPlayersCount">Players Online: Loading...</div>
-      <p><strong>Welcome to Cake SMP!</strong> This is your ultimate destination for pure, unadulterated vanilla Minecraft survival gameplay. Dive into a tight-knit community where every single block placed tells a story.</p>
-      <p>Our server averages around 10 active players online at a time. While we might be smaller in size compared to massive networks, our community is vibrant, friendly, and deeply creative. We focus on genuine player connections and epic long-term building projects.</p>
-      <p>To keep the gameplay dynamic and fun, we have custom rule sets: <strong>crystal PvP is completely disabled</strong> to ensure fair and balanced combat, but we've happily brought back <strong>string dupers and infinite trades</strong> for an extra layer of classic survival freedom!</p>
-    </div>
-  </div>
+  <footer>Made for Cake SMP 🍰</footer>
+</div>
 
-  <!-- Store Frame (Isti dizajn kao Stats) -->
-  <div class="fullscreen-frame" id="storeFrame">
-    <button class="back-btn" id="closeStoreBtn">
-      <span>←</span> Back to Home
-    </button>
-    <div class="frame-content">
-      <h2>Cake SMP Official Store</h2>
-      <div class="coming-soon-container">
-        <img src="coming_soon.png" alt="Coming Soon" class="coming-soon-img">
-        <p style="font-size: 14px; color: var(--gold); margin: 0; font-family: var(--font-display);">Coming soon maybe...</p>
-      </div>
-      <p style="text-align: center;">Our server store is currently under development. Soon you will be able to support Cake SMP by acquiring exclusive ranks, cosmetic perks, and special community rewards to enhance your gameplay experience!</p>
-    </div>
+<!-- Stats Frame (Centriran na sredinu ekrana izvan wrap-a) -->
+<div class="fullscreen-frame" id="statsFrame">
+  <button class="back-btn" id="closeStatsBtn">
+    <span>←</span> Back to Home
+  </button>
+  <div class="frame-content">
+    <h2>Server Statistics & Detailed Info</h2>
+    <div class="stats-online-badge" id="modalPlayersCount">Players Online: Loading...</div>
+    <p><strong>Welcome to Cake SMP!</strong> This is your ultimate destination for pure, unadulterated vanilla Minecraft survival gameplay. Dive into a tight-knit community where every single block placed tells a story.</p>
+    <p>Our server averages around 10 active players online at a time. While we might be smaller in size compared to massive networks, our community is vibrant, friendly, and deeply creative. We focus on genuine player connections and epic long-term building projects.</p>
+    <p>To keep the gameplay dynamic and fun, we have custom rule sets: <strong>crystal PvP is completely disabled</strong> to ensure fair and balanced combat, but we've happily brought back <strong>string dupers and infinite trades</strong> for an extra layer of classic survival freedom!</p>
   </div>
+</div>
 
-  <footer id="mainFooter">Made for Cake SMP 🍰</footer>
+<!-- Store Frame (Centriran na sredinu ekrana izvan wrap-a) -->
+<div class="fullscreen-frame" id="storeFrame">
+  <button class="back-btn" id="closeStoreBtn">
+    <span>←</span> Back to Home
+  </button>
+  <div class="frame-content">
+    <h2>Cake SMP Official Store</h2>
+    <div class="coming-soon-container">
+      <img src="coming_soon.png" alt="Coming Soon" class="coming-soon-img">
+      <p style="font-size: 13px; color: var(--gold); margin: 0; font-family: var(--font-display);">Coming soon maybe...</p>
+    </div>
+    <p style="text-align: center;">Our server store is currently under development. Soon you will be able to support Cake SMP by acquiring exclusive ranks, cosmetic perks, and special community rewards to enhance your gameplay experience!</p>
+  </div>
 </div>
 
 <div class="toast" id="toast"></div>
@@ -517,48 +514,28 @@
     document.body.style.fontSize = '14px';
   });
 
-  // Store Fullscreen Frame logic
+  const mainWrap = document.getElementById('mainWrap');
   const storeFrame = document.getElementById('storeFrame');
+  const statsFrame = document.getElementById('statsFrame');
+
+  // Store Frame logic
   document.getElementById('openStoreBtn').addEventListener('click', () => {
-    mainGrid.classList.add('hidden-view');
-    mainHeader.style.opacity = '0';
-    mainHeader.style.transform = 'translateY(-10px)';
-    mainDivider.style.opacity = '0';
-    mainFooter.classList.add('hidden-view');
+    mainWrap.classList.add('hidden-view');
     storeFrame.classList.add('active');
   });
   document.getElementById('closeStoreBtn').addEventListener('click', () => {
     storeFrame.classList.remove('active');
-    mainGrid.classList.remove('hidden-view');
-    mainHeader.style.opacity = '1';
-    mainHeader.style.transform = 'translateY(0)';
-    mainDivider.style.opacity = '0.85';
-    mainFooter.classList.remove('hidden-view');
+    mainWrap.classList.remove('hidden-view');
   });
 
-  // Stats Fullscreen Frame logic
-  const mainGrid = document.getElementById('mainGrid');
-  const mainHeader = document.getElementById('mainHeader');
-  const mainDivider = document.getElementById('mainDivider');
-  const mainFooter = document.getElementById('mainFooter');
-  const statsFrame = document.getElementById('statsFrame');
-
+  // Stats Frame logic
   document.getElementById('openStatsBtn').addEventListener('click', () => {
-    mainGrid.classList.add('hidden-view');
-    mainHeader.style.opacity = '0';
-    mainHeader.style.transform = 'translateY(-10px)';
-    mainDivider.style.opacity = '0';
-    mainFooter.classList.add('hidden-view');
+    mainWrap.classList.add('hidden-view');
     statsFrame.classList.add('active');
   });
-
   document.getElementById('closeStatsBtn').addEventListener('click', () => {
     statsFrame.classList.remove('active');
-    mainGrid.classList.remove('hidden-view');
-    mainHeader.style.opacity = '1';
-    mainHeader.style.transform = 'translateY(0)';
-    mainDivider.style.opacity = '0.85';
-    mainFooter.classList.remove('hidden-view');
+    mainWrap.classList.remove('hidden-view');
   });
 
   function updateCountdown(){
