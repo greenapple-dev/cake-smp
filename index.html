@@ -360,8 +360,8 @@
   <video id="eventVideoPlayer" src="eventvideo.mp4" playsinline></video>
 </div>
 
-<!-- Background Audio for Event (Epic Cinematic Track / Kizuku) -->
-<audio id="eventAudio" src="https://upload.wikimedia.org/wikipedia/commons/b/b2/Beethoven_Moonlight_1st_movement.ogg" preload="auto"></audio>
+<!-- Background Audio for Event (Postavljeno na eventsound.mp3 i svira do kraja) -->
+<audio id="eventAudio" src="eventsound.mp3" preload="auto"></audio>
 
 <video id="bgVideo" class="bg-video" autoplay muted loop playsinline>
   <source src="back.mp4" type="video/mp4">
@@ -496,7 +496,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T14:15:00' // Postavljeno na 14:15
+    countdownDate: '2026-08-20T14:20:00' // Postavljeno na 14:20 za testiranje
   };
 
   let eventTriggered = false;
@@ -593,7 +593,7 @@
     // 1. Prikaz crnog overlayja s fade-in efektom u sjenu
     overlay.classList.add('show');
     
-    // Pokretanje glazbe (uz osiguranje automatske reprodukcije)
+    // Pokretanje zvuka eventsound.mp3 i osiguranje da svira do kraja
     audio.play().catch(err => {
       console.log("Audio autoplay bio blokiran, pokreće se klikom:", err);
       const unlockAudio = () => {
@@ -613,34 +613,46 @@
       textImg.classList.remove('fade-in');
       textImg.classList.add('fade-out');
       
-      // 4. Nakon završetka fade-out efekta teksta, gasi se glazba i automatski kreće video s fade-in efektom
+      // 4. Nakon završetka fade-out efekta teksta, automatski kreće video s fade-in efektom (dok zvuk i dalje svira do kraja)
       setTimeout(() => {
         textImg.style.display = 'none';
         video.style.display = 'block';
-        
-        // Stišavanje/gašenje pozadinske glazbe i automatsko paljenje videa
-        audio.pause();
         
         setTimeout(() => {
           video.classList.add('fade-in');
           video.play().catch(err => {
             console.log("Video autoplay bio blokiran:", err);
-            video.muted = true; // Pokušaj s mutiranim videom ako preglednik blokira
+            video.muted = true;
             video.play();
           });
         }, 100);
 
-      }, 1500); // Vrijeme trajanja fade-out prijelaza za tekst
+      }, 1500);
     }, 7000);
 
-    // 5. Kada video završi, vraća sve u main menu
+    // 5. Kada video i zvuk završe, vraća sve u main menu
+    let videoEnded = false;
+    let audioEnded = false;
+
+    function checkSequenceEnd() {
+      if(videoEnded && audioEnded) {
+        overlay.classList.remove('show');
+        video.classList.remove('fade-in');
+        video.style.display = 'none';
+        textImg.style.display = 'block';
+        textImg.classList.remove('fade-out');
+        mainWrap.classList.remove('hidden-view');
+      }
+    }
+
     video.addEventListener('ended', () => {
-      overlay.classList.remove('show');
-      video.classList.remove('fade-in');
-      video.style.display = 'none';
-      textImg.style.display = 'block';
-      textImg.classList.remove('fade-out');
-      mainWrap.classList.remove('hidden-view');
+      videoEnded = true;
+      checkSequenceEnd();
+    });
+
+    audio.addEventListener('ended', () => {
+      audioEnded = true;
+      checkSequenceEnd();
     });
   }
 
