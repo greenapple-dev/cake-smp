@@ -496,7 +496,7 @@
     serverAddress: 'cakesmp.minecraft.co.com',
     bedrockIp: '185.207.164.151',
     bedrockPort: '25565',
-    countdownDate: '2026-08-20T15:20:00' // TESTNO VRIJEME: 15:20
+    countdownDate: '2026-08-20T15:25:00' // TESTNO VRIJEME: 15:25
   };
 
   let eventTriggered = false;
@@ -590,7 +590,7 @@
     const textImg = document.getElementById('eventTextImg');
     const video = document.getElementById('eventVideoPlayer');
 
-    // 1. Odmah prikaži crni overlay i POKRENI GLAZBU OD POČETKA u isto vrijeme
+    // 1. Prikaži crni overlay i pokreni glazbu od početka
     overlay.classList.add('show');
     audio.currentTime = 0;
     audio.play().catch(err => {
@@ -602,17 +602,22 @@
       document.addEventListener('click', unlockAudio);
     });
 
-    // 2. Nakon 1 sekunde lagano prikaži tekst sliku (fade-in)
+    // Postavi početnu sliku (eventtext.png)
+    textImg.src = 'eventtext.png';
+    textImg.style.display = 'block';
+    textImg.className = 'event-text-img';
+
+    // 2. Nakon 1 sekunde prikaži početni tekst (fade-in)
     setTimeout(() => {
       textImg.classList.add('fade-in');
     }, 1000);
 
-    // 3. Nakon ukupno 7 sekundi, tekst dobiva fade-out efekt (nestaje u sjenu)
+    // 3. Nakon 7 sekundi makni početni tekst (fade-out)
     setTimeout(() => {
       textImg.classList.remove('fade-in');
       textImg.classList.add('fade-out');
       
-      // 4. Nakon završetka fade-out efekta teksta, automatski kreće video
+      // 4. Nakon fade-out efekta teksta, pokreni video
       setTimeout(() => {
         textImg.style.display = 'none';
         video.style.display = 'block';
@@ -629,17 +634,34 @@
       }, 1500);
     }, 7000);
 
-    // 5. Kad video završi, glazba se pauzira/resetira i sve se vraća na staro (main menu)
+    // 5. Kad video završi, prikaži završnu sliku (eventtext_end.png)
     video.onended = () => {
-      audio.pause();
-      audio.currentTime = 0;
-
-      overlay.classList.remove('show');
       video.classList.remove('fade-in');
       video.style.display = 'none';
+
+      // Priprema i prikaz završne slike
+      textImg.src = 'eventtext_end.png';
       textImg.style.display = 'block';
-      textImg.classList.remove('fade-out');
-      mainWrap.classList.remove('hidden-view');
+      textImg.className = 'event-text-img';
+      
+      setTimeout(() => {
+        textImg.classList.add('fade-in');
+      }, 100);
+
+      // 6. Nakon što završna slika stoji 4 sekunde, ugasi sve i vrati se u main menu
+      setTimeout(() => {
+        textImg.classList.remove('fade-in');
+        textImg.classList.add('fade-out');
+
+        setTimeout(() => {
+          audio.pause();
+          audio.currentTime = 0;
+          overlay.classList.remove('show');
+          textImg.classList.remove('fade-out');
+          mainWrap.classList.remove('hidden-view');
+        }, 1500);
+
+      }, 4000);
     };
   }
 
