@@ -157,7 +157,7 @@
   .card-icon:hover { transform: translateY(-6px) scale(1.01); }
 
   .card-store {
-    grid-column: span 2; grid-row: span 2;
+    grid-column: span 1; grid-row: span 2;
     background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%), url('store_icon.png');
     background-size: cover; background-position: center; background-repeat: no-repeat;
     cursor: pointer;
@@ -165,12 +165,28 @@
   .card-store:hover { transform: translateY(-6px) scale(1.01); }
 
   .card-stats {
-    grid-column: span 2; grid-row: span 2;
+    grid-column: span 2; grid-row: span 1;
     background: linear-gradient(180deg, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.7) 100%), url('StatsIcon.png');
     background-size: cover; background-position: center; background-repeat: no-repeat;
     cursor: pointer;
   }
   .card-stats:hover { transform: translateY(-6px) scale(1.01); }
+
+  .card-ai {
+    grid-column: span 2; grid-row: span 1;
+    background: linear-gradient(135deg, rgba(77, 196, 255, 0.25) 0%, rgba(127, 224, 196, 0.25) 100%), var(--card-bg);
+    cursor: pointer; display: flex; flex-direction: column; justify-content: center; padding: 20px;
+    border: 1px solid var(--mint);
+  }
+  .card-ai:hover { transform: translateY(-6px) scale(1.01); border-color: #fff; }
+
+  .card-join-guide {
+    grid-column: span 2; grid-row: span 1;
+    background: linear-gradient(135deg, rgba(255, 127, 171, 0.25) 0%, rgba(240, 185, 61, 0.25) 100%), var(--card-bg);
+    cursor: pointer; display: flex; flex-direction: column; justify-content: center; padding: 20px;
+    border: 1px solid var(--frosting-pink);
+  }
+  .card-join-guide:hover { transform: translateY(-6px) scale(1.01); border-color: #fff; }
 
   .card-countdown {
     grid-column: span 4; grid-row: span 1;
@@ -188,16 +204,16 @@
   }
 
   .media-label {
-    font-size: 18px; color: #fff; font-weight: bold;
+    font-size: 16px; color: #fff; font-weight: bold;
     text-shadow: 2px 2px 0px rgba(0,0,0,0.8);
   }
 
   .card-discord{ grid-column: span 1; grid-row: span 2; display:flex; flex-direction:column; align-items:center; justify-content:center; text-align:center; padding:18px; gap:6px; background: rgba(42, 25, 34, 0.9); backdrop-filter: blur(8px); }
-  .card-join{ grid-column: span 2; grid-row: span 2; background: rgba(36, 21, 28, 0.95); padding: 18px 22px; display:flex; flex-direction:column; justify-content:center; gap: 6px; backdrop-filter: blur(8px); }
+  .card-join{ grid-column: span 1; grid-row: span 2; background: rgba(36, 21, 28, 0.95); padding: 18px 22px; display:flex; flex-direction:column; justify-content:center; gap: 6px; backdrop-filter: blur(8px); }
 
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
-    .card-icon,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
+    .card-icon,.card-store,.card-discord,.card-stats,.card-ai,.card-join-guide,.card-join{ grid-column: span 2; grid-row: auto; min-height: 180px; }
     .card-countdown{ grid-column: span 2; }
   }
 
@@ -271,6 +287,23 @@
     display: inline-block; background: rgba(127, 224, 196, 0.15); border: 2px solid var(--mint);
     color: var(--mint); font-size: 13px; padding: 10px 18px;
     border-radius: 12px; margin-bottom: 20px; box-shadow: 0 0 20px rgba(127, 224, 196, 0.2);
+  }
+
+  /* AI Assistant Options Grid Inside Modal */
+  .ai-options-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 12px; margin: 20px 0;
+  }
+  .ai-opt-btn {
+    background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 14px 16px; border-radius: 12px; color: var(--cream); font-family: var(--font-display);
+    font-size: 10px; cursor: pointer; text-align: left; transition: all 0.2s ease;
+  }
+  .ai-opt-btn:hover { background: var(--mint); color: #000; border-color: var(--mint); transform: translateY(-2px); }
+  
+  .ai-response-box {
+    background: rgba(0, 0, 0, 0.5); border: 1px solid var(--card-border);
+    border-radius: 14px; padding: 20px; margin-top: 20px; min-height: 90px;
+    font-family: 'Inter', sans-serif; font-size: 14px; color: #fff; line-height: 1.6;
   }
 
   .coming-soon-container { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 30px 0; gap: 15px; text-align: center; }
@@ -373,238 +406,4 @@
     </div>
 
     <div class="card card-discord">
-      <svg class="discord-icon" viewBox="0 0 24 24" fill="#8c9eff"><path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.045-.32 13.579.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.055c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.028zM8.02 15.331c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.955 2.418-2.157 2.418zm7.974 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
-      <div class="discord-count" id="discordCount">137</div>
-      <div class="discord-sub">
-        <span class="dot-live"></span>
-        <span id="discordOnline">46 Online</span>
-      </div>
-      <a class="discord-join" href="https://discord.gg/uZbNkQv9c" target="_blank">Join Discord →</a>
-    </div>
-
-    <div class="card card-stats" id="openStatsBtn">
-      <div class="card-content-over">
-        <span class="media-label">Stats</span>
-      </div>
-    </div>
-
-    <div class="card card-join">
-      <div style="font-size:11px; font-weight:600;">Server Status & IP</div>
-      <div>
-        <div class="field-label">Online Players</div>
-        <div class="field-box" id="smpPlayersCount" style="color: var(--mint); font-weight: bold; cursor: default;">Loading...</div>
-      </div>
-      <div>
-        <div class="field-label">Java IP</div>
-        <div class="field-box" id="serverAddressField">cakesmp.minecraft.co.com</div>
-      </div>
-      <div style="display: flex; gap: 8px;">
-        <div style="flex: 2;">
-          <div class="field-label">Bedrock IP</div>
-          <div class="field-box" id="bedrockIpField">185.207.164.151</div>
-        </div>
-        <div style="flex: 1;">
-          <div class="field-label">Port</div>
-          <div class="field-box" id="bedrockPortField">25565</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="card card-countdown">
-      <div class="cd-left">
-        <div class="cd-title">PvP event</div>
-        <div class="cd-sub" id="countdownDateDisplay">Loading…</div>
-      </div>
-      <div class="cd-timer" id="cdTimer">
-        <div class="cd-unit"><div class="num" id="cdDays">--</div><div class="lbl">days</div></div>
-        <div class="cd-unit"><div class="num" id="cdHours">--</div><div class="lbl">hrs</div></div>
-        <div class="cd-unit"><div class="num" id="cdMins">--</div><div class="lbl">min</div></div>
-        <div class="cd-unit"><div class="num" id="cdSecs">--</div><div class="lbl">sec</div></div>
-      </div>
-    </div>
-  </div>
-
-  <footer>Made for Cake SMP 🍰</footer>
-</div>
-
-<!-- Stats Frame -->
-<div class="fullscreen-frame" id="statsFrame">
-  <button class="back-btn" id="closeStatsBtn">
-    <span>←</span> Back to Home
-  </button>
-  <div class="frame-content">
-    <h2>Server Statistics & Detailed Info</h2>
-    <div class="stats-online-badge" id="modalPlayersCount">Players Online: Loading...</div>
-    <p><strong>Welcome to Cake SMP!</strong> This is your ultimate destination for pure, unadulterated vanilla Minecraft survival gameplay. Dive into a tight-knit community where every single block placed tells a story.</p>
-    <p>Our server averages around 10 active players online at a time. While we might be smaller in size compared to massive networks, our community is vibrant, friendly, and deeply creative. We focus on genuine player connections and epic long-term building projects.</p>
-    <p>To keep the gameplay dynamic and fun, we have custom rule sets: <strong>crystal PvP is completely disabled</strong> to ensure fair and balanced combat, but we've happily brought back <strong>string dupers and infinite trades</strong> for an extra layer of classic survival freedom!</p>
-  </div>
-</div>
-
-<!-- Store Frame -->
-<div class="fullscreen-frame" id="storeFrame">
-  <button class="back-btn" id="closeStoreBtn">
-    <span>←</span> Back to Home
-  </button>
-  <div class="frame-content">
-    <h2>Cake SMP Official Store</h2>
-    <div class="coming-soon-container">
-      <img src="coming_soon.png" alt="Coming Soon" class="coming-soon-img">
-      <p style="font-size: 13px; color: var(--gold); margin: 0; font-family: var(--font-display);">Coming soon maybe...</p>
-    </div>
-    <p style="text-align: center;">Our server store is currently under development. Soon you will be able to support Cake SMP by acquiring exclusive ranks, cosmetic perks, and special community rewards to enhance your gameplay experience!</p>
-  </div>
-</div>
-
-<div class="toast" id="toast"></div>
-
-<script>
-(function(){
-  const config = {
-    serverAddress: 'cakesmp.minecraft.co.com',
-    bedrockIp: '185.207.164.151',
-    bedrockPort: '25565',
-    countdownDate: '2026-08-21T20:00:00'
-  };
-
-  function showToast(msg){
-    const t = document.getElementById('toast');
-    t.textContent = msg;
-    t.classList.add('show');
-    setTimeout(()=>t.classList.remove('show'), 2000);
-  }
-
-  // Accessibility Widget Toggle
-  const accessibilityToggle = document.getElementById('accessibilityToggle');
-  const accessibilityMenu = document.getElementById('accessibilityMenu');
-  accessibilityToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    accessibilityMenu.classList.toggle('open');
-  });
-  document.addEventListener('click', () => {
-    accessibilityMenu.classList.remove('open');
-  });
-  accessibilityMenu.addEventListener('click', (e) => e.stopPropagation());
-
-  // Accessibility Actions
-  let currentFontSize = 14;
-  document.getElementById('toolIncreaseText').addEventListener('click', () => {
-    currentFontSize += 2;
-    document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
-    document.body.style.fontSize = currentFontSize + 'px';
-  });
-  document.getElementById('toolDecreaseText').addEventListener('click', () => {
-    if(currentFontSize > 10) currentFontSize -= 2;
-    document.documentElement.style.setProperty('--base-font-size', currentFontSize + 'px');
-    document.body.style.fontSize = currentFontSize + 'px';
-  });
-  document.getElementById('toolGrayscale').addEventListener('click', () => document.body.classList.toggle('grayscale-mode'));
-  document.getElementById('toolHighContrast').addEventListener('click', () => document.body.classList.toggle('high-contrast-mode'));
-  document.getElementById('toolNegativeContrast').addEventListener('click', () => document.body.classList.toggle('negative-contrast-mode'));
-  document.getElementById('toolLightBg').addEventListener('click', () => document.body.classList.toggle('light-bg-mode'));
-  document.getElementById('toolLinksUnderline').addEventListener('click', () => document.body.classList.toggle('links-underline-mode'));
-  document.getElementById('toolReadableFont').addEventListener('click', () => document.body.classList.toggle('readable-font-mode'));
-  document.getElementById('toolReset').addEventListener('click', () => {
-    document.body.className = '';
-    currentFontSize = 14;
-    document.documentElement.style.setProperty('--base-font-size', '14px');
-    document.body.style.fontSize = '14px';
-  });
-
-  const mainWrap = document.getElementById('mainWrap');
-  const storeFrame = document.getElementById('storeFrame');
-  const statsFrame = document.getElementById('statsFrame');
-  const commandsCreditsOverlay = document.getElementById('commandsCreditsOverlay');
-
-  // Commands Credits Open/Close logic
-  document.getElementById('openCommandsBtn').addEventListener('click', () => {
-    mainWrap.classList.add('hidden-view');
-    commandsCreditsOverlay.classList.add('show');
-  });
-
-  commandsCreditsOverlay.addEventListener('click', () => {
-    commandsCreditsOverlay.classList.remove('show');
-    mainWrap.classList.remove('hidden-view');
-  });
-
-  // Store Frame logic
-  document.getElementById('openStoreBtn').addEventListener('click', () => {
-    mainWrap.classList.add('hidden-view');
-    storeFrame.classList.add('active');
-  });
-  document.getElementById('closeStoreBtn').addEventListener('click', () => {
-    storeFrame.classList.remove('active');
-    mainWrap.classList.remove('hidden-view');
-  });
-
-  // Stats Frame logic
-  document.getElementById('openStatsBtn').addEventListener('click', () => {
-    mainWrap.classList.add('hidden-view');
-    statsFrame.classList.add('active');
-  });
-  document.getElementById('closeStatsBtn').addEventListener('click', () => {
-    statsFrame.classList.remove('active');
-    mainWrap.classList.remove('hidden-view');
-  });
-
-  function updateCountdown(){
-    if(!config.countdownDate) return;
-    
-    const target = new Date(config.countdownDate).getTime();
-    const diff = target - Date.now();
-
-    const dateDisplay = document.getElementById('countdownDateDisplay');
-    if(dateDisplay) dateDisplay.textContent = new Date(config.countdownDate).toLocaleString();
-
-    if(diff <= 0){
-      document.getElementById('cdDays').textContent = '00';
-      document.getElementById('cdHours').textContent = '00';
-      document.getElementById('cdMins').textContent = '00';
-      document.getElementById('cdSecs').textContent = '00';
-      return;
-    }
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
-    document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
-    document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
-  }
-
-  setInterval(updateCountdown, 1000);
-  updateCountdown();
-
-  // Dohvat statusa igrača
-  fetch(`https://api.mcsrvstat.us/2/${config.serverAddress}`)
-    .then(res => res.json())
-    .then(data => {
-      const countEl = document.getElementById('smpPlayersCount');
-      const modalCountEl = document.getElementById('modalPlayersCount');
-      if(data && data.online) {
-        countEl.textContent = `${data.players.online} / ${data.players.max} Online`;
-        modalCountEl.textContent = `Players Online: ${data.players.online} / ${data.players.max}`;
-      } else {
-        countEl.textContent = 'Server Offline';
-        modalCountEl.textContent = 'Players Online: Server Offline';
-      }
-    })
-    .catch(() => {
-      document.getElementById('smpPlayersCount').textContent = 'Status Unavailable';
-      document.getElementById('modalPlayersCount').textContent = 'Players Online: Status Unavailable';
-    });
-
-  // Kopiranje IP adresa na klik
-  document.querySelectorAll('#serverAddressField, #bedrockIpField').forEach(el => {
-    el.addEventListener('click', () => {
-      navigator.clipboard.writeText(el.textContent.trim());
-      showToast('IP adresa kopirana u međuspremnik!');
-    });
-  });
-})();
-</script>
-</body>
-</html>
+      <svg class="discord-icon" viewBox="0 0 24 24" fill="#8c9eff"><path d="M20.317 4.369a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.045-.32 13.579.099 18.057a.082.082 0 0 0 .031.056 19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.076.076 0 0 0-.04.107c.36.698.772 1.362 1.225 1.
