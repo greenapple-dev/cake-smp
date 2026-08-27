@@ -88,7 +88,7 @@
   .wrap.hidden-view { opacity: 0; transform: scale(0.95); pointer-events: none; visibility: hidden; position: absolute; width: 100%; }
 
   @media (max-width: 768px) {
-    .wrap { padding-left: 24px; }
+    .wrap { padding: 20px 16px 80px 16px; }
     .accessibility-widget { left: 10px; top: 10px; }
   }
 
@@ -198,7 +198,16 @@
   @media (max-width:880px){
     .grid{ grid-template-columns: repeat(2,1fr); }
     .card-icon,.card-store,.card-discord,.card-stats,.card-join{ grid-column: span 2; }
-    .card-countdown{ grid-column: span 2; }
+    .card-countdown{ grid-column: span 2; min-height: auto; justify-content: center; text-align: center; }
+    .cd-timer { justify-content: center; }
+  }
+
+  @media (max-width: 480px) {
+    .grid { grid-template-columns: 1fr; }
+    .card-icon, .card-store, .card-discord, .card-stats, .card-join, .card-countdown { grid-column: span 1; grid-row: auto; min-height: 160px; }
+    .cd-timer { gap: 6px; }
+    .cd-unit { padding: 8px 10px; min-width: 52px; }
+    .cd-unit .num { font-size: 12px; }
   }
 
   .discord-icon{ width:42px; height:42px; margin-bottom:4px; transition: transform 0.3s ease; }
@@ -283,7 +292,6 @@
 </head>
 <body>
 
-<!-- Accessibility Widget -->
 <div class="accessibility-widget" id="accessibilityWidget">
   <button class="accessibility-toggle" id="accessibilityToggle" aria-label="Accessibility Tools">
     <svg viewBox="0 0 24 24"><path d="M12 2a2 2 0 1 0 2 2 2 2 0 0 0-2-2zm9 7h-6v13h-2v-6h-2v6H9V9H3V7h18z"/></svg>
@@ -302,7 +310,6 @@
   </div>
 </div>
 
-<!-- Commands Credits Overlay -->
 <div id="commandsCreditsOverlay">
   <div class="credits-scroll-container">
     <h1 class="credits-title">Commands</h1>
@@ -396,13 +403,4 @@
       </div>
       <div>
         <div class="field-label">Java IP</div>
-        <div class="field-box" id="serverAddressField">cakesmp.minecraft.co.com</div>
-      </div>
-      <div style="display: flex; gap: 8px;">
-        <div style="flex: 2;">
-          <div class="field-label">Bedrock IP</div>
-          <div class="field-box" id="bedrockIpField">185.207.164.151</div>
-        </div>
-        <div style="flex: 1;">
-          <div class="field-label">Port</div>
-          <div class="field-box" id="bedrockPortField">25565</div
+        <div class="field-box" id="serverAddressField">cakesmp.mi
