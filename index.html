@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cake SMP - Official Website</title>
-    <!-- Favicon (Slika Cake.jpeg za Google/Tabove) -->
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="Cake.jpeg">
     <!-- Import Minecraft Font -->
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
@@ -20,7 +20,7 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            background-color: #0b0614;
+            background-color: #1a1110; /* Čokoladno tamna Minecraft pozadina */
             color: #fff;
         }
 
@@ -58,22 +58,22 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(15, 5, 25, 0.75) 0%, rgba(5, 2, 10, 0.9) 100%);
+            background: radial-gradient(circle, rgba(40, 20, 25, 0.8) 0%, rgba(15, 8, 10, 0.95) 100%);
             z-index: -1;
         }
 
-        /* Epic Navigation Bar */
+        /* Cake SMP Navigation Bar */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 15px 30px;
-            background: rgba(12, 7, 20, 0.95);
-            border-bottom: 4px solid #9c27b0;
-            box-shadow: 0 4px 20px rgba(156, 39, 176, 0.3);
+            background: rgba(26, 15, 20, 0.95);
+            border-bottom: 4px solid #ff69b4; /* Roza frosting linija */
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
             position: sticky;
             top: 0;
-            z-index: 100;
+            z-index: 1000;
             flex-wrap: wrap;
             gap: 10px;
         }
@@ -83,15 +83,15 @@
             align-items: center;
             gap: 12px;
             font-size: 20px;
-            color: #ffeb3b;
-            text-shadow: 3px 3px #512da8;
+            color: #fff2e6; /* Kremasta boja torte */
+            text-shadow: 3px 3px #8b4513; /* Čokoladna sjena */
         }
 
         .logo img {
             width: 42px;
             height: 42px;
             border-radius: 6px;
-            border: 2px solid #ffeb3b;
+            border: 2px solid #ff69b4;
             object-fit: cover;
         }
 
@@ -102,28 +102,29 @@
         }
 
         .nav-btn {
-            background: #1f1135;
-            color: #d1c4e9;
-            border: 2px solid #512da8;
+            background: #3d2229;
+            color: #ffccd5;
+            border: 2px solid #ff69b4;
             padding: 8px 14px;
             cursor: pointer;
             font-size: 11px;
             text-transform: uppercase;
             transition: 0.2s;
-            box-shadow: 0 3px 0 #10061d;
+            box-shadow: 0 3px 0 #1f1014;
         }
 
-        .nav-btn:hover, .nav-btn.active {
-            background: #9c27b0;
-            color: #fff;
-            border-color: #ffeb3b;
-            box-shadow: 0 3px 0 #4a148c;
+        .nav-btn:hover, .nav-btn.active-btn {
+            background: #ff69b4;
+            color: #1a1110;
+            border-color: #fff2e6;
+            box-shadow: 0 3px 0 #c71585;
             transform: translateY(-2px);
+            font-weight: bold;
         }
 
         /* Main Content Layout */
         .main-content {
-            padding: 30px 15px;
+            padding: 40px 15px;
             max-width: 950px;
             margin: 0 auto;
             min-height: calc(100vh - 100px);
@@ -136,34 +137,34 @@
             display: none;
             width: 100%;
             text-align: center;
-            animation: fadeIn 0.4s ease-in-out;
         }
 
-        .section.active {
+        .section.active-sec {
             display: block;
+            animation: fadeIn 0.3s ease-in-out;
         }
 
         @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(8px); }
+            from { opacity: 0; transform: translateY(6px); }
             to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
             font-size: 34px;
             margin-bottom: 15px;
-            color: #ffeb3b;
-            text-shadow: 3px 3px #6a1b9a;
+            color: #fff2e6;
+            text-shadow: 3px 3px #ff69b4;
         }
 
         p {
             font-size: 15px;
             line-height: 1.6;
             margin-bottom: 20px;
-            color: #e0f2f1;
+            color: #fce4ec;
             text-shadow: 1px 1px #000;
         }
 
-        /* Epic Cards & Grids */
+        /* Cake Cards & Grids */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -172,53 +173,55 @@
         }
 
         .card {
-            background: rgba(22, 12, 38, 0.88);
-            border: 3px solid #7b1fa2;
+            background: rgba(45, 24, 30, 0.9);
+            border: 3px solid #ff69b4;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.6);
             transition: 0.3s;
+            text-align: left;
         }
 
         .card:hover {
-            border-color: #ffeb3b;
-            box-shadow: 0 8px 25px rgba(156, 39, 176, 0.4);
+            border-color: #fff2e6;
+            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
             transform: translateY(-3px);
         }
 
         /* IP Box */
         .ip-box {
-            background: rgba(10, 5, 20, 0.9);
-            border: 2px dashed #ffeb3b;
+            background: rgba(20, 10, 12, 0.9);
+            border: 2px dashed #ff69b4;
             padding: 10px;
             margin: 12px 0;
             cursor: pointer;
             border-radius: 4px;
             transition: 0.2s;
+            text-align: center;
         }
 
         .ip-box:hover {
-            background: rgba(40, 20, 60, 0.9);
+            background: rgba(50, 20, 28, 0.9);
         }
 
         .ip-box code {
-            color: #69f0ae;
+            color: #00ffcc;
             font-size: 13px;
             word-break: break-all;
         }
 
-        /* Epic Countdown */
+        /* Countdown */
         .countdown {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin-top: 20px;
+            margin-top: 15px;
             flex-wrap: wrap;
         }
 
         .time-block {
-            background: rgba(15, 8, 28, 0.95);
-            border: 2px solid #ab47bc;
+            background: rgba(30, 15, 20, 0.95);
+            border: 2px solid #ff69b4;
             padding: 10px 14px;
             min-width: 65px;
             border-radius: 6px;
@@ -228,13 +231,13 @@
         .time-block span {
             display: block;
             font-size: 22px;
-            color: #ffeb3b;
-            text-shadow: 2px 2px #4a148c;
+            color: #fff2e6;
+            text-shadow: 2px 2px #ff1493;
         }
 
         .time-block label {
             font-size: 10px;
-            color: #ce93d8;
+            color: #ffb6c1;
         }
 
         /* Buttons */
@@ -249,6 +252,7 @@
             box-shadow: 0 3px 0 #283593;
             margin-top: 10px;
             transition: 0.2s;
+            text-align: center;
         }
 
         .cta-btn:hover {
@@ -257,19 +261,22 @@
         }
 
         .store-btn {
-            background: #ab47bc;
-            border-color: #ea80fc;
-            box-shadow: 0 3px 0 #4a148c;
+            background: #ff69b4;
+            border-color: #fff2e6;
+            color: #1a1110;
+            font-weight: bold;
+            box-shadow: 0 3px 0 #c71585;
         }
 
         .store-btn:hover {
-            background: #8e24aa;
+            background: #ff1493;
+            color: #fff;
         }
 
         /* AI Chat Widget */
         .ai-chat-box {
-            background: rgba(14, 7, 24, 0.95);
-            border: 3px solid #ab47bc;
+            background: rgba(30, 15, 20, 0.95);
+            border: 3px solid #ff69b4;
             border-radius: 8px;
             max-width: 500px;
             margin: 0 auto;
@@ -297,30 +304,30 @@
         }
 
         .msg.bot {
-            background: #281537;
-            border: 1px solid #ab47bc;
-            color: #e1bee7;
+            background: #4a2530;
+            border: 1px solid #ff69b4;
+            color: #fce4ec;
             align-self: flex-start;
         }
 
         .msg.user {
-            background: #122b20;
-            border: 1px solid #69f0ae;
-            color: #c8e6c9;
+            background: #1f3a30;
+            border: 1px solid #00ffcc;
+            color: #e0f2f1;
             align-self: flex-end;
         }
 
         .ai-input-area {
             display: flex;
-            border-top: 2px solid #381a4e;
+            border-top: 2px solid #522b37;
             padding: 8px;
-            background: #0b0614;
+            background: #1a1110;
         }
 
         .ai-input-area input {
             flex: 1;
-            background: #1a0f2b;
-            border: 1px solid #7b1fa2;
+            background: #2b181d;
+            border: 1px solid #ff69b4;
             color: #fff;
             padding: 8px;
             font-size: 12px;
@@ -329,8 +336,9 @@
         }
 
         .ai-input-area button {
-            background: #ab47bc;
-            color: white;
+            background: #ff69b4;
+            color: #1a1110;
+            font-weight: bold;
             border: none;
             padding: 0 15px;
             margin-left: 6px;
@@ -341,21 +349,22 @@
         }
 
         .ai-input-area button:hover {
-            background: #8e24aa;
+            background: #ff1493;
+            color: #fff;
         }
 
         /* Toast Notification */
         #toast {
             visibility: hidden;
             min-width: 220px;
-            background-color: #69f0ae;
+            background-color: #00ffcc;
             color: #000;
             font-weight: bold;
             text-align: center;
             border-radius: 4px;
             padding: 10px;
             position: fixed;
-            z-index: 1000;
+            z-index: 2000;
             left: 50%;
             bottom: 20px;
             transform: translateX(-50%);
@@ -398,12 +407,12 @@
             <span>Cake SMP</span>
         </div>
         <nav>
-            <button class="nav-btn active" onclick="switchTab(event, 'home')">Home</button>
-            <button class="nav-btn" onclick="switchTab(event, 'event')">Event</button>
-            <button class="nav-btn" onclick="switchTab(event, 'status')">Status</button>
-            <button class="nav-btn" onclick="switchTab(event, 'news')">News</button>
-            <button class="nav-btn" onclick="switchTab(event, 'ai-assistant')">AI Assistant</button>
-            <button class="nav-btn" onclick="switchTab(event, 'store')">Store</button>
+            <button class="nav-btn active-btn" onclick="openTab(event, 'home')">Home</button>
+            <button class="nav-btn" onclick="openTab(event, 'event')">Event</button>
+            <button class="nav-btn" onclick="openTab(event, 'status')">Status</button>
+            <button class="nav-btn" onclick="openTab(event, 'news')">News</button>
+            <button class="nav-btn" onclick="openTab(event, 'ai-assistant')">AI Assistant</button>
+            <button class="nav-btn" onclick="openTab(event, 'store')">Store</button>
         </nav>
     </header>
 
@@ -411,13 +420,13 @@
     <div class="main-content">
 
         <!-- HOME -->
-        <div id="home" class="section active">
+        <div id="home" class="section active-sec">
             <h1>Welcome to Cake SMP!</h1>
             <p>The tastiest Minecraft SMP server! Join our awesome community, survive, build, and have fun.</p>
             
             <div style="margin-top: 15px;">
-                <h3 style="color: #ffeb3b; margin-bottom: 8px;">Season 4 starts in:</h3>
-                <div class="countdown" id="countdown-home">
+                <h3 style="color: #ff69b4; margin-bottom: 8px;">Season 4 starts in:</h3>
+                <div class="countdown">
                     <div class="time-block"><span id="days">14</span><label>Days</label></div>
                     <div class="time-block"><span id="hours">00</span><label>Hours</label></div>
                     <div class="time-block"><span id="minutes">00</span><label>Mins</label></div>
@@ -429,26 +438,31 @@
         <!-- EVENT -->
         <div id="event" class="section">
             <h1>Upcoming Events</h1>
-            <p>Get ready for huge rewards and epic battles! Special events for Season 4 launch are almost here.</p>
+            <p>Get ready for epic battles and special community game nights!</p>
             
-            <div style="margin-top: 10px;">
-                <h3 style="color: #ffeb3b; margin-bottom: 8px;">Grand Opening Event starts in:</h3>
-                <div class="countdown" id="countdown-event">
-                    <div class="time-block"><span id="ev-days">14</span><label>Days</label></div>
-                    <div class="time-block"><span id="ev-hours">00</span><label>Hours</label></div>
-                    <div class="time-block"><span id="ev-minutes">00</span><label>Mins</label></div>
-                    <div class="time-block"><span id="ev-seconds">00</span><label>Secs</label></div>
+            <div class="card-grid">
+                <!-- Cart PvP Event (Srijeda) -->
+                <div class="card">
+                    <h3 style="color: #00ffcc; margin-bottom: 5px;">Next Wednesday: Cart PvP</h3>
+                    <p style="font-size: 12px; margin-bottom: 10px;">Fast-paced minecart combat tournament!</p>
+                    <div class="countdown" id="cd-cart">
+                        <div class="time-block"><span id="c-days">0</span><label>Days</label></div>
+                        <div class="time-block"><span id="c-hours">0</span><label>Hours</label></div>
+                        <div class="time-block"><span id="c-mins">0</span><label>Mins</label></div>
+                        <div class="time-block"><span id="c-secs">0</span><label>Secs</label></div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="card-grid" style="margin-top: 25px;">
+                <!-- Cake God Return Event (Petak) -->
                 <div class="card">
-                    <h3 style="color: #69f0ae; margin-bottom: 8px;">Grand Opening</h3>
-                    <p style="font-size: 12px;">Join on day one to win exclusive ranks and epic rewards!</p>
-                </div>
-                <div class="card">
-                    <h3 style="color: #ffeb3b; margin-bottom: 8px;">PvP Tournament</h3>
-                    <p style="font-size: 12px;">Test your survival and combat skills against the best fighters.</p>
+                    <h3 style="color: #ff69b4; margin-bottom: 5px;">Next Friday: Cake___God return...</h3>
+                    <p style="font-size: 12px; margin-bottom: 10px;">The Thunder will start...</p>
+                    <div class="countdown" id="cd-god">
+                        <div class="time-block"><span id="g-days">0</span><label>Days</label></div>
+                        <div class="time-block"><span id="g-hours">0</span><label>Hours</label></div>
+                        <div class="time-block"><span id="g-mins">0</span><label>Mins</label></div>
+                        <div class="time-block"><span id="g-secs">0</span><label>Secs</label></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -456,11 +470,11 @@
         <!-- STATUS -->
         <div id="status" class="section">
             <h1>Server Status & Info</h1>
-            <p>Server status: <strong style="color: #69f0ae;">● ONLINE</strong></p>
+            <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Sweetest and smoothest gameplay!</p>
             
             <div class="card-grid">
                 <div class="card">
-                    <h3>Java Edition</h3>
+                    <h3 style="color: #ff69b4;">Java Edition</h3>
                     <p style="font-size: 12px; margin: 8px 0;">Click to copy IP:</p>
                     <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
                         <code>cakesmp.minecraft.co.com</code>
@@ -468,7 +482,7 @@
                 </div>
 
                 <div class="card">
-                    <h3>Bedrock Edition</h3>
+                    <h3 style="color: #ff69b4;">Bedrock Edition</h3>
                     <p style="font-size: 12px; margin: 8px 0;">Click to copy IP & Port:</p>
                     <div class="ip-box" onclick="copyText('185.207.164.151:25565')">
                         <code>IP: 185.207.164.151<br>PORT: 25565</code>
@@ -476,9 +490,9 @@
                 </div>
 
                 <div class="card">
-                    <h3>Discord Community</h3>
-                    <p style="font-size: 12px; margin: 8px 0;">Join our community server to chat with members!</p>
-                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn">Open Discord</a>
+                    <h3 style="color: #ff69b4;">Discord Community</h3>
+                    <p style="font-size: 12px; margin: 8px 0;">Join our active community server!</p>
+                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn" style="width: 100%;">Open Discord</a>
                 </div>
             </div>
         </div>
@@ -486,10 +500,10 @@
         <!-- NEWS -->
         <div id="news" class="section">
             <h1>Latest News</h1>
-            <div class="card" style="max-width: 550px; margin: 0 auto; text-align: left;">
-                <h3 style="color: #ffeb3b; margin-bottom: 8px;">Season 4 Announcement</h3>
+            <div class="card" style="max-width: 550px; margin: 0 auto;">
+                <h3 style="color: #ff69b4; margin-bottom: 8px;">Season 4 Announcement</h3>
                 <p style="font-size: 13px;">Season 4 starts in 2-3 weeks with new features and better quality!</p>
-                <span style="font-size: 10px; color: #ce93d8;">Posted recently</span>
+                <span style="font-size: 10px; color: #ffb6c1;">Posted recently</span>
             </div>
         </div>
 
@@ -522,16 +536,19 @@
     <div id="toast">Copied to clipboard successfully!</div>
 
     <script>
-        // Tab Switcher
-        function switchTab(event, tabId) {
-            document.querySelectorAll('.section').forEach(sec => sec.classList.remove('active'));
-            document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.remove('active'));
-            
-            document.getElementById(tabId).classList.add('active');
-            event.currentTarget.classList.add('active');
+        // --- SIGURAN SUSTAV ZA TABOVE (DIREKTNO VEZANO NA KLIK) ---
+        function openTab(evt, tabName) {
+            let sections = document.querySelectorAll('.section');
+            sections.forEach(sec => sec.classList.remove('active-sec'));
+
+            let buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(btn => btn.classList.remove('active-btn'));
+
+            document.getElementById(tabName).classList.add('active-sec');
+            evt.currentTarget.classList.add('active-btn');
         }
 
-        // Copy Text Helper
+        // --- KOPIRANJE TEKSTA ---
         function copyText(text) {
             navigator.clipboard.writeText(text).then(() => {
                 let toast = document.getElementById("toast");
@@ -540,7 +557,7 @@
             });
         }
 
-        // Background Slider & Video Loop
+        // --- POZADINSKI SLIDER I VIDEO ---
         let slides = document.querySelectorAll('.bg-slide');
         let video = document.querySelector('.bg-video');
         let currentSlide = 0;
@@ -559,49 +576,26 @@
         }
         setInterval(nextBackground, 6000);
 
-        // Countdowns Timer (Home & Event)
-        const countDownDate = new Date().getTime() + (18 * 24 * 60 * 60 * 1000);
-        const eventCountDownDate = new Date().getTime() + (17 * 24 * 60 * 60 * 1000); // Malo drukčije vrijeme za event
+        // --- COUNTDOWN TIMERI ---
+        const seasonDate = new Date().getTime() + (18 * 24 * 60 * 60 * 1000);
+        const cartPvpDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // Srijeda
+        const cakeGodDate = new Date().getTime() + (5 * 24 * 60 * 60 * 1000); // Petak
 
         setInterval(() => {
             const now = new Date().getTime();
-            
-            // Home Countdown
-            const distance = countDownDate - now;
-            if (distance > 0) {
-                document.getElementById("days").innerText = Math.floor(distance / (1000 * 60 * 60 * 24));
-                document.getElementById("hours").innerText = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("minutes").innerText = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("seconds").innerText = Math.floor((distance % (1000 * 60)) / 1000);
+
+            // Home / Season 4
+            let d1 = seasonDate - now;
+            if (d1 > 0) {
+                document.getElementById("days").innerText = Math.floor(d1 / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((d1 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((d1 % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("seconds").innerText = Math.floor((d1 % (1000 * 60)) / 1000);
             }
 
-            // Event Countdown
-            const evDistance = eventCountDownDate - now;
-            if (evDistance > 0) {
-                document.getElementById("ev-days").innerText = Math.floor(evDistance / (1000 * 60 * 60 * 24));
-                document.getElementById("ev-hours").innerText = Math.floor((evDistance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("ev-minutes").innerText = Math.floor((evDistance % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("ev-seconds").innerText = Math.floor((evDistance % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-
-        // Custom AI Assistant Logic
-        function handleKey(e) {
-            if (e.key === 'Enter') {
-                sendAImessage();
-            }
-        }
-
-        function sendAImessage() {
-            let inputField = document.getElementById("userInput");
-            let text = inputField.value.trim();
-            if (text === "") return;
-
-            let chatMessages = document.getElementById("chatMessages");
-
-            let userDiv = document.createElement("div");
-            userDiv.className = "msg user";
-            userDiv.innerText = text;
-            chatMessages.appendChild(userDiv);
-
-            inputField.va
+            // Cart PvP (Srijeda)
+            let d2 = cartPvpDate - now;
+            if (d2 > 0) {
+                document.getElementById("c-days").innerText = Math.floor(d2 / (1000 * 60 * 60 * 24));
+                document.getElementById("c-hours").innerText = Math.floor((d2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        
