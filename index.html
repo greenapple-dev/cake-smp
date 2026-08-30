@@ -64,7 +64,7 @@
             z-index: -1;
         }
 
-        /* Navigation Header - Osigurano da klikovi rade savršeno */
+        /* Navigation Header */
         header {
             display: flex;
             justify-content: space-between;
@@ -115,7 +115,7 @@
             transition: all 0.2s ease;
         }
 
-        .nav-btn:hover, .nav-btn.active-btn {
+        .nav-btn.active-btn {
             background: #ff69b4 !important;
             color: #140b0f !important;
             border-color: #fff2e6 !important;
@@ -137,15 +137,10 @@
             display: none;
             width: 100%;
             text-align: center;
-            opacity: 0;
-            transform: translateY(10px);
-            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .section.active-sec {
-            display: block;
-            opacity: 1;
-            transform: translateY(0);
+            display: block !important;
         }
 
         h1 {
@@ -386,12 +381,12 @@
             <span>Cake SMP</span>
         </div>
         <nav>
-            <button class="nav-btn active-btn" onclick="switchTab('home', this)">Home</button>
-            <button class="nav-btn" onclick="switchTab('event', this)">Event</button>
-            <button class="nav-btn" onclick="switchTab('status', this)">Status</button>
-            <button class="nav-btn" onclick="switchTab('news', this)">News</button>
-            <button class="nav-btn" onclick="switchTab('ai-assistant', this)">AI</button>
-            <button class="nav-btn" onclick="switchTab('store', this)">Store</button>
+            <button class="nav-btn active-btn" data-target="home">Home</button>
+            <button class="nav-btn" data-target="event">Event</button>
+            <button class="nav-btn" data-target="status">Status</button>
+            <button class="nav-btn" data-target="news">News</button>
+            <button class="nav-btn" data-target="ai-assistant">AI</button>
+            <button class="nav-btn" data-target="store">Store</button>
         </nav>
     </header>
 
@@ -404,7 +399,7 @@
             <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER, AN ADVENTURER, OR JUST LOOKING TO MAKE NEW FRIENDS AND HANG OUT, CAKE SMP HAS A SPOT FOR YOU.<br><br><strong>WHY JOIN US?</strong><br>⛏ VANILLA SMP EXPERIENCE – CLASSIC MINECRAFT GAMEPLAY WITH GREAT FEATURES!</p>
 
             <div style="margin-top: 10px;">
-                <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">SERVER INFO & IP</button>
+                <button class="cta-btn" id="go-status">SERVER INFO & IP</button>
             </div>
 
             <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
@@ -524,22 +519,41 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        function switchTab(targetId, btnElement) {
-            document.querySelectorAll('.main-content .section').forEach(sec => sec.classList.remove('active-sec'));
-            let targetSec = document.getElementById(targetId);
-            if(targetSec) targetSec.classList.add('active-sec');
-
-            let allBtns = document.querySelectorAll('nav .nav-btn');
-            allBtns.forEach(b => b.classList.remove('active-btn'));
-            
-            if(btnElement) {
-                btnElement.classList.add('active-btn');
-            } else {
-                allBtns.forEach(b => {
-                    if(b.getAttribute('onclick').includes(targetId)) b.classList.add('active-btn');
+        // Robusno prebacivanje tabova bez greške na mobitelima
+        document.querySelectorAll('nav .nav-btn').forEach(button => {
+            button.addEventListener('click', function() {
+                let targetId = this.getAttribute('data-target');
+                
+                document.querySelectorAll('.main-content .section').forEach(sec => {
+                    sec.classList.remove('active-sec');
                 });
-            }
-            window.scrollTo({ top: 0, behavior: 'smooth' });
+                
+                let activeSec = document.getElementById(targetId);
+                if(activeSec) {
+                    activeSec.classList.add('active-sec');
+                }
+
+                document.querySelectorAll('nav .nav-btn').forEach(btn => {
+                    btn.classList.remove('active-btn');
+                });
+                this.classList.add('active-btn');
+
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+        });
+
+        // Gumb za Status IP unutar Home taba
+        let goStatusBtn = document.getElementById('go-status');
+        if(goStatusBtn) {
+            goStatusBtn.addEventListener('click', function() {
+                document.querySelectorAll('.main-content .section').forEach(sec => sec.classList.remove('active-sec'));
+                document.getElementById('status').classList.add('active-sec');
+                document.querySelectorAll('nav .nav-btn').forEach(btn => {
+                    btn.classList.remove('active-btn');
+                    if(btn.getAttribute('data-target') === 'status') btn.classList.add('active-btn');
+                });
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
         }
 
         function copyText(txt) {
@@ -569,18 +583,4 @@
             slides.forEach(s => s.classList.remove('active'));
             if(video) video.classList.remove('active');
             curSlide++;
-            if(curSlide < slides.length) {
-                slides[curSlide].classList.add('active');
-            } else {
-                if(video) video.classList.add('active');
-                curSlide = -1;
-            }
-        }, 6000);
-
-        // Persistent Countdown Fix
-        let savedTarget = localStorage.getItem("cake_smp_target");
-        let targetTime;
-        if(savedTarget) {
-            targetTime = parseInt(savedTarget);
-        } else {
-            targetTime = new Date().getTime() + (14 * 24 * 60 * 6
+            if(curSlide < slides.leng
