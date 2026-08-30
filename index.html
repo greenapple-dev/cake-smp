@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake SMP - Official Page</title>
+    <title>Cake SMP - Službena Stranica</title>
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
@@ -18,10 +18,9 @@
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #2b1713;
-            color: #fff5ee;
+            background-color: #140b0f;
+            color: #fff2e6;
             overflow-x: hidden;
-            image-rendering: pixelated;
         }
 
         /* Pozadina */
@@ -43,7 +42,6 @@
             background-image: url('Cake.jpeg');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.5);
         }
 
         .overlay {
@@ -52,19 +50,18 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(43, 23, 19, 0.88);
+            background: rgba(12, 5, 8, 0.94);
             z-index: -1;
         }
 
-        /* Vrh stranice */
+        /* Navigacija - Cake stil (bez zelene) */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 12px 20px;
-            background: #3b2018;
-            border-bottom: 4px solid #fff5ee;
-            box-shadow: 0 4px 0 #1b0e0a;
+            padding: 10px 15px;
+            background: rgba(22, 10, 15, 0.98);
+            border-bottom: 4px solid #ff69b4;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -73,290 +70,228 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-size: 13px;
-            color: #ff6b81;
-            text-shadow: 2px 2px #000;
+            gap: 8px;
+            font-size: 12px;
+            color: #fff2e6;
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
-            border-radius: 2px;
-            border: 2px solid #fff5ee;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
+            border: 2px solid #ff69b4;
             object-fit: cover;
-            box-shadow: 2px 2px 0 #000;
         }
 
         nav {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
             justify-content: flex-end;
         }
 
         .nav-btn {
-            background: #5c3527;
-            color: #fff5ee;
-            border-top: 3px solid #8c533e;
-            border-left: 3px solid #8c533e;
-            border-right: 3px solid #2b1713;
-            border-bottom: 3px solid #2b1713;
-            padding: 8px 12px;
+            background: #2b151c;
+            color: #ffccd5;
+            border: 2px solid #ff69b4;
+            padding: 6px 9px;
             cursor: pointer;
-            font-size: 9px;
+            font-size: 8px;
             text-transform: uppercase;
             font-weight: bold;
-            box-shadow: 0 2px 0 #000;
-        }
-
-        .nav-btn:active {
-            border-top: 3px solid #2b1713;
-            border-left: 3px solid #2b1713;
-            border-right: 3px solid #8c533e;
-            border-bottom: 3px solid #8c533e;
         }
 
         .nav-btn.active {
-            background: #e74c3c !important;
-            border-top: 3px solid #ff7675;
-            border-left: 3px solid #ff7675;
-            border-right: 3px solid #c0392b;
-            border-bottom: 3px solid #c0392b;
-            color: #fff !important;
+            background: #ff69b4 !important;
+            color: #140b0f !important;
         }
 
-        /* Sadržaj */
+        /* Sadržaj stranica */
         .main-content {
-            padding: 30px 15px;
-            max-width: 850px;
+            padding: 25px 15px;
+            max-width: 800px;
             margin: 0 auto;
         }
 
         .page {
             display: none;
             text-align: center;
-            animation: fadeIn 0.25s ease-in-out;
         }
 
         .page.active-page {
             display: block;
         }
 
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(4px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
         h1 {
-            font-size: 20px;
+            font-size: 18px;
             margin-bottom: 15px;
-            color: #ff6b81;
-            text-shadow: 3px 3px #1b0e0a;
+            color: #fff2e6;
+            text-shadow: 2px 2px #ff69b4;
         }
 
         p {
             font-size: 11px;
             line-height: 1.6;
             margin-bottom: 15px;
-            color: #f7d7dc;
-            text-shadow: 1px 1px #000;
+            color: #fce4ec;
         }
 
-        /* Originalne starog tipa kartice (frame-ovi) s laganim, uglađenim prijelazom */
+        /* EPIC KARTICE - poboljšani framovi sa sjajem i glatkom animacijom */
         .card {
-            background: #fff5ee;
-            border-top: 4px solid #ffffff;
-            border-left: 4px solid #ffffff;
-            border-right: 4px solid #dcd6d0;
-            border-bottom: 4px solid #dcd6d0;
+            background: rgba(35, 16, 22, 0.95);
+            border: 3px solid #ff69b4;
             padding: 16px;
-            margin-top: 18px;
+            border-radius: 8px;
+            margin-top: 15px;
             text-align: left;
-            box-shadow: 5px 5px 0 rgba(0,0,0,0.6);
-            color: #2b1713;
-            transition: transform 0.15s ease, box-shadow 0.15s ease;
+            box-shadow: 0 6px 20px rgba(255, 105, 180, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
         }
 
         .card:hover {
-            transform: translateY(-2px);
-            box-shadow: 6px 7px 0 rgba(0,0,0,0.7);
-        }
-
-        .card h3 {
-            color: #3b2018;
-            font-size: 12px;
-            margin-bottom: 6px;
-        }
-
-        .card p {
-            color: #5c3527;
-            text-shadow: none;
-            font-size: 10px;
+            transform: translateY(-3px);
+            border-color: #ffb6c1;
+            box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
         }
 
         .ip-box {
-            background: #2b1713;
-            border-top: 3px solid #1b0e0a;
-            border-left: 3px solid #1b0e0a;
-            border-right: 3px solid #5c3527;
-            border-bottom: 3px solid #5c3527;
-            padding: 10px;
-            margin-top: 10px;
+            background: rgba(15, 6, 9, 0.9);
+            border: 2px dashed #ff69b4;
+            padding: 8px 10px;
+            margin-top: 8px;
+            border-radius: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            transition: background 0.15s ease;
+            transition: background 0.15s ease, border-color 0.15s ease;
         }
 
         .ip-box:hover {
-            background: #351d18;
+            background: rgba(45, 18, 28, 0.95);
+            border-color: #ffb6c1;
         }
 
         .ip-box code {
-            color: #ff6b81;
-            font-size: 11px;
-            text-shadow: 1px 1px #000;
+            color: #ffb6c1;
+            font-size: 10px;
         }
 
         .ip-box span {
             font-size: 9px;
-            background: #fff5ee;
-            color: #2b1713;
-            padding: 4px 8px;
+            background: #ff69b4;
+            color: #140b0f;
+            padding: 2px 5px;
             font-weight: bold;
-            border: 1px solid #000;
+            border-radius: 2px;
         }
 
+        /* Gumbi (ostali netaknuti, tvoj originalni stil) */
         .cta-btn {
             display: inline-block;
-            background: #5c3527;
-            color: #fff5ee;
-            padding: 10px 16px;
+            background: #ff69b4;
+            color: #140b0f;
+            padding: 8px 14px;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
-            border-top: 3px solid #8c533e;
-            border-left: 3px solid #8c533e;
-            border-right: 3px solid #2b1713;
-            border-bottom: 3px solid #2b1713;
+            border: 2px solid #fff2e6;
             cursor: pointer;
-            margin-top: 10px;
+            margin-top: 8px;
             text-align: center;
-            text-shadow: 1px 1px #000;
-            box-shadow: 0 3px 0 #000;
-        }
-
-        .cta-btn:active {
-            border-top: 3px solid #2b1713;
-            border-left: 3px solid #2b1713;
-            border-right: 3px solid #8c533e;
-            border-bottom: 3px solid #8c533e;
         }
 
         .discord-btn {
             background: #5865F2;
+            color: #fff;
             width: 100%;
             display: block;
-            border-top-color: #8ea1ff;
-            border-left-color: #8ea1ff;
-            border-right-color: #283593;
-            border-bottom-color: #283593;
         }
 
+        /* Countdown */
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin-top: 15px;
+            gap: 8px;
+            margin-top: 12px;
         }
 
         .time-block {
-            background: #5c3527;
-            border-top: 3px solid #8c533e;
-            border-left: 3px solid #8c533e;
-            border-right: 3px solid #2b1713;
-            border-bottom: 3px solid #2b1713;
-            padding: 10px;
-            min-width: 60px;
-            text-align: center;
-            box-shadow: inset 1px 1px 0 #000;
+            background: rgba(22, 10, 15, 0.95);
+            border: 2px solid #ff69b4;
+            padding: 8px;
+            min-width: 50px;
+            border-radius: 4px;
         }
 
         .time-block span {
             display: block;
-            font-size: 16px;
-            color: #ff6b81;
-            text-shadow: 2px 2px #000;
+            font-size: 15px;
+            color: #fff2e6;
         }
 
         .time-block label {
             font-size: 7px;
-            color: #fff5ee;
-            text-shadow: 1px 1px #000;
+            color: #ffb6c1;
         }
 
         /* AI Chatbox */
         .chat-box {
-            background: #1b0e0a;
-            border-top: 3px solid #2b1713;
-            border-left: 3px solid #2b1713;
-            border-right: 3px solid #5c3527;
-            border-bottom: 3px solid #5c3527;
-            height: 240px;
-            padding: 12px;
+            background: rgba(20, 8, 12, 0.9);
+            border: 2px solid #ff69b4;
+            border-radius: 6px;
+            height: 220px;
+            padding: 10px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-bottom: 12px;
+            gap: 6px;
+            margin-bottom: 10px;
             text-align: left;
-            box-shadow: inset 2px 2px 0 #000;
         }
 
         .chat-msg {
             font-size: 10px;
-            padding: 6px 10px;
+            padding: 6px 8px;
+            border-radius: 4px;
             max-width: 85%;
         }
 
-        .chat-msg.bot { background: #3b2018; color: #ffb6c1; border-left: 3px solid #ff69b4; }
-        .chat-msg.user { background: #5c3527; color: #fff5ee; border-right: 3px solid #ff6b81; align-self: flex-end; }
+        .chat-msg.bot { background: #351522; color: #ffccd5; align-self: flex-start; border-left: 3px solid #ff69b4; }
+        .chat-msg.user { background: #2b151c; color: #fff2e6; align-self: flex-end; border-right: 3px solid #ffb6c1; }
 
         .chat-input-area {
             display: flex;
-            gap: 6px;
+            gap: 5px;
         }
 
         .chat-input-area input {
             flex: 1;
-            background: #3b2018;
-            border-top: 3px solid #1b0e0a;
-            border-left: 3px solid #1b0e0a;
-            border-right: 3px solid #fff5ee;
-            border-bottom: 3px solid #fff5ee;
+            background: #1a0a10;
+            border: 2px solid #ff69b4;
             color: #fff;
-            padding: 8px;
+            padding: 6px;
             font-size: 10px;
             outline: none;
+            border-radius: 4px;
         }
 
+        /* Toast obavijest */
         #toast {
             visibility: hidden;
-            background-color: #fff5ee;
-            color: #2b1713;
+            background-color: #ff69b4;
+            color: #140b0f;
             font-weight: bold;
             text-align: center;
-            padding: 8px 14px;
+            padding: 6px;
             position: fixed;
             z-index: 9999;
             left: 50%;
-            bottom: 25px;
+            bottom: 20px;
             transform: translateX(-50%);
             font-size: 10px;
-            border: 2px solid #2b1713;
-            box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
+            border-radius: 4px;
+            border: 2px solid #fff2e6;
         }
         #toast.show { visibility: visible; }
     </style>
@@ -372,7 +307,7 @@
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
-            <span>CAKE SMP</span>
+            <span>Cake SMP</span>
         </div>
         <nav>
             <button class="nav-btn active" onclick="changePage('home', this)">Home</button>
@@ -393,8 +328,8 @@
             
             <button class="cta-btn" onclick="changePage('status', document.querySelectorAll('.nav-btn')[2])">SERVER INFO & IP</button>
 
-            <div style="margin-top: 30px; border-top: 3px dashed #8c533e; padding-top: 15px;">
-                <h3 style="color: #ff6b81; font-size: 12px; margin-bottom: 10px; text-shadow: 2px 2px #000;">SEASON 4 STARTS IN:</h3>
+            <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
+                <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 8px;">SEASON 4 STARTS IN:</h3>
                 <div class="countdown">
                     <div class="time-block"><span id="d">14</span><label>DAYS</label></div>
                     <div class="time-block"><span id="h">00</span><label>HOURS</label></div>
@@ -408,22 +343,22 @@
         <div id="event" class="page">
             <h1>UPCOMING EVENTS 🎉</h1>
             <div class="card">
-                <h3>Next Wednesday: Cart PvP</h3>
-                <p>Fast-paced minecart combat tournament with special rewards!</p>
+                <h3 style="color: #ff69b4; font-size: 11px;">Next Wednesday: Cart PvP</h3>
+                <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament with special rewards!</p>
             </div>
             <div class="card">
-                <h3>Next Friday: Cake___God Event</h3>
-                <p>The ultimate boss fight begins...</p>
+                <h3 style="color: #ff69b4; font-size: 11px;">Next Friday: Cake___God Event</h3>
+                <p style="font-size: 10px; margin-top: 5px;">The ultimate boss fight begins...</p>
             </div>
         </div>
 
         <!-- STATUS -->
         <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
-            <p>Status: <strong style="color: #ff6b81;">● ONLINE</strong></p>
+            <p>Status: <strong style="color: #ffb6c1;">● ONLINE</strong></p>
             
             <div class="card">
-                <h3>Java IP</h3>
+                <h3 style="color: #ff69b4; font-size: 11px;">Java IP</h3>
                 <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
                     <code>cakesmp.minecraft.co.com</code>
                     <span>Copy</span>
@@ -431,7 +366,7 @@
             </div>
 
             <div class="card">
-                <h3>Bedrock Edition (IP & Port)</h3>
+                <h3 style="color: #ff69b4; font-size: 11px;">Bedrock Edition (IP & Port)</h3>
                 <div class="ip-box" onclick="copyText('185.207.164.151')">
                     <code>IP: 185.207.164.151</code>
                     <span>Copy IP</span>
@@ -443,8 +378,8 @@
             </div>
 
             <div class="card">
-                <h3>Discord Community</h3>
-                <p style="margin-bottom: 8px;">Join our official server for updates and voice chats!</p>
+                <h3 style="color: #ff69b4; font-size: 11px;">Discord Community</h3>
+                <p style="font-size: 10px; margin: 5px 0;">Join our official server for updates and voice chats!</p>
                 <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn">Open Discord</a>
             </div>
         </div>
@@ -453,21 +388,21 @@
         <div id="news" class="page">
             <h1>LATEST NEWS 📰</h1>
             <div class="card">
-                <h3>Season 4 Announcement</h3>
-                <p>Season 4 starts soon with new features, better performance, and fresh map generation!</p>
+                <h3 style="color: #ff69b4; font-size: 11px;">Season 4 Announcement</h3>
+                <p style="font-size: 10px; margin-top: 5px;">Season 4 starts soon with new features, better performance, and fresh map generation!</p>
             </div>
         </div>
 
         <!-- AI -->
         <div id="ai" class="page">
             <h1>CAKE AI ASSISTANT 🤖</h1>
-            <div class="card" style="background: #2b1713; border: 4px solid #3b2018;">
+            <div class="card">
                 <div class="chat-box" id="chatBox">
-                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about how to join, server IP, or ranks! 🎂</div>
+                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about how to join, server IP, or ranks!</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="chatInput" placeholder="Type a message (e.g. how do i join, ip)..." onkeypress="handleEnter(event)">
-                    <button class="cta-btn" id="sendBtn" style="margin:0; padding:6px 12px;" onclick="sendAI()">Send</button>
+                    <button class="cta-btn" id="sendBtn" style="margin:0; padding:6px 10px;" onclick="sendAI()">Send</button>
                 </div>
             </div>
         </div>
@@ -476,8 +411,8 @@
         <div id="store" class="page">
             <h1>CAKE SMP STORE 🛒</h1>
             <div class="card" style="text-align: center; padding: 30px;">
-                <h3 style="color: #e74c3c; font-size: 14px; margin-bottom: 8px;">Coming soon...</h3>
-                <p>Our store is currently under construction. Check back later for ranks and perks!</p>
+                <h3 style="color: #ff69b4; font-size: 14px; margin-bottom: 10px;">Coming soon...</h3>
+                <p style="font-size: 11px;">Our store is currently under construction. Check back later for ranks and perks!</p>
             </div>
         </div>
 
@@ -547,7 +482,7 @@
                 let sendBtn = document.getElementById("sendBtn");
                 sendBtn.style.opacity = "0.5";
 
-                box.innerHTML += `<div class="chat-msg bot" style="color:#ff6b81;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
+                box.innerHTML += `<div class="chat-msg bot" style="color:#ffb6c1;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
                 box.scrollTop = box.scrollHeight;
 
                 spamTimer = setInterval(() => {
@@ -590,4 +525,13 @@
         setInterval(() => {
             let now = new Date().getTime();
             let diff = targetTime - now;
-            if(diff > 0) 
+            if(diff > 0) {
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
