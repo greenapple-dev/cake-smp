@@ -435,7 +435,6 @@
             
             <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
                 <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">Server Info & IP</button>
-                <button class="cta-btn" style="background: #3d1b26; color:#ffccd5; border-color:#ff69b4;" onclick="switchTab('event', document.querySelectorAll('nav button')[1])">More Info & Events</button>
             </div>
 
             <div style="margin-top: 30px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 15px;">
@@ -557,24 +556,24 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // --- PREBACIVANJE SEKCIJA (FIXED) ---
+        // --- PREBACIVANJE SEKCIJA (ROBUSTAN FIX) ---
         function switchTab(targetId, btnElement) {
-            let allSections = document.querySelectorAll('.main-content .section');
+            const allSections = document.querySelectorAll('.main-content .section');
             allSections.forEach(sec => sec.classList.remove('active-sec'));
 
-            let targetSec = document.getElementById(targetId);
+            const targetSec = document.getElementById(targetId);
             if(targetSec) {
                 targetSec.classList.add('active-sec');
             }
 
-            let allBtns = document.querySelectorAll('nav .nav-btn');
+            const allBtns = document.querySelectorAll('nav .nav-btn');
             allBtns.forEach(b => b.classList.remove('active-btn'));
             
             if(btnElement) {
                 btnElement.classList.add('active-btn');
             } else {
                 allBtns.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(targetId)) {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick'].includes(targetId)) {
                         b.classList.add('active-btn');
                     }
                 });
@@ -598,4 +597,10 @@
                 document.getElementById("mc-username").focus();
                 return;
             }
-            alert("Redirecting to checkout for " + username + " (Rank: " + rankName + "). Store opening soon with
+            alert("Redirecting to checkout for " + username + " (Rank: " + rankName + "). Store opening soon with Season 4!");
+        }
+
+        // --- POZADINA ---
+        let slides = document.querySelectorAll('.bg-slide');
+        let video = document.querySelector('.bg-video');
+        let curSlide = 
