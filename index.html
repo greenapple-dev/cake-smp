@@ -1,34 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="hr">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake SMP - Official Website</title>
-    <!-- Favicon -->
+    <title>Cake SMP - Službena Stranica</title>
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
-    <!-- Import Minecraft Font -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Minecraft', 'VT323', 'Press Start 2P', monospace;
+            font-family: 'Minecraft', monospace;
         }
 
         body, html {
             width: 100%;
             height: 100%;
-            overflow-x: hidden;
             background-color: #140b0f;
             color: #fff;
+            overflow-x: hidden;
         }
 
-        /* Background Slider and Video */
+        /* Pozadina */
         .bg-container {
             position: fixed;
             top: 0;
@@ -36,22 +31,17 @@
             width: 100%;
             height: 100%;
             z-index: -2;
-            overflow: hidden;
         }
 
-        .bg-slide, .bg-video {
+        .bg-slide {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1.5s ease-in-out;
-        }
-
-        .bg-slide.active, .bg-video.active {
-            opacity: 1;
+            background-image: url('Cake.jpeg');
+            background-size: cover;
+            background-position: center;
         }
 
         .overlay {
@@ -60,38 +50,35 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(35, 15, 22, 0.85) 0%, rgba(12, 5, 8, 0.96) 100%);
+            background: rgba(12, 5, 8, 0.93);
             z-index: -1;
         }
 
-        /* Navigation Header */
+        /* Navigacija */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 12px;
+            padding: 10px 15px;
             background: rgba(22, 10, 15, 0.98);
             border-bottom: 4px solid #ff69b4;
-            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
             position: sticky;
             top: 0;
-            z-index: 9999;
+            z-index: 1000;
         }
 
         .logo {
             display: flex;
             align-items: center;
             gap: 8px;
-            font-size: 13px;
+            font-size: 12px;
             color: #fff2e6;
-            text-shadow: 2px 2px #8b4513;
-            white-space: nowrap;
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            width: 30px;
+            height: 30px;
+            border-radius: 4px;
             border: 2px solid #ff69b4;
             object-fit: cover;
         }
@@ -107,45 +94,37 @@
             background: #2b151c;
             color: #ffccd5;
             border: 2px solid #ff69b4;
-            padding: 6px 8px;
+            padding: 6px 9px;
             cursor: pointer;
             font-size: 8px;
             text-transform: uppercase;
-            box-shadow: 0 2px 0 #120609;
-            transition: all 0.2s ease;
-        }
-
-        .nav-btn.active-btn {
-            background: #ff69b4 !important;
-            color: #140b0f !important;
-            border-color: #fff2e6 !important;
-            box-shadow: 0 0 10px #ff1493, 0 2px 0 #c71585 !important;
             font-weight: bold;
         }
 
-        /* Main Content Layout */
-        .main-content {
-            padding: 25px 15px;
-            max-width: 900px;
-            margin: 0 auto;
-            min-height: calc(100vh - 80px);
-            position: relative;
-            z-index: 1;
+        .nav-btn.active {
+            background: #ff69b4 !important;
+            color: #140b0f !important;
         }
 
-        .section {
+        /* Sadržaj stranica */
+        .main-content {
+            padding: 25px 15px;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .page {
             display: none;
-            width: 100%;
             text-align: center;
         }
 
-        .section.active-sec {
-            display: block !important;
+        .page.active-page {
+            display: block;
         }
 
         h1 {
-            font-size: 20px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin-bottom: 15px;
             color: #fff2e6;
             text-shadow: 2px 2px #ff69b4;
         }
@@ -155,49 +134,33 @@
             line-height: 1.6;
             margin-bottom: 15px;
             color: #fce4ec;
-            text-shadow: 1px 1px #000;
         }
 
-        /* Cards */
-        .card-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
-        }
-
+        /* Kartice */
         .card {
             background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
             padding: 15px;
             border-radius: 8px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
+            margin-top: 15px;
             text-align: left;
-        }
-
-        /* IP Box */
-        .ip-box-container {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            margin-top: 8px;
         }
 
         .ip-box {
             background: rgba(15, 6, 9, 0.9);
             border: 2px dashed #ff69b4;
             padding: 8px 10px;
-            cursor: pointer;
-            border-radius: 5px;
+            margin-top: 8px;
+            border-radius: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
+            cursor: pointer;
         }
 
         .ip-box code {
             color: #00ffcc;
             font-size: 10px;
-            word-break: break-all;
         }
 
         .ip-box span {
@@ -205,8 +168,30 @@
             background: #ff69b4;
             color: #140b0f;
             padding: 2px 5px;
-            border-radius: 3px;
             font-weight: bold;
+            border-radius: 2px;
+        }
+
+        /* Gumbi */
+        .cta-btn {
+            display: inline-block;
+            background: #ff69b4;
+            color: #140b0f;
+            padding: 8px 14px;
+            text-decoration: none;
+            font-size: 10px;
+            font-weight: bold;
+            border: 2px solid #fff2e6;
+            cursor: pointer;
+            margin-top: 8px;
+            text-align: center;
+        }
+
+        .discord-btn {
+            background: #5865F2;
+            color: #fff;
+            width: 100%;
+            display: block;
         }
 
         /* Countdown */
@@ -214,303 +199,147 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 10px;
-            flex-wrap: wrap;
+            margin-top: 12px;
         }
 
         .time-block {
             background: rgba(22, 10, 15, 0.95);
             border: 2px solid #ff69b4;
-            padding: 8px 10px;
-            min-width: 52px;
-            border-radius: 6px;
+            padding: 8px;
+            min-width: 50px;
+            border-radius: 4px;
         }
 
         .time-block span {
             display: block;
-            font-size: 16px;
+            font-size: 15px;
             color: #fff2e6;
-            text-shadow: 1px 1px #ff1493;
         }
 
         .time-block label {
-            font-size: 8px;
+            font-size: 7px;
             color: #ffb6c1;
         }
 
-        /* Buttons */
-        .cta-btn {
-            display: inline-block;
-            background: #ff69b4;
-            color: #140b0f;
-            padding: 8px 14px;
-            text-decoration: none;
-            font-size: 11px;
-            font-weight: bold;
-            border: 2px solid #fff2e6;
-            box-shadow: 0 2px 0 #c71585;
-            margin-top: 8px;
-            text-align: center;
-            cursor: pointer;
-            border-radius: 4px;
-        }
-
-        .cta-btn:hover {
-            background: #ff1493;
-            color: #fff;
-        }
-
-        .discord-btn {
-            background: #5865F2;
-            color: #fff;
-            border-color: #7986cb;
-            box-shadow: 0 2px 0 #283593;
-        }
-
-        /* Store Input */
+        /* Polja za unos */
         .store-input {
             width: 100%;
             background: #1a0a10;
             border: 2px solid #ff69b4;
             color: #fff;
             padding: 8px;
-            font-size: 11px;
-            border-radius: 5px;
-            margin-bottom: 12px;
+            font-size: 10px;
+            margin-bottom: 10px;
             outline: none;
         }
 
-        /* AI Chat */
-        .ai-chat-box {
-            background: rgba(22, 10, 15, 0.95);
-            border: 3px solid #ff69b4;
-            border-radius: 8px;
-            max-width: 450px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            height: 280px;
-        }
-
-        .ai-messages {
-            flex: 1;
-            padding: 8px;
-            overflow-y: auto;
-            text-align: left;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-        }
-
-        .msg {
-            padding: 6px 9px;
-            border-radius: 5px;
-            max-width: 85%;
-            font-size: 10px;
-        }
-
-        .msg.bot { background: #3a1a24; border: 1px solid #ff69b4; color: #fce4ec; align-self: flex-start; }
-        .msg.user { background: #14382d; border: 1px solid #00ffcc; color: #e0f2f1; align-self: flex-end; }
-
-        .ai-input-area {
-            display: flex;
-            border-top: 2px solid #3a1a24;
-            padding: 6px;
-            background: #140b0f;
-        }
-
-        .ai-input-area input {
-            flex: 1;
-            background: #210e14;
-            border: 1px solid #ff69b4;
-            color: #fff;
-            padding: 6px;
-            font-size: 10px;
-            outline: none;
-            border-radius: 3px;
-        }
-
-        .ai-input-area button {
-            background: #ff69b4;
-            color: #140b0f;
-            font-weight: bold;
-            border: none;
-            padding: 0 10px;
-            margin-left: 4px;
-            cursor: pointer;
-            border-radius: 3px;
-        }
-
-        /* Toast */
+        /* Toast obavijest */
         #toast {
             visibility: hidden;
-            min-width: 150px;
             background-color: #00ffcc;
             color: #000;
             font-weight: bold;
             text-align: center;
-            border-radius: 4px;
             padding: 6px;
             position: fixed;
-            z-index: 99999;
+            z-index: 9999;
             left: 50%;
             bottom: 20px;
             transform: translateX(-50%);
-            font-size: 11px;
+            font-size: 10px;
+            border-radius: 4px;
         }
-        #toast.show { visibility: visible; animation: fadeInToast 0.2s, fadeOutToast 0.2s 1.5s; }
-        @keyframes fadeInToast { from { bottom: 0; opacity: 0; } to { bottom: 20px; opacity: 1; } }
-        @keyframes fadeOutToast { from { bottom: 20px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+        #toast.show { visibility: visible; }
     </style>
 </head>
 <body>
 
-    <!-- Background System -->
     <div class="bg-container">
-        <div class="bg-slide active" style="background-image: url('Cake.jpeg');"></div>
-        <video class="bg-video" autoplay muted loop>
-            <source src="back.mp4" type="video/mp4">
-        </video>
+        <div class="bg-slide"></div>
     </div>
     <div class="overlay"></div>
 
-    <!-- Navigation Header -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
             <span>Cake SMP</span>
         </div>
         <nav>
-            <button class="nav-btn active-btn" data-target="home">Home</button>
-            <button class="nav-btn" data-target="event">Event</button>
-            <button class="nav-btn" data-target="status">Status</button>
-            <button class="nav-btn" data-target="news">News</button>
-            <button class="nav-btn" data-target="ai-assistant">AI</button>
-            <button class="nav-btn" data-target="store">Store</button>
+            <button class="nav-btn active" onclick="changePage('home', this)">Home</button>
+            <button class="nav-btn" onclick="changePage('event', this)">Event</button>
+            <button class="nav-btn" onclick="changePage('status', this)">Status</button>
+            <button class="nav-btn" onclick="changePage('news', this)">News</button>
+            <button class="nav-btn" onclick="changePage('store', this)">Store</button>
         </nav>
     </header>
 
-    <!-- Main Wrapper -->
     <div class="main-content">
 
-        <!-- HOME -->
-        <div id="home" class="section active-sec">
+        <div id="home" class="page active-page">
             <h1>WELCOME TO CAKE SMP! 🎂✨</h1>
-            <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER, AN ADVENTURER, OR JUST LOOKING TO MAKE NEW FRIENDS AND HANG OUT, CAKE SMP HAS A SPOT FOR YOU.<br><br><strong>WHY JOIN US?</strong><br>⛏ VANILLA SMP EXPERIENCE – CLASSIC MINECRAFT GAMEPLAY WITH GREAT FEATURES!</p>
-
-            <div style="margin-top: 10px;">
-                <button class="cta-btn" id="go-status">SERVER INFO & IP</button>
-            </div>
+            <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER OR AN ADVENTURER, CAKE SMP HAS A SPOT FOR YOU.</p>
+            
+            <button class="cta-btn" onclick="changePage('status', document.querySelectorAll('nav-btn')[2])">SERVER INFO & IP</button>
 
             <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
-                <h3 style="color: #ff69b4; margin-bottom: 8px; font-size: 12px;">SEASON 4 STARTS IN:</h3>
+                <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 8px;">SEASON 4 STARTS IN:</h3>
                 <div class="countdown">
-                    <div class="time-block"><span id="days">14</span><label>DAYS</label></div>
-                    <div class="time-block"><span id="hours">00</span><label>HOURS</label></div>
-                    <div class="time-block"><span id="minutes">00</span><label>MINS</label></div>
-                    <div class="time-block"><span id="seconds">00</span><label>SECS</label></div>
+                    <div class="time-block"><span id="d">14</span><label>DAYS</label></div>
+                    <div class="time-block"><span id="h">00</span><label>HOURS</label></div>
+                    <div class="time-block"><span id="m">00</span><label>MINS</label></div>
+                    <div class="time-block"><span id="s">00</span><label>SECS</label></div>
                 </div>
             </div>
         </div>
 
-        <!-- EVENT -->
-        <div id="event" class="section">
+        <div id="event" class="page">
             <h1>UPCOMING EVENTS</h1>
-            <p>Get ready for epic battles and special community game nights!</p>
-
-            <div class="card-grid">
-                <div class="card">
-                    <h3 style="color: #00ffcc; margin-bottom: 4px; font-size: 12px;">Next Wednesday: Cart PvP</h3>
-                    <p style="font-size: 10px;">Fast-paced minecart combat tournament!</p>
-                </div>
-                <div class="card">
-                    <h3 style="color: #ff69b4; margin-bottom: 4px; font-size: 12px;">Next Friday: Cake___God</h3>
-                    <p style="font-size: 10px;">The Thunder will start...</p>
-                </div>
+            <div class="card">
+                <h3 style="color: #00ffcc; font-size: 11px;">Next Wednesday: Cart PvP</h3>
+                <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament!</p>
             </div>
         </div>
 
-        <!-- STATUS -->
-        <div id="status" class="section">
+        <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
-            <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</strong></p>
-
-            <div class="card-grid">
-                <div class="card">
-                    <h3 style="color: #ff69b4; font-size: 12px;">Java Edition</h3>
-                    <div class="ip-box-container">
-                        <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
-                            <code>cakesmp.minecraft.co.com</code>
-                            <span>Copy</span>
-                        </div>
-                    </div>
+            <p>Status: <strong style="color: #00ffcc;">● ONLINE</strong></p>
+            <div class="card">
+                <h3 style="color: #ff69b4; font-size: 11px;">Java IP</h3>
+                <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
+                    <code>cakesmp.minecraft.co.com</code>
+                    <span>Copy</span>
                 </div>
-
-                <div class="card">
-                    <h3 style="color: #ff69b4; font-size: 12px;">Bedrock Edition</h3>
-                    <div class="ip-box-container">
-                        <div class="ip-box" onclick="copyText('185.207.164.151')">
-                            <code>IP: 185.207.164.151</code>
-                            <span>Copy</span>
-                        </div>
-                        <div class="ip-box" onclick="copyText('25565')">
-                            <code>PORT: 25565</code>
-                            <span>Copy</span>
-                        </div>
-                    </div>
+            </div>
+            <div class="card">
+                <h3 style="color: #ff69b4; font-size: 11px;">Bedrock IP & Port</h3>
+                <div class="ip-box" onclick="copyText('185.207.164.151')">
+                    <code>185.207.164.151</code>
+                    <span>Copy</span>
                 </div>
-
-                <div class="card">
-                    <h3 style="color: #ff69b4; font-size: 12px;">Discord</h3>
-                    <p style="font-size: 10px; margin: 4px 0;">Join our community server!</p>
-                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block; margin-top:4px;">Open Discord</a>
+                <div class="ip-box" onclick="copyText('25565')">
+                    <code>Port: 25565</code>
+                    <span>Copy</span>
                 </div>
+            </div>
+            <div class="card">
+                <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn">Open Discord</a>
             </div>
         </div>
 
-        <!-- NEWS -->
-        <div id="news" class="section">
+        <div id="news" class="page">
             <h1>LATEST NEWS</h1>
-            <div class="card" style="max-width: 450px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 4px; font-size: 12px;">Season 4 Announcement</h3>
-                <p style="font-size: 10px;">Season 4 starts soon with new features and better performance!</p>
+            <div class="card">
+                <h3 style="color: #ff69b4; font-size: 11px;">Season 4 Announcement</h3>
+                <p style="font-size: 10px; margin-top: 5px;">Season 4 starts soon with new features!</p>
             </div>
         </div>
 
-        <!-- AI ASSISTANT -->
-        <div id="ai-assistant" class="section">
-            <h1>AI ASSISTANT</h1>
-            <div class="ai-chat-box">
-                <div class="ai-messages" id="chatMessages">
-                    <div class="msg bot">Hello! Ask me anything about Cake SMP.</div>
-                </div>
-                <div class="ai-input-area">
-                    <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKey(event)">
-                    <button onclick="sendAImessage()">Send</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- STORE -->
-        <div id="store" class="section">
+        <div id="store" class="page">
             <h1>CAKE SMP STORE</h1>
-            <p>Support the server and unlock perks!</p>
-
-            <div class="card" style="max-width: 450px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 6px; font-size: 12px;">Minecraft Username</h3>
-                <input type="text" id="mc-username" class="store-input" placeholder="Your username...">
-
-                <div style="display: flex; gap: 8px;">
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 8px; border-radius: 4px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #00ffcc; margin-bottom: 4px; font-size: 11px;">Support</h4>
-                        <button class="cta-btn" style="width: 100%; margin:0; padding:5px;" onclick="buyItem('Support')">Buy</button>
-                    </div>
-
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 8px; border-radius: 4px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #ff69b4; margin-bottom: 4px; font-size: 11px;">Premium</h4>
-                        <button class="cta-btn" style="width: 100%; margin:0; padding:5px;" onclick="buyItem('Premium')">Buy</button>
-                    </div>
-                </div>
+            <div class="card">
+                <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 5px;">Minecraft Username</h3>
+                <input type="text" id="username" class="store-input" placeholder="Your username...">
+                <button class="cta-btn" style="width: 100%;" onclick="buyRank()">Buy Rank</button>
             </div>
         </div>
 
@@ -519,43 +348,37 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // Robusno prebacivanje tabova bez greške na mobitelima
-        document.querySelectorAll('nav .nav-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                let targetId = this.getAttribute('data-target');
-                
-                document.querySelectorAll('.main-content .section').forEach(sec => {
-                    sec.classList.remove('active-sec');
-                });
-                
-                let activeSec = document.getElementById(targetId);
-                if(activeSec) {
-                    activeSec.classList.add('active-sec');
-                }
+        // Funkcija za prebacivanje stranica (direktna i brza)
+        function changePage(pageId, btnElement) {
+            // Sakrij sve stranice
+            let pages = document.querySelectorAll('.page');
+            pages.forEach(p => p.classList.remove('active-page'));
 
-                document.querySelectorAll('nav .nav-btn').forEach(btn => {
-                    btn.classList.remove('active-btn');
-                });
-                this.classList.add('active-btn');
+            // Prikaži traženu stranicu
+            let target = document.getElementById(pageId);
+            if(target) {
+                target.classList.add('active-page');
+            }
 
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
-        });
+            // Makni aktivnu boju sa svih gumba u navigaciji
+            let buttons = document.querySelectorAll('.nav-btn');
+            buttons.forEach(b => b.classList.remove('active'));
 
-        // Gumb za Status IP unutar Home taba
-        let goStatusBtn = document.getElementById('go-status');
-        if(goStatusBtn) {
-            goStatusBtn.addEventListener('click', function() {
-                document.querySelectorAll('.main-content .section').forEach(sec => sec.classList.remove('active-sec'));
-                document.getElementById('status').classList.add('active-sec');
-                document.querySelectorAll('nav .nav-btn').forEach(btn => {
-                    btn.classList.remove('active-btn');
-                    if(btn.getAttribute('data-target') === 'status') btn.classList.add('active-btn');
+            // Postavi aktivnu boju na stisnuti gumb
+            if(btnElement) {
+                btnElement.classList.add('active');
+            } else {
+                // Ako je pozvano iznutra, pronađi gumb po ID-u
+                buttons.forEach(b => {
+                    if(b.getAttribute('onclick').includes(pageId)) {
+                        b.classList.add('active');
+                    }
                 });
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            });
+            }
+            window.scrollTo(0, 0);
         }
 
+        // Kopiranje teksta
         function copyText(txt) {
             navigator.clipboard.writeText(txt).then(() => {
                 let t = document.getElementById("toast");
@@ -564,23 +387,28 @@
             });
         }
 
-        function buyItem(rankName) {
-            let username = document.getElementById("mc-username").value.trim();
-            if(!username) {
-                alert("Please enter your Minecraft username first!");
-                document.getElementById("mc-username").focus();
+        // Kupovina ranka
+        function buyRank() {
+            let user = document.getElementById("username").value;
+            if(!user) {
+                alert("Please enter your Minecraft username!");
                 return;
             }
-            alert("Redirecting to checkout for " + username + " (" + rankName + ").");
+            alert("Redirecting to store for: " + user);
         }
 
-        // Background Slideshow
-        let slides = document.querySelectorAll('.bg-slide');
-        let video = document.querySelector('.bg-video');
-        let curSlide = 0;
+        // Siguran Countdown koji radi bez greške
+        let targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
         setInterval(() => {
-            if(slides.length === 0) return;
-            slides.forEach(s => s.classList.remove('active'));
-            if(video) video.classList.remove('active');
-            curSlide++;
-            if(curSlide < slides.leng
+            let now = new Date().getTime();
+            let diff = targetTime - now;
+            if(diff > 0) {
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
