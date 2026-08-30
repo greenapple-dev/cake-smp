@@ -136,7 +136,7 @@
             color: #fce4ec;
         }
 
-        /* EPIC KARTICE */
+        /* EPIC KARTICE - poboljšani framovi sa sjajem i glatkom animacijom */
         .card {
             background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
@@ -186,7 +186,7 @@
             border-radius: 2px;
         }
 
-        /* Gumbi */
+        /* Gumbi (ostali netaknuti, tvoj originalni stil) */
         .cta-btn {
             display: inline-block;
             background: #ff69b4;
@@ -295,7 +295,7 @@
         }
         #toast.show { visibility: visible; }
 
-        /* ====== CAKE GOD ====== */
+        /* ====== CAKE GOD - mračna kartica ====== */
         .cake-god-card {
             background: #000000 !important;
             border: 3px solid #3a0006 !important;
@@ -596,7 +596,6 @@
     </div>
 
     <script>
-        // Prebacivanje stranica
         function changePage(pageId, btnElement) {
             let pages = document.querySelectorAll('.page');
             pages.forEach(p => p.classList.remove('active-page'));
@@ -613,7 +612,7 @@
                 btnElement.classList.add('active');
             } else {
                 buttons.forEach(b => {
-                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(pageId)) {
+                    if(b.getAttribute('onclick').includes(pageId)) {
                         b.classList.add('active');
                     }
                 });
@@ -621,7 +620,6 @@
             window.scrollTo(0, 0);
         }
 
-        // Kopiranje teksta i Toast obavijest
         function copyText(txt) {
             navigator.clipboard.writeText(txt).then(() => {
                 let t = document.getElementById("toast");
@@ -629,5 +627,4 @@
                 t.className = "show";
                 setTimeout(() => { t.className = ""; }, 1500);
             });
-        }
         
