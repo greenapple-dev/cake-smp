@@ -20,7 +20,7 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            background-color: #1a1110; /* Čokoladno tamna Minecraft pozadina */
+            background-color: #1a1110;
             color: #fff;
         }
 
@@ -69,7 +69,7 @@
             align-items: center;
             padding: 15px 30px;
             background: rgba(26, 15, 20, 0.95);
-            border-bottom: 4px solid #ff69b4; /* Roza frosting linija */
+            border-bottom: 4px solid #ff69b4;
             box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
             position: sticky;
             top: 0;
@@ -83,8 +83,8 @@
             align-items: center;
             gap: 12px;
             font-size: 20px;
-            color: #fff2e6; /* Kremasta boja torte */
-            text-shadow: 3px 3px #8b4513; /* Čokoladna sjena */
+            color: #fff2e6;
+            text-shadow: 3px 3px #8b4513;
         }
 
         .logo img {
@@ -109,15 +109,15 @@
             cursor: pointer;
             font-size: 11px;
             text-transform: uppercase;
-            transition: 0.2s;
             box-shadow: 0 3px 0 #1f1014;
         }
 
-        .nav-btn:hover, .nav-btn.active-btn {
-            background: #ff69b4;
-            color: #1a1110;
-            border-color: #fff2e6;
-            box-shadow: 0 3px 0 #c71585;
+        /* Klasa koja se dodaje preko JS-a kad je gumb stisnut */
+        .nav-btn.active-btn {
+            background: #ff69b4 !important;
+            color: #1a1110 !important;
+            border-color: #fff2e6 !important;
+            box-shadow: 0 3px 0 #c71585 !important;
             transform: translateY(-2px);
             font-weight: bold;
         }
@@ -141,12 +141,6 @@
 
         .section.active-sec {
             display: block;
-            animation: fadeIn 0.3s ease-in-out;
-        }
-
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         h1 {
@@ -178,14 +172,7 @@
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 8px 20px rgba(0,0,0,0.6);
-            transition: 0.3s;
             text-align: left;
-        }
-
-        .card:hover {
-            border-color: #fff2e6;
-            box-shadow: 0 8px 25px rgba(255, 105, 180, 0.4);
-            transform: translateY(-3px);
         }
 
         /* IP Box */
@@ -196,12 +183,7 @@
             margin: 12px 0;
             cursor: pointer;
             border-radius: 4px;
-            transition: 0.2s;
             text-align: center;
-        }
-
-        .ip-box:hover {
-            background: rgba(50, 20, 28, 0.9);
         }
 
         .ip-box code {
@@ -225,7 +207,6 @@
             padding: 10px 14px;
             min-width: 65px;
             border-radius: 6px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.4);
         }
 
         .time-block span {
@@ -251,13 +232,7 @@
             border: 2px solid #7986cb;
             box-shadow: 0 3px 0 #283593;
             margin-top: 10px;
-            transition: 0.2s;
             text-align: center;
-        }
-
-        .cta-btn:hover {
-            background: #3f51b5;
-            transform: translateY(-2px);
         }
 
         .store-btn {
@@ -266,11 +241,6 @@
             color: #1a1110;
             font-weight: bold;
             box-shadow: 0 3px 0 #c71585;
-        }
-
-        .store-btn:hover {
-            background: #ff1493;
-            color: #fff;
         }
 
         /* AI Chat Widget */
@@ -283,7 +253,6 @@
             display: flex;
             flex-direction: column;
             height: 340px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.7);
         }
 
         .ai-messages {
@@ -345,12 +314,6 @@
             cursor: pointer;
             font-family: 'Minecraft', sans-serif;
             border-radius: 4px;
-            transition: 0.2s;
-        }
-
-        .ai-input-area button:hover {
-            background: #ff1493;
-            color: #fff;
         }
 
         /* Toast Notification */
@@ -369,7 +332,6 @@
             bottom: 20px;
             transform: translateX(-50%);
             font-size: 13px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         #toast.show {
@@ -407,12 +369,12 @@
             <span>Cake SMP</span>
         </div>
         <nav>
-            <button class="nav-btn active-btn" onclick="openTab(event, 'home')">Home</button>
-            <button class="nav-btn" onclick="openTab(event, 'event')">Event</button>
-            <button class="nav-btn" onclick="openTab(event, 'status')">Status</button>
-            <button class="nav-btn" onclick="openTab(event, 'news')">News</button>
-            <button class="nav-btn" onclick="openTab(event, 'ai-assistant')">AI Assistant</button>
-            <button class="nav-btn" onclick="openTab(event, 'store')">Store</button>
+            <button class="nav-btn active-btn" id="btn-home" onclick="openTab('home', this)">Home</button>
+            <button class="nav-btn" id="btn-event" onclick="openTab('event', this)">Event</button>
+            <button class="nav-btn" id="btn-status" onclick="openTab('status', this)">Status</button>
+            <button class="nav-btn" id="btn-news" onclick="openTab('news', this)">News</button>
+            <button class="nav-btn" id="btn-ai-assistant" onclick="openTab('ai-assistant', this)">AI Assistant</button>
+            <button class="nav-btn" id="btn-store" onclick="openTab('store', this)">Store</button>
         </nav>
     </header>
 
@@ -445,7 +407,7 @@
                 <div class="card">
                     <h3 style="color: #00ffcc; margin-bottom: 5px;">Next Wednesday: Cart PvP</h3>
                     <p style="font-size: 12px; margin-bottom: 10px;">Fast-paced minecart combat tournament!</p>
-                    <div class="countdown" id="cd-cart">
+                    <div class="countdown">
                         <div class="time-block"><span id="c-days">0</span><label>Days</label></div>
                         <div class="time-block"><span id="c-hours">0</span><label>Hours</label></div>
                         <div class="time-block"><span id="c-mins">0</span><label>Mins</label></div>
@@ -457,7 +419,7 @@
                 <div class="card">
                     <h3 style="color: #ff69b4; margin-bottom: 5px;">Next Friday: Cake___God return...</h3>
                     <p style="font-size: 12px; margin-bottom: 10px;">The Thunder will start...</p>
-                    <div class="countdown" id="cd-god">
+                    <div class="countdown">
                         <div class="time-block"><span id="g-days">0</span><label>Days</label></div>
                         <div class="time-block"><span id="g-hours">0</span><label>Hours</label></div>
                         <div class="time-block"><span id="g-mins">0</span><label>Mins</label></div>
@@ -536,8 +498,8 @@
     <div id="toast">Copied to clipboard successfully!</div>
 
     <script>
-        // --- SIGURAN SUSTAV ZA TABOVE (DIREKTNO VEZANO NA KLIK) ---
-        function openTab(evt, tabName) {
+        // --- DIREKTNA I BRZA FUNKCIJA ZA TABOVE ---
+        function openTab(tabName, elmnt) {
             let sections = document.querySelectorAll('.section');
             sections.forEach(sec => sec.classList.remove('active-sec'));
 
@@ -545,7 +507,9 @@
             buttons.forEach(btn => btn.classList.remove('active-btn'));
 
             document.getElementById(tabName).classList.add('active-sec');
-            evt.currentTarget.classList.add('active-btn');
+            if(elmnt) {
+                elmnt.classList.add('active-btn');
+            }
         }
 
         // --- KOPIRANJE TEKSTA ---
@@ -563,14 +527,15 @@
         let currentSlide = 0;
 
         function nextBackground() {
+            if(slides.length === 0) return;
             slides.forEach(slide => slide.classList.remove('active'));
-            video.classList.remove('active');
+            if(video) video.classList.remove('active');
 
             currentSlide++;
             if (currentSlide < slides.length) {
                 slides[currentSlide].classList.add('active');
             } else {
-                video.classList.add('active');
+                if(video) video.classList.add('active');
                 currentSlide = -1;
             }
         }
@@ -578,24 +543,40 @@
 
         // --- COUNTDOWN TIMERI ---
         const seasonDate = new Date().getTime() + (18 * 24 * 60 * 60 * 1000);
-        const cartPvpDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000); // Srijeda
-        const cakeGodDate = new Date().getTime() + (5 * 24 * 60 * 60 * 1000); // Petak
+        const cartPvpDate = new Date().getTime() + (3 * 24 * 60 * 60 * 1000);
+        const cakeGodDate = new Date().getTime() + (5 * 24 * 60 * 60 * 1000);
 
         setInterval(() => {
             const now = new Date().getTime();
 
-            // Home / Season 4
             let d1 = seasonDate - now;
-            if (d1 > 0) {
+            if (d1 > 0 && document.getElementById("days")) {
                 document.getElementById("days").innerText = Math.floor(d1 / (1000 * 60 * 60 * 24));
                 document.getElementById("hours").innerText = Math.floor((d1 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
                 document.getElementById("minutes").innerText = Math.floor((d1 % (1000 * 60 * 60)) / (1000 * 60));
                 document.getElementById("seconds").innerText = Math.floor((d1 % (1000 * 60)) / 1000);
             }
 
-            // Cart PvP (Srijeda)
             let d2 = cartPvpDate - now;
-            if (d2 > 0) {
+            if (d2 > 0 && document.getElementById("c-days")) {
                 document.getElementById("c-days").innerText = Math.floor(d2 / (1000 * 60 * 60 * 24));
                 document.getElementById("c-hours").innerText = Math.floor((d2 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        
+                document.getElementById("c-mins").innerText = Math.floor((d2 % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("c-secs").innerText = Math.floor((d2 % (1000 * 60)) / 1000);
+            }
+
+            let d3 = cakeGodDate - now;
+            if (d3 > 0 && document.getElementById("g-days")) {
+                document.getElementById("g-days").innerText = Math.floor(d3 / (1000 * 60 * 60 * 24));
+                document.getElementById("g-hours").innerText = Math.floor((d3 % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("g-mins").innerText = Math.floor((d3 % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("g-secs").innerText = Math.floor((d3 % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+
+        // --- AI ASSISTANT LOGIC ---
+        function handleKey(e) {
+            if (e.key === 'Enter') {
+                sendAImessage();
+            }
+       
