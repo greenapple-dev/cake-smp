@@ -20,7 +20,7 @@
             width: 100%;
             height: 100%;
             overflow-x: hidden;
-            background-color: #1a1110;
+            background-color: #140b0f;
             color: #fff;
         }
 
@@ -56,19 +56,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle, rgba(40, 20, 25, 0.8) 0%, rgba(15, 8, 10, 0.95) 100%);
+            background: radial-gradient(circle, rgba(35, 15, 22, 0.85) 0%, rgba(12, 5, 8, 0.96) 100%);
             z-index: -1;
         }
 
-        /* Cake SMP Navigation Bar */
+        /* Navigation Header */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 15px 20px;
-            background: rgba(26, 15, 20, 0.98);
+            padding: 14px 24px;
+            background: rgba(22, 10, 15, 0.95);
             border-bottom: 4px solid #ff69b4;
-            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
+            box-shadow: 0 4px 25px rgba(255, 105, 180, 0.25);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -79,16 +79,16 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             font-size: 18px;
             color: #fff2e6;
             text-shadow: 3px 3px #8b4513;
         }
 
         .logo img {
-            width: 38px;
-            height: 38px;
-            border-radius: 6px;
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
             border: 2px solid #ff69b4;
             object-fit: cover;
         }
@@ -100,19 +100,25 @@
         }
 
         .nav-btn {
-            background: #3d2229;
+            background: #2b151c;
             color: #ffccd5;
             border: 2px solid #ff69b4;
-            padding: 8px 12px;
+            padding: 8px 14px;
             cursor: pointer;
             font-size: 10px;
             text-transform: uppercase;
-            box-shadow: 0 3px 0 #1f1014;
+            box-shadow: 0 3px 0 #120609;
+            transition: 0.2s;
+        }
+
+        .nav-btn:hover {
+            background: #ff69b4;
+            color: #140b0f;
         }
 
         .nav-btn.active-btn {
             background: #ff69b4 !important;
-            color: #1a1110 !important;
+            color: #140b0f !important;
             border-color: #fff2e6 !important;
             box-shadow: 0 3px 0 #c71585 !important;
             transform: translateY(-2px);
@@ -122,7 +128,7 @@
         /* Main Content Layout */
         .main-content {
             padding: 30px 15px;
-            max-width: 900px;
+            max-width: 950px;
             margin: 0 auto;
             min-height: calc(100vh - 90px);
             display: flex;
@@ -141,7 +147,7 @@
         }
 
         h1 {
-            font-size: 30px;
+            font-size: 32px;
             margin-bottom: 15px;
             color: #fff2e6;
             text-shadow: 3px 3px #ff69b4;
@@ -158,35 +164,58 @@
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
             gap: 15px;
             margin-top: 15px;
         }
 
         .card {
-            background: rgba(45, 24, 30, 0.95);
+            background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
-            padding: 18px;
-            border-radius: 8px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.6);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
             text-align: left;
         }
 
         /* IP Box */
+        .ip-box-container {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-top: 10px;
+        }
+
         .ip-box {
-            background: rgba(20, 10, 12, 0.9);
+            background: rgba(15, 6, 9, 0.9);
             border: 2px dashed #ff69b4;
-            padding: 10px;
-            margin: 10px 0;
+            padding: 10px 14px;
             cursor: pointer;
-            border-radius: 4px;
-            text-align: center;
+            border-radius: 6px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: 0.2s;
+        }
+
+        .ip-box:hover {
+            background: rgba(45, 18, 28, 0.9);
+            border-color: #00ffcc;
         }
 
         .ip-box code {
             color: #00ffcc;
             font-size: 12px;
             word-break: break-all;
+        }
+
+        .ip-box span {
+            font-size: 10px;
+            background: #ff69b4;
+            color: #140b0f;
+            padding: 3px 6px;
+            border-radius: 3px;
+            font-weight: bold;
         }
 
         /* Countdown */
@@ -199,7 +228,7 @@
         }
 
         .time-block {
-            background: rgba(30, 15, 20, 0.95);
+            background: rgba(22, 10, 15, 0.95);
             border: 2px solid #ff69b4;
             padding: 8px 10px;
             min-width: 55px;
@@ -221,30 +250,59 @@
         /* Buttons */
         .cta-btn {
             display: inline-block;
-            background: #5865F2;
-            color: white;
-            padding: 10px 16px;
+            background: #ff69b4;
+            color: #140b0f;
+            padding: 10px 18px;
             text-decoration: none;
             font-size: 12px;
-            border: 2px solid #7986cb;
-            box-shadow: 0 3px 0 #283593;
+            font-weight: bold;
+            border: 2px solid #fff2e6;
+            box-shadow: 0 3px 0 #c71585;
             margin-top: 10px;
             text-align: center;
+            cursor: pointer;
+            border-radius: 4px;
+            transition: 0.2s;
         }
 
-        .store-btn {
-            background: #ff69b4;
-            border-color: #fff2e6;
-            color: #1a1110;
-            font-weight: bold;
-            box-shadow: 0 3px 0 #c71585;
+        .cta-btn:hover {
+            background: #ff1493;
+            color: #fff;
+            transform: translateY(-2px);
+        }
+
+        .discord-btn {
+            background: #5865F2;
+            color: #fff;
+            border-color: #7986cb;
+            box-shadow: 0 3px 0 #283593;
+        }
+        .discord-btn:hover {
+            background: #4752c4;
+        }
+
+        /* Store Form & Items */
+        .store-input {
+            width: 100%;
+            background: #1a0a10;
+            border: 2px solid #ff69b4;
+            color: #fff;
+            padding: 10px;
+            font-size: 12px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            outline: none;
+        }
+
+        .store-input:focus {
+            border-color: #00ffcc;
         }
 
         /* AI Chat */
         .ai-chat-box {
-            background: rgba(30, 15, 20, 0.95);
+            background: rgba(22, 10, 15, 0.95);
             border: 3px solid #ff69b4;
-            border-radius: 8px;
+            border-radius: 10px;
             max-width: 480px;
             margin: 0 auto;
             display: flex;
@@ -264,20 +322,20 @@
 
         .msg {
             padding: 8px 10px;
-            border-radius: 5px;
+            border-radius: 6px;
             max-width: 85%;
             font-size: 11px;
         }
 
         .msg.bot {
-            background: #4a2530;
+            background: #3a1a24;
             border: 1px solid #ff69b4;
             color: #fce4ec;
             align-self: flex-start;
         }
 
         .msg.user {
-            background: #1f3a30;
+            background: #14382d;
             border: 1px solid #00ffcc;
             color: #e0f2f1;
             align-self: flex-end;
@@ -285,14 +343,14 @@
 
         .ai-input-area {
             display: flex;
-            border-top: 2px solid #522b37;
+            border-top: 2px solid #3a1a24;
             padding: 6px;
-            background: #1a1110;
+            background: #140b0f;
         }
 
         .ai-input-area input {
             flex: 1;
-            background: #2b181d;
+            background: #210e14;
             border: 1px solid #ff69b4;
             color: #fff;
             padding: 8px;
@@ -303,13 +361,12 @@
 
         .ai-input-area button {
             background: #ff69b4;
-            color: #1a1110;
+            color: #140b0f;
             font-weight: bold;
             border: none;
             padding: 0 12px;
             margin-left: 5px;
             cursor: pointer;
-            font-family: 'Minecraft', sans-serif;
             border-radius: 4px;
         }
 
@@ -329,6 +386,7 @@
             bottom: 20px;
             transform: translateX(-50%);
             font-size: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
         }
 
         #toast.show {
@@ -345,7 +403,6 @@
     <!-- Background System -->
     <div class="bg-container">
         <div class="bg-slide active" style="background-image: url('Cake.jpeg');"></div>
-        <div class="bg-slide" style="background-image: url('coming_soon.png');"></div>
         <video class="bg-video" autoplay muted loop>
             <source src="back.mp4" type="video/mp4">
         </video>
@@ -359,12 +416,12 @@
             <span>Cake SMP</span>
         </div>
         <nav>
-            <button class="nav-btn active-btn" id="b-home" onclick="switchTab('home', this)">Home</button>
-            <button class="nav-btn" id="b-event" onclick="switchTab('event', this)">Event</button>
-            <button class="nav-btn" id="b-status" onclick="switchTab('status', this)">Status</button>
-            <button class="nav-btn" id="b-news" onclick="switchTab('news', this)">News</button>
-            <button class="nav-btn" id="b-ai" onclick="switchTab('ai-assistant', this)">AI</button>
-            <button class="nav-btn" id="b-store" onclick="switchTab('store', this)">Store</button>
+            <button class="nav-btn active-btn" onclick="switchTab('home', this)">Home</button>
+            <button class="nav-btn" onclick="switchTab('event', this)">Event</button>
+            <button class="nav-btn" onclick="switchTab('status', this)">Status</button>
+            <button class="nav-btn" onclick="switchTab('news', this)">News</button>
+            <button class="nav-btn" onclick="switchTab('ai-assistant', this)">AI</button>
+            <button class="nav-btn" onclick="switchTab('store', this)">Store</button>
         </nav>
     </header>
 
@@ -372,11 +429,16 @@
     <div class="main-content">
 
         <!-- HOME -->
-        <div id="home" class="section active-sec" style="display: block;">
+        <div id="home" class="section active-sec">
             <h1>Welcome to Cake SMP!</h1>
             <p>The tastiest Minecraft SMP server! Join our awesome community, survive, build, and have fun.</p>
             
-            <div style="margin-top: 15px;">
+            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+                <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">Server Info & IP</button>
+                <button class="cta-btn" style="background: #3d1b26; color:#ffccd5; border-color:#ff69b4;" onclick="switchTab('event', document.querySelectorAll('nav button')[1])">More Info & Events</button>
+            </div>
+
+            <div style="margin-top: 20px;">
                 <h3 style="color: #ff69b4; margin-bottom: 8px;">Season 4 starts in:</h3>
                 <div class="countdown">
                     <div class="time-block"><span id="days">14</span><label>Days</label></div>
@@ -388,67 +450,71 @@
         </div>
 
         <!-- EVENT -->
-        <div id="event" class="section" style="display: none;">
-            <h1>Upcoming Events</h1>
+        <div id="event" class="section">
+            <h1>Upcoming Events & More Info</h1>
             <p>Get ready for epic battles and special community game nights!</p>
             
             <div class="card-grid">
                 <div class="card">
                     <h3 style="color: #00ffcc; margin-bottom: 5px;">Next Wednesday: Cart PvP</h3>
                     <p style="font-size: 11px; margin-bottom: 8px;">Fast-paced minecart combat tournament!</p>
-                    <div class="countdown">
-                        <div class="time-block"><span id="c-days">3</span><label>Days</label></div>
-                        <div class="time-block"><span id="c-hours">12</span><label>Hours</label></div>
-                        <div class="time-block"><span id="c-mins">30</span><label>Mins</label></div>
-                        <div class="time-block"><span id="c-secs">00</span><label>Secs</label></div>
-                    </div>
                 </div>
-
                 <div class="card">
                     <h3 style="color: #ff69b4; margin-bottom: 5px;">Next Friday: Cake___God</h3>
                     <p style="font-size: 11px; margin-bottom: 8px;">The Thunder will start...</p>
-                    <div class="countdown">
-                        <div class="time-block"><span id="g-days">5</span><label>Days</label></div>
-                        <div class="time-block"><span id="g-hours">18</span><label>Hours</label></div>
-                        <div class="time-block"><span id="g-mins">15</span><label>Mins</label></div>
-                        <div class="time-block"><span id="g-secs">00</span><label>Secs</label></div>
-                    </div>
                 </div>
             </div>
         </div>
 
         <!-- STATUS -->
-        <div id="status" class="section" style="display: none;">
-            <h1>Server Status & Info</h1>
-            <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong></p>
+        <div id="status" class="section">
+            <h1>Server Status & IP</h1>
+            <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</strong></p>
             
             <div class="card-grid">
                 <div class="card">
                     <h3 style="color: #ff69b4;">Java Edition</h3>
-                    <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
-                        <code>cakesmp.minecraft.co.com</code>
+                    <div class="ip-box-container">
+                        <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
+                            <code>cakesmp.minecraft.co.com</code>
+                            <span>Copy IP</span>
+                        </div>
                     </div>
                 </div>
+
                 <div class="card">
                     <h3 style="color: #ff69b4;">Bedrock Edition</h3>
-                    <div class="ip-box" onclick="copyText('185.207.164.151:25565')">
-                        <code>185.207.164.151:25565</code>
+                    <div class="ip-box-container">
+                        <div class="ip-box" onclick="copyText('185.207.164.151')">
+                            <code>IP: 185.207.164.151</code>
+                            <span>Copy IP</span>
+                        </div>
+                        <div class="ip-box" onclick="copyText('25565')">
+                            <code>PORT: 25565</code>
+                            <span>Copy Port</span>
+                        </div>
                     </div>
+                </div>
+
+                <div class="card" style="grid-column: span 1;">
+                    <h3 style="color: #ff69b4;">Discord Community</h3>
+                    <p style="font-size: 11px; margin: 8px 0;">Join our community server for chat and support!</p>
+                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block;">Open Discord</a>
                 </div>
             </div>
         </div>
 
         <!-- NEWS -->
-        <div id="news" class="section" style="display: none;">
+        <div id="news" class="section">
             <h1>Latest News</h1>
             <div class="card" style="max-width: 500px; margin: 0 auto;">
                 <h3 style="color: #ff69b4; margin-bottom: 5px;">Season 4 Announcement</h3>
-                <p style="font-size: 12px;">Season 4 starts in 2-3 weeks with new features!</p>
+                <p style="font-size: 12px;">Season 4 starts in 2-3 weeks with new features and better performance!</p>
             </div>
         </div>
 
         <!-- AI ASSISTANT -->
-        <div id="ai-assistant" class="section" style="display: none;">
+        <div id="ai-assistant" class="section">
             <h1>AI Assistant</h1>
             <div class="ai-chat-box">
                 <div class="ai-messages" id="chatMessages">
@@ -462,10 +528,28 @@
         </div>
 
         <!-- STORE -->
-        <div id="store" class="section" style="display: none;">
+        <div id="store" class="section">
             <h1>Cake SMP Store</h1>
-            <p>Support the server development!</p>
-            <a href="#" class="cta-btn store-btn" onclick="alert('Store opening soon with Season 4!')">Visit Store</a>
+            <p>Support the server development and unlock cool perks!</p>
+            
+            <div class="card" style="max-width: 500px; margin: 0 auto;">
+                <h3 style="color: #ff69b4; margin-bottom: 10px;">Enter Minecraft Username</h3>
+                <input type="text" id="mc-username" class="store-input" placeholder="Your Minecraft Username...">
+
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 12px; border-radius: 6px; border: 1px solid #ff69b4;">
+                        <h4 style="color: #00ffcc; margin-bottom: 5px;">Support Rank</h4>
+                        <p style="font-size: 11px; margin-bottom: 8px;">Basic supporter role + special color.</p>
+                        <button class="cta-btn" style="width: 100%; margin:0;" onclick="buyItem('Support')">Buy Support</button>
+                    </div>
+
+                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 12px; border-radius: 6px; border: 1px solid #ff69b4;">
+                        <h4 style="color: #ff69b4; margin-bottom: 5px;">Premium Rank</h4>
+                        <p style="font-size: 11px; margin-bottom: 8px;">All perks, custom kits and more!</p>
+                        <button class="cta-btn" style="width: 100%; margin:0;" onclick="buyItem('Premium')">Buy Premium</button>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>
@@ -473,27 +557,27 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // --- 100% SIGURNO PREBACIVANJE SEKCIJA ---
+        // --- PREBACIVANJE SEKCIJA ---
         function switchTab(targetId, btnElement) {
-            // Sakrij sve sekcije direktno preko stila
             let allSections = document.querySelectorAll('.main-content .section');
-            allSections.forEach(sec => {
-                sec.style.display = 'none';
-                sec.classList.remove('active-sec');
-            });
+            allSections.forEach(sec => sec.classList.remove('active-sec'));
 
-            // Pokaži ciljanu sekciju
             let targetSec = document.getElementById(targetId);
             if(targetSec) {
-                targetSec.style.display = 'block';
                 targetSec.classList.add('active-sec');
             }
 
-            // Makni klasu sa svih gumbiju i dodaj na stisnuti
             let allBtns = document.querySelectorAll('.nav-btn');
             allBtns.forEach(b => b.classList.remove('active-btn'));
             if(btnElement) {
                 btnElement.classList.add('active-btn');
+            } else {
+                // Pronađi odgovarajući gumb ako je pozvano izvana
+                allBtns.forEach(b => {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(targetId)) {
+                        b.classList.add('active-btn');
+                    }
+                });
             }
         }
 
@@ -506,63 +590,21 @@
             });
         }
 
+        // --- KUPOVINA U STORE-U ---
+        function buyItem(rankName) {
+            let username = document.getElementById("mc-username").value.trim();
+            if(username === "") {
+                alert("Please enter your Minecraft username before buying!");
+                document.getElementById("mc-username").focus();
+                return;
+            }
+            alert("Redirecting to checkout for " + username + " (Rank: " + rankName + "). Store opening soon with Season 4!");
+        }
+
         // --- POZADINA ---
         let slides = document.querySelectorAll('.bg-slide');
         let video = document.querySelector('.bg-video');
         let curSlide = 0;
         setInterval(() => {
             if(slides.length === 0) return;
-            slides.forEach(s => s.classList.remove('active'));
-            if(video) video.classList.remove('active');
-            curSlide++;
-            if(curSlide < slides.length) {
-                slides[curSlide].classList.add('active');
-            } else {
-                if(video) video.classList.add('active');
-                curSlide = -1;
-            }
-        }, 6000);
-
-        // --- COUNTDOWN TIMERI (POPRAVLJENI) ---
-        const targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
-        setInterval(() => {
-            let now = new Date().getTime();
-            let diff = targetTime - now;
-            if(diff > 0) {
-                let d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                let h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                let s = Math.floor((diff % (1000 * 60)) / 1000);
-
-                if(document.getElementById("days")) document.getElementById("days").innerText = d;
-                if(document.getElementById("hours")) document.getElementById("hours").innerText = h < 10 ? '0' + h : h;
-                if(document.getElementById("minutes")) document.getElementById("minutes").innerText = m < 10 ? '0' + m : m;
-                if(document.getElementById("seconds")) document.getElementById("seconds").innerText = s < 10 ? '0' + s : s;
-            }
-        }, 1000);
-
-        // --- AI CHAT ---
-        function handleKey(e) { if(e.key === 'Enter') sendAImessage(); }
-        function sendAImessage() {
-            let input = document.getElementById("userInput");
-            let val = input.value.trim();
-            if(!val) return;
-            let box = document.getElementById("chatMessages");
-            
-            box.innerHTML += `<div class="msg user">${val}</div>`;
-            input.value = "";
-            box.scrollTop = box.scrollHeight;
-
-            setTimeout(() => {
-                let reply = "Check our Event tab for details or ask on Discord!";
-                let q = val.toLowerCase();
-                if(q.includes('ip') || q.includes('server')) reply = "Java: cakesmp.minecraft.co.com | Bedrock: 185.207.164.151:25565";
-                else if(q.includes('discord')) reply = "Join our Discord: https://discord.gg/uZbNkQv9c";
-                box.innerHTML += `<div class="msg bot">${reply}</div>`;
-                box.scrollTop = box.scrollHeight;
-            }, 400);
-        }
-    </script>
-</body>
-                                                    </html>
-                                                    
+     
