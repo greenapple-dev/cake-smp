@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="hr">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake SMP - Službena Stranica</title>
+    <title>Cake SMP - Official Page</title>
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
@@ -23,7 +23,7 @@
             overflow-x: hidden;
         }
 
-        /* Pozadina */
+        /* Background */
         .bg-container {
             position: fixed;
             top: 0;
@@ -54,7 +54,7 @@
             z-index: -1;
         }
 
-        /* Navigacija - Cake stil (bez zelene) */
+        /* Navigation */
         header {
             display: flex;
             justify-content: space-between;
@@ -106,7 +106,7 @@
             color: #140b0f !important;
         }
 
-        /* Sadržaj stranica */
+        /* Page Content */
         .main-content {
             padding: 25px 15px;
             max-width: 800px;
@@ -136,7 +136,7 @@
             color: #fce4ec;
         }
 
-        /* EPIC KARTICE - poboljšani framovi sa sjajem i glatkom animacijom */
+        /* Epic Cards */
         .card {
             background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
@@ -186,7 +186,7 @@
             border-radius: 2px;
         }
 
-        /* Gumbi (ostali netaknuti, tvoj originalni stil) */
+        /* Buttons */
         .cta-btn {
             display: inline-block;
             background: #ff69b4;
@@ -276,7 +276,7 @@
             border-radius: 4px;
         }
 
-        /* Toast obavijest */
+        /* Toast notification */
         #toast {
             visibility: hidden;
             background-color: #ff69b4;
@@ -295,7 +295,7 @@
         }
         #toast.show { visibility: visible; }
 
-        /* ====== CAKE GOD - mračna kartica ====== */
+        /* ====== CAKE GOD ====== */
         .cake-god-card {
             background: #000000 !important;
             border: 3px solid #3a0006 !important;
@@ -461,7 +461,7 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- Navigacija -->
+    <!-- Navigation -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -583,15 +583,15 @@
         <div class="fire-layer"></div>
         <div class="cake-god-content" id="cakeGodContent">
             <h1>CAKE___GOD</h1>
-            <p>Iz dubine pećnice, nešto se budi...</p>
-            <p>On ne jede kolače. On JEST kolač. I gladan je.</p>
+            <p>From the depths of the oven, something is waking up...</p>
+            <p>He doesn't eat cake. He IS the cake. And he is hungry.</p>
             <ul class="cake-god-powers">
-                <li>Inferno Slice — zadaje vatrenu štetu u krugu oko sebe</li>
-                <li>Sugar Rush — povremeno se kreće dvostrukom brzinom</li>
-                <li>Frosting Shield — apsorbira prvih nekoliko udaraca bez štete</li>
-                <li>Crumb Summon — priziva male sluge (mrvice) da napadaju igrače</li>
+                <li>Inferno Slice — Deals fire damage in an area around him</li>
+                <li>Sugar Rush — Periodically moves at double speed</li>
+                <li>Frosting Shield — Absorbs the first few hits without taking damage</li>
+                <li>Crumb Summon — Summons small minions (crumbs) to attack players</li>
             </ul>
-            <button class="cta-btn cake-god-close" onclick="closeCakeGod()">Zatvori</button>
+            <button class="cta-btn cake-god-close" onclick="closeCakeGod()">Close</button>
         </div>
     </div>
 
@@ -633,167 +633,4 @@
             if(e.key === 'Enter') sendAI();
         }
 
-        let isSpamBlocked = false;
-        let spamTimer = null;
-
-        function sendAI() {
-            if (isSpamBlocked) return;
-
-            let input = document.getElementById("chatInput");
-            let val = input.value.trim();
-            if(!val) return;
-
-            let box = document.getElementById("chatBox");
-            let words = val.split(' ');
-            let isGibberish = words.some(w => w.length > 12 && !w.includes('http') && !w.includes('.'));
-
-            box.innerHTML += `<div class="chat-msg user">${val}</div>`;
-            input.value = "";
-            box.scrollTop = box.scrollHeight;
-
-            if (isGibberish) {
-                isSpamBlocked = true;
-                let timeLeft = 10;
-                let sendBtn = document.getElementById("sendBtn");
-                sendBtn.style.opacity = "0.5";
-
-                box.innerHTML += `<div class="chat-msg bot" style="color:#ffb6c1;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
-                box.scrollTop = box.scrollHeight;
-
-                spamTimer = setInterval(() => {
-                    timeLeft--;
-                    if (timeLeft <= 0) {
-                        clearInterval(spamTimer);
-                        isSpamBlocked = false;
-                        sendBtn.style.opacity = "1";
-                        box.innerHTML += `<div class="chat-msg bot">You can type again now. Please write normally! 😊</div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }
-                }, 1000);
-                return;
-            }
-
-            setTimeout(() => {
-                let q = val.toLowerCase();
-                let reply = "That's cool! You can ask me how to join, check the server IP, or look at upcoming events.";
-
-                if(q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('bok') || q.includes('zdravo') || q.includes('sup')) {
-                    reply = "Hello there! Welcome to Cake SMP. How can I help you today? 🎂";
-                } else if(q.includes('how do i join') || q.includes('how to join') || q.includes('kako ući') || q.includes('join')) {
-                    reply = "To join Cake SMP, open Minecraft, go to Multiplayer, click Add Server, and type: cakesmp.minecraft.co.com (Java) or use IP: 185.207.164.151 Port: 25565 (Bedrock)!";
-                } else if(q.includes('ip') || q.includes('server') || q.includes('port') || q.includes('address')) {
-                    reply = "Java IP: cakesmp.minecraft.co.com | Bedrock IP: 185.207.164.151 (Port: 25565)";
-                } else if(q.includes('discord') || q.includes('community')) {
-                    reply = "You can join our community Discord server using the link in the Status tab!";
-                } else if(q.includes('store') || q.includes('buy') || q.includes('rank') || q.includes('shop')) {
-                    reply = "The store is coming soon! Stay tuned for amazing ranks.";
-                } else if(q.includes('event')) {
-                    reply = "Check out our Event tab to see all upcoming tournaments and boss fights!";
-                }
-
-                box.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
-                box.scrollTop = box.scrollHeight;
-            }, 300);
-        }
-
-        let targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
-        setInterval(() => {
-            let now = new Date().getTime();
-            let diff = targetTime - now;
-            if(diff > 0) {
-                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-
-        /* ====== CAKE GOD LOGIKA ====== */
-        let cakeGodAudioCtx = null;
-        let cakeGodAutoCloseTimer = null;
-
-        function playCakeGodSound() {
-            try {
-                cakeGodAudioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                const ctx = cakeGodAudioCtx;
-                const now = ctx.currentTime;
-
-                // Duboki, jezivi drone zvuk
-                const drone = ctx.createOscillator();
-                drone.type = 'sawtooth';
-                drone.frequency.setValueAtTime(55, now);
-                drone.frequency.exponentialRampToValueAtTime(38, now + 2.5);
-
-                const droneGain = ctx.createGain();
-                droneGain.gain.setValueAtTime(0.0001, now);
-                droneGain.gain.exponentialRampToValueAtTime(0.35, now + 0.4);
-                droneGain.gain.exponentialRampToValueAtTime(0.15, now + 2.5);
-                droneGain.gain.exponentialRampToValueAtTime(0.0001, now + 4.5);
-
-                const droneFilter = ctx.createBiquadFilter();
-                droneFilter.type = 'lowpass';
-                droneFilter.frequency.setValueAtTime(400, now);
-
-                drone.connect(droneFilter);
-                droneFilter.connect(droneGain);
-                droneGain.connect(ctx.destination);
-
-                // Visoki jezivi "krik" sloj
-                const shriek = ctx.createOscillator();
-                shriek.type = 'sine';
-                shriek.frequency.setValueAtTime(900, now + 0.6);
-                shriek.frequency.exponentialRampToValueAtTime(180, now + 1.6);
-
-                const shriekGain = ctx.createGain();
-                shriekGain.gain.setValueAtTime(0.0001, now + 0.6);
-                shriekGain.gain.exponentialRampToValueAtTime(0.12, now + 0.8);
-                shriekGain.gain.exponentialRampToValueAtTime(0.0001, now + 1.8);
-
-                shriek.connect(shriekGain);
-                shriekGain.connect(ctx.destination);
-
-                drone.start(now);
-                shriek.start(now + 0.6);
-                drone.stop(now + 4.6);
-                shriek.stop(now + 1.9);
-            } catch(e) {
-                console.log("Audio nije podržan:", e);
-            }
-        }
-
-        function openCakeGod() {
-            const overlay = document.getElementById('cakeGodOverlay');
-            const content = document.getElementById('cakeGodContent');
-
-            overlay.classList.add('show');
-            content.classList.remove('reveal');
-            playCakeGodSound();
-
-            setTimeout(() => {
-                content.classList.add('reveal');
-            }, 900);
-
-            clearTimeout(cakeGodAutoCloseTimer);
-            cakeGodAutoCloseTimer = setTimeout(() => {
-                closeCakeGod();
-            }, 9000);
-        }
-
-        function closeCakeGod() {
-            const overlay = document.getElementById('cakeGodOverlay');
-            const content = document.getElementById('cakeGodContent');
-            clearTimeout(cakeGodAutoCloseTimer);
-
-            content.classList.remove('reveal');
-            setTimeout(() => {
-                overlay.classList.remove('show');
-            }, 400);
-
-            if (cakeGodAudioCtx) {
-                cakeGodAudioCtx.close();
-                cakeGodAudioCtx = null;
-            }
-        }
-    </script>
-</body>
-</html>
+        let is
