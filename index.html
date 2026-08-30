@@ -54,7 +54,7 @@
             z-index: -1;
         }
 
-        /* Navigacija */
+        /* Navigacija - Cake stil (bez zelene) */
         header {
             display: flex;
             justify-content: space-between;
@@ -136,7 +136,7 @@
             color: #fce4ec;
         }
 
-        /* Kartice */
+        /* EPIC KARTICE - poboljšani framovi sa sjajem i glatkom animacijom */
         .card {
             background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
@@ -152,37 +152,6 @@
             transform: translateY(-3px);
             border-color: #ffb6c1;
             box-shadow: 0 10px 25px rgba(255, 105, 180, 0.3);
-        }
-
-        /* EPIC CRNI CAKE GOD FRAME */
-        .card.cake-god-secret {
-            background: #050203;
-            border: 3px solid #ff0055;
-            cursor: pointer;
-            text-align: center;
-            box-shadow: 0 0 15px rgba(255, 0, 85, 0.4);
-            transition: all 0.3s ease;
-        }
-
-        .card.cake-god-secret:hover {
-            background: #0d0407;
-            border-color: #ff3366;
-            box-shadow: 0 0 25px rgba(255, 0, 85, 0.7);
-            transform: scale(1.02);
-        }
-
-        .card.cake-god-secret h3 {
-            color: #ff0055;
-            font-size: 14px;
-            text-shadow: 0 0 8px rgba(255, 0, 85, 0.8);
-            letter-spacing: 2px;
-        }
-
-        .card.cake-god-secret p {
-            color: #8c737b;
-            font-size: 9px;
-            margin-top: 5px;
-            text-transform: uppercase;
         }
 
         .ip-box {
@@ -217,7 +186,7 @@
             border-radius: 2px;
         }
 
-        /* Gumbi */
+        /* Gumbi (ostali netaknuti, tvoj originalni stil) */
         .cta-btn {
             display: inline-block;
             background: #ff69b4;
@@ -307,79 +276,6 @@
             border-radius: 4px;
         }
 
-        /* CINEMATIC HOROR/FIRE OVERLAY ZA CAKE GOD-A */
-        #cinematic-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100vw;
-            height: 100vh;
-            background-color: #000000;
-            z-index: 99999;
-            display: none;
-            justify-content: center;
-            align-items: center;
-            flex-direction: column;
-            opacity: 0;
-            transition: opacity 0.5s ease-in;
-            overflow: hidden;
-            pointer-events: none;
-        }
-
-        #cinematic-overlay.active {
-            display: flex;
-            opacity: 1;
-        }
-
-        /* Efekt vatre */
-        .fire-glow {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle, rgba(255,0,0,0.2) 0%, rgba(255,100,0,0.05) 50%, rgba(0,0,0,0.95) 90%);
-            animation: fireFlicker 0.15s infinite alternate;
-            z-index: 1;
-        }
-
-        @keyframes fireFlicker {
-            0% { opacity: 0.7; transform: scale(1); }
-            100% { opacity: 1; transform: scale(1.02); }
-        }
-
-        .boss-text-container {
-            position: relative;
-            z-index: 2;
-            text-align: center;
-            padding: 20px;
-            max-width: 600px;
-            animation: textZoomIn 0.8s cubic-bezier(0.175, 0.885, 0.32, 1.275) forwards;
-        }
-
-        @keyframes textZoomIn {
-            0% { transform: scale(0.2); opacity: 0; filter: blur(10px); }
-            100% { transform: scale(1); opacity: 1; filter: blur(0); }
-        }
-
-        .boss-title {
-            font-size: 22px;
-            color: #ff1e4d;
-            text-shadow: 0 0 15px #ff0000, 0 0 30px #ff0055;
-            margin-bottom: 15px;
-            letter-spacing: 3px;
-        }
-
-        .boss-desc {
-            font-size: 11px;
-            color: #ffccd5;
-            line-height: 1.8;
-            text-shadow: 2px 2px #000;
-            background: rgba(20, 0, 5, 0.85);
-            border: 2px solid #ff0055;
-            padding: 15px;
-            border-radius: 6px;
-            box-shadow: 0 0 20px rgba(255, 0, 85, 0.3);
-        }
-
         /* Toast obavijest */
         #toast {
             visibility: hidden;
@@ -407,42 +303,30 @@
     </div>
     <div class="overlay"></div>
 
-    <div id="cinematic-overlay">
-        <div class="fire-glow"></div>
-        <div class="boss-text-container">
-            <h2 class="boss-title">⚠️ CAKE___GOD AWAKENS ⚠️</h2>
-            <div class="boss-desc">
-                MOĆI BOŽANSTVA:<br>
-                • <strong>Sugar Blast:</strong> Uništava sve blokove u krugu od 50 blokova.<br>
-                • <strong>Sweet Immortality:</strong> Imunitet na sve napade u trajanju od 10 minuta.<br>
-                • <strong>Void Frost:</strong> Zamrzava sve igrače na serveru u sekundi.<br><br>
-                <em>Pripremite se za konačnu bitku...</em>
-            </div>
-        </div>
-    </div>
-
+    <!-- Navigacija -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
             <span>Cake SMP</span>
         </div>
         <nav>
-            <button class="nav-btn active" id="btn-home" onclick="changePage('home', this)">Home</button>
-            <button class="nav-btn" id="btn-event" onclick="changePage('event', this)">Event</button>
-            <button class="nav-btn" id="btn-status" onclick="changePage('status', this)">Status</button>
-            <button class="nav-btn" id="btn-news" onclick="changePage('news', this)">News</button>
-            <button class="nav-btn" id="btn-ai" onclick="changePage('ai', this)">AI</button>
-            <button class="nav-btn" id="btn-store" onclick="changePage('store', this)">Store</button>
+            <button class="nav-btn active" onclick="changePage('home', this)">Home</button>
+            <button class="nav-btn" onclick="changePage('event', this)">Event</button>
+            <button class="nav-btn" onclick="changePage('status', this)">Status</button>
+            <button class="nav-btn" onclick="changePage('news', this)">News</button>
+            <button class="nav-btn" onclick="changePage('ai', this)">AI</button>
+            <button class="nav-btn" onclick="changePage('store', this)">Store</button>
         </nav>
     </header>
 
     <div class="main-content">
 
+        <!-- HOME -->
         <div id="home" class="page active-page">
             <h1>WELCOME TO CAKE SMP! 🎂✨</h1>
             <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER OR AN ADVENTURER, CAKE SMP HAS A SPOT FOR YOU.</p>
             
-            <button class="cta-btn" onclick="changePage('status', document.getElementById('btn-status'))">SERVER INFO & IP</button>
+            <button class="cta-btn" onclick="changePage('status', document.querySelectorAll('.nav-btn')[2])">SERVER INFO & IP</button>
 
             <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
                 <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 8px;">SEASON 4 STARTS IN:</h3>
@@ -455,19 +339,20 @@
             </div>
         </div>
 
+        <!-- EVENT -->
         <div id="event" class="page">
             <h1>UPCOMING EVENTS 🎉</h1>
             <div class="card">
                 <h3 style="color: #ff69b4; font-size: 11px;">Next Wednesday: Cart PvP</h3>
                 <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament with special rewards!</p>
             </div>
-            
-            <div class="card cake-god-secret" onclick="triggerCakeGodEvent()">
-                <h3>???</h3>
-                <p>Click for info</p>
+            <div class="card">
+                <h3 style="color: #ff69b4; font-size: 11px;">Next Friday: Cake___God Event</h3>
+                <p style="font-size: 10px; margin-top: 5px;">The ultimate boss fight begins...</p>
             </div>
         </div>
 
+        <!-- STATUS -->
         <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
             <p>Status: <strong style="color: #ffb6c1;">● ONLINE</strong></p>
@@ -499,6 +384,7 @@
             </div>
         </div>
 
+        <!-- NEWS -->
         <div id="news" class="page">
             <h1>LATEST NEWS 📰</h1>
             <div class="card">
@@ -507,6 +393,7 @@
             </div>
         </div>
 
+        <!-- AI -->
         <div id="ai" class="page">
             <h1>CAKE AI ASSISTANT 🤖</h1>
             <div class="card">
@@ -520,6 +407,7 @@
             </div>
         </div>
 
+        <!-- STORE -->
         <div id="store" class="page">
             <h1>CAKE SMP STORE 🛒</h1>
             <div class="card" style="text-align: center; padding: 30px;">
@@ -533,61 +421,6 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // Web Audio API sintetizator za strašan zvučni efekat
-        function playScarySound() {
-            try {
-                const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-                
-                const osc1 = audioCtx.createOscillator();
-                const gain1 = audioCtx.createGain();
-                osc1.type = 'sawtooth';
-                osc1.frequency.setValueAtTime(120, audioCtx.currentTime);
-                osc1.frequency.exponentialRampToValueAtTime(30, audioCtx.currentTime + 1.5);
-                
-                gain1.gain.setValueAtTime(0.5, audioCtx.currentTime);
-                gain1.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.8);
-                
-                osc1.connect(gain1);
-                gain1.connect(audioCtx.destination);
-                
-                osc1.start();
-                osc1.stop(audioCtx.currentTime + 1.8);
-
-                const osc2 = audioCtx.createOscillator();
-                const gain2 = audioCtx.createGain();
-                osc2.type = 'sine';
-                osc2.frequency.setValueAtTime(600, audioCtx.currentTime + 0.2);
-                osc2.frequency.linearRampToValueAtTime(300, audioCtx.currentTime + 1.5);
-
-                gain2.gain.setValueAtTime(0.2, audioCtx.currentTime + 0.2);
-                gain2.gain.exponentialRampToValueAtTime(0.01, audioCtx.currentTime + 1.6);
-
-                osc2.connect(gain2);
-                gain2.connect(audioCtx.destination);
-
-                osc2.start(audioCtx.currentTime + 0.2);
-                osc2.stop(audioCtx.currentTime + 1.6);
-            } catch (e) {
-                console.log("Audio nije podržan ili blokiran.");
-            }
-        }
-
-        // Pokretanje Cake God strašnog eventa
-        function triggerCakeGodEvent() {
-            const overlay = document.getElementById('cinematic-overlay');
-            playScarySound();
-            overlay.classList.add('active');
-
-            setTimeout(() => {
-                overlay.style.opacity = '0';
-                setTimeout(() => {
-                    overlay.classList.remove('active');
-                    overlay.style.opacity = '1';
-                }, 500);
-            }, 5000);
-        }
-
-        // Sigurna funkcija za prebacivanje stranica
         function changePage(pageId, btnElement) {
             let pages = document.querySelectorAll('.page');
             pages.forEach(p => p.classList.remove('active-page'));
@@ -602,13 +435,103 @@
 
             if(btnElement) {
                 btnElement.classList.add('active');
+            } else {
+                buttons.forEach(b => {
+                    if(b.getAttribute('onclick').includes(pageId)) {
+                        b.classList.add('active');
+                    }
+                });
             }
             window.scrollTo(0, 0);
         }
 
-        // Funkcija za kopiranje teksta
         function copyText(txt) {
             navigator.clipboard.writeText(txt).then(() => {
                 let t = document.getElementById("toast");
                 t.innerText = "Copied: " + txt;
-                t.className 
+                t.className = "show";
+                setTimeout(() => { t.className = ""; }, 1500);
+            });
+        }
+
+        function handleEnter(e) {
+            if(e.key === 'Enter') sendAI();
+        }
+
+        let isSpamBlocked = false;
+        let spamTimer = null;
+
+        function sendAI() {
+            if (isSpamBlocked) return;
+
+            let input = document.getElementById("chatInput");
+            let val = input.value.trim();
+            if(!val) return;
+
+            let box = document.getElementById("chatBox");
+            let words = val.split(' ');
+            let isGibberish = words.some(w => w.length > 12 && !w.includes('http') && !w.includes('.'));
+
+            box.innerHTML += `<div class="chat-msg user">${val}</div>`;
+            input.value = "";
+            box.scrollTop = box.scrollHeight;
+
+            if (isGibberish) {
+                isSpamBlocked = true;
+                let timeLeft = 10;
+                let sendBtn = document.getElementById("sendBtn");
+                sendBtn.style.opacity = "0.5";
+
+                box.innerHTML += `<div class="chat-msg bot" style="color:#ffb6c1;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
+                box.scrollTop = box.scrollHeight;
+
+                spamTimer = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft <= 0) {
+                        clearInterval(spamTimer);
+                        isSpamBlocked = false;
+                        sendBtn.style.opacity = "1";
+                        box.innerHTML += `<div class="chat-msg bot">You can type again now. Please write normally! 😊</div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }
+                }, 1000);
+                return;
+            }
+
+            setTimeout(() => {
+                let q = val.toLowerCase();
+                let reply = "That's cool! You can ask me how to join, check the server IP, or look at upcoming events.";
+
+                if(q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('bok') || q.includes('zdravo') || q.includes('sup')) {
+                    reply = "Hello there! Welcome to Cake SMP. How can I help you today? 🎂";
+                } else if(q.includes('how do i join') || q.includes('how to join') || q.includes('kako ući') || q.includes('join')) {
+                    reply = "To join Cake SMP, open Minecraft, go to Multiplayer, click Add Server, and type: cakesmp.minecraft.co.com (Java) or use IP: 185.207.164.151 Port: 25565 (Bedrock)!";
+                } else if(q.includes('ip') || q.includes('server') || q.includes('port') || q.includes('address')) {
+                    reply = "Java IP: cakesmp.minecraft.co.com | Bedrock IP: 185.207.164.151 (Port: 25565)";
+                } else if(q.includes('discord') || q.includes('community')) {
+                    reply = "You can join our community Discord server using the link in the Status tab!";
+                } else if(q.includes('store') || q.includes('buy') || q.includes('rank') || q.includes('shop')) {
+                    reply = "The store is coming soon! Stay tuned for amazing ranks.";
+                } else if(q.includes('event')) {
+                    reply = "Check out our Event tab to see all upcoming tournaments and boss fights!";
+                }
+
+                box.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
+                box.scrollTop = box.scrollHeight;
+            }, 300);
+        }
+
+        let targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
+        setInterval(() => {
+            let now = new Date().getTime();
+            let diff = targetTime - now;
+            if(diff > 0) {
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
+            }
+        }, 1000);
+    </script>
+</body>
+</html>
