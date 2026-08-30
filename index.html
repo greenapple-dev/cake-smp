@@ -147,14 +147,14 @@
         }
 
         h1 {
-            font-size: 32px;
+            font-size: 26px;
             margin-bottom: 15px;
             color: #fff2e6;
             text-shadow: 3px 3px #ff69b4;
         }
 
         p {
-            font-size: 14px;
+            font-size: 13px;
             line-height: 1.6;
             margin-bottom: 20px;
             color: #fce4ec;
@@ -223,7 +223,7 @@
             display: flex;
             justify-content: center;
             gap: 8px;
-            margin-top: 12px;
+            margin-top: 10px;
             flex-wrap: wrap;
         }
 
@@ -430,16 +430,16 @@
 
         <!-- HOME -->
         <div id="home" class="section active-sec">
-            <h1>Welcome to Cake SMP!</h1>
-            <p>The tastiest Minecraft SMP server! Join our awesome community, survive, build, and have fun.</p>
+            <h1>Welcome to Cake smp! 🎂✨</h1>
+            <p>Looking for a cozy, fun, and active Minecraft SMP? You’ve found the right place! Whether you're a master builder, an adventurer, or just looking to make new friends and hang out, Cake smp has a spot for you.<br><br><strong>Why join us?</strong><br>⛏ Vanilla SMP Experience – Classic Minecraft gameplay with great features!</p>
             
-            <div style="margin-top: 10px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
                 <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">Server Info & IP</button>
                 <button class="cta-btn" style="background: #3d1b26; color:#ffccd5; border-color:#ff69b4;" onclick="switchTab('event', document.querySelectorAll('nav button')[1])">More Info & Events</button>
             </div>
 
-            <div style="margin-top: 20px;">
-                <h3 style="color: #ff69b4; margin-bottom: 8px;">Season 4 starts in:</h3>
+            <div style="margin-top: 30px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 15px;">
+                <h3 style="color: #ff69b4; margin-bottom: 8px; font-size: 14px;">Season 4 starts in:</h3>
                 <div class="countdown">
                     <div class="time-block"><span id="days">14</span><label>Days</label></div>
                     <div class="time-block"><span id="hours">00</span><label>Hours</label></div>
@@ -557,7 +557,7 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // --- PREBACIVANJE SEKCIJA ---
+        // --- PREBACIVANJE SEKCIJA (FIXED) ---
         function switchTab(targetId, btnElement) {
             let allSections = document.querySelectorAll('.main-content .section');
             allSections.forEach(sec => sec.classList.remove('active-sec'));
@@ -567,12 +567,12 @@
                 targetSec.classList.add('active-sec');
             }
 
-            let allBtns = document.querySelectorAll('.nav-btn');
+            let allBtns = document.querySelectorAll('nav .nav-btn');
             allBtns.forEach(b => b.classList.remove('active-btn'));
+            
             if(btnElement) {
                 btnElement.classList.add('active-btn');
             } else {
-                // Pronađi odgovarajući gumb ako je pozvano izvana
                 allBtns.forEach(b => {
                     if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(targetId)) {
                         b.classList.add('active-btn');
@@ -598,13 +598,4 @@
                 document.getElementById("mc-username").focus();
                 return;
             }
-            alert("Redirecting to checkout for " + username + " (Rank: " + rankName + "). Store opening soon with Season 4!");
-        }
-
-        // --- POZADINA ---
-        let slides = document.querySelectorAll('.bg-slide');
-        let video = document.querySelector('.bg-video');
-        let curSlide = 0;
-        setInterval(() => {
-            if(slides.length === 0) return;
-     
+            alert("Redirecting to checkout for " + username + " (Rank: " + rankName + "). Store opening soon with
