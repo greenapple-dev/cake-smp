@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cake SMP - Minecraft Style</title>
+    <title>Cake SMP - Official Cake Theme</title>
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
@@ -18,13 +18,13 @@
         body, html {
             width: 100%;
             height: 100%;
-            background-color: #2c1810;
-            color: #fff2e6;
+            background-color: #2b1713;
+            color: #fff5ee;
             overflow-x: hidden;
             image-rendering: pixelated;
         }
 
-        /* Minecraft pozadina s efektom bloka */
+        /* Pozadina */
         .bg-container {
             position: fixed;
             top: 0;
@@ -43,7 +43,7 @@
             background-image: url('Cake.jpeg');
             background-size: cover;
             background-position: center;
-            filter: brightness(0.6);
+            filter: brightness(0.5);
         }
 
         .overlay {
@@ -52,19 +52,19 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(44, 24, 16, 0.88);
+            background: rgba(43, 23, 19, 0.88);
             z-index: -1;
         }
 
-        /* Glavna Minecraft traka (dirt/stone stil granica) */
+        /* Vrh stranice - čokoladno smeđa s kremastim rubom */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
             padding: 12px 20px;
-            background: #1f110b;
-            border-bottom: 4px solid #5c3a21;
-            box-shadow: 0 4px 0 #110906;
+            background: #3b2018;
+            border-bottom: 4px solid #fff5ee; /* Kremasti rub glazure */
+            box-shadow: 0 4px 0 #1b0e0a;
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -75,7 +75,7 @@
             align-items: center;
             gap: 10px;
             font-size: 13px;
-            color: #ffb6c1;
+            color: #ff6b81; /* Boja trešnjica */
             text-shadow: 2px 2px #000;
         }
 
@@ -83,7 +83,7 @@
             width: 32px;
             height: 32px;
             border-radius: 2px;
-            border: 2px solid #fff;
+            border: 2px solid #fff5ee;
             object-fit: cover;
             box-shadow: 2px 2px 0 #000;
         }
@@ -95,14 +95,14 @@
             justify-content: flex-end;
         }
 
-        /* Minecraft tipke (gumbi s 3D rubom) */
+        /* Gumbi u stilu biskvita i glazure */
         .nav-btn {
-            background: #737373;
-            color: #ffffff;
-            border-top: 3px solid #b3b3b3;
-            border-left: 3px solid #b3b3b3;
-            border-right: 3px solid #3d3d3d;
-            border-bottom: 3px solid #3d3d3d;
+            background: #5c3527;
+            color: #fff5ee;
+            border-top: 3px solid #8c533e;
+            border-left: 3px solid #8c533e;
+            border-right: 3px solid #2b1713;
+            border-bottom: 3px solid #2b1713;
             padding: 8px 12px;
             cursor: pointer;
             font-size: 9px;
@@ -112,23 +112,22 @@
         }
 
         .nav-btn:active {
-            border-top: 3px solid #3d3d3d;
-            border-left: 3px solid #3d3d3d;
-            border-right: 3px solid #b3b3b3;
-            border-bottom: 3px solid #b3b3b3;
-            padding: 9px 11px 7px 13px;
+            border-top: 3px solid #2b1713;
+            border-left: 3px solid #2b1713;
+            border-right: 3px solid #8c533e;
+            border-bottom: 3px solid #8c533e;
         }
 
         .nav-btn.active {
-            background: #a33554 !important;
-            border-top: 3px solid #d45d81;
-            border-left: 3px solid #d45d81;
-            border-right: 3px solid #591b2c;
-            border-bottom: 3px solid #591b2c;
+            background: #e74c3c !important; /* Crvena trešnjica */
+            border-top: 3px solid #ff7675;
+            border-left: 3px solid #ff7675;
+            border-right: 3px solid #c0392b;
+            border-bottom: 3px solid #c0392b;
             color: #fff !important;
         }
 
-        /* Sadržaj stranica */
+        /* Sadržaj */
         .main-content {
             padding: 30px 15px;
             max-width: 850px;
@@ -147,88 +146,86 @@
         h1 {
             font-size: 20px;
             margin-bottom: 15px;
-            color: #ffb6c1;
-            text-shadow: 3px 3px #110906;
+            color: #ff6b81;
+            text-shadow: 3px 3px #1b0e0a;
         }
 
         p {
             font-size: 11px;
             line-height: 1.6;
             margin-bottom: 15px;
-            color: #fce4ec;
+            color: #f7d7dc;
             text-shadow: 1px 1px #000;
         }
 
-        /* Minecraft GUI prozori (Inventory slot stil) */
+        /* Kartice u stilu "kremaste torte" (bijela glazura s čokoladnom pozadinom) */
         .card {
-            background: #c6c6c6;
+            background: #fff5ee; /* Kremasto bijela glazura */
             border-top: 4px solid #ffffff;
             border-left: 4px solid #ffffff;
-            border-right: 4px solid #555555;
-            border-bottom: 4px solid #555555;
+            border-right: 4px solid #dcd6d0;
+            border-bottom: 4px solid #dcd6d0;
             padding: 16px;
             margin-top: 18px;
             text-align: left;
-            box-shadow: inset 2px 2px 0 #888, inset -2px -2px 0 #333, 5px 5px 0 rgba(0,0,0,0.5);
-            color: #3f3f3f;
+            box-shadow: 5px 5px 0 rgba(0,0,0,0.6);
+            color: #2b1713;
         }
 
         .card h3 {
-            color: #3f3f3f;
-            text-shadow: 1px 1px #fff;
+            color: #3b2018;
             font-size: 12px;
             margin-bottom: 6px;
         }
 
         .card p {
-            color: #2b2b2b;
+            color: #5c3527;
             text-shadow: none;
             font-size: 10px;
         }
 
         .ip-box {
-            background: #8b8b8b;
-            border-top: 3px solid #373737;
-            border-left: 3px solid #373737;
-            border-right: 3px solid #fff;
-            border-bottom: 3px solid #fff;
+            background: #2b1713;
+            border-top: 3px solid #1b0e0a;
+            border-left: 3px solid #1b0e0a;
+            border-right: 3px solid #5c3527;
+            border-bottom: 3px solid #5c3527;
             padding: 10px;
             margin-top: 10px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             cursor: pointer;
-            box-shadow: inset 1px 1px 0 #000;
         }
 
         .ip-box code {
-            color: #ffff55; /* Minecraft žuta boja za kodove */
+            color: #ff6b81; /* Crvena trešnjica boja za IP */
             font-size: 11px;
             text-shadow: 1px 1px #000;
         }
 
         .ip-box span {
             font-size: 9px;
-            background: #3c3c3c;
-            color: #fff;
+            background: #fff5ee;
+            color: #2b1713;
             padding: 4px 8px;
             font-weight: bold;
             border: 1px solid #000;
         }
 
-        /* Minecraft gumbi */
+        /* Gumbi unutar kartica */
         .cta-btn {
             display: inline-block;
-            background: #737373;
-            color: #fff;
+            background: #5c3527;
+            color: #fff5ee;
             padding: 10px 16px;
             text-decoration: none;
             font-size: 11px;
             font-weight: bold;
-            border-top: 3px solid #b3b3b3;
-            border-left: 3px solid #b3b3b3;
-            border-right: 3px solid #3d3d3d;
-            border-bottom: 3px solid #3d3d3d;
+            border-top: 3px solid #8c533e;
+            border-left: 3px solid #8c533e;
+            border-right: 3px solid #2b1713;
+            border-bottom: 3px solid #2b1713;
             cursor: pointer;
             margin-top: 10px;
             text-align: center;
@@ -237,10 +234,10 @@
         }
 
         .cta-btn:active {
-            border-top: 3px solid #3d3d3d;
-            border-left: 3px solid #3d3d3d;
-            border-right: 3px solid #b3b3b3;
-            border-bottom: 3px solid #b3b3b3;
+            border-top: 3px solid #2b1713;
+            border-left: 3px solid #2b1713;
+            border-right: 3px solid #8c533e;
+            border-bottom: 3px solid #8c533e;
         }
 
         .discord-btn {
@@ -253,7 +250,7 @@
             border-bottom-color: #283593;
         }
 
-        /* Countdown */
+        /* Vremenski blokovi (biskvit stil) */
         .countdown {
             display: flex;
             justify-content: center;
@@ -262,11 +259,11 @@
         }
 
         .time-block {
-            background: #8b8b8b;
-            border-top: 3px solid #fff;
-            border-left: 3px solid #fff;
-            border-right: 3px solid #373737;
-            border-bottom: 3px solid #373737;
+            background: #5c3527;
+            border-top: 3px solid #8c533e;
+            border-left: 3px solid #8c533e;
+            border-right: 3px solid #2b1713;
+            border-bottom: 3px solid #2b1713;
             padding: 10px;
             min-width: 60px;
             text-align: center;
@@ -276,24 +273,23 @@
         .time-block span {
             display: block;
             font-size: 16px;
-            color: #ffff55;
+            color: #ff6b81;
             text-shadow: 2px 2px #000;
         }
 
         .time-block label {
             font-size: 7px;
-            color: #d3d3d3;
+            color: #fff5ee;
             text-shadow: 1px 1px #000;
         }
 
-        /* AI Chatbox u Minecraft stilu */
+        /* AI Chatbox u čokoladnom stilu torte */
         .chat-box {
-            background: #181818;
-            border-top: 3px solid #373737;
-            border-left: 3px solid #373737;
-            border-right: 3px solid #555;
-            border-bottom: 3px solid #555;
-            border-radius: 0;
+            background: #1b0e0a;
+            border-top: 3px solid #2b1713;
+            border-left: 3px solid #2b1713;
+            border-right: 3px solid #5c3, 5c3;
+            border-bottom: 3px solid #5c3527;
             height: 240px;
             padding: 12px;
             overflow-y: auto;
@@ -311,8 +307,8 @@
             max-width: 85%;
         }
 
-        .chat-msg.bot { background: #331a26; color: #ffb6c1; border-left: 3px solid #ff69b4; }
-        .chat-msg.user { background: #22223b; color: #d0bfff; border-right: 3px solid #8585ff; align-self: flex-end; }
+        .chat-msg.bot { background: #3b2018; color: #ffb6c1; border-left: 3px solid #ff69b4; }
+        .chat-msg.user { background: #5c3527; color: #fff5ee; border-right: 3px solid #ff6b81; align-self: flex-end; }
 
         .chat-input-area {
             display: flex;
@@ -321,22 +317,22 @@
 
         .chat-input-area input {
             flex: 1;
-            background: #3c3c3c;
-            border-top: 3px solid #1e1e1e;
-            border-left: 3px solid #1e1e1e;
-            border-right: 3px solid #fff;
-            border-bottom: 3px solid #fff;
+            background: #3b2018;
+            border-top: 3px solid #1b0e0a;
+            border-left: 3px solid #1b0e0a;
+            border-right: 3px solid #fff5ee;
+            border-bottom: 3px solid #fff5ee;
             color: #fff;
             padding: 8px;
             font-size: 10px;
             outline: none;
         }
 
-        /* Toast poruka */
+        /* Toast obavijest */
         #toast {
             visibility: hidden;
-            background-color: #3c3c3c;
-            color: #ffff55;
+            background-color: #fff5ee;
+            color: #2b1713;
             font-weight: bold;
             text-align: center;
             padding: 8px 14px;
@@ -346,10 +342,7 @@
             bottom: 25px;
             transform: translateX(-50%);
             font-size: 10px;
-            border-top: 2px solid #fff;
-            border-left: 2px solid #fff;
-            border-right: 2px solid #000;
-            border-bottom: 2px solid #000;
+            border: 2px solid #2b1713;
             box-shadow: 3px 3px 0 rgba(0,0,0,0.8);
         }
         #toast.show { visibility: visible; }
@@ -362,7 +355,7 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- Minecraft Navigacija -->
+    <!-- Navigacija -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -387,8 +380,8 @@
             
             <button class="cta-btn" onclick="changePage('status', document.querySelectorAll('.nav-btn')[2])">SERVER INFO & IP</button>
 
-            <div style="margin-top: 30px; border-top: 3px dashed #5c3a21; padding-top: 15px;">
-                <h3 style="color: #ffb6c1; font-size: 12px; margin-bottom: 10px; text-shadow: 2px 2px #000;">SEASON 4 STARTS IN:</h3>
+            <div style="margin-top: 30px; border-top: 3px dashed #8c533e; padding-top: 15px;">
+                <h3 style="color: #ff6b81; font-size: 12px; margin-bottom: 10px; text-shadow: 2px 2px #000;">SEASON 4 STARTS IN:</h3>
                 <div class="countdown">
                     <div class="time-block"><span id="d">14</span><label>DAYS</label></div>
                     <div class="time-block"><span id="h">00</span><label>HOURS</label></div>
@@ -414,7 +407,7 @@
         <!-- STATUS -->
         <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
-            <p>Status: <strong style="color: #ffff55;">● ONLINE</strong></p>
+            <p>Status: <strong style="color: #ff6b81;">● ONLINE</strong></p>
             
             <div class="card">
                 <h3>Java IP</h3>
@@ -455,9 +448,9 @@
         <!-- AI -->
         <div id="ai" class="page">
             <h1>CAKE AI ASSISTANT 🤖</h1>
-            <div class="card">
+            <div class="card" style="background: #2b1713; border: 4px solid #3b2018;">
                 <div class="chat-box" id="chatBox">
-                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about how to join, server IP, or ranks!</div>
+                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about how to join, server IP, or ranks! 🎂</div>
                 </div>
                 <div class="chat-input-area">
                     <input type="text" id="chatInput" placeholder="Type a message (e.g. how do i join, ip)..." onkeypress="handleEnter(event)">
@@ -470,7 +463,7 @@
         <div id="store" class="page">
             <h1>CAKE SMP STORE 🛒</h1>
             <div class="card" style="text-align: center; padding: 30px;">
-                <h3 style="color: #a33554; font-size: 14px; margin-bottom: 8px;">Coming soon...</h3>
+                <h3 style="color: #e74c3c; font-size: 14px; margin-bottom: 8px;">Coming soon...</h3>
                 <p>Our store is currently under construction. Check back later for ranks and perks!</p>
             </div>
         </div>
@@ -541,7 +534,7 @@
                 let sendBtn = document.getElementById("sendBtn");
                 sendBtn.style.opacity = "0.5";
 
-                box.innerHTML += `<div class="chat-msg bot" style="color:#ffb6c1;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
+                box.innerHTML += `<div class="chat-msg bot" style="color:#ff6b81;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
                 box.scrollTop = box.scrollHeight;
 
                 spamTimer = setInterval(() => {
@@ -585,4 +578,5 @@
             let now = new Date().getTime();
             let diff = targetTime - now;
             if(diff > 0) {
-                document.getElementById("
+                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("h").innerTex
