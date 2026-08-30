@@ -19,7 +19,7 @@
             width: 100%;
             height: 100%;
             background-color: #140b0f;
-            color: #fff;
+            color: #fff2e6;
             overflow-x: hidden;
         }
 
@@ -50,11 +50,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(12, 5, 8, 0.93);
+            background: rgba(12, 5, 8, 0.94);
             z-index: -1;
         }
 
-        /* Navigacija */
+        /* Navigacija - Cake stil (bez zelene) */
         header {
             display: flex;
             justify-content: space-between;
@@ -159,7 +159,7 @@
         }
 
         .ip-box code {
-            color: #00ffcc;
+            color: #ffb6c1; /* Umjesto zelene - nježno roza */
             font-size: 10px;
         }
 
@@ -244,7 +244,7 @@
         }
 
         .chat-msg.bot { background: #351522; color: #ffccd5; align-self: flex-start; border-left: 3px solid #ff69b4; }
-        .chat-msg.user { background: #0f2b22; color: #ccffeb; align-self: flex-end; border-right: 3px solid #00ffcc; }
+        .chat-msg.user { background: #2b151c; color: #fff2e6; align-self: flex-end; border-right: 3px solid #ffb6c1; }
 
         .chat-input-area {
             display: flex;
@@ -265,8 +265,8 @@
         /* Toast obavijest */
         #toast {
             visibility: hidden;
-            background-color: #00ffcc;
-            color: #000;
+            background-color: #ff69b4;
+            color: #140b0f;
             font-weight: bold;
             text-align: center;
             padding: 6px;
@@ -277,6 +277,7 @@
             transform: translateX(-50%);
             font-size: 10px;
             border-radius: 4px;
+            border: 2px solid #fff2e6;
         }
         #toast.show { visibility: visible; }
     </style>
@@ -288,6 +289,7 @@
     </div>
     <div class="overlay"></div>
 
+    <!-- Navigacija -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -305,6 +307,7 @@
 
     <div class="main-content">
 
+        <!-- HOME -->
         <div id="home" class="page active-page">
             <h1>WELCOME TO CAKE SMP! 🎂✨</h1>
             <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER OR AN ADVENTURER, CAKE SMP HAS A SPOT FOR YOU.</p>
@@ -322,10 +325,11 @@
             </div>
         </div>
 
+        <!-- EVENT -->
         <div id="event" class="page">
             <h1>UPCOMING EVENTS 🎉</h1>
             <div class="card">
-                <h3 style="color: #00ffcc; font-size: 11px;">Next Wednesday: Cart PvP</h3>
+                <h3 style="color: #ff69b4; font-size: 11px;">Next Wednesday: Cart PvP</h3>
                 <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament with special rewards!</p>
             </div>
             <div class="card">
@@ -334,9 +338,10 @@
             </div>
         </div>
 
+        <!-- STATUS -->
         <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
-            <p>Status: <strong style="color: #00ffcc;">● ONLINE</strong></p>
+            <p>Status: <strong style="color: #ffb6c1;">● ONLINE</strong></p>
             
             <div class="card">
                 <h3 style="color: #ff69b4; font-size: 11px;">Java IP</h3>
@@ -365,6 +370,7 @@
             </div>
         </div>
 
+        <!-- NEWS -->
         <div id="news" class="page">
             <h1>LATEST NEWS 📰</h1>
             <div class="card">
@@ -373,19 +379,21 @@
             </div>
         </div>
 
+        <!-- AI -->
         <div id="ai" class="page">
             <h1>CAKE AI ASSISTANT 🤖</h1>
             <div class="card">
                 <div class="chat-box" id="chatBox">
-                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about the server, IP addresses, or rules!</div>
+                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about how to join, server IP, or ranks!</div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Type a message (e.g. hi, ip)..." onkeypress="handleEnter(event)">
-                    <button class="cta-btn" style="margin:0; padding:6px 10px;" onclick="sendAI()">Send</button>
+                    <input type="text" id="chatInput" placeholder="Type a message (e.g. how do i join, ip)..." onkeypress="handleEnter(event)">
+                    <button class="cta-btn" id="sendBtn" style="margin:0; padding:6px 10px;" onclick="sendAI()">Send</button>
                 </div>
             </div>
         </div>
 
+        <!-- STORE -->
         <div id="store" class="page">
             <h1>CAKE SMP STORE 🛒</h1>
             <div class="card" style="text-align: center; padding: 30px;">
@@ -436,32 +444,66 @@
             if(e.key === 'Enter') sendAI();
         }
 
-        // Pametni AI bot
+        // Varijable za zaštitu od spamanja (10 sec blokada)
+        let isSpamBlocked = false;
+        let spamTimer = null;
+
+        // Pametniji AI bot s anti-spam zaštitom
         function sendAI() {
+            if (isSpamBlocked) return;
+
             let input = document.getElementById("chatInput");
             let val = input.value.trim();
             if(!val) return;
+
             let box = document.getElementById("chatBox");
+
+            // Provjera spamanja: ako pošalje hrpu nasumičnih slova bez razmaka dužih od 10 znakova (npr. "asdfghjklzxcvbnm")
+            let words = val.split(' ');
+            let isGibberish = words.some(w => w.length > 12 && !w.includes('http') && !w.includes('.'));
+
             box.innerHTML += `<div class="chat-msg user">${val}</div>`;
             input.value = "";
             box.scrollTop = box.scrollHeight;
 
+            if (isGibberish) {
+                isSpamBlocked = true;
+                let timeLeft = 10;
+                let sendBtn = document.getElementById("sendBtn");
+                sendBtn.style.opacity = "0.5";
+
+                box.innerHTML += `<div class="chat-msg bot" style="color:#ffb6c1;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
+                box.scrollTop = box.scrollHeight;
+
+                spamTimer = setInterval(() => {
+                    timeLeft--;
+                    if (timeLeft <= 0) {
+                        clearInterval(spamTimer);
+                        isSpamBlocked = false;
+                        sendBtn.style.opacity = "1";
+                        box.innerHTML += `<div class="chat-msg bot">You can type again now. Please write normally! 😊</div>`;
+                        box.scrollTop = box.scrollHeight;
+                    }
+                }, 1000);
+                return;
+            }
+
             setTimeout(() => {
                 let q = val.toLowerCase();
-                let reply = "That's cool! Feel free to ask me about our server IP, events, or community.";
+                let reply = "That's cool! You can ask me how to join, check the server IP, or look at upcoming events.";
 
                 if(q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('bok') || q.includes('zdravo') || q.includes('sup')) {
-                    reply = "Hello there! Welcome to Cake SMP. How can I help you today? 😊";
-                } else if(q.includes('how are you') || q.includes('kako si')) {
-                    reply = "I'm doing great, ready for Season 4!";
+                    reply = "Hello there! Welcome to Cake SMP. How can I help you today? 🎂";
+                } else if(q.includes('how do i join') || q.includes('how to join') || q.includes('kako ući') || q.includes('join')) {
+                    reply = "To join Cake SMP, open Minecraft, go to Multiplayer, click Add Server, and type: cakesmp.minecraft.co.com (Java) or use IP: 185.207.164.151 Port: 25565 (Bedrock)!";
                 } else if(q.includes('ip') || q.includes('server') || q.includes('port') || q.includes('address')) {
                     reply = "Java IP: cakesmp.minecraft.co.com | Bedrock IP: 185.207.164.151 (Port: 25565)";
                 } else if(q.includes('discord') || q.includes('community')) {
                     reply = "You can join our community Discord server using the link in the Status tab!";
                 } else if(q.includes('store') || q.includes('buy') || q.includes('rank') || q.includes('shop')) {
-                    reply = "The store is coming soon! Stay tuned.";
+                    reply = "The store is coming soon! Stay tuned for amazing ranks.";
                 } else if(q.includes('event')) {
-                    reply = "Check out our Event tab to see all upcoming tournaments!";
+                    reply = "Check out our Event tab to see all upcoming tournaments and boss fights!";
                 }
 
                 box.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
