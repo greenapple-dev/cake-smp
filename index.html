@@ -74,6 +74,12 @@
             z-index: 1000;
             flex-wrap: wrap;
             gap: 10px;
+            animation: headerDropIn 0.6s ease;
+        }
+
+        @keyframes headerDropIn {
+            from { transform: translateY(-30px); opacity: 0; }
+            to { transform: translateY(0); opacity: 1; }
         }
 
         .logo {
@@ -121,6 +127,7 @@
             background: #ff69b4;
             color: #140b0f;
             box-shadow: 0 0 15px #ff69b4;
+            transform: translateY(-2px);
         }
 
         .nav-btn.active-btn {
@@ -140,7 +147,7 @@
             min-height: calc(100vh - 90px);
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: flex-start;
         }
 
         /* Sekcije s animacijom prijelaza */
@@ -154,7 +161,7 @@
         }
 
         .section.active-sec {
-            display: block !important;
+            display: block;
             opacity: 1;
             transform: translateY(0);
         }
@@ -180,7 +187,7 @@
             text-shadow: 1px 1px #000;
         }
 
-        /* Cards s animacijom lebdenja */
+        /* Cards */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -195,7 +202,18 @@
             border-radius: 10px;
             box-shadow: 0 8px 25px rgba(0,0,0,0.7);
             text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: cardIn 0.5s ease forwards;
+        }
+
+        .section.active-sec .card:nth-child(1) { animation-delay: 0.08s; }
+        .section.active-sec .card:nth-child(2) { animation-delay: 0.18s; }
+        .section.active-sec .card:nth-child(3) { animation-delay: 0.28s; }
+
+        @keyframes cardIn {
+            to { opacity: 1; transform: translateY(0); }
         }
 
         .card:hover {
@@ -327,7 +345,7 @@
             border-radius: 6px;
             margin-bottom: 15px;
             outline: none;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s, box-shadow 0.3s;
         }
 
         .store-input:focus {
@@ -482,7 +500,7 @@
         <div id="home" class="section active-sec">
             <h1>Welcome to Cake smp! 🎂✨</h1>
             <p>Looking for a cozy, fun, and active Minecraft SMP? You’ve found the right place! Whether you're a master builder, an adventurer, or just looking to make new friends and hang out, Cake smp has a spot for you.<br><br><strong>Why join us?</strong><br>⛏ Vanilla SMP Experience – Classic Minecraft gameplay with great features!</p>
-            
+
             <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
                 <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">Server Info & IP</button>
             </div>
@@ -502,7 +520,7 @@
         <div id="event" class="section">
             <h1>Upcoming Events & More Info</h1>
             <p>Get ready for epic battles and special community game nights!</p>
-            
+
             <div class="card-grid">
                 <div class="card">
                     <h3 style="color: #00ffcc; margin-bottom: 5px;">Next Wednesday: Cart PvP</h3>
@@ -519,7 +537,7 @@
         <div id="status" class="section">
             <h1>Server Status & IP</h1>
             <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</strong></p>
-            
+
             <div class="card-grid">
                 <div class="card">
                     <h3 style="color: #ff69b4;">Java Edition</h3>
@@ -545,7 +563,7 @@
                     </div>
                 </div>
 
-                <div class="card" style="grid-column: span 1;">
+                <div class="card">
                     <h3 style="color: #ff69b4;">Discord Community</h3>
                     <p style="font-size: 11px; margin: 8px 0;">Join our community server for chat and support!</p>
                     <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block;">Open Discord</a>
@@ -580,7 +598,7 @@
         <div id="store" class="section">
             <h1>Cake SMP Store</h1>
             <p>Support the server development and unlock cool perks!</p>
-            
+
             <div class="card" style="max-width: 500px; margin: 0 auto;">
                 <h3 style="color: #ff69b4; margin-bottom: 10px;">Enter Minecraft Username</h3>
                 <input type="text" id="mc-username" class="store-input" placeholder="Your Minecraft Username...">
@@ -592,18 +610,4 @@
                         <button class="cta-btn" style="width: 100%; margin:0;" onclick="buyItem('Support')">Buy Support</button>
                     </div>
 
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 12px; border-radius: 6px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #ff69b4; margin-bottom: 5px;">Premium Rank</h4>
-                        <p style="font-size: 11px; margin-bottom: 8px;">All perks, custom kits and more!</p>
-                        <button class="cta-btn" style="width: 100%; margin:0;" onclick="buyItem('Premium')">Buy Premium</button>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div id="toast">Copied to clipboard!</div>
-
-    <script>
-        // --- 100% POUZDAN
+                    <div
