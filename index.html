@@ -6,14 +6,25 @@
     <title>Cake SMP - Official Website</title>
     <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
-    <!-- Import Minecraft Font -->
+    <!-- Import Minecraft Font (primarni izvor) -->
+    <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <!-- Pixel fallback font, u slučaju da se Minecraft font ne učita -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Minecraft', sans-serif;
+            font-family: 'Minecraft', 'VT323', 'Press Start 2P', monospace;
+        }
+
+        /* h1 i logo dobiju malo veći letter-spacing jer Press Start 2P/VT323
+           (fallback ako se Minecraft font ne učita) izgledaju bolje razmaknuti */
+        h1, .logo, .nav-btn, .cta-btn {
+            letter-spacing: 0.5px;
         }
 
         body, html {
@@ -58,6 +69,25 @@
             height: 100%;
             background: radial-gradient(circle, rgba(35, 15, 22, 0.85) 0%, rgba(12, 5, 8, 0.96) 100%);
             z-index: -1;
+        }
+
+        /* Floating particles (ambient) */
+        .particle {
+            position: fixed;
+            top: 100%;
+            font-size: 20px;
+            opacity: 0;
+            pointer-events: none;
+            z-index: -1;
+            animation: floatUp linear forwards;
+            filter: drop-shadow(0 0 6px rgba(255, 105, 180, 0.5));
+        }
+
+        @keyframes floatUp {
+            0% { transform: translateY(0) rotate(0deg); opacity: 0; }
+            10% { opacity: 0.65; }
+            90% { opacity: 0.5; }
+            100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
 
         /* Navigation Header */
@@ -130,6 +160,11 @@
             transform: translateY(-2px);
         }
 
+        .nav-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 1px 0 #120609;
+        }
+
         .nav-btn.active-btn {
             background: #ff69b4 !important;
             color: #140b0f !important;
@@ -148,9 +183,10 @@
             display: flex;
             justify-content: center;
             align-items: flex-start;
+            position: relative;
         }
 
-        /* Sekcije s animacijom prijelaza */
+        /* Sekcije s animacijom prijelaza (fade + slide, kontrolirano iz JS-a) */
         .section {
             display: none;
             width: 100%;
@@ -187,7 +223,7 @@
             text-shadow: 1px 1px #000;
         }
 
-        /* Cards */
+        /* Cards s animacijom lebdenja i ulaska */
         .card-grid {
             display: grid;
             grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
@@ -211,6 +247,7 @@
         .section.active-sec .card:nth-child(1) { animation-delay: 0.08s; }
         .section.active-sec .card:nth-child(2) { animation-delay: 0.18s; }
         .section.active-sec .card:nth-child(3) { animation-delay: 0.28s; }
+        .section.active-sec .card:nth-child(4) { animation-delay: 0.38s; }
 
         @keyframes cardIn {
             to { opacity: 1; transform: translateY(0); }
@@ -246,6 +283,10 @@
             background: rgba(45, 18, 28, 0.9);
             border-color: #00ffcc;
             box-shadow: 0 0 10px rgba(0,255,204,0.4);
+        }
+
+        .ip-box:active {
+            transform: scale(0.98);
         }
 
         .ip-box code {
@@ -291,6 +332,16 @@
             font-size: 18px;
             color: #fff2e6;
             text-shadow: 2px 2px #ff1493;
+            transition: transform 0.15s ease;
+        }
+
+        .time-block span.tick {
+            animation: tickPulse 0.4s ease;
+        }
+
+        @keyframes tickPulse {
+            0% { transform: scale(1.35); color: #00ffcc; }
+            100% { transform: scale(1); color: #fff2e6; }
         }
 
         .time-block label {
@@ -323,6 +374,11 @@
             box-shadow: 0 0 20px #ff69b4, 0 3px 0 #c71585;
         }
 
+        .cta-btn:active {
+            transform: translateY(0);
+            box-shadow: 0 1px 0 #c71585;
+        }
+
         .discord-btn {
             background: #5865F2;
             color: #fff;
@@ -351,6 +407,17 @@
         .store-input:focus {
             border-color: #00ffcc;
             box-shadow: 0 0 10px rgba(0,255,204,0.4);
+        }
+
+        .store-input.shake {
+            animation: shakeInput 0.4s ease;
+            border-color: #ff1493;
+        }
+
+        @keyframes shakeInput {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
         }
 
         /* AI Chat */
@@ -403,6 +470,29 @@
             align-self: flex-end;
         }
 
+        .msg.typing {
+            display: flex;
+            gap: 4px;
+            align-items: center;
+            padding: 10px;
+        }
+
+        .msg.typing span {
+            width: 5px;
+            height: 5px;
+            background: #ff69b4;
+            border-radius: 50%;
+            animation: typingDot 1s infinite ease-in-out;
+        }
+
+        .msg.typing span:nth-child(2) { animation-delay: 0.15s; }
+        .msg.typing span:nth-child(3) { animation-delay: 0.3s; }
+
+        @keyframes typingDot {
+            0%, 60%, 100% { transform: translateY(0); opacity: 0.5; }
+            30% { transform: translateY(-4px); opacity: 1; }
+        }
+
         .ai-input-area {
             display: flex;
             border-top: 2px solid #3a1a24;
@@ -438,6 +528,17 @@
             color: #fff;
         }
 
+        /* Player count pulse kad se promijeni */
+        #player-count.pulse {
+            animation: countPulse 0.5s ease;
+        }
+
+        @keyframes countPulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); color: #00ffcc; }
+            100% { transform: scale(1); }
+        }
+
         /* Toast */
         #toast {
             visibility: hidden;
@@ -464,6 +565,14 @@
 
         @keyframes fadeInToast { from { bottom: 0; opacity: 0; } to { bottom: 20px; opacity: 1; } }
         @keyframes fadeOutToast { from { bottom: 20px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -536,78 +645,4 @@
         <!-- STATUS -->
         <div id="status" class="section">
             <h1>Server Status & IP</h1>
-            <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</strong></p>
-
-            <div class="card-grid">
-                <div class="card">
-                    <h3 style="color: #ff69b4;">Java Edition</h3>
-                    <div class="ip-box-container">
-                        <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
-                            <code>cakesmp.minecraft.co.com</code>
-                            <span>Copy IP</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 style="color: #ff69b4;">Bedrock Edition</h3>
-                    <div class="ip-box-container">
-                        <div class="ip-box" onclick="copyText('185.207.164.151')">
-                            <code>IP: 185.207.164.151</code>
-                            <span>Copy IP</span>
-                        </div>
-                        <div class="ip-box" onclick="copyText('25565')">
-                            <code>PORT: 25565</code>
-                            <span>Copy Port</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="card">
-                    <h3 style="color: #ff69b4;">Discord Community</h3>
-                    <p style="font-size: 11px; margin: 8px 0;">Join our community server for chat and support!</p>
-                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block;">Open Discord</a>
-                </div>
-            </div>
-        </div>
-
-        <!-- NEWS -->
-        <div id="news" class="section">
-            <h1>Latest News</h1>
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 5px;">Season 4 Announcement</h3>
-                <p style="font-size: 12px;">Season 4 starts in 2-3 weeks with new features and better performance!</p>
-            </div>
-        </div>
-
-        <!-- AI ASSISTANT -->
-        <div id="ai-assistant" class="section">
-            <h1>AI Assistant</h1>
-            <div class="ai-chat-box">
-                <div class="ai-messages" id="chatMessages">
-                    <div class="msg bot">Hello! Ask me anything about Cake SMP.</div>
-                </div>
-                <div class="ai-input-area">
-                    <input type="text" id="userInput" placeholder="Type a message..." onkeypress="handleKey(event)">
-                    <button onclick="sendAImessage()">Send</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- STORE -->
-        <div id="store" class="section">
-            <h1>Cake SMP Store</h1>
-            <p>Support the server development and unlock cool perks!</p>
-
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 10px;">Enter Minecraft Username</h3>
-                <input type="text" id="mc-username" class="store-input" placeholder="Your Minecraft Username...">
-
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 12px; border-radius: 6px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #00ffcc; margin-bottom: 5px;">Support Rank</h4>
-                        <p style="font-size: 11px; margin-bottom: 8px;">Basic supporter role + special color.</p>
-                        <button class="cta-btn" style="width: 100%; margin:0;" onclick="buyItem('Support')">Buy Support</button>
-                    </div>
-
-                    <div
+            <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</st
