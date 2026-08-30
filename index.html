@@ -60,12 +60,12 @@
             z-index: -1;
         }
 
-        /* Navigacija */
+        /* Navigacija optimizirana za PC i mobitele */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
+            padding: 12px 30px;
             background: rgba(22, 10, 15, 0.98);
             border-bottom: 4px solid #ff69b4;
             position: sticky;
@@ -76,14 +76,14 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 13px;
+            gap: 10px;
+            font-size: 15px;
             color: #fff2e6;
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
+            width: 36px;
+            height: 36px;
             border-radius: 6px;
             border: 2px solid #ff69b4;
             object-fit: cover;
@@ -97,7 +97,7 @@
 
         nav {
             display: flex;
-            gap: 3px;
+            gap: 8px;
             flex-wrap: wrap;
             justify-content: flex-end;
         }
@@ -106,9 +106,9 @@
             background: #2b151c;
             color: #ffccd5;
             border: 2px solid #ff69b4;
-            padding: 6px 8px;
+            padding: 8px 12px;
             cursor: pointer;
-            font-size: 8px;
+            font-size: 10px;
             text-transform: uppercase;
             font-weight: bold;
             transition: all 0.2s;
@@ -120,10 +120,10 @@
             transform: scale(1.05);
         }
 
-        /* Sadržaj stranica */
+        /* Glavni sadržaj – odlična širina i za PC i za mobitel */
         .main-content {
-            padding: 25px 15px;
-            max-width: 800px;
+            padding: 35px 20px;
+            max-width: 900px;
             margin: 0 auto;
         }
 
@@ -143,14 +143,14 @@
         }
 
         h1 {
-            font-size: 19px;
-            margin-bottom: 15px;
+            font-size: 22px;
+            margin-bottom: 18px;
             color: #fff2e6;
             text-shadow: 2px 2px #ff69b4;
         }
 
         p {
-            font-size: 12px;
+            font-size: 13px;
             line-height: 1.6;
             margin-bottom: 15px;
             color: #fce4ec;
@@ -160,9 +160,9 @@
         .card {
             background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
-            padding: 15px;
+            padding: 20px;
             border-radius: 8px;
-            margin-top: 15px;
+            margin-top: 18px;
             text-align: left;
             box-shadow: 0 4px 15px rgba(255,105,180,0.2);
         }
@@ -170,8 +170,8 @@
         .ip-box {
             background: rgba(15, 6, 9, 0.9);
             border: 2px dashed #ff69b4;
-            padding: 10px;
-            margin-top: 8px;
+            padding: 12px;
+            margin-top: 10px;
             border-radius: 4px;
             display: flex;
             justify-content: space-between;
@@ -186,14 +186,14 @@
 
         .ip-box code {
             color: #00ffcc;
-            font-size: 11px;
+            font-size: 12px;
         }
 
         .ip-box span {
-            font-size: 9px;
+            font-size: 10px;
             background: #ff69b4;
             color: #140b0f;
-            padding: 3px 6px;
+            padding: 4px 8px;
             font-weight: bold;
             border-radius: 3px;
         }
@@ -203,7 +203,7 @@
             display: inline-block;
             background: #ff69b4;
             color: #140b0f;
-            padding: 9px 14px;
+            padding: 10px 16px;
             text-decoration: none;
             font-size: 11px;
             font-weight: bold;
@@ -230,15 +230,15 @@
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 8px;
-            margin-top: 12px;
+            gap: 10px;
+            margin-top: 15px;
         }
 
         .time-block {
             background: rgba(22, 10, 15, 0.95);
             border: 2px solid #ff69b4;
-            padding: 10px;
-            min-width: 55px;
+            padding: 12px;
+            min-width: 65px;
             border-radius: 6px;
             animation: pulseBlock 2s infinite ease-in-out;
         }
@@ -250,26 +250,33 @@
 
         .time-block span {
             display: block;
-            font-size: 16px;
+            font-size: 18px;
             color: #fff2e6;
         }
 
         .time-block label {
-            font-size: 8px;
+            font-size: 9px;
             color: #ffb6c1;
         }
 
-        /* Polja za unos i Store */
+        /* Store sekcije */
         .store-input {
             width: 100%;
             background: #1a0a10;
             border: 2px solid #ff69b4;
             color: #fff;
-            padding: 9px;
-            font-size: 11px;
-            margin-bottom: 10px;
+            padding: 10px;
+            font-size: 12px;
+            margin-bottom: 12px;
             outline: none;
             border-radius: 4px;
+        }
+
+        .store-view {
+            display: none;
+        }
+        .store-view.active-store {
+            display: block;
         }
 
         /* AI Chatbox stilovi */
@@ -277,19 +284,19 @@
             background: rgba(20, 8, 12, 0.9);
             border: 2px solid #ff69b4;
             border-radius: 6px;
-            height: 220px;
-            padding: 10px;
+            height: 280px;
+            padding: 12px;
             overflow-y: auto;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 8px;
             margin-bottom: 10px;
             text-align: left;
         }
 
         .chat-msg {
-            font-size: 10px;
-            padding: 6px 8px;
+            font-size: 11px;
+            padding: 8px 10px;
             border-radius: 4px;
             max-width: 85%;
         }
@@ -299,7 +306,7 @@
 
         .chat-input-area {
             display: flex;
-            gap: 5px;
+            gap: 6px;
         }
 
         .chat-input-area input {
@@ -307,30 +314,30 @@
             background: #1a0a10;
             border: 2px solid #ff69b4;
             color: #fff;
-            padding: 6px;
-            font-size: 10px;
+            padding: 8px;
+            font-size: 11px;
             outline: none;
             border-radius: 4px;
         }
 
-        /* Toast obavijest s animacijom */
+        /* Toast obavijest */
         #toast {
             visibility: hidden;
             background-color: #00ffcc;
             color: #000;
             font-weight: bold;
             text-align: center;
-            padding: 8px 14px;
+            padding: 10px 16px;
             position: fixed;
             z-index: 9999;
             left: 50%;
             bottom: -50px;
             transform: translateX(-50%);
-            font-size: 11px;
+            font-size: 12px;
             border-radius: 4px;
             transition: bottom 0.3s ease-in-out;
         }
-        #toast.show { visibility: visible; bottom: 25px; }
+        #toast.show { visibility: visible; bottom: 30px; }
     </style>
 </head>
 <body>
@@ -340,6 +347,7 @@
     </div>
     <div class="overlay"></div>
 
+    <!-- Navigacija -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -357,14 +365,15 @@
 
     <div class="main-content">
 
+        <!-- HOME -->
         <div id="home" class="page active-page">
             <h1>WELCOME TO CAKE SMP! 🎂✨</h1>
             <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER OR AN ADVENTURER, CAKE SMP HAS A SPOT FOR YOU.</p>
             
             <button class="cta-btn" onclick="changePage('status', document.querySelectorAll('.nav-btn')[2])">SERVER INFO & IP</button>
 
-            <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
-                <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 8px;">SEASON 4 STARTS IN:</h3>
+            <div style="margin-top: 30px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 15px;">
+                <h3 style="color: #ff69b4; font-size: 12px; margin-bottom: 10px;">SEASON 4 STARTS IN:</h3>
                 <div class="countdown">
                     <div class="time-block"><span id="d">14</span><label>DAYS</label></div>
                     <div class="time-block"><span id="h">00</span><label>HOURS</label></div>
@@ -374,24 +383,26 @@
             </div>
         </div>
 
+        <!-- EVENT -->
         <div id="event" class="page">
             <h1>UPCOMING EVENTS 🎉</h1>
             <div class="card">
-                <h3 style="color: #00ffcc; font-size: 11px;">Next Wednesday: Cart PvP</h3>
-                <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament with special rewards!</p>
+                <h3 style="color: #00ffcc; font-size: 12px;">Next Wednesday: Cart PvP</h3>
+                <p style="font-size: 11px; margin-top: 6px;">Fast-paced minecart combat tournament with special rewards!</p>
             </div>
             <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px;">Next Friday: Cake___God Event</h3>
-                <p style="font-size: 10px; margin-top: 5px;">The ultimate boss fight begins...</p>
+                <h3 style="color: #ff69b4; font-size: 12px;">Next Friday: Cake___God Event</h3>
+                <p style="font-size: 11px; margin-top: 6px;">The ultimate boss fight begins...</p>
             </div>
         </div>
 
+        <!-- STATUS -->
         <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
             <p>Status: <strong style="color: #00ffcc;">● ONLINE</strong></p>
             
             <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px;">Java IP</h3>
+                <h3 style="color: #ff69b4; font-size: 12px;">Java IP</h3>
                 <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
                     <code>cakesmp.minecraft.co.com</code>
                     <span>Copy</span>
@@ -399,7 +410,7 @@
             </div>
 
             <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px;">Bedrock Edition (IP & Port)</h3>
+                <h3 style="color: #ff69b4; font-size: 12px;">Bedrock Edition (IP & Port)</h3>
                 <div class="ip-box" onclick="copyText('185.207.164.151')">
                     <code>IP: 185.207.164.151</code>
                     <span>Copy IP</span>
@@ -411,42 +422,70 @@
             </div>
 
             <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px;">Discord Community</h3>
-                <p style="font-size: 10px; margin: 5px 0;">Join our official server for updates and voice chats!</p>
+                <h3 style="color: #ff69b4; font-size: 12px;">Discord Community</h3>
+                <p style="font-size: 11px; margin: 6px 0;">Join our official server for updates and voice chats!</p>
                 <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn">Open Discord</a>
             </div>
         </div>
 
+        <!-- NEWS -->
         <div id="news" class="page">
             <h1>LATEST NEWS 📰</h1>
             <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px;">Season 4 Announcement</h3>
-                <p style="font-size: 10px; margin-top: 5px;">Season 4 starts soon with new features, better performance, and fresh map generation!</p>
+                <h3 style="color: #ff69b4; font-size: 12px;">Season 4 Announcement</h3>
+                <p style="font-size: 11px; margin-top: 6px;">Season 4 starts soon with new features, better performance, and fresh map generation!</p>
             </div>
         </div>
 
+        <!-- AI ASSISTANT (Pametniji bot) -->
         <div id="ai" class="page">
             <h1>CAKE AI ASSISTANT 🤖</h1>
             <div class="card">
                 <div class="chat-box" id="chatBox">
-                    <div class="chat-msg bot">Hi! Ask me anything about Cake SMP (IP, ranks, rules).</div>
+                    <div class="chat-msg bot">Hi! I am Cake AI. Ask me anything about the server, IP addresses, or ranks!</div>
                 </div>
                 <div class="chat-input-area">
-                    <input type="text" id="chatInput" placeholder="Type a message..." onkeypress="handleEnter(event)">
-                    <button class="cta-btn" style="margin:0; padding:6px 10px;" onclick="sendAI()">Send</button>
+                    <input type="text" id="chatInput" placeholder="Type a message (e.g. hi, ip, discord)..." onkeypress="handleEnter(event)">
+                    <button class="cta-btn" style="margin:0; padding:8px 12px;" onclick="sendAI()">Send</button>
                 </div>
             </div>
         </div>
 
+        <!-- STORE (Unos imena -> nestaje prozor -> otvara se dućan s Back gumbom) -->
         <div id="store" class="page">
             <h1>CAKE SMP STORE 🛒</h1>
-            <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 5px;">Minecraft In-Game Name (IGN)</h3>
-                <input type="text" id="username" class="store-input" placeholder="Enter your username...">
+            
+            <!-- Korak 1: Unos imena -->
+            <div id="store-login" class="card store-view active-store">
+                <h3 style="color: #ff69b4; font-size: 12px; margin-bottom: 8px;">Enter your Minecraft In-Game Name (IGN)</h3>
+                <input type="text" id="username" class="store-input" placeholder="Your username...">
+                <button class="cta-btn" style="width: 100%;" onclick="proceedStore()">Continue to Store</button>
+            </div>
+
+            <!-- Korak 2: Pravi Store s ponudom i Back gumbom -->
+            <div id="store-main" class="card store-view">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px;">
+                    <h3 style="color: #00ffcc; font-size: 12px;" id="welcome-user">Welcome, Player!</h3>
+                    <button class="cta-btn" style="margin:0; padding:4px 10px; font-size:9px; background:#444; color:#fff;" onclick="backToStoreLogin()">← Back</button>
+                </div>
+                <p style="font-size: 11px; margin-bottom: 12px;">Select a package below to support Cake SMP:</p>
                 
-                <div style="display: flex; gap: 8px; margin-top: 10px;">
-                    <button class="cta-btn" style="flex:1;" onclick="buyRank('Support Rank')">Buy Support</button>
-                    <button class="cta-btn" style="flex:1; background:#00ffcc; color:#140b0f;" onclick="buyRank('Premium Rank')">Buy Premium</button>
+                <div style="display: flex; flex-direction: column; gap: 10px;">
+                    <div style="background: rgba(20,8,12,0.9); padding: 12px; border: 2px solid #ff69b4; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong style="color: #ff69b4; font-size: 12px;">Support Rank</strong>
+                            <p style="font-size: 10px; margin: 2px 0 0 0;">Basic perks & cool prefix.</p>
+                        </div>
+                        <button class="cta-btn" style="margin:0; padding:6px 12px;" onclick="buyItem('Support Rank')">Buy ($5)</button>
+                    </div>
+
+                    <div style="background: rgba(20,8,12,0.9); padding: 12px; border: 2px solid #00ffcc; border-radius: 6px; display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <strong style="color: #00ffcc; font-size: 12px;">Premium Rank</strong>
+                            <p style="font-size: 10px; margin: 2px 0 0 0;">All kits, fly mode & exclusive items.</p>
+                        </div>
+                        <button class="cta-btn" style="margin:0; padding:6px 12px; background:#00ffcc; color:#140b0f;" onclick="buyItem('Premium Rank')">Buy ($15)</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -483,7 +522,8 @@
             });
         }
 
-        function buyRank(rankName) {
+        // Store logika sa skrivanjem prozora i Back tipkom
+        function proceedStore() {
             let user = document.getElementById("username").value.trim();
             let t = document.getElementById("toast");
             if(!user) {
@@ -495,7 +535,20 @@
                 document.getElementById("username").focus();
                 return;
             }
-            t.innerText = "Redirecting for " + user + " (" + rankName + ")";
+            document.getElementById("welcome-user").innerText = "Logged in as: " + user;
+            document.getElementById("store-login").classList.remove("active-store");
+            document.getElementById("store-main").classList.add("active-store");
+        }
+
+        function backToStoreLogin() {
+            document.getElementById("store-main").classList.remove("active-store");
+            document.getElementById("store-login").classList.add("active-store");
+        }
+
+        function buyItem(rankName) {
+            let user = document.getElementById("username").value.trim();
+            let t = document.getElementById("toast");
+            t.innerText = "Redirecting to checkout for " + user + " (" + rankName + ")";
             t.style.backgroundColor = "#00ffcc";
             t.style.color = "#000";
             t.className = "show";
@@ -506,6 +559,7 @@
             if(e.key === 'Enter') sendAI();
         }
 
+        // Pametni AI bot bez strogih ključnih riječi
         function sendAI() {
             let input = document.getElementById("chatInput");
             let val = input.value.trim();
@@ -513,35 +567,4 @@
             let box = document.getElementById("chatBox");
             box.innerHTML += `<div class="chat-msg user">${val}</div>`;
             input.value = "";
-            box.scrollTop = box.scrollHeight;
-
-            setTimeout(() => {
-                let reply = "Check out our Status tab for IP or Discord tab to chat with staff!";
-                let q = val.toLowerCase();
-                if(q.includes('ip') || q.includes('port')) reply = "Java IP: cakesmp.minecraft.co.com | Bedrock IP: 185.207.164.151 Port: 25565";
-                else if(q.includes('discord')) reply = "You can join our Discord via the link in the Status tab!";
-                else if(q.includes('store') || q.includes('rank')) reply = "Type your Minecraft username in the Store tab and click buy!";
-                box.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
-                box.scrollTop = box.scrollHeight;
-            }, 400);
-        }
-
-        // Countdown logika
-        let targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
-        setInterval(() => {
-            let now = new Date().getTime();
-            let diff = targetTime - now;
-            if(diff > 0) {
-                let dE = document.getElementById("d");
-                let hE = document.getElementById("h");
-                let mE = document.getElementById("m");
-                let sE = document.getElementById("s");
-                if(dE) dE.innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                if(hE) hE.innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                if(mE) mE.innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                if(sE) sE.innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+            box.sc
