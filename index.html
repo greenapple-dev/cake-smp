@@ -294,6 +294,164 @@
             border: 2px solid #fff2e6;
         }
         #toast.show { visibility: visible; }
+
+        /* ====== CAKE GOD - mračna kartica ====== */
+        .cake-god-card {
+            background: #000000 !important;
+            border: 3px solid #3a0006 !important;
+            cursor: pointer;
+            text-align: center;
+            padding: 22px 16px;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 18px rgba(255, 0, 0, 0.15);
+            transition: transform 0.2s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        .cake-god-card:hover {
+            transform: translateY(-3px) scale(1.01);
+            border-color: #ff2b2b !important;
+            box-shadow: 0 0 28px rgba(255, 0, 0, 0.4);
+        }
+
+        .cake-god-card h3 {
+            color: #ff2b2b;
+            font-size: 20px;
+            letter-spacing: 6px;
+            text-shadow: 0 0 10px rgba(255, 0, 0, 0.8);
+            animation: godFlicker 2.4s infinite;
+        }
+
+        .cake-god-card p {
+            color: #7a2a2a;
+            font-size: 9px;
+            margin-top: 8px;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        @keyframes godFlicker {
+            0%, 100% { opacity: 1; }
+            48% { opacity: 1; }
+            50% { opacity: 0.3; }
+            52% { opacity: 1; }
+            76% { opacity: 1; }
+            78% { opacity: 0.5; }
+            80% { opacity: 1; }
+        }
+
+        /* ====== FULLSCREEN OVERLAY ====== */
+        .cake-god-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+
+        .cake-god-overlay.show {
+            display: flex;
+        }
+
+        .fire-layer {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 55%;
+            pointer-events: none;
+            background:
+                radial-gradient(circle, rgba(255,140,0,0.9) 0%, rgba(255,60,0,0.5) 35%, rgba(120,0,0,0) 70%),
+                radial-gradient(circle, rgba(255,190,0,0.7) 0%, rgba(255,40,0,0.4) 30%, rgba(80,0,0,0) 65%);
+            background-repeat: no-repeat;
+            background-size: 60% 100%, 45% 90%;
+            background-position: 20% 100%, 70% 100%;
+            filter: blur(6px);
+            animation: fireFlicker 0.5s infinite alternate;
+            opacity: 0;
+        }
+
+        .cake-god-overlay.show .fire-layer {
+            opacity: 1;
+        }
+
+        @keyframes fireFlicker {
+            0% { transform: scaleY(1) translateX(0); filter: blur(6px) brightness(1); }
+            50% { transform: scaleY(1.08) translateX(-6px); filter: blur(8px) brightness(1.25); }
+            100% { transform: scaleY(0.95) translateX(6px); filter: blur(5px) brightness(0.95); }
+        }
+
+        .cake-god-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+            padding: 20px;
+            max-width: 600px;
+            opacity: 0;
+            transform: scale(0.85);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .cake-god-content.reveal {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .cake-god-content h1 {
+            font-size: 26px;
+            color: #ff1c1c;
+            text-shadow: 0 0 12px #ff0000, 0 0 30px #ff0000;
+            letter-spacing: 4px;
+            margin-bottom: 14px;
+            animation: godShake 0.15s infinite;
+        }
+
+        @keyframes godShake {
+            0% { transform: translate(0px, 0px); }
+            25% { transform: translate(1px, -1px); }
+            50% { transform: translate(-1px, 1px); }
+            75% { transform: translate(1px, 1px); }
+            100% { transform: translate(0px, 0px); }
+        }
+
+        .cake-god-content p {
+            color: #ffbdbd;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .cake-god-powers {
+            text-align: left;
+            display: inline-block;
+            margin-top: 10px;
+            border-top: 1px dashed rgba(255,0,0,0.4);
+            padding-top: 10px;
+        }
+
+        .cake-god-powers li {
+            list-style: none;
+            font-size: 10px;
+            color: #ff9d9d;
+            margin-bottom: 6px;
+        }
+
+        .cake-god-powers li::before {
+            content: "☠ ";
+            color: #ff1c1c;
+        }
+
+        .cake-god-close {
+            margin-top: 18px;
+            background: #1a0000;
+            color: #ff2b2b;
+            border: 2px solid #ff2b2b;
+        }
     </style>
 </head>
 <body>
@@ -346,9 +504,9 @@
                 <h3 style="color: #ff69b4; font-size: 11px;">Next Wednesday: Cart PvP</h3>
                 <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament with special rewards!</p>
             </div>
-            <div class="card">
-                <h3 style="color: #ff69b4; font-size: 11px;">Next Friday: Cake___God Event</h3>
-                <p style="font-size: 10px; margin-top: 5px;">The ultimate boss fight begins...</p>
+            <div class="card cake-god-card" onclick="openCakeGod()">
+                <h3>???</h3>
+                <p>Click for info</p>
             </div>
         </div>
 
@@ -420,6 +578,23 @@
 
     <div id="toast">Copied to clipboard!</div>
 
+    <!-- CAKE GOD FULLSCREEN OVERLAY -->
+    <div class="cake-god-overlay" id="cakeGodOverlay">
+        <div class="fire-layer"></div>
+        <div class="cake-god-content" id="cakeGodContent">
+            <h1>CAKE___GOD</h1>
+            <p>Iz dubine pećnice, nešto se budi...</p>
+            <p>On ne jede kolače. On JEST kolač. I gladan je.</p>
+            <ul class="cake-god-powers">
+                <li>Inferno Slice — zadaje vatrenu štetu u krugu oko sebe</li>
+                <li>Sugar Rush — povremeno se kreće dvostrukom brzinom</li>
+                <li>Frosting Shield — apsorbira prvih nekoliko udaraca bez štete</li>
+                <li>Crumb Summon — priziva male sluge (mrvice) da napadaju igrače</li>
+            </ul>
+            <button class="cta-btn cake-god-close" onclick="closeCakeGod()">Zatvori</button>
+        </div>
+    </div>
+
     <script>
         function changePage(pageId, btnElement) {
             let pages = document.querySelectorAll('.page');
@@ -452,86 +627,4 @@
                 t.className = "show";
                 setTimeout(() => { t.className = ""; }, 1500);
             });
-        }
-
-        function handleEnter(e) {
-            if(e.key === 'Enter') sendAI();
-        }
-
-        let isSpamBlocked = false;
-        let spamTimer = null;
-
-        function sendAI() {
-            if (isSpamBlocked) return;
-
-            let input = document.getElementById("chatInput");
-            let val = input.value.trim();
-            if(!val) return;
-
-            let box = document.getElementById("chatBox");
-            let words = val.split(' ');
-            let isGibberish = words.some(w => w.length > 12 && !w.includes('http') && !w.includes('.'));
-
-            box.innerHTML += `<div class="chat-msg user">${val}</div>`;
-            input.value = "";
-            box.scrollTop = box.scrollHeight;
-
-            if (isGibberish) {
-                isSpamBlocked = true;
-                let timeLeft = 10;
-                let sendBtn = document.getElementById("sendBtn");
-                sendBtn.style.opacity = "0.5";
-
-                box.innerHTML += `<div class="chat-msg bot" style="color:#ffb6c1;">⚠️ Spam detected! Chat is locked for 10 seconds.</div>`;
-                box.scrollTop = box.scrollHeight;
-
-                spamTimer = setInterval(() => {
-                    timeLeft--;
-                    if (timeLeft <= 0) {
-                        clearInterval(spamTimer);
-                        isSpamBlocked = false;
-                        sendBtn.style.opacity = "1";
-                        box.innerHTML += `<div class="chat-msg bot">You can type again now. Please write normally! 😊</div>`;
-                        box.scrollTop = box.scrollHeight;
-                    }
-                }, 1000);
-                return;
-            }
-
-            setTimeout(() => {
-                let q = val.toLowerCase();
-                let reply = "That's cool! You can ask me how to join, check the server IP, or look at upcoming events.";
-
-                if(q.includes('hi') || q.includes('hello') || q.includes('hey') || q.includes('bok') || q.includes('zdravo') || q.includes('sup')) {
-                    reply = "Hello there! Welcome to Cake SMP. How can I help you today? 🎂";
-                } else if(q.includes('how do i join') || q.includes('how to join') || q.includes('kako ući') || q.includes('join')) {
-                    reply = "To join Cake SMP, open Minecraft, go to Multiplayer, click Add Server, and type: cakesmp.minecraft.co.com (Java) or use IP: 185.207.164.151 Port: 25565 (Bedrock)!";
-                } else if(q.includes('ip') || q.includes('server') || q.includes('port') || q.includes('address')) {
-                    reply = "Java IP: cakesmp.minecraft.co.com | Bedrock IP: 185.207.164.151 (Port: 25565)";
-                } else if(q.includes('discord') || q.includes('community')) {
-                    reply = "You can join our community Discord server using the link in the Status tab!";
-                } else if(q.includes('store') || q.includes('buy') || q.includes('rank') || q.includes('shop')) {
-                    reply = "The store is coming soon! Stay tuned for amazing ranks.";
-                } else if(q.includes('event')) {
-                    reply = "Check out our Event tab to see all upcoming tournaments and boss fights!";
-                }
-
-                box.innerHTML += `<div class="chat-msg bot">${reply}</div>`;
-                box.scrollTop = box.scrollHeight;
-            }, 300);
-        }
-
-        let targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
-        setInterval(() => {
-            let now = new Date().getTime();
-            let diff = targetTime - now;
-            if(diff > 0) {
-                document.getElementById("d").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
-                document.getElementById("h").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                document.getElementById("m").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                document.getElementById("s").innerText = Math.floor((diff % (1000 * 60)) / 1000);
-            }
-        }, 1000);
-    </script>
-</body>
-</html>
+        
