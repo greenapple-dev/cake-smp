@@ -4,12 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cake SMP - Official Website</title>
-    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
-    <!-- Import Minecraft Font -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
-    <!-- Pixel fallback font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -19,10 +16,6 @@
             padding: 0;
             box-sizing: border-box;
             font-family: 'Minecraft', 'VT323', 'Press Start 2P', monospace;
-        }
-
-        h1, .logo, .nav-btn, .cta-btn {
-            letter-spacing: 0.5px;
         }
 
         body, html {
@@ -69,15 +62,15 @@
             z-index: -1;
         }
 
-        /* Navigation Header - Prilagođeno za mobitele da ljepše stane */
+        /* Navigation Header - Savršeno prilagođeno za mobitele da sve stane u red */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 10px 15px;
-            background: rgba(22, 10, 15, 0.95);
-            border-bottom: 4px solid #ff69b4;
-            box-shadow: 0 4px 25px rgba(255, 105, 180, 0.3);
+            padding: 8px 10px;
+            background: rgba(22, 10, 15, 0.98);
+            border-bottom: 3px solid #ff69b4;
+            box-shadow: 0 4px 20px rgba(255, 105, 180, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
@@ -86,35 +79,33 @@
         .logo {
             display: flex;
             align-items: center;
-            gap: 8px;
-            font-size: 14px;
+            gap: 6px;
+            font-size: 11px;
             color: #fff2e6;
             text-shadow: 2px 2px #8b4513;
+            white-space: nowrap;
         }
 
         .logo img {
-            width: 32px;
-            height: 32px;
-            border-radius: 6px;
+            width: 26px;
+            height: 26px;
+            border-radius: 4px;
             border: 2px solid #ff69b4;
             object-fit: cover;
         }
 
         nav {
             display: flex;
-            gap: 4px;
-            flex-wrap: wrap;
-            justify-content: flex-end;
-            max-width: 65%;
+            gap: 3px;
         }
 
         .nav-btn {
             background: #2b151c;
             color: #ffccd5;
-            border: 2px solid #ff69b4;
-            padding: 6px 8px;
+            border: 1.5px solid #ff69b4;
+            padding: 5px 6px;
             cursor: pointer;
-            font-size: 8px;
+            font-size: 7px;
             text-transform: uppercase;
             box-shadow: 0 2px 0 #120609;
             transition: all 0.2s ease;
@@ -124,20 +115,19 @@
             background: #ff69b4 !important;
             color: #140b0f !important;
             border-color: #fff2e6 !important;
-            box-shadow: 0 0 12px #ff1493, 0 2px 0 #c71585 !important;
+            box-shadow: 0 0 10px #ff1493, 0 2px 0 #c71585 !important;
             font-weight: bold;
         }
 
         /* Main Content Layout */
         .main-content {
-            padding: 30px 15px;
-            max-width: 950px;
+            padding: 25px 10px;
+            max-width: 900px;
             margin: 0 auto;
-            min-height: calc(100vh - 80px);
+            min-height: calc(100vh - 70px);
             display: flex;
             justify-content: center;
             align-items: flex-start;
-            position: relative;
         }
 
         .section {
@@ -145,8 +135,8 @@
             width: 100%;
             text-align: center;
             opacity: 0;
-            transform: translateY(15px);
-            transition: opacity 0.4s ease, transform 0.4s ease;
+            transform: translateY(10px);
+            transition: opacity 0.3s ease, transform 0.3s ease;
         }
 
         .section.active-sec {
@@ -156,16 +146,16 @@
         }
 
         h1 {
-            font-size: 22px;
-            margin-bottom: 12px;
+            font-size: 18px;
+            margin-bottom: 10px;
             color: #fff2e6;
             text-shadow: 2px 2px #ff69b4;
         }
 
         p {
-            font-size: 11px;
+            font-size: 10px;
             line-height: 1.5;
-            margin-bottom: 15px;
+            margin-bottom: 12px;
             color: #fce4ec;
             text-shadow: 1px 1px #000;
         }
@@ -173,17 +163,17 @@
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-            gap: 12px;
-            margin-top: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 10px;
+            margin-top: 12px;
         }
 
         .card {
             background: rgba(35, 16, 22, 0.95);
-            border: 3px solid #ff69b4;
-            padding: 15px;
-            border-radius: 8px;
-            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
+            border: 2px solid #ff69b4;
+            padding: 12px;
+            border-radius: 6px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.7);
             text-align: left;
         }
 
@@ -191,16 +181,16 @@
         .ip-box-container {
             display: flex;
             flex-direction: column;
-            gap: 6px;
-            margin-top: 8px;
+            gap: 5px;
+            margin-top: 6px;
         }
 
         .ip-box {
             background: rgba(15, 6, 9, 0.9);
-            border: 2px dashed #ff69b4;
-            padding: 8px 10px;
+            border: 1.5px dashed #ff69b4;
+            padding: 6px 8px;
             cursor: pointer;
-            border-radius: 5px;
+            border-radius: 4px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -208,16 +198,16 @@
 
         .ip-box code {
             color: #00ffcc;
-            font-size: 10px;
+            font-size: 9px;
             word-break: break-all;
         }
 
         .ip-box span {
-            font-size: 9px;
+            font-size: 8px;
             background: #ff69b4;
             color: #140b0f;
-            padding: 2px 5px;
-            border-radius: 3px;
+            padding: 2px 4px;
+            border-radius: 2px;
             font-weight: bold;
         }
 
@@ -225,28 +215,28 @@
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 6px;
-            margin-top: 10px;
+            gap: 5px;
+            margin-top: 8px;
             flex-wrap: wrap;
         }
 
         .time-block {
             background: rgba(22, 10, 15, 0.95);
-            border: 2px solid #ff69b4;
-            padding: 6px 8px;
-            min-width: 48px;
-            border-radius: 5px;
+            border: 1.5px solid #ff69b4;
+            padding: 5px 6px;
+            min-width: 42px;
+            border-radius: 4px;
         }
 
         .time-block span {
             display: block;
-            font-size: 15px;
+            font-size: 13px;
             color: #fff2e6;
             text-shadow: 1px 1px #ff1493;
         }
 
         .time-block label {
-            font-size: 8px;
+            font-size: 7px;
             color: #ffb6c1;
         }
 
@@ -255,17 +245,16 @@
             display: inline-block;
             background: #ff69b4;
             color: #140b0f;
-            padding: 8px 14px;
+            padding: 7px 12px;
             text-decoration: none;
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             border: 2px solid #fff2e6;
             box-shadow: 0 2px 0 #c71585;
-            margin-top: 8px;
+            margin-top: 6px;
             text-align: center;
             cursor: pointer;
-            border-radius: 4px;
-            transition: all 0.2s ease;
+            border-radius: 3px;
         }
 
         .cta-btn:hover {
@@ -284,42 +273,42 @@
         .store-input {
             width: 100%;
             background: #1a0a10;
-            border: 2px solid #ff69b4;
+            border: 1.5px solid #ff69b4;
             color: #fff;
-            padding: 8px;
-            font-size: 11px;
-            border-radius: 5px;
-            margin-bottom: 12px;
+            padding: 6px;
+            font-size: 10px;
+            border-radius: 4px;
+            margin-bottom: 10px;
             outline: none;
         }
 
         /* AI Chat */
         .ai-chat-box {
             background: rgba(22, 10, 15, 0.95);
-            border: 3px solid #ff69b4;
-            border-radius: 8px;
-            max-width: 450px;
+            border: 2px solid #ff69b4;
+            border-radius: 6px;
+            max-width: 400px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            height: 280px;
+            height: 250px;
         }
 
         .ai-messages {
             flex: 1;
-            padding: 8px;
+            padding: 6px;
             overflow-y: auto;
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 6px;
+            gap: 5px;
         }
 
         .msg {
-            padding: 6px 8px;
-            border-radius: 5px;
+            padding: 5px 7px;
+            border-radius: 4px;
             max-width: 85%;
-            font-size: 10px;
+            font-size: 9px;
         }
 
         .msg.bot { background: #3a1a24; border: 1px solid #ff69b4; color: #fce4ec; align-self: flex-start; }
@@ -327,8 +316,8 @@
 
         .ai-input-area {
             display: flex;
-            border-top: 2px solid #3a1a24;
-            padding: 5px;
+            border-top: 1.5px solid #3a1a24;
+            padding: 4px;
             background: #140b0f;
         }
 
@@ -337,8 +326,8 @@
             background: #210e14;
             border: 1px solid #ff69b4;
             color: #fff;
-            padding: 6px;
-            font-size: 10px;
+            padding: 5px;
+            font-size: 9px;
             outline: none;
             border-radius: 3px;
         }
@@ -348,8 +337,8 @@
             color: #140b0f;
             font-weight: bold;
             border: none;
-            padding: 0 10px;
-            margin-left: 4px;
+            padding: 0 8px;
+            margin-left: 3px;
             cursor: pointer;
             border-radius: 3px;
         }
@@ -357,28 +346,27 @@
         /* Toast */
         #toast {
             visibility: hidden;
-            min-width: 160px;
+            min-width: 140px;
             background-color: #00ffcc;
             color: #000;
             font-weight: bold;
             text-align: center;
-            border-radius: 4px;
-            padding: 6px;
+            border-radius: 3px;
+            padding: 5px;
             position: fixed;
             z-index: 2000;
             left: 50%;
-            bottom: 15px;
+            bottom: 10px;
             transform: translateX(-50%);
-            font-size: 11px;
+            font-size: 10px;
         }
-        #toast.show { visibility: visible; animation: fadeInToast 0.3s, fadeOutToast 0.3s 1.8s; }
-        @keyframes fadeInToast { from { bottom: 0; opacity: 0; } to { bottom: 15px; opacity: 1; } }
-        @keyframes fadeOutToast { from { bottom: 15px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+        #toast.show { visibility: visible; animation: fadeInToast 0.2s, fadeOutToast 0.2s 1.5s; }
+        @keyframes fadeInToast { from { bottom: 0; opacity: 0; } to { bottom: 10px; opacity: 1; } }
+        @keyframes fadeOutToast { from { bottom: 10px; opacity: 1; } to { bottom: 0; opacity: 0; } }
     </style>
 </head>
 <body>
 
-    <!-- Background System -->
     <div class="bg-container">
         <div class="bg-slide active" style="background-image: url('Cake.jpeg');"></div>
         <video class="bg-video" autoplay muted loop>
@@ -387,7 +375,6 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- Navigation Header -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -403,20 +390,18 @@
         </nav>
     </header>
 
-    <!-- Main Wrapper -->
     <div class="main-content">
 
-        <!-- HOME -->
         <div id="home" class="section active-sec">
-            <h1>Welcome to Cake smp! 🎂✨</h1>
-            <p>Looking for a cozy, fun, and active Minecraft SMP? You’ve found the right place! Whether you're a master builder, an adventurer, or just looking to make new friends and hang out, Cake smp has a spot for you.<br><br><strong>Why join us?</strong><br>⛏ Vanilla SMP Experience – Classic Minecraft gameplay with great features!</p>
+            <h1>Welcome to Cake SMP! 🎂✨</h1>
+            <p>The tastiest Minecraft SMP server! Join our awesome community, survive, build, and have fun.</p>
 
-            <div style="margin-top: 10px;">
+            <div style="margin-top: 8px;">
                 <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">Server Info & IP</button>
             </div>
 
-            <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
-                <h3 style="color: #ff69b4; margin-bottom: 6px; font-size: 12px;">Season 4 starts in:</h3>
+            <div style="margin-top: 20px; border-top: 1.5px dashed rgba(255,105,180,0.4); padding-top: 10px;">
+                <h3 style="color: #ff69b4; margin-bottom: 5px; font-size: 11px;">Season 4 starts in:</h3>
                 <div class="countdown">
                     <div class="time-block"><span id="days">00</span><label>Days</label></div>
                     <div class="time-block"><span id="hours">00</span><label>Hours</label></div>
@@ -426,31 +411,29 @@
             </div>
         </div>
 
-        <!-- EVENT -->
         <div id="event" class="section">
-            <h1>Upcoming Events & More Info</h1>
+            <h1>Upcoming Events</h1>
             <p>Get ready for epic battles and special community game nights!</p>
 
             <div class="card-grid">
                 <div class="card">
-                    <h3 style="color: #00ffcc; margin-bottom: 4px; font-size: 12px;">Next Wednesday: Cart PvP</h3>
-                    <p style="font-size: 10px; margin-bottom: 4px;">Fast-paced minecart combat tournament!</p>
+                    <h3 style="color: #00ffcc; margin-bottom: 3px; font-size: 11px;">Next Wednesday: Cart PvP</h3>
+                    <p style="font-size: 9px;">Fast-paced minecart combat tournament!</p>
                 </div>
                 <div class="card">
-                    <h3 style="color: #ff69b4; margin-bottom: 4px; font-size: 12px;">Next Friday: Cake___God</h3>
-                    <p style="font-size: 10px; margin-bottom: 4px;">The Thunder will start...</p>
+                    <h3 style="color: #ff69b4; margin-bottom: 3px; font-size: 11px;">Next Friday: Cake___God</h3>
+                    <p style="font-size: 9px;">The Thunder will start...</p>
                 </div>
             </div>
         </div>
 
-        <!-- STATUS -->
         <div id="status" class="section">
             <h1>Server Status & IP</h1>
             <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</strong></p>
 
             <div class="card-grid">
                 <div class="card">
-                    <h3 style="color: #ff69b4; font-size: 12px;">Java Edition</h3>
+                    <h3 style="color: #ff69b4; font-size: 11px;">Java Edition</h3>
                     <div class="ip-box-container">
                         <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
                             <code>cakesmp.minecraft.co.com</code>
@@ -460,7 +443,7 @@
                 </div>
 
                 <div class="card">
-                    <h3 style="color: #ff69b4; font-size: 12px;">Bedrock Edition</h3>
+                    <h3 style="color: #ff69b4; font-size: 11px;">Bedrock Edition</h3>
                     <div class="ip-box-container">
                         <div class="ip-box" onclick="copyText('185.207.164.151')">
                             <code>IP: 185.207.164.151</code>
@@ -474,23 +457,21 @@
                 </div>
 
                 <div class="card">
-                    <h3 style="color: #ff69b4; font-size: 12px;">Discord Community</h3>
-                    <p style="font-size: 10px; margin: 4px 0;">Join our community server for chat and support!</p>
-                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block; margin-top:4px;">Open Discord</a>
+                    <h3 style="color: #ff69b4; font-size: 11px;">Discord</h3>
+                    <p style="font-size: 9px; margin: 3px 0;">Join our community server!</p>
+                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block; margin-top:3px; padding:5px;">Open Discord</a>
                 </div>
             </div>
         </div>
 
-        <!-- NEWS -->
         <div id="news" class="section">
             <h1>Latest News</h1>
-            <div class="card" style="max-width: 450px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 4px; font-size: 12px;">Season 4 Announcement</h3>
-                <p style="font-size: 10px;">Season 4 starts soon with new features and better performance!</p>
+            <div class="card" style="max-width: 400px; margin: 0 auto;">
+                <h3 style="color: #ff69b4; margin-bottom: 3px; font-size: 11px;">Season 4 Announcement</h3>
+                <p style="font-size: 9px;">Season 4 starts soon with new features and better performance!</p>
             </div>
         </div>
 
-        <!-- AI ASSISTANT -->
         <div id="ai-assistant" class="section">
             <h1>AI Assistant</h1>
             <div class="ai-chat-box">
@@ -504,26 +485,23 @@
             </div>
         </div>
 
-        <!-- STORE -->
         <div id="store" class="section">
             <h1>Cake SMP Store</h1>
-            <p>Support the server development and unlock cool perks!</p>
+            <p>Support the server and unlock perks!</p>
 
-            <div class="card" style="max-width: 450px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 6px; font-size: 12px;">Enter Minecraft Username</h3>
-                <input type="text" id="mc-username" class="store-input" placeholder="Your Minecraft Username...">
+            <div class="card" style="max-width: 400px; margin: 0 auto;">
+                <h3 style="color: #ff69b4; margin-bottom: 5px; font-size: 11px;">Minecraft Username</h3>
+                <input type="text" id="mc-username" class="store-input" placeholder="Your username...">
 
-                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 8px; border-radius: 4px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #00ffcc; margin-bottom: 3px; font-size: 11px;">Support</h4>
-                        <p style="font-size: 9px; margin-bottom: 6px;">Basic supporter role.</p>
-                        <button class="cta-btn" style="width: 100%; margin:0; padding:4px;" onclick="buyItem('Support')">Buy</button>
+                <div style="display: flex; gap: 6px;">
+                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 6px; border-radius: 4px; border: 1px solid #ff69b4;">
+                        <h4 style="color: #00ffcc; margin-bottom: 2px; font-size: 10px;">Support</h4>
+                        <button class="cta-btn" style="width: 100%; margin:0; padding:3px; font-size:9px;" onclick="buyItem('Support')">Buy</button>
                     </div>
 
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 8px; border-radius: 4px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #ff69b4; margin-bottom: 3px; font-size: 11px;">Premium</h4>
-                        <p style="font-size: 9px; margin-bottom: 6px;">All perks & kits!</p>
-                        <button class="cta-btn" style="width: 100%; margin:0; padding:4px;" onclick="buyItem('Premium')">Buy</button>
+                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 6px; border-radius: 4px; border: 1px solid #ff69b4;">
+                        <h4 style="color: #ff69b4; margin-bottom: 2px; font-size: 10px;">Premium</h4>
+                        <button class="cta-btn" style="width: 100%; margin:0; padding:3px; font-size:9px;" onclick="buyItem('Premium')">Buy</button>
                     </div>
                 </div>
             </div>
@@ -534,7 +512,6 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // --- TAB SWITCHING ---
         function switchTab(targetId, btnElement) {
             document.querySelectorAll('.main-content .section').forEach(sec => sec.classList.remove('active-sec'));
             let targetSec = document.getElementById(targetId);
@@ -553,16 +530,14 @@
             window.scrollTo({ top: 0, behavior: 'smooth' });
         }
 
-        // --- CLIPBOARD ---
         function copyText(txt) {
             navigator.clipboard.writeText(txt).then(() => {
                 let t = document.getElementById("toast");
                 t.className = "show";
-                setTimeout(() => { t.className = ""; }, 1800);
+                setTimeout(() => { t.className = ""; }, 1500);
             });
         }
 
-        // --- STORE ---
         function buyItem(rankName) {
             let username = document.getElementById("mc-username").value.trim();
             if(!username) {
@@ -573,10 +548,38 @@
             alert("Redirecting to checkout for " + username + " (" + rankName + ").");
         }
 
-        // --- BACKGROUND SLIDESHOW ---
+        // Background Slideshow
         let slides = document.querySelectorAll('.bg-slide');
         let video = document.querySelector('.bg-video');
         let curSlide = 0;
         setInterval(() => {
             if(slides.length === 0) return;
-            slides
+            slides.forEach(s => s.classList.remove('active'));
+            if(video) video.classList.remove('active');
+            curSlide++;
+            if(curSlide < slides.length) {
+                slides[curSlide].classList.add('active');
+            } else {
+                if(video) video.classList.add('active');
+                curSlide = -1;
+            }
+        }, 6000);
+
+        // Persistent Countdown
+        let savedTarget = localStorage.getItem("cake_smp_target");
+        let targetTime;
+        if(savedTarget) {
+            targetTime = parseInt(savedTarget);
+        } else {
+            targetTime = new Date().getTime() + (14 * 24 * 60 * 60 * 1000);
+            localStorage.setItem("cake_smp_target", targetTime);
+        }
+
+        setInterval(() => {
+            let now = new Date().getTime();
+            let diff = targetTime - now;
+            if(diff > 0) {
+                let d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                let h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                let m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                let s = Math.f
