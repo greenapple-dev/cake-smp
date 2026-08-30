@@ -4,9 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cake SMP - Official Website</title>
+    <!-- Favicon -->
     <link rel="icon" type="image/jpeg" href="Cake.jpeg?v=2026">
+    <!-- Import Minecraft Font -->
     <link rel="preconnect" href="https://fonts.cdnfonts.com">
     <link href="https://fonts.cdnfonts.com/css/minecraft-4" rel="stylesheet">
+    <!-- Pixel fallback font -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
@@ -66,103 +69,77 @@
             z-index: -1;
         }
 
-        /* Navigation Header */
+        /* Navigation Header - Prilagođeno za mobitele da ljepše stane */
         header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 14px 24px;
+            padding: 10px 15px;
             background: rgba(22, 10, 15, 0.95);
             border-bottom: 4px solid #ff69b4;
             box-shadow: 0 4px 25px rgba(255, 105, 180, 0.3);
             position: sticky;
             top: 0;
             z-index: 1000;
-            flex-wrap: wrap;
-            gap: 10px;
-            animation: headerDropIn 0.6s ease;
-        }
-
-        @keyframes headerDropIn {
-            from { transform: translateY(-30px); opacity: 0; }
-            to { transform: translateY(0); opacity: 1; }
         }
 
         .logo {
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-size: 18px;
+            gap: 8px;
+            font-size: 14px;
             color: #fff2e6;
-            text-shadow: 3px 3px #8b4513;
-            animation: pulseLogo 3s infinite alternate;
-        }
-
-        @keyframes pulseLogo {
-            0% { transform: scale(1); }
-            100% { transform: scale(1.03); }
+            text-shadow: 2px 2px #8b4513;
         }
 
         .logo img {
-            width: 40px;
-            height: 40px;
-            border-radius: 8px;
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
             border: 2px solid #ff69b4;
             object-fit: cover;
         }
 
         nav {
             display: flex;
-            gap: 6px;
+            gap: 4px;
             flex-wrap: wrap;
+            justify-content: flex-end;
+            max-width: 65%;
         }
 
         .nav-btn {
             background: #2b151c;
             color: #ffccd5;
             border: 2px solid #ff69b4;
-            padding: 8px 14px;
+            padding: 6px 8px;
             cursor: pointer;
-            font-size: 10px;
+            font-size: 8px;
             text-transform: uppercase;
-            box-shadow: 0 3px 0 #120609;
-            transition: all 0.3s ease;
+            box-shadow: 0 2px 0 #120609;
+            transition: all 0.2s ease;
         }
 
-        .nav-btn:hover {
-            background: #ff69b4;
-            color: #140b0f;
-            box-shadow: 0 0 15px #ff69b4;
-            transform: translateY(-2px);
-        }
-
-        .nav-btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 1px 0 #120609;
-        }
-
-        .nav-btn.active-btn {
+        .nav-btn:hover, .nav-btn.active-btn {
             background: #ff69b4 !important;
             color: #140b0f !important;
             border-color: #fff2e6 !important;
-            box-shadow: 0 0 20px #ff1493, 0 3px 0 #c71585 !important;
-            transform: translateY(-2px);
+            box-shadow: 0 0 12px #ff1493, 0 2px 0 #c71585 !important;
             font-weight: bold;
         }
 
         /* Main Content Layout */
         .main-content {
-            padding: 40px 15px;
+            padding: 30px 15px;
             max-width: 950px;
             margin: 0 auto;
-            min-height: calc(100vh - 90px);
+            min-height: calc(100vh - 80px);
             display: flex;
             justify-content: center;
             align-items: flex-start;
             position: relative;
         }
 
-        /* Sekcije s animacijom prijelaza */
         .section {
             display: none;
             width: 100%;
@@ -179,22 +156,16 @@
         }
 
         h1 {
-            font-size: 26px;
-            margin-bottom: 15px;
+            font-size: 22px;
+            margin-bottom: 12px;
             color: #fff2e6;
-            text-shadow: 3px 3px #ff69b4;
-            animation: textGlow 2s infinite alternate;
-        }
-
-        @keyframes textGlow {
-            0% { text-shadow: 3px 3px #ff69b4; }
-            100% { text-shadow: 3px 3px #ff1493, 0 0 15px rgba(255,105,180,0.6); }
+            text-shadow: 2px 2px #ff69b4;
         }
 
         p {
-            font-size: 13px;
-            line-height: 1.6;
-            margin-bottom: 20px;
+            font-size: 11px;
+            line-height: 1.5;
+            margin-bottom: 15px;
             color: #fce4ec;
             text-shadow: 1px 1px #000;
         }
@@ -202,75 +173,50 @@
         /* Cards */
         .card-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-            gap: 15px;
+            grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+            gap: 12px;
             margin-top: 15px;
         }
 
         .card {
             background: rgba(35, 16, 22, 0.95);
             border: 3px solid #ff69b4;
-            padding: 20px;
-            border-radius: 10px;
-            box-shadow: 0 8px 25px rgba(0,0,0,0.7);
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.7);
             text-align: left;
-            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            animation: cardIn 0.5s ease forwards;
-        }
-
-        .section.active-sec .card:nth-child(1) { animation-delay: 0.08s; }
-        .section.active-sec .card:nth-child(2) { animation-delay: 0.18s; }
-        .section.active-sec .card:nth-child(3) { animation-delay: 0.28s; }
-
-        @keyframes cardIn {
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 30px rgba(255,105,180,0.35);
-            border-color: #00ffcc;
         }
 
         /* IP Box */
         .ip-box-container {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            margin-top: 10px;
+            gap: 6px;
+            margin-top: 8px;
         }
 
         .ip-box {
             background: rgba(15, 6, 9, 0.9);
             border: 2px dashed #ff69b4;
-            padding: 10px 14px;
+            padding: 8px 10px;
             cursor: pointer;
-            border-radius: 6px;
+            border-radius: 5px;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.2s;
-        }
-
-        .ip-box:hover {
-            background: rgba(45, 18, 28, 0.9);
-            border-color: #00ffcc;
-            box-shadow: 0 0 10px rgba(0,255,204,0.4);
         }
 
         .ip-box code {
             color: #00ffcc;
-            font-size: 12px;
+            font-size: 10px;
             word-break: break-all;
         }
 
         .ip-box span {
-            font-size: 10px;
+            font-size: 9px;
             background: #ff69b4;
             color: #140b0f;
-            padding: 3px 6px;
+            padding: 2px 5px;
             border-radius: 3px;
             font-weight: bold;
         }
@@ -279,7 +225,7 @@
         .countdown {
             display: flex;
             justify-content: center;
-            gap: 8px;
+            gap: 6px;
             margin-top: 10px;
             flex-wrap: wrap;
         }
@@ -287,26 +233,20 @@
         .time-block {
             background: rgba(22, 10, 15, 0.95);
             border: 2px solid #ff69b4;
-            padding: 8px 10px;
-            min-width: 55px;
-            border-radius: 6px;
-            animation: borderPulse 2s infinite alternate;
-        }
-
-        @keyframes borderPulse {
-            0% { border-color: #ff69b4; }
-            100% { border-color: #ff1493; box-shadow: 0 0 10px rgba(255,105,180,0.5); }
+            padding: 6px 8px;
+            min-width: 48px;
+            border-radius: 5px;
         }
 
         .time-block span {
             display: block;
-            font-size: 18px;
+            font-size: 15px;
             color: #fff2e6;
-            text-shadow: 2px 2px #ff1493;
+            text-shadow: 1px 1px #ff1493;
         }
 
         .time-block label {
-            font-size: 9px;
+            font-size: 8px;
             color: #ffb6c1;
         }
 
@@ -315,13 +255,13 @@
             display: inline-block;
             background: #ff69b4;
             color: #140b0f;
-            padding: 10px 18px;
+            padding: 8px 14px;
             text-decoration: none;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             border: 2px solid #fff2e6;
-            box-shadow: 0 3px 0 #c71585;
-            margin-top: 10px;
+            box-shadow: 0 2px 0 #c71585;
+            margin-top: 8px;
             text-align: center;
             cursor: pointer;
             border-radius: 4px;
@@ -331,94 +271,64 @@
         .cta-btn:hover {
             background: #ff1493;
             color: #fff;
-            transform: translateY(-3px);
-            box-shadow: 0 0 20px #ff69b4, 0 3px 0 #c71585;
         }
 
         .discord-btn {
             background: #5865F2;
             color: #fff;
             border-color: #7986cb;
-            box-shadow: 0 3px 0 #283593;
-        }
-        .discord-btn:hover {
-            background: #4752c4;
-            box-shadow: 0 0 20px #5865F2, 0 3px 0 #283593;
+            box-shadow: 0 2px 0 #283593;
         }
 
-        /* Store Form & Items */
+        /* Store Input */
         .store-input {
             width: 100%;
             background: #1a0a10;
             border: 2px solid #ff69b4;
             color: #fff;
-            padding: 10px;
-            font-size: 12px;
-            border-radius: 6px;
-            margin-bottom: 15px;
+            padding: 8px;
+            font-size: 11px;
+            border-radius: 5px;
+            margin-bottom: 12px;
             outline: none;
-            transition: border-color 0.3s, box-shadow 0.3s;
-        }
-
-        .store-input:focus {
-            border-color: #00ffcc;
-            box-shadow: 0 0 10px rgba(0,255,204,0.4);
         }
 
         /* AI Chat */
         .ai-chat-box {
             background: rgba(22, 10, 15, 0.95);
             border: 3px solid #ff69b4;
-            border-radius: 10px;
-            max-width: 480px;
+            border-radius: 8px;
+            max-width: 450px;
             margin: 0 auto;
             display: flex;
             flex-direction: column;
-            height: 320px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.8);
+            height: 280px;
         }
 
         .ai-messages {
             flex: 1;
-            padding: 10px;
+            padding: 8px;
             overflow-y: auto;
             text-align: left;
             display: flex;
             flex-direction: column;
-            gap: 8px;
+            gap: 6px;
         }
 
         .msg {
-            padding: 8px 10px;
-            border-radius: 6px;
+            padding: 6px 8px;
+            border-radius: 5px;
             max-width: 85%;
-            font-size: 11px;
-            animation: fadeInMsg 0.3s ease;
+            font-size: 10px;
         }
 
-        @keyframes fadeInMsg {
-            from { opacity: 0; transform: translateY(5px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        .msg.bot {
-            background: #3a1a24;
-            border: 1px solid #ff69b4;
-            color: #fce4ec;
-            align-self: flex-start;
-        }
-
-        .msg.user {
-            background: #14382d;
-            border: 1px solid #00ffcc;
-            color: #e0f2f1;
-            align-self: flex-end;
-        }
+        .msg.bot { background: #3a1a24; border: 1px solid #ff69b4; color: #fce4ec; align-self: flex-start; }
+        .msg.user { background: #14382d; border: 1px solid #00ffcc; color: #e0f2f1; align-self: flex-end; }
 
         .ai-input-area {
             display: flex;
             border-top: 2px solid #3a1a24;
-            padding: 6px;
+            padding: 5px;
             background: #140b0f;
         }
 
@@ -427,10 +337,10 @@
             background: #210e14;
             border: 1px solid #ff69b4;
             color: #fff;
-            padding: 8px;
-            font-size: 11px;
+            padding: 6px;
+            font-size: 10px;
             outline: none;
-            border-radius: 4px;
+            border-radius: 3px;
         }
 
         .ai-input-area button {
@@ -438,48 +348,37 @@
             color: #140b0f;
             font-weight: bold;
             border: none;
-            padding: 0 12px;
-            margin-left: 5px;
+            padding: 0 10px;
+            margin-left: 4px;
             cursor: pointer;
-            border-radius: 4px;
-            transition: background 0.2s;
-        }
-
-        .ai-input-area button:hover {
-            background: #ff1493;
-            color: #fff;
+            border-radius: 3px;
         }
 
         /* Toast */
         #toast {
             visibility: hidden;
-            min-width: 200px;
+            min-width: 160px;
             background-color: #00ffcc;
             color: #000;
             font-weight: bold;
             text-align: center;
             border-radius: 4px;
-            padding: 8px;
+            padding: 6px;
             position: fixed;
             z-index: 2000;
             left: 50%;
-            bottom: 20px;
+            bottom: 15px;
             transform: translateX(-50%);
-            font-size: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.6);
+            font-size: 11px;
         }
-
-        #toast.show {
-            visibility: visible;
-            animation: fadeInToast 0.3s, fadeOutToast 0.3s 2s;
-        }
-
-        @keyframes fadeInToast { from { bottom: 0; opacity: 0; } to { bottom: 20px; opacity: 1; } }
-        @keyframes fadeOutToast { from { bottom: 20px; opacity: 1; } to { bottom: 0; opacity: 0; } }
+        #toast.show { visibility: visible; animation: fadeInToast 0.3s, fadeOutToast 0.3s 1.8s; }
+        @keyframes fadeInToast { from { bottom: 0; opacity: 0; } to { bottom: 15px; opacity: 1; } }
+        @keyframes fadeOutToast { from { bottom: 15px; opacity: 1; } to { bottom: 0; opacity: 0; } }
     </style>
 </head>
 <body>
 
+    <!-- Background System -->
     <div class="bg-container">
         <div class="bg-slide active" style="background-image: url('Cake.jpeg');"></div>
         <video class="bg-video" autoplay muted loop>
@@ -488,6 +387,7 @@
     </div>
     <div class="overlay"></div>
 
+    <!-- Navigation Header -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -503,20 +403,22 @@
         </nav>
     </header>
 
+    <!-- Main Wrapper -->
     <div class="main-content">
 
+        <!-- HOME -->
         <div id="home" class="section active-sec">
             <h1>Welcome to Cake smp! 🎂✨</h1>
             <p>Looking for a cozy, fun, and active Minecraft SMP? You’ve found the right place! Whether you're a master builder, an adventurer, or just looking to make new friends and hang out, Cake smp has a spot for you.<br><br><strong>Why join us?</strong><br>⛏ Vanilla SMP Experience – Classic Minecraft gameplay with great features!</p>
 
-            <div style="margin-top: 15px; display: flex; justify-content: center; gap: 10px; flex-wrap: wrap;">
+            <div style="margin-top: 10px;">
                 <button class="cta-btn" onclick="switchTab('status', document.querySelectorAll('nav button')[2])">Server Info & IP</button>
             </div>
 
-            <div style="margin-top: 30px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 15px;">
-                <h3 style="color: #ff69b4; margin-bottom: 8px; font-size: 14px;">Season 4 starts in:</h3>
+            <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
+                <h3 style="color: #ff69b4; margin-bottom: 6px; font-size: 12px;">Season 4 starts in:</h3>
                 <div class="countdown">
-                    <div class="time-block"><span id="days">14</span><label>Days</label></div>
+                    <div class="time-block"><span id="days">00</span><label>Days</label></div>
                     <div class="time-block"><span id="hours">00</span><label>Hours</label></div>
                     <div class="time-block"><span id="minutes">00</span><label>Mins</label></div>
                     <div class="time-block"><span id="seconds">00</span><label>Secs</label></div>
@@ -524,67 +426,71 @@
             </div>
         </div>
 
+        <!-- EVENT -->
         <div id="event" class="section">
             <h1>Upcoming Events & More Info</h1>
             <p>Get ready for epic battles and special community game nights!</p>
 
             <div class="card-grid">
                 <div class="card">
-                    <h3 style="color: #00ffcc; margin-bottom: 5px;">Next Wednesday: Cart PvP</h3>
-                    <p style="font-size: 11px; margin-bottom: 8px;">Fast-paced minecart combat tournament!</p>
+                    <h3 style="color: #00ffcc; margin-bottom: 4px; font-size: 12px;">Next Wednesday: Cart PvP</h3>
+                    <p style="font-size: 10px; margin-bottom: 4px;">Fast-paced minecart combat tournament!</p>
                 </div>
                 <div class="card">
-                    <h3 style="color: #ff69b4; margin-bottom: 5px;">Next Friday: Cake___God</h3>
-                    <p style="font-size: 11px; margin-bottom: 8px;">The Thunder will start...</p>
+                    <h3 style="color: #ff69b4; margin-bottom: 4px; font-size: 12px;">Next Friday: Cake___God</h3>
+                    <p style="font-size: 10px; margin-bottom: 4px;">The Thunder will start...</p>
                 </div>
             </div>
         </div>
 
+        <!-- STATUS -->
         <div id="status" class="section">
             <h1>Server Status & IP</h1>
             <p>Server status: <strong style="color: #00ffcc;">● ONLINE</strong> | Active Players: <strong id="player-count" style="color: #ff69b4;">14 / 50</strong></p>
 
             <div class="card-grid">
                 <div class="card">
-                    <h3 style="color: #ff69b4;">Java Edition</h3>
+                    <h3 style="color: #ff69b4; font-size: 12px;">Java Edition</h3>
                     <div class="ip-box-container">
                         <div class="ip-box" onclick="copyText('cakesmp.minecraft.co.com')">
                             <code>cakesmp.minecraft.co.com</code>
-                            <span>Copy IP</span>
+                            <span>Copy</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 style="color: #ff69b4;">Bedrock Edition</h3>
+                    <h3 style="color: #ff69b4; font-size: 12px;">Bedrock Edition</h3>
                     <div class="ip-box-container">
                         <div class="ip-box" onclick="copyText('185.207.164.151')">
                             <code>IP: 185.207.164.151</code>
-                            <span>Copy IP</span>
+                            <span>Copy</span>
                         </div>
                         <div class="ip-box" onclick="copyText('25565')">
                             <code>PORT: 25565</code>
-                            <span>Copy Port</span>
+                            <span>Copy</span>
                         </div>
                     </div>
                 </div>
 
                 <div class="card">
-                    <h3 style="color: #ff69b4;">Discord Community</h3>
-                    <p style="font-size: 11px; margin: 8px 0;">Join our community server for chat and support!</p>
-                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block;">Open Discord</a>
+                    <h3 style="color: #ff69b4; font-size: 12px;">Discord Community</h3>
+                    <p style="font-size: 10px; margin: 4px 0;">Join our community server for chat and support!</p>
+                    <a href="https://discord.gg/uZbNkQv9c" target="_blank" class="cta-btn discord-btn" style="width: 100%; display: block; margin-top:4px;">Open Discord</a>
                 </div>
             </div>
         </div>
 
+        <!-- NEWS -->
         <div id="news" class="section">
             <h1>Latest News</h1>
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 5px;">Season 4 Announcement</h3>
-                <p style="font-size: 12px;">Season 4 starts in 2-3 weeks with new features and better performance!</p>
+            <div class="card" style="max-width: 450px; margin: 0 auto;">
+                <h3 style="color: #ff69b4; margin-bottom: 4px; font-size: 12px;">Season 4 Announcement</h3>
+                <p style="font-size: 10px;">Season 4 starts soon with new features and better performance!</p>
             </div>
         </div>
 
+        <!-- AI ASSISTANT -->
         <div id="ai-assistant" class="section">
             <h1>AI Assistant</h1>
             <div class="ai-chat-box">
@@ -598,15 +504,79 @@
             </div>
         </div>
 
+        <!-- STORE -->
         <div id="store" class="section">
             <h1>Cake SMP Store</h1>
             <p>Support the server development and unlock cool perks!</p>
 
-            <div class="card" style="max-width: 500px; margin: 0 auto;">
-                <h3 style="color: #ff69b4; margin-bottom: 10px;">Enter Minecraft Username</h3>
+            <div class="card" style="max-width: 450px; margin: 0 auto;">
+                <h3 style="color: #ff69b4; margin-bottom: 6px; font-size: 12px;">Enter Minecraft Username</h3>
                 <input type="text" id="mc-username" class="store-input" placeholder="Your Minecraft Username...">
 
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 12px; border-radius: 6px; border: 1px solid #ff69b4;">
-                        <h4 style="color: #00ffcc; margin-bottom: 5px;">Support Rank</h4>
-     
+                <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 8px; border-radius: 4px; border: 1px solid #ff69b4;">
+                        <h4 style="color: #00ffcc; margin-bottom: 3px; font-size: 11px;">Support</h4>
+                        <p style="font-size: 9px; margin-bottom: 6px;">Basic supporter role.</p>
+                        <button class="cta-btn" style="width: 100%; margin:0; padding:4px;" onclick="buyItem('Support')">Buy</button>
+                    </div>
+
+                    <div style="flex: 1; background: rgba(20,8,12,0.8); padding: 8px; border-radius: 4px; border: 1px solid #ff69b4;">
+                        <h4 style="color: #ff69b4; margin-bottom: 3px; font-size: 11px;">Premium</h4>
+                        <p style="font-size: 9px; margin-bottom: 6px;">All perks & kits!</p>
+                        <button class="cta-btn" style="width: 100%; margin:0; padding:4px;" onclick="buyItem('Premium')">Buy</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    <div id="toast">Copied to clipboard!</div>
+
+    <script>
+        // --- TAB SWITCHING ---
+        function switchTab(targetId, btnElement) {
+            document.querySelectorAll('.main-content .section').forEach(sec => sec.classList.remove('active-sec'));
+            let targetSec = document.getElementById(targetId);
+            if(targetSec) targetSec.classList.add('active-sec');
+
+            let allBtns = document.querySelectorAll('nav .nav-btn');
+            allBtns.forEach(b => b.classList.remove('active-btn'));
+            
+            if(btnElement) {
+                btnElement.classList.add('active-btn');
+            } else {
+                allBtns.forEach(b => {
+                    if(b.getAttribute('onclick').includes(targetId)) b.classList.add('active-btn');
+                });
+            }
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // --- CLIPBOARD ---
+        function copyText(txt) {
+            navigator.clipboard.writeText(txt).then(() => {
+                let t = document.getElementById("toast");
+                t.className = "show";
+                setTimeout(() => { t.className = ""; }, 1800);
+            });
+        }
+
+        // --- STORE ---
+        function buyItem(rankName) {
+            let username = document.getElementById("mc-username").value.trim();
+            if(!username) {
+                alert("Please enter your Minecraft username first!");
+                document.getElementById("mc-username").focus();
+                return;
+            }
+            alert("Redirecting to checkout for " + username + " (" + rankName + ").");
+        }
+
+        // --- BACKGROUND SLIDESHOW ---
+        let slides = document.querySelectorAll('.bg-slide');
+        let video = document.querySelector('.bg-video');
+        let curSlide = 0;
+        setInterval(() => {
+            if(slides.length === 0) return;
+            slides
