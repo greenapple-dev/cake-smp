@@ -331,7 +331,7 @@
             opacity: 1;
         }
 
-        /* Efekt vatre (titranje i čestice/svjetlo) */
+        /* Efekt vatre */
         .fire-glow {
             position: absolute;
             width: 100%;
@@ -407,7 +407,6 @@
     </div>
     <div class="overlay"></div>
 
-    <!-- CINEMATIC SCREEN ZA CAKE GOD EVENT -->
     <div id="cinematic-overlay">
         <div class="fire-glow"></div>
         <div class="boss-text-container">
@@ -422,7 +421,6 @@
         </div>
     </div>
 
-    <!-- Navigacija -->
     <header>
         <div class="logo">
             <img src="Cake.jpeg" alt="Logo">
@@ -440,12 +438,11 @@
 
     <div class="main-content">
 
-        <!-- HOME -->
         <div id="home" class="page active-page">
             <h1>WELCOME TO CAKE SMP! 🎂✨</h1>
             <p>LOOKING FOR A COZY, FUN, AND ACTIVE MINECRAFT SMP? YOU'VE FOUND THE RIGHT PLACE! WHETHER YOU'RE A MASTER BUILDER OR AN ADVENTURER, CAKE SMP HAS A SPOT FOR YOU.</p>
             
-            <button class="cta-btn" onclick="changePage('status', document.querySelectorAll('.nav-btn')[2])">SERVER INFO & IP</button>
+            <button class="cta-btn" onclick="changePage('status', document.querySelector('nav button:nth-child(3)'))">SERVER INFO & IP</button>
 
             <div style="margin-top: 25px; border-top: 2px dashed rgba(255,105,180,0.4); padding-top: 12px;">
                 <h3 style="color: #ff69b4; font-size: 11px; margin-bottom: 8px;">SEASON 4 STARTS IN:</h3>
@@ -458,7 +455,6 @@
             </div>
         </div>
 
-        <!-- EVENT -->
         <div id="event" class="page">
             <h1>UPCOMING EVENTS 🎉</h1>
             <div class="card">
@@ -466,14 +462,12 @@
                 <p style="font-size: 10px; margin-top: 5px;">Fast-paced minecart combat tournament with special rewards!</p>
             </div>
             
-            <!-- EPIC CRNI CAKE GOD FRAME (TRIGGER) -->
             <div class="card cake-god-secret" onclick="triggerCakeGodEvent()">
                 <h3>???</h3>
                 <p>Click for info</p>
             </div>
         </div>
 
-        <!-- STATUS -->
         <div id="status" class="page">
             <h1>SERVER STATUS & IP</h1>
             <p>Status: <strong style="color: #ffb6c1;">● ONLINE</strong></p>
@@ -505,7 +499,6 @@
             </div>
         </div>
 
-        <!-- NEWS -->
         <div id="news" class="page">
             <h1>LATEST NEWS 📰</h1>
             <div class="card">
@@ -514,7 +507,6 @@
             </div>
         </div>
 
-        <!-- AI -->
         <div id="ai" class="page">
             <h1>CAKE AI ASSISTANT 🤖</h1>
             <div class="card">
@@ -528,7 +520,6 @@
             </div>
         </div>
 
-        <!-- STORE -->
         <div id="store" class="page">
             <h1>CAKE SMP STORE 🛒</h1>
             <div class="card" style="text-align: center; padding: 30px;">
@@ -542,12 +533,11 @@
     <div id="toast">Copied to clipboard!</div>
 
     <script>
-        // Web Audio API sintetizator za strašan zvučni efekat (grmljavina / sirena šef borbe)
+        // Web Audio API sintetizator za strašan zvučni efekat
         function playScarySound() {
             try {
                 const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
                 
-                // Duboki bas udarac
                 const osc1 = audioCtx.createOscillator();
                 const gain1 = audioCtx.createGain();
                 osc1.type = 'sawtooth';
@@ -563,7 +553,6 @@
                 osc1.start();
                 osc1.stop(audioCtx.currentTime + 1.8);
 
-                // Zlokobni visoki ton (strašan efekt)
                 const osc2 = audioCtx.createOscillator();
                 const gain2 = audioCtx.createGain();
                 osc2.type = 'sine';
@@ -579,17 +568,16 @@
                 osc2.start(audioCtx.currentTime + 0.2);
                 osc2.stop(audioCtx.currentTime + 1.6);
             } catch (e) {
-                console.log("Audio nije podržan ili blokiran od strane preglednika.");
+                console.log("Audio nije podržan ili blokiran.");
             }
         }
 
-        // Pokretanje Cake God strašnog eventa preko cijelog ekrana
+        // Pokretanje Cake God strašnog eventa
         function triggerCakeGodEvent() {
             const overlay = document.getElementById('cinematic-overlay');
             playScarySound();
             overlay.classList.add('active');
 
-            // Vraća sve na normalu nakon 5 sekundi
             setTimeout(() => {
                 overlay.style.opacity = '0';
                 setTimeout(() => {
@@ -599,6 +587,7 @@
             }, 5000);
         }
 
+        // Funkcija za prebacivanje stranica
         function changePage(pageId, btnElement) {
             let pages = document.querySelectorAll('.page');
             pages.forEach(p => p.classList.remove('active-page'));
@@ -612,4 +601,17 @@
             buttons.forEach(b => b.classList.remove('active'));
 
             if(btnElement) {
-     
+                btnElement.classList.add('active');
+            } else {
+                buttons.forEach(b => {
+                    if(b.getAttribute('onclick') && b.getAttribute('onclick').includes(pageId)) {
+                        b.classList.add('active');
+                    }
+                });
+            }
+            window.scrollTo(0, 0);
+        }
+
+        // Funkcija za kopiranje teksta
+        function copyText(txt) {
+            navigator.cli
