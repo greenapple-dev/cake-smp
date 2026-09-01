@@ -1,0 +1,873 @@
+<title>CakeSMP</title>
+<meta name="description" content="Minecraft SMP server — join info, features, Discord, and rules." />
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+
+  :root{
+    --bg:         #050505;
+    --bg-2:       #0c0c0c;
+    --surface:    #111111;
+    --raised:     #161616;
+    --border:     #2a2a2a;
+    --border-2:   #3a3a3a;
+    --text:       #f5f5f5;
+    --text-muted: #9a9a9a;
+    --text-dim:   #6b6b6b;
+    --line:       #ffffff;
+  }
+
+  *{box-sizing:border-box;}
+  html{color-scheme:dark; height:100%;}
+  body{
+    margin:0;
+    min-height:100%;
+    display:flex;
+    flex-direction:column;
+    background:var(--bg);
+    color:var(--text);
+    font-family:'Figtree',-apple-system,BlinkMacSystemFont,'Segoe UI',sans-serif;
+    font-size:16px;
+    line-height:1.55;
+  }
+  h1,h2,h3{text-wrap:balance; margin:0;}
+  a{color:inherit;}
+  img{max-width:100%;}
+  ::selection{background:#ffffff; color:#000000;}
+
+  .display{
+    font-family:'Baloo 2', 'Figtree', sans-serif;
+    font-weight:700;
+  }
+  .mono{
+    font-family:'JetBrains Mono', ui-monospace, monospace;
+    font-variant-numeric:tabular-nums;
+  }
+
+  .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
+
+  /* ---------- site-wide animated background ---------- */
+  #site-shader{
+    position:fixed;
+    inset:0;
+    width:100vw;
+    height:100vh;
+    z-index:0;
+    display:block;
+    pointer-events:none;
+  }
+  header, main, footer{ position:relative; z-index:1; }
+  header, footer{ flex:none; }
+  main{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+
+  /* ---------- header ---------- */
+  header{
+    position:sticky;
+    top:0;
+    z-index:30;
+    background:rgba(5,5,5,0.85);
+    backdrop-filter:blur(6px);
+    border-bottom:1px solid var(--border);
+  }
+  .header-inner{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    height:68px;
+  }
+  .wordmark{
+    display:flex;
+    align-items:center;
+    gap:8px;
+    text-decoration:none;
+    font-size:19px;
+    cursor:pointer;
+    background:none;
+    border:0;
+    color:var(--text);
+    padding:0;
+  }
+
+  nav.primary{ display:flex; align-items:center; gap:6px; }
+  nav.primary button{
+    font:inherit;
+    text-decoration:none;
+    color:var(--text-muted);
+    font-weight:600;
+    font-size:14.5px;
+    padding:8px 16px;
+    border-radius:8px;
+    background:none;
+    border:1.5px solid transparent;
+    cursor:pointer;
+  }
+  nav.primary button[aria-current="page"]{
+    color:var(--text);
+    position:relative;
+  }
+  nav.primary button[aria-current="page"]::after{
+    content:'';
+    position:absolute;
+    left:16px; right:16px; bottom:2px;
+    height:2px;
+    background:var(--line);
+  }
+  .nav-ghost{
+    border:1.5px dashed var(--border-2) !important;
+  }
+  .nav-ghost:hover{
+    color:var(--text);
+    border-color:var(--text-muted) !important;
+  }
+
+  .header-right{ display:flex; align-items:center; gap:14px; }
+  .btn{
+    display:inline-flex;
+    align-items:center;
+    justify-content:center;
+    text-decoration:none;
+    font-weight:700;
+    font-size:14.5px;
+    padding:11px 22px;
+    border-radius:999px;
+    border:1.5px solid var(--line);
+    background:var(--line);
+    color:#000000;
+    cursor:pointer;
+    transition:opacity 120ms ease, transform 120ms ease;
+    font-family:inherit;
+  }
+  .btn:hover{ opacity:0.85; }
+  .btn:active{ transform:scale(0.97); }
+  .btn:focus-visible{ outline:2px solid var(--line); outline-offset:3px; }
+
+  .avatar{
+    width:38px; height:38px;
+    border-radius:50%;
+    background:var(--raised);
+    border:1.5px solid var(--border-2);
+    display:flex; align-items:center; justify-content:center;
+    font-size:12px; font-weight:700;
+    color:var(--text-muted);
+    flex:none;
+  }
+
+  /* ---------- page title bar (non-home pages) ---------- */
+  .page-title{
+    padding:48px 0 40px;
+    border-bottom:1px solid var(--border);
+    text-align:center;
+  }
+  .page-title h1{ font-size:34px; }
+  .page-title p{ color:var(--text-muted); margin-top:10px; }
+
+  /* ---------- about ---------- */
+  .about-copy{
+    max-width:64ch;
+    margin:0 auto 40px;
+    color:var(--text-muted);
+    font-size:15.5px;
+  }
+  .about-copy + .about-copy{ margin-top:-24px; }
+  .fact-grid{
+    display:grid;
+    grid-template-columns:repeat(3, 1fr);
+    gap:16px;
+  }
+  @media (max-width:680px){ .fact-grid{ grid-template-columns:1fr; } }
+  .fact{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+    text-align:center;
+  }
+  .fact .value{ font-size:24px; font-weight:700; }
+  .fact .label{
+    margin-top:6px;
+    font-size:12px;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+  }
+
+  /* ---------- page shell (each route fills the space between header/footer) ---------- */
+  .page{
+    flex:1 1 auto;
+    display:flex;
+    flex-direction:column;
+    min-height:0;
+  }
+  .page[hidden]{ display:none; }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative;
+    overflow:hidden;
+    padding:64px 0;
+    border-bottom:1px solid var(--border);
+    flex:1 1 auto;
+    display:flex;
+    align-items:center;
+    min-height:0;
+  }
+  .hero > .wrap{ width:100%; }
+  .hero-bg{
+    position:absolute; inset:0;
+    background:
+      radial-gradient(ellipse at 50% -10%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 55%),
+      linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0.7) 100%);
+    z-index:0;
+    overflow:hidden;
+  }
+  .mountains{
+    position:absolute; bottom:0; left:0;
+    width:100%; height:34%;
+  }
+
+  .hero-inner{
+    position:relative;
+    z-index:1;
+    text-align:center;
+  }
+  .hero h1{
+    font-size:56px;
+    line-height:1.08;
+    letter-spacing:-0.01em;
+  }
+  .hero h1 .stroke{
+    color:transparent;
+    -webkit-text-stroke:2px var(--line);
+  }
+  .hero p.lede{
+    margin:22px auto 0;
+    max-width:46ch;
+    color:var(--text-muted);
+    font-size:17px;
+  }
+
+  .stat-pill{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    margin:32px auto 0;
+    padding:9px 18px;
+    border:1px solid var(--border-2);
+    border-radius:999px;
+    background:var(--surface);
+    font-size:13px;
+  }
+  .stat-pill .dot{
+    width:7px; height:7px; border-radius:50%;
+    background:var(--line);
+    box-shadow:0 0 0 3px rgba(255,255,255,0.08);
+  }
+  .stat-pill span.count{ color:var(--text-muted); }
+
+  /* ---------- join card ---------- */
+  .join-card{
+    position:relative;
+    z-index:1;
+    max-width:840px;
+    margin:44px auto 0;
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:20px;
+    padding:36px;
+  }
+  .join-card > h2{
+    font-size:26px;
+    text-align:center;
+    margin-bottom:26px;
+  }
+  .join-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:18px;
+    text-align:left;
+  }
+  @media (max-width:640px){ .join-grid{ grid-template-columns:1fr; } }
+
+  .slot{
+    background:var(--raised);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:20px;
+  }
+  .slot-head{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    margin-bottom:14px;
+  }
+  .slot-head h3{ font-size:16.5px; }
+  .icon-btn{
+    width:30px; height:30px;
+    border-radius:8px;
+    border:1px solid var(--border-2);
+    background:transparent;
+    color:var(--text-muted);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer;
+    transition:background 120ms ease, color 120ms ease, border-color 120ms ease;
+  }
+  .icon-btn:hover{ color:var(--text); border-color:var(--text); }
+  .icon-btn:focus-visible{ outline:2px solid var(--line); outline-offset:2px; }
+  .icon-btn svg{ width:15px; height:15px; }
+
+  .addr-field{
+    background:var(--bg-2);
+    border:1px solid var(--border);
+    border-radius:10px;
+    padding:12px 14px;
+    font-size:14px;
+    color:var(--text);
+    word-break:break-all;
+  }
+  .addr-field + .addr-field{ margin-top:10px; }
+  .addr-label{
+    display:block;
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-dim);
+    text-transform:uppercase;
+    letter-spacing:0.06em;
+    margin:12px 0 6px;
+  }
+  .addr-label:first-of-type{ margin-top:0; }
+
+  /* ---------- section shell ---------- */
+  section{ padding:64px 0; }
+  .section-head{ text-align:center; margin-bottom:36px; }
+  .section-head h2{ font-size:30px; }
+  .section-head p{ color:var(--text-muted); margin-top:10px; }
+
+  /* ---------- features ---------- */
+  .feature-grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+  }
+  @media (max-width:900px){ .feature-grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:520px){ .feature-grid{ grid-template-columns:1fr; } }
+  .feature-grid-2{
+    grid-template-columns:repeat(2, minmax(0, 320px));
+    max-width:680px;
+    margin:0 auto;
+  }
+  @media (max-width:640px){ .feature-grid-2{ grid-template-columns:minmax(0, 320px); } }
+  .feature{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:14px;
+    padding:22px;
+  }
+  .feature .icon{
+    width:36px; height:36px;
+    border-radius:10px;
+    border:1px solid var(--border-2);
+    display:flex; align-items:center; justify-content:center;
+    margin-bottom:14px;
+  }
+  .feature .icon svg{ width:18px; height:18px; }
+  .feature h3{ font-size:15.5px; margin-bottom:6px; }
+  .feature p{ font-size:13.5px; color:var(--text-muted); margin:0; }
+
+  /* ---------- discord ---------- */
+  .discord-lead{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+    gap:24px;
+    flex-wrap:wrap;
+    margin-bottom:26px;
+  }
+  .discord-lead p{ margin:6px 0 0; color:var(--text-muted); max-width:52ch; }
+  .discord-grid .slot h3{ font-size:16.5px; }
+
+  /* ---------- vertical centering for short, non-scrolling pages ---------- */
+  .page-fill{
+    flex:1 1 auto;
+    display:flex;
+    align-items:center;
+    min-height:0;
+  }
+  .page-fill > .wrap{ width:100%; }
+
+  /* ---------- rules ---------- */
+  .rules-grid{
+    display:grid;
+    grid-template-columns:1fr 1fr;
+    gap:20px;
+  }
+  @media (max-width:780px){ .rules-grid{ grid-template-columns:1fr; } }
+  .plank{
+    background:var(--surface);
+    border:1px solid var(--border);
+    border-radius:16px;
+    overflow:hidden;
+  }
+  .plank-head{
+    padding:16px 22px;
+    border-bottom:1px solid var(--border);
+  }
+  .plank-head h3{ font-size:16px; }
+  .plank ol{ list-style:none; margin:0; padding:0; counter-reset:rule; }
+  .plank li{
+    counter-increment:rule;
+    display:flex;
+    gap:14px;
+    padding:13px 22px;
+    border-bottom:1px solid var(--border);
+    font-size:14.5px;
+    color:var(--text);
+  }
+  .plank li:last-child{ border-bottom:0; }
+  .plank li::before{
+    content:counter(rule);
+    flex:none;
+    width:22px; height:22px;
+    display:flex; align-items:center; justify-content:center;
+    border-radius:6px;
+    border:1px solid var(--border-2);
+    font-size:11px;
+    font-weight:700;
+    color:var(--text-dim);
+  }
+
+  /* ---------- footer ---------- */
+  footer{ border-top:1px solid var(--border); padding:28px 0; }
+  .footer-inner{
+    display:flex; align-items:center; justify-content:space-between;
+    flex-wrap:wrap; gap:12px;
+    font-size:13px; color:var(--text-dim);
+  }
+  .footer-inner a{ color:var(--text-dim); text-decoration:underline; text-underline-offset:2px; }
+  .footer-inner a:hover{ color:var(--text); }
+  .footer-nav{ display:flex; gap:18px; }
+  .footer-nav button{
+    font:inherit; background:none; border:0; padding:0; cursor:pointer;
+    color:var(--text-dim);
+  }
+  .footer-nav button:hover{ color:var(--text); }
+</style>
+
+<canvas id="site-shader" aria-hidden="true"></canvas>
+
+<header>
+  <div class="wrap header-inner">
+    <button class="wordmark display" data-nav="home"><span>Cake SMP</span></button>
+    <nav class="primary">
+      <button data-nav="home">Home</button>
+      <button class="nav-ghost" data-nav="about">About</button>
+      <button class="nav-ghost" data-nav="features">Features</button>
+      <button class="nav-ghost" data-nav="discord">Discord</button>
+      <button class="nav-ghost" data-nav="rules">Rules</button>
+    </nav>
+    <div class="header-right">
+      <button class="btn" data-nav="home" data-scroll="join">Play Now</button>
+      <div class="avatar">CS</div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+  <!-- ================= HOME ================= -->
+  <div class="page" data-page="home">
+    <section class="hero">
+      <div class="hero-bg" id="hero-bg" aria-hidden="true">
+        <svg class="mountains" viewBox="0 0 100 30" preserveAspectRatio="none">
+          <polygon points="0,30 0,18 14,9 26,20 38,6 50,22 63,11 76,24 88,14 100,20 100,30" fill="#0f0f0f"/>
+          <polygon points="0,30 0,24 18,15 34,26 50,17 68,27 84,19 100,26 100,30" fill="#050505"/>
+        </svg>
+      </div>
+
+      <div class="wrap hero-inner">
+        <h1 class="display">Cake SMP <span class="stroke">Season 3</span></h1>
+        <p class="lede">Vanilla survival focused on building, community, and creativity.</p>
+
+        <div class="stat-pill">
+          <span class="dot"></span>
+          <span class="count">Average 10+ Daily</span>
+        </div>
+
+        <div class="join-card" id="join">
+          <h2 class="display">Join Now</h2>
+          <div class="join-grid">
+            <div class="slot">
+              <div class="slot-head">
+                <h3>Java Edition</h3>
+                <button class="icon-btn" data-target="java-addr" aria-label="Copy Java server address">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg>
+                </button>
+              </div>
+              <span class="addr-label">Server Address</span>
+              <div class="addr-field mono" id="java-addr">cakesmp.minecraft.co.com</div>
+              <span class="addr-label">Port</span>
+              <div class="addr-field mono">25565</div>
+            </div>
+
+            <div class="slot">
+              <div class="slot-head">
+                <h3>Bedrock Edition</h3>
+                <button class="icon-btn" data-target="bedrock-addr" aria-label="Copy Bedrock server address">
+                  <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg>
+                </button>
+              </div>
+              <span class="addr-label">Server Address</span>
+              <div class="addr-field mono" id="bedrock-addr">185.207.164.151:25565</div>
+              <span class="addr-label">Port</span>
+              <div class="addr-field mono">25565</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= ABOUT ================= -->
+  <div class="page" data-page="about" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">About Cake SMP</h1>
+        <p>Who we are and what this server is actually about.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <p class="about-copy">Cake SMP started as a small survival world for a handful of friends who wanted a vanilla server without the griefing, the pay-to-win ranks, or the noise. Season 3 keeps that same idea: build things, play fair, and stick around for the people, not the plugins.</p>
+        <div class="fact-grid">
+          <div class="fact">
+            <div class="value display">2026</div>
+            <div class="label">Founded</div>
+          </div>
+          <div class="fact">
+            <div class="value display">10+</div>
+            <div class="label">Daily players</div>
+          </div>
+          <div class="fact">
+            <div class="value display">Vanilla</div>
+            <div class="label">Playstyle</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= FEATURES ================= -->
+  <div class="page" data-page="features" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Server Features</h1>
+        <p>What makes Cake SMP worth logging into.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="feature-grid feature-grid-2">
+          <div class="feature">
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
+            <h3>Weekly events</h3>
+            <p>Build contests and minigames run every week for the community.</p>
+          </div>
+          <div class="feature">
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17V9l6-5 6 5v8"/><path d="M8 17v-5h4v5"/></svg></div>
+            <h3>Active moderation</h3>
+            <p>Staff online daily to keep the server fair and hacker-free.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= DISCORD ================= -->
+  <div class="page" data-page="discord" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Discord</h1>
+        <p>Announcements, event pings, and support all happen here.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="join-card">
+          <div class="discord-lead">
+            <div>
+              <h2 class="display" style="font-size:20px;">Cake SMP Community</h2>
+              <p>Join to get whitelisted, chat with the community, and see event announcements.</p>
+            </div>
+            <a class="btn" href="https://discord.gg/s5qvDXvdSc" target="_blank" rel="noopener">Join Discord</a>
+          </div>
+
+          <div class="join-grid discord-grid">
+            <div class="slot">
+              <h3>Invite link</h3>
+              <div class="addr-field mono" style="margin-top:12px;">discord.gg/s5qvDXvdSc</div>
+            </div>
+            <div class="slot">
+              <h3>Support</h3>
+              <p style="margin-top:12px; color:var(--text-muted); font-size:14px;">Open a ticket in #support for build help or reports.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= RULES ================= -->
+  <div class="page" data-page="rules" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Rules</h1>
+        <p>Read before you join — both apply on Discord and in-game.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="rules-grid">
+          <div class="plank">
+            <div class="plank-head"><h3>Discord Rules</h3></div>
+            <ol>
+              <li>No disrespectful behavior towards other members</li>
+              <li>No toxicity or harassment towards other members</li>
+              <li>English only in general, media, and all other public channels</li>
+              <li>No self-promotion</li>
+              <li>No ragebaiting or provoking other members</li>
+              <li>No sexist, racist, or discriminatory content</li>
+              <li>Do not post content intended to offend, target, or seriously upset other members</li>
+              <li>No spamming in general, media, and all other public channels</li>
+            </ol>
+          </div>
+          <div class="plank">
+            <div class="plank-head"><h3>Minecraft Server Rules</h3></div>
+            <ol>
+              <li>No hacking or cheating (minimaps, X-ray, hacked clients, or any other unfair modifications)</li>
+              <li>No lag machines</li>
+              <li>No mods giving an unfair advantage</li>
+              <li>No alternate accounts</li>
+              <li>No spawn/camp killing</li>
+              <li>Do not post content intended to offend, target, or seriously upset other members</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<footer>
+  <div class="wrap footer-inner">
+    <span>© CakeSMP 2026</span>
+    <nav class="footer-nav">
+      <button data-nav="home">Home</button>
+      <button data-nav="about">About</button>
+      <button data-nav="features">Features</button>
+      <button data-nav="discord">Discord</button>
+      <button data-nav="rules">Rules</button>
+    </nav>
+  </div>
+</footer>
+
+<script>
+  // ---- animated WebGL fragment-shader background (drifting monochrome fog) ----
+  // One fixed, full-viewport canvas behind the entire site (header/main/footer
+  // all sit above it via z-index). Keeps running across every page/route.
+  function createShaderBackground(canvas){
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if(!gl) return null; // falls back to the plain CSS gradient behind the canvas
+
+    const vertSrc = `
+      attribute vec2 a_pos;
+      void main(){ gl_Position = vec4(a_pos, 0.0, 1.0); }
+    `;
+    const fragSrc = `
+      precision mediump float;
+      uniform vec2 u_resolution;
+      uniform float u_time;
+
+      float hash(vec2 p){
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+      }
+      float noise(vec2 p){
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+      }
+      float fbm(vec2 p){
+        float v = 0.0;
+        float amp = 0.5;
+        for(int i = 0; i < 5; i++){
+          v += amp * noise(p);
+          p *= 2.0;
+          amp *= 0.5;
+        }
+        return v;
+      }
+      void main(){
+        vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+        vec2 p = uv * vec2(3.6, 2.4);
+        p.x += u_time * 0.015;
+        float warp = fbm(p + u_time * 0.03);
+        float n = fbm(p + warp * 1.4);
+
+        float shade = smoothstep(0.15, 0.85, n);
+        vec3 base = mix(vec3(0.015, 0.015, 0.017), vec3(0.1, 0.1, 0.11), shade);
+
+        float vig = smoothstep(1.1, 0.2, length(uv - vec2(0.5, 0.4)));
+        base *= mix(0.6, 1.0, vig);
+
+        gl_FragColor = vec4(base, 1.0);
+      }
+    `;
+
+    function compile(type, src){
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, src);
+      gl.compileShader(shader);
+      if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    const vert = compile(gl.VERTEX_SHADER, vertSrc);
+    const frag = compile(gl.FRAGMENT_SHADER, fragSrc);
+    if(!vert || !frag) return null;
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vert);
+    gl.attachShader(program, frag);
+    gl.linkProgram(program);
+    if(!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
+    gl.useProgram(program);
+
+    const posBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, 'a_pos');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const resLoc = gl.getUniformLocation(program, 'u_resolution');
+    const timeLoc = gl.getUniformLocation(program, 'u_time');
+
+    function resize(){
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if(canvas.width !== w || canvas.height !== h){
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    }
+
+    function draw(t){
+      resize();
+      gl.uniform2f(resLoc, canvas.width, canvas.height);
+      gl.uniform1f(timeLoc, t);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = null;
+
+    function start(){
+      if(reduceMotion){ draw(0); return; }
+      if(raf) return;
+      function loop(ts){
+        draw(ts * 0.001);
+        raf = requestAnimationFrame(loop);
+      }
+      raf = requestAnimationFrame(loop);
+    }
+    function stop(){
+      if(raf){ cancelAnimationFrame(raf); raf = null; }
+    }
+
+    draw(0);
+    window.addEventListener('resize', () => draw(performance.now() * 0.001));
+
+    return { start, stop };
+  }
+
+  const siteShader = createShaderBackground(document.getElementById('site-shader'));
+  if(siteShader) siteShader.start();
+
+  // ---- client-side page router (hash based, no reload) ----
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const navButtons = Array.from(document.querySelectorAll('[data-nav]'));
+
+  function showPage(name, scrollTargetId){
+    let matched = false;
+    pages.forEach(p => {
+      const active = p.dataset.page === name;
+      p.hidden = !active;
+      if(active) matched = true;
+    });
+    if(!matched){ pages[0].hidden = false; name = pages[0].dataset.page; }
+
+    navButtons.forEach(b => {
+      if(b.classList.contains('wordmark') || b.closest('.footer-nav') || b.dataset.scroll) return;
+      if(b.dataset.nav === name) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+
+    if(scrollTargetId){
+      requestAnimationFrame(() => {
+        document.getElementById(scrollTargetId)?.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function routeFromHash(){
+    const name = (location.hash.replace('#','') || 'home');
+    showPage(name);
+  }
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.nav;
+      location.hash = name;
+      showPage(name, btn.dataset.scroll);
+    });
+  });
+
+  window.addEventListener('hashchange', routeFromHash);
+  routeFromHash();
+
+  // ---- copy to clipboard ----
+  document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const el = document.getElementById(btn.dataset.target);
+      const text = el.textContent.trim();
+      try{ await navigator.clipboard.writeText(text); }
+      catch(e){
+        const range = document.createRange();
+        range.selectNode(el);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+      }
+      const original = btn.innerHTML;
+      btn.innerHTML = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10l4 4 8-9"/></svg>`;
+      setTimeout(() => { btn.innerHTML = original; }, 1400);
+    });
+  });
+</script>
