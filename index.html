@@ -69,7 +69,6 @@
   }
   .btn:hover{ opacity:0.92; transform:translateY(-2px) scale(1.03); box-shadow:0 8px 22px rgba(255,255,255,0.18); }
   .btn:active{ transform:translateY(0) scale(0.96); box-shadow:none; }
-  .btn:disabled{ opacity:0.45; cursor:not-allowed; transform:none !important; }
 
   .avatar{
     width:38px; height:38px; border-radius:50%; background:var(--raised); border:1.5px solid var(--border-2);
@@ -198,7 +197,6 @@
     border-radius:6px; border:1px solid var(--border-2); font-size:11px; font-weight:700; color:var(--text-dim);
   }
 
-  /* Shop lock */
   .shop-locked-wrapper{ position:relative; min-height:420px; }
   .shop-lock-overlay{
     position:absolute; inset:0; background:rgba(5,5,5,0.92); backdrop-filter:blur(8px);
@@ -332,6 +330,71 @@
   .footer-nav{ display:flex; gap:18px; }
   .footer-nav button{ font:inherit; background:none; border:0; padding:0; cursor:pointer; color:var(--text-dim); }
   .footer-nav button:hover{ color:var(--text); }
+
+  /* ========== CAKER AI ASSISTANT ========== */
+  #caker-toggle{
+    position:fixed; bottom:28px; right:28px; z-index:1000;
+    width:60px; height:60px; border-radius:50%;
+    background:var(--line); color:#000; border:none; cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    font-size:26px; box-shadow:0 8px 28px rgba(255,255,255,0.18);
+    transition:transform 220ms ease, box-shadow 220ms ease;
+  }
+  #caker-toggle:hover{ transform:scale(1.08); box-shadow:0 12px 32px rgba(255,255,255,0.28); }
+  #caker-toggle.open{ background:var(--raised); color:var(--text); border:1.5px solid var(--border-2); }
+
+  #caker-window{
+    position:fixed; bottom:100px; right:28px; z-index:1000;
+    width:380px; max-width:calc(100vw - 32px); height:520px;
+    background:var(--surface); border:1px solid var(--border-2); border-radius:20px;
+    display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.55);
+    opacity:0; transform:translateY(20px) scale(0.96); pointer-events:none;
+    transition:opacity 240ms ease, transform 240ms ease;
+  }
+  #caker-window.open{
+    opacity:1; transform:translateY(0) scale(1); pointer-events:auto;
+  }
+
+  .caker-header{
+    padding:16px 18px; background:var(--raised); border-bottom:1px solid var(--border);
+    display:flex; align-items:center; gap:12px;
+  }
+  .caker-avatar{
+    width:40px; height:40px; border-radius:12px; background:var(--line); color:#000;
+    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;
+  }
+  .caker-header-info h3{ font-size:16px; margin-bottom:2px; }
+  .caker-header-info span{ font-size:12px; color:var(--text-dim); }
+
+  .caker-messages{
+    flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px;
+  }
+  .caker-msg{
+    max-width:85%; padding:11px 14px; border-radius:14px; font-size:14px; line-height:1.45;
+  }
+  .caker-msg.bot{
+    background:var(--raised); border:1px solid var(--border); align-self:flex-start;
+    border-bottom-left-radius:4px;
+  }
+  .caker-msg.user{
+    background:var(--line); color:#000; align-self:flex-end;
+    border-bottom-right-radius:4px;
+  }
+
+  .caker-input-area{
+    padding:14px; border-top:1px solid var(--border); display:flex; gap:10px;
+  }
+  .caker-input-area input{
+    flex:1; background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
+    padding:12px 14px; color:var(--text); font-size:14px; font-family:inherit;
+  }
+  .caker-input-area input:focus{ outline:none; border-color:var(--line); }
+  .caker-input-area button{
+    background:var(--line); color:#000; border:none; border-radius:12px;
+    padding:0 16px; font-weight:700; cursor:pointer; transition:opacity 150ms ease;
+  }
+  .caker-input-area button:hover{ opacity:0.85; }
 </style>
 </head>
 <body>
@@ -513,7 +576,6 @@
               <button class="btn" data-nav="account">Go to Account</button>
             </div>
           </div>
-
           <div id="shop-content">
             <p class="shop-intro">All purchases are cosmetic or convenience only — nothing here affects fair play in Hide &amp; Seek.</p>
             <div class="shop-grid">
@@ -570,13 +632,11 @@
     <div class="page-title"><div class="wrap"><h1 class="display">Account</h1><p>Sign in or create an account with your Minecraft username + email.</p></div></div>
     <section class="page-fill"><div class="wrap">
       <div class="account-shell">
-
         <div class="account-panel" id="account-auth">
           <div class="account-tabs">
             <button type="button" class="active" data-tab="signin">Sign In</button>
             <button type="button" data-tab="signup">Sign Up</button>
           </div>
-
           <div id="tab-signin">
             <h2 class="display">Welcome back</h2>
             <p class="sub">Use your Minecraft username to sign in.</p>
@@ -592,7 +652,6 @@
               <button type="submit" class="btn">Sign In</button>
             </form>
           </div>
-
           <div id="tab-signup" hidden>
             <h2 class="display">Create account</h2>
             <p class="sub">Minecraft username and email are both required.</p>
@@ -616,7 +675,6 @@
               <button type="submit" class="btn">Create Account</button>
             </form>
           </div>
-
           <div class="account-message" id="account-msg"></div>
         </div>
 
@@ -627,7 +685,7 @@
           <form id="verify-form">
             <div class="account-field">
               <label for="verify-code">Verification Code</label>
-              <input type="text" id="verify-code" class="verify-code-input" required maxlength="6" placeholder="000000" autocomplete="one-time-code">
+              <input type="text" id="verify-code" class="verify-code-input" required maxlength="6" placeholder="000000">
             </div>
             <button type="submit" class="btn">Verify & Activate</button>
           </form>
@@ -646,7 +704,6 @@
           <p style="color:var(--text-muted);font-size:14px;">You are signed in with your Minecraft username.</p>
           <button type="button" class="btn account-logout" id="logout-btn">Sign Out</button>
         </div>
-
       </div>
     </div></section>
   </div>
@@ -665,9 +722,27 @@
   </div>
 </footer>
 
+<!-- ========== CAKER AI ========== -->
+<button id="caker-toggle" title="Chat with Caker">🎂</button>
+
+<div id="caker-window">
+  <div class="caker-header">
+    <div class="caker-avatar">C</div>
+    <div class="caker-header-info">
+      <h3 class="display">Caker</h3>
+      <span>Cake SMP AI Assistant</span>
+    </div>
+  </div>
+  <div class="caker-messages" id="caker-messages"></div>
+  <div class="caker-input-area">
+    <input type="text" id="caker-input" placeholder="Ask me anything..." autocomplete="off">
+    <button id="caker-send">Send</button>
+  </div>
+</div>
+
 <script>
 (function(){
-  // Navigation
+  // ---------- Navigation ----------
   const pages = document.querySelectorAll('.page');
   document.querySelectorAll('[data-nav]').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -683,7 +758,7 @@
     });
   });
 
-  // Copy buttons
+  // ---------- Copy ----------
   document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
     btn.addEventListener('click', async () => {
       const el = document.getElementById(btn.dataset.target);
@@ -697,7 +772,7 @@
     });
   });
 
-  // Countdown
+  // ---------- Countdown ----------
   const targetDate = new Date('2026-09-20T18:00:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
@@ -726,7 +801,7 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // Online status
+  // ---------- Online status ----------
   async function checkServer(host, elOnline, elPlayers){
     try {
       const res = await fetch(`https://api.mcsrvstat.us/2/${host}`);
@@ -750,7 +825,7 @@
   refreshStatus();
   setInterval(refreshStatus, 60000);
 
-  // Account + Shop lock
+  // ---------- Account + Shop lock ----------
   const AUTH_KEY = 'cakesmp_user';
   const PENDING_KEY = 'cakesmp_pending';
 
@@ -772,7 +847,6 @@
   function updateUI(){
     const user = getUser();
     const pending = getPending();
-
     if (shopLock) shopLock.hidden = !!user;
 
     if (user) {
@@ -798,7 +872,6 @@
     }
   }
 
-  // Tabs
   document.querySelectorAll('.account-tabs button').forEach(btn => {
     btn.addEventListener('click', () => {
       document.querySelectorAll('.account-tabs button').forEach(b => b.classList.remove('active'));
@@ -810,7 +883,6 @@
     });
   });
 
-  // Sign In
   document.getElementById('signin-form').addEventListener('submit', e => {
     e.preventDefault();
     const username = document.getElementById('signin-user').value.trim();
@@ -826,7 +898,6 @@
     }
   });
 
-  // Sign Up
   document.getElementById('signup-form').addEventListener('submit', e => {
     e.preventDefault();
     const username = document.getElementById('signup-user').value.trim();
@@ -848,7 +919,6 @@
     const code = String(Math.floor(100000 + Math.random() * 900000));
     setPending({ username, email, password: pass, code });
 
-    // Notify owner (no page redirect)
     const body = new FormData();
     body.append('_subject', 'Cake SMP - New Account');
     body.append('_captcha', 'false');
@@ -864,7 +934,6 @@
     updateUI();
   });
 
-  // Verify
   document.getElementById('verify-form').addEventListener('submit', e => {
     e.preventDefault();
     const entered = document.getElementById('verify-code').value.trim();
@@ -898,7 +967,123 @@
 
   updateUI();
 
-  // Canvas background
+  // ---------- CAKER AI ----------
+  const cakerToggle = document.getElementById('caker-toggle');
+  const cakerWindow = document.getElementById('caker-window');
+  const cakerMessages = document.getElementById('caker-messages');
+  const cakerInput = document.getElementById('caker-input');
+  const cakerSend = document.getElementById('caker-send');
+
+  let cakerOpen = false;
+
+  function toggleCaker(){
+    cakerOpen = !cakerOpen;
+    cakerWindow.classList.toggle('open', cakerOpen);
+    cakerToggle.classList.toggle('open', cakerOpen);
+    cakerToggle.textContent = cakerOpen ? '✕' : '🎂';
+    if (cakerOpen && cakerMessages.children.length === 0) {
+      addBotMessage("Hey! I'm **Caker**, your Cake SMP assistant. Ask me anything about the server, how to join, rules, shop, Hide & Seek, or accounts!");
+    }
+  }
+
+  cakerToggle.addEventListener('click', toggleCaker);
+
+  function addBotMessage(text){
+    const div = document.createElement('div');
+    div.className = 'caker-msg bot';
+    div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    cakerMessages.appendChild(div);
+    cakerMessages.scrollTop = cakerMessages.scrollHeight;
+  }
+
+  function addUserMessage(text){
+    const div = document.createElement('div');
+    div.className = 'caker-msg user';
+    div.textContent = text;
+    cakerMessages.appendChild(div);
+    cakerMessages.scrollTop = cakerMessages.scrollHeight;
+  }
+
+  function cakerReply(input){
+    const msg = input.toLowerCase().trim();
+
+    // Greetings
+    if (/^(hi|hey|hello|yo|sup|hola)/.test(msg)) {
+      return "Hey there! Welcome to Cake SMP Season 3. What do you need help with?";
+    }
+
+    // How to join
+    if (msg.includes('join') || msg.includes('ip') || msg.includes('address') || msg.includes('how to connect')) {
+      return "Easy!<br><br><strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol<br><br>Just paste the address in Minecraft and hop in!";
+    }
+
+    // Rules
+    if (msg.includes('rule') || msg.includes('banned') || msg.includes('allowed')) {
+      return "Quick rules summary:<br><br>• No hacking / X-ray / unfair mods<br>• No lag machines<br>• No alternate accounts<br>• No spawn/camp killing<br>• Be respectful on Discord<br><br>Full list is on the <strong>Rules</strong> page!";
+    }
+
+    // Shop
+    if (msg.includes('shop') || msg.includes('buy') || msg.includes('rank') || msg.includes('pack') || msg.includes('price')) {
+      return "The Shop has 3 packs for Hide & Seek abilities:<br><br>• <strong>Starter</strong> – €2.99<br>• <strong>Hider Pack</strong> – €5.99 (Most Popular)<br>• <strong>Ultimate</strong> – €9.99<br><br>You need to <strong>sign up</strong> first to access the shop!";
+    }
+
+    // Account / Sign up
+    if (msg.includes('account') || msg.includes('sign up') || msg.includes('register') || msg.includes('login') || msg.includes('sign in')) {
+      return "To create an account go to the <strong>Account</strong> page.<br><br>You need:<br>1. Minecraft Username<br>2. Email<br>3. Password<br><br>Then enter the verification code that appears on screen.";
+    }
+
+    // Hide and Seek
+    if (msg.includes('hide') || msg.includes('seek') || msg.includes('hns')) {
+      return "Hide & Seek is our special game mode!<br><br>Server: <strong>hideseekcs.folium.lol</strong><br><br>There are cool ability packs in the Shop (Sprint Boost, Invisibility, Thermal Scan...). Have fun!";
+    }
+
+    // Discord
+    if (msg.includes('discord')) {
+      return "Join our Discord to chat, get updates, and find people to play with! There's a big Join Discord button on the Discord page.";
+    }
+
+    // Who are you
+    if (msg.includes('who are you') || msg.includes('what are you') || msg.includes('your name')) {
+      return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant. I'm here to help you with anything related to the server. Ask away!";
+    }
+
+    // Season
+    if (msg.includes('season') || msg.includes('s3')) {
+      return "We're currently in <strong>Season 3</strong>! Fresh world, great community, weekly events, and of course... Hide & Seek.";
+    }
+
+    // Help
+    if (msg.includes('help') || msg.includes('what can you do')) {
+      return "I can help you with:<br>• How to join the server<br>• Rules<br>• Shop & ranks<br>• Account / Sign up<br>• Hide & Seek<br>• Discord<br><br>Just ask naturally!";
+    }
+
+    // Default smart fallback
+    const fallbacks = [
+      "Hmm, not sure I got that. Try asking about joining, rules, shop, or Hide & Seek!",
+      "I'm still learning. Can you rephrase that? I know a lot about Cake SMP!",
+      "Interesting question! For server-related stuff I can help a lot. Try asking about IP, rules, or the shop."
+    ];
+    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+  }
+
+  function sendMessage(){
+    const text = cakerInput.value.trim();
+    if (!text) return;
+    addUserMessage(text);
+    cakerInput.value = '';
+
+    // Fake thinking delay
+    setTimeout(() => {
+      addBotMessage(cakerReply(text));
+    }, 400 + Math.random() * 600);
+  }
+
+  cakerSend.addEventListener('click', sendMessage);
+  cakerInput.addEventListener('keydown', e => {
+    if (e.key === 'Enter') sendMessage();
+  });
+
+  // ---------- Canvas ----------
   const canvas = document.getElementById('site-shader');
   const ctx = canvas.getContext('2d');
   let w, h, particles = [];
