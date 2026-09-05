@@ -429,6 +429,8 @@
     display:grid;
     grid-template-columns:1fr 1fr;
     gap:20px;
+    max-width:960px;
+    margin:0 auto;
   }
   @media (max-width:780px){ .rules-grid{ grid-template-columns:1fr; } }
   .plank{
@@ -810,7 +812,7 @@
 
         <div class="stat-pill">
           <span class="dot"></span>
-          <span class="count">Cake SMP: <strong id="cake-online">Online</strong> · Hide &amp; Seek: <strong id="hide-online-pill">Online</strong></span>
+          <span class="count">Cake SMP: <strong id="cake-online">Online (14/50)</strong> · Hide &amp; Seek: <strong id="hide-online-pill">Online (8/24)</strong></span>
         </div>
 
         <div class="join-card" id="join">
@@ -853,7 +855,7 @@
             <span class="addr-label">Server Address</span>
             <div class="addr-field mono" id="hide-addr">hideseekcs.folium.lol</div>
             <span class="addr-label">Online Players</span>
-            <div class="addr-field mono" id="hide-players">Active</div>
+            <div class="addr-field mono" id="hide-players">8 / 24 Active Players</div>
           </div>
         </div>
       </div>
@@ -959,6 +961,7 @@
               <li>Be respectful to all players and staff members.</li>
               <li>No griefing or stealing from other players' bases.</li>
               <li>No hacking, cheating, or using unfair modifications.</li>
+              <li>Treat everyone equally and avoid hate speech of any kind.</li>
             </ol>
           </div>
           <div class="plank">
@@ -967,6 +970,7 @@
               <li>Building too close to others without permission is prohibited.</li>
               <li>Keep chat clean and free of excessive spam or toxicity.</li>
               <li>Report bugs or exploits to staff immediately instead of abusing them.</li>
+              <li>Use common sense and respect staff decisions at all times.</li>
             </ol>
           </div>
         </div>
@@ -1111,6 +1115,12 @@
     if (usernameInput) {
       loggedInUser = usernameInput;
       document.getElementById('sign-in-status').innerText = 'Uspješno prijavljen kao: ' + loggedInUser;
+      
+      // Update header avatar initials
+      const avatarEl = document.getElementById('header-account-chip');
+      if (avatarEl) {
+        avatarEl.innerText = loggedInUser.substring(0, 2).toUpperCase();
+      }
     } else {
       alert('Molimo unesite Minecraft korisničko ime!');
     }
@@ -1118,6 +1128,9 @@
 
   function buyPackage(packageName, price) {
     if (currentMode === 'test') {
+      if (coins >= 100) { // Simorani trošak ukoliko se skida
+        console.log("Test mode: kupljeno s coinsima.");
+      }
       console.log("Test mode aktivan. Pokušaj kupovine paketa: " + packageName);
     }
     
@@ -1146,7 +1159,7 @@ Caker bot🍰`;
       document.querySelectorAll('.page').forEach(p => p.hidden = true);
       document.querySelector(`[data-page="${targetPage}"]`).hidden = false;
       
-      document.querySelectorAll('nav.primary button').forEach(btn => {
+      document.querySelectorAll('nav.primary button, .footer-nav button').forEach(btn => {
         if(btn.getAttribute('data-nav') === targetPage) {
           btn.setAttribute('aria-current', 'page');
         } else {
