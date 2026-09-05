@@ -207,7 +207,7 @@
     letter-spacing:0.06em;
   }
 
-  /* ---------- page shell (each route fills the space between header/footer) ---------- */
+  /* ---------- page shell ---------- */
   .page{
     flex:1 1 auto;
     display:flex;
@@ -419,7 +419,7 @@
   .discord-lead p{ margin:6px 0 0; color:var(--text-muted); max-width:52ch; }
   .discord-grid .slot h3{ font-size:16.5px; }
 
-  /* ---------- vertical centering for short, non-scrolling pages ---------- */
+  /* ---------- vertical centering ---------- */
   .page-fill{
     flex:1 1 auto;
     display:flex;
@@ -488,12 +488,13 @@
   }
   .shop-grid{
     display:grid;
-    grid-template-columns:repeat(4, 1fr);
+    grid-template-columns:repeat(3, 1fr);
     gap:18px;
     align-items:stretch;
+    max-width:960px;
+    margin:0 auto;
   }
-  @media (max-width:980px){ .shop-grid{ grid-template-columns:repeat(2, 1fr); } }
-  @media (max-width:560px){ .shop-grid{ grid-template-columns:1fr; } }
+  @media (max-width:800px){ .shop-grid{ grid-template-columns:1fr; } }
 
   .price-card{
     position:relative;
@@ -516,7 +517,6 @@
   .price-card:nth-child(1){ animation-delay:0ms; }
   .price-card:nth-child(2){ animation-delay:90ms; }
   .price-card:nth-child(3){ animation-delay:180ms; }
-  .price-card:nth-child(4){ animation-delay:270ms; }
 
   @keyframes card-in{
     to{ opacity:1; transform:translateY(0); }
@@ -575,7 +575,6 @@
     font-weight:700;
     margin-bottom:2px;
   }
-  .price-card .price .cents{ font-size:16px; color:var(--text-muted); }
   .price-card .price-note{
     font-size:11.5px;
     color:var(--text-dim);
@@ -907,6 +906,7 @@
 
 <main>
 
+  <!-- ================= HOME ================= -->
   <div class="page" data-page="home">
     <section class="hero">
       <div class="hero-bg" id="hero-bg" aria-hidden="true">
@@ -972,6 +972,7 @@
     </section>
   </div>
 
+  <!-- ================= ABOUT ================= -->
   <div class="page" data-page="about" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1000,6 +1001,7 @@
     </section>
   </div>
 
+  <!-- ================= FEATURES ================= -->
   <div class="page" data-page="features" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1035,11 +1037,12 @@
     </section>
   </div>
 
+  <!-- ================= SHOP ================= -->
   <div class="page" data-page="shop" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
         <h1 class="display">Shop</h1>
-        <p>Unlock abilities for Hide &amp; Seek — buy with card or with Cake Coins.</p>
+        <p>Unlock abilities for Hide &amp; Seek — max price is 10 euros.</p>
       </div>
     </div>
     <section class="page-fill">
@@ -1051,9 +1054,9 @@
             <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
             <h3>Starter</h3>
             <p class="tier-desc">Get in and try the game mode out.</p>
-            <div class="price mono">€4.99</div>
+            <div class="price mono">€2.99</div>
             <div class="price-note">One-time</div>
-            <div class="coin-price"><span class="mini-coin">C</span>500 Cake Coins</div>
+            <div class="coin-price"><span class="mini-coin">C</span>300 Cake Coins</div>
             <ul>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Access to Hide &amp; Seek</span></li>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Sprint Boost — 5s speed dash</span></li>
@@ -1061,18 +1064,19 @@
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Basic scoreboard stats</span></li>
             </ul>
             <div class="btn-row">
-              <button class="btn" data-buy="Starter" data-eur="€4.99">Get Starter</button>
-              <button class="btn btn-coins" data-redeem="Starter" data-coins="500">Buy with 500 Coins</button>
+              <button class="btn" data-buy="Starter" data-eur="€2.99">Get Starter</button>
+              <button class="btn btn-coins" data-redeem="Starter" data-coins="300">Buy with 300 Coins</button>
             </div>
           </div>
 
-          <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 11l7-8 7 8-7 8-7-8z"/></svg></div>
+          <div class="price-card featured">
+            <span class="price-badge">Most Popular</span>
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
             <h3>Hider Pack</h3>
             <p class="tier-desc">Stealthier hiding, sharper seeking.</p>
-            <div class="price mono">€9.99</div>
+            <div class="price mono">€5.99</div>
             <div class="price-note">One-time</div>
-            <div class="coin-price"><span class="mini-coin">C</span>1,000 Cake Coins</div>
+            <div class="coin-price"><span class="mini-coin">C</span>600 Cake Coins</div>
             <ul>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Starter</span></li>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Silent Steps — no footstep sound, 10s</span></li>
@@ -1081,19 +1085,18 @@
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">+25% coin gain</span></li>
             </ul>
             <div class="btn-row">
-              <button class="btn" data-buy="Hider Pack" data-eur="€9.99">Get Hider Pack</button>
-              <button class="btn btn-coins" data-redeem="Hider Pack" data-coins="1000">Buy with 1,000 Coins</button>
+              <button class="btn" data-buy="Hider Pack" data-eur="€5.99">Get Hider Pack</button>
+              <button class="btn btn-coins" data-redeem="Hider Pack" data-coins="600">Buy with 600 Coins</button>
             </div>
           </div>
 
-          <div class="price-card featured">
-            <span class="price-badge">Most Popular</span>
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
+          <div class="price-card">
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 8h14"/></svg></div>
             <h3>Seeker Elite</h3>
-            <p class="tier-desc">Our best value pick — full ability set.</p>
-            <div class="price mono">€14.99</div>
+            <p class="tier-desc">Full ability set, max package.</p>
+            <div class="price mono">€10.00</div>
             <div class="price-note">One-time</div>
-            <div class="coin-price"><span class="mini-coin">C</span>1,500 Cake Coins</div>
+            <div class="coin-price"><span class="mini-coin">C</span>1,000 Cake Coins</div>
             <ul>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Hider Pack</span></li>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Smoke Cloak — blinds nearby seekers, 3s</span></li>
@@ -1102,28 +1105,8 @@
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">+50% coin gain</span></li>
             </ul>
             <div class="btn-row">
-              <button class="btn" data-buy="Seeker Elite" data-eur="€14.99">Get Seeker Elite</button>
-              <button class="btn btn-coins" data-redeem="Seeker Elite" data-coins="1500">Buy with 1,500 Coins</button>
-            </div>
-          </div>
-
-          <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 8h14"/></svg></div>
-            <h3>Ultimate</h3>
-            <p class="tier-desc">Every ability, plus your own lobby.</p>
-            <div class="price mono">€24.99</div>
-            <div class="price-note">One-time</div>
-            <div class="coin-price"><span class="mini-coin">C</span>2,500 Cake Coins</div>
-            <ul>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Seeker Elite</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Phase Walk — pass through 1 block, 8s cooldown</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Seeker's Instinct — outlines all hiders, 2s</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Private lobby creation + full cosmetic bundle</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">+100% coin gain</span></li>
-            </ul>
-            <div class="btn-row">
-              <button class="btn" data-buy="Ultimate" data-eur="€24.99">Get Ultimate</button>
-              <button class="btn btn-coins" data-redeem="Ultimate" data-coins="2500">Buy with 2,500 Coins</button>
+              <button class="btn" data-buy="Seeker Elite" data-eur="€10.00">Get Seeker Elite</button>
+              <button class="btn btn-coins" data-redeem="Seeker Elite" data-coins="1000">Buy with 1,000 Coins</button>
             </div>
           </div>
         </div>
@@ -1133,6 +1116,7 @@
     </section>
   </div>
 
+  <!-- ================= DISCORD ================= -->
   <div class="page" data-page="discord" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1166,6 +1150,7 @@
     </section>
   </div>
 
+  <!-- ================= RULES ================= -->
   <div class="page" data-page="rules" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1205,6 +1190,7 @@
     </section>
   </div>
 
+  <!-- ================= ACCOUNT ================= -->
   <div class="page" data-page="account" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1216,6 +1202,7 @@
       <div class="wrap">
         <div class="account-shell">
 
+          <!-- logged-out view -->
           <div class="account-panel" id="account-login-view">
             <h2 class="display">Link your account</h2>
             <p class="sub">Enter your Minecraft username to create or open your Cake SMP account. New accounts start with 500 Cake Coins.</p>
@@ -1226,6 +1213,7 @@
             <button class="btn" id="account-login-btn">Log In / Create Account</button>
           </div>
 
+          <!-- logged-in view -->
           <div class="account-panel" id="account-profile-view" hidden>
             <div class="account-profile-head">
               <div class="account-avatar-lg" id="profile-avatar">S</div>
@@ -1272,7 +1260,7 @@
 </footer>
 
 <script>
-  // ---- animated WebGL fragment-shader background (drifting monochrome fog) ----
+  // ---- animated WebGL fragment-shader background ----
   function createShaderBackground(canvas){
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
     if(!gl) return null;
