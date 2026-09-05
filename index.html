@@ -8,8 +8,8 @@
   @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
 
   :root{
-    --bg:        #050505;
-    --bg-2:      #0c0c0c;
+    --bg:         #050505;
+    --bg-2:       #0c0c0c;
     --surface:    #111111;
     --raised:     #161616;
     --border:     #2a2a2a;
@@ -160,7 +160,7 @@
     flex:none;
   }
 
-  /* ---------- page title bar (non-home pages) ---------- */
+  /* ---------- page title bar ---------- */
   .page-title{
     padding:48px 0 40px;
     border-bottom:1px solid var(--border);
@@ -359,7 +359,6 @@
   }
   .addr-label:first-of-type{ margin-top:0; }
 
-  /* ---------- section shell ---------- */
   section{ padding:64px 0; }
   .section-head{ text-align:center; margin-bottom:36px; }
   .section-head h2{ font-size:30px; }
@@ -392,8 +391,6 @@
   .feature:hover{ transform:translateY(-4px); border-color:var(--border-2); box-shadow:0 10px 26px rgba(0,0,0,0.4); }
   .feature:nth-child(1){ animation-delay:0ms; }
   .feature:nth-child(2){ animation-delay:90ms; }
-  .feature:nth-child(3){ animation-delay:180ms; }
-  .feature:nth-child(4){ animation-delay:270ms; }
   .feature .icon{
     width:36px; height:36px;
     border-radius:10px;
@@ -419,7 +416,6 @@
   .discord-lead p{ margin:6px 0 0; color:var(--text-muted); max-width:52ch; }
   .discord-grid .slot h3{ font-size:16.5px; }
 
-  /* ---------- vertical centering ---------- */
   .page-fill{
     flex:1 1 auto;
     display:flex;
@@ -580,24 +576,7 @@
     color:var(--text-dim);
     text-transform:uppercase;
     letter-spacing:0.05em;
-    margin-bottom:12px;
-  }
-  .price-card .coin-price{
-    display:flex;
-    align-items:center;
-    gap:6px;
-    font-size:12.5px;
-    color:var(--text-muted);
     margin-bottom:20px;
-  }
-  .price-card .coin-price .mini-coin{
-    width:16px; height:16px;
-    border-radius:50%;
-    background:var(--line);
-    color:#000;
-    display:flex; align-items:center; justify-content:center;
-    font-size:9px; font-weight:800;
-    flex:none;
   }
   .ability-tag{
     display:inline-block;
@@ -616,16 +595,6 @@
     flex-wrap:wrap;
   }
   .price-card li .ability-text{ flex:1; }
-  .price-card .btn-row{ display:flex; flex-direction:column; gap:8px; }
-  .price-card .btn-coins{
-    width:100%;
-    background:transparent;
-    color:var(--text);
-    border:1.5px dashed var(--border-2);
-    font-size:13px;
-    padding:10px 20px;
-  }
-  .price-card .btn-coins:hover{ border-color:var(--line); opacity:1; }
   .price-card ul{
     list-style:none;
     margin:0 0 22px;
@@ -807,47 +776,6 @@
   .account-profile-head:hover .account-avatar-lg{ transform:scale(1.05) rotate(-2deg); }
   .account-profile-head h2{ font-size:19px; margin-bottom:2px; }
   .account-profile-head .sub{ margin:0; font-size:12.5px; }
-
-  .coin-balance{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    background:var(--raised);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:16px 20px;
-    margin-bottom:20px;
-    transition:border-color 200ms ease, transform 200ms ease;
-  }
-  .coin-balance:hover{ border-color:var(--border-2); transform:translateY(-2px); }
-  .coin-balance .coin-icon{
-    width:34px; height:34px;
-    border-radius:50%;
-    background:var(--line);
-    color:#000;
-    display:flex; align-items:center; justify-content:center;
-    font-size:15px; font-weight:800;
-    flex:none;
-    animation:coin-spin 3s ease-in-out infinite;
-  }
-  @keyframes coin-spin{
-    0%,100%{ transform:rotateY(0deg); }
-    50%{ transform:rotateY(180deg); }
-  }
-  .coin-balance .coin-info{ flex:1; margin-left:14px; }
-  .coin-balance .coin-amount{ font-size:22px; font-weight:700; }
-  .coin-balance .coin-label{ font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; }
-
-  .purchase-list{ list-style:none; margin:0; padding:0; }
-  .purchase-list li{
-    display:flex;
-    justify-content:space-between;
-    padding:12px 0;
-    border-top:1px solid var(--border);
-    font-size:13.5px;
-  }
-  .purchase-list li:first-child{ border-top:0; }
-  .purchase-empty{ color:var(--text-dim); font-size:13px; text-align:center; padding:14px 0; }
 
   .account-logout{
     width:100%;
@@ -1042,56 +970,177 @@
     <div class="page-title">
       <div class="page-title-inner wrap">
         <h1 class="display">Shop</h1>
-        <p>Unlock abilities for Hide &amp; Seek — max price is 10 euros.</p>
+        <p>Unlock abilities for Hide &amp; Seek — maximum price is 10 euros.</p>
       </div>
     </div>
     <section class="page-fill">
       <div class="wrap">
         <p class="shop-intro">All purchases are cosmetic or convenience only — nothing here affects fair play in Hide &amp; Seek.</p>
-        
+
         <div class="shop-grid">
           <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="8"/></svg></div>
-            <h3>Starter Pack</h3>
-            <p class="tier-desc">Basic cosmetic trails and custom taunts.</p>
-            <div class="price">€3.50</div>
-            <div class="price-note">One-time purchase</div>
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
+            <h3>Starter</h3>
+            <p class="tier-desc">Get in and try the game mode out.</p>
+            <div class="price mono">€2.99</div>
+            <div class="price-note">One-time</div>
             <ul>
-              <li><span class="ability-tag hider">Hider</span><span class="ability-text">Custom particle trail</span></li>
-              <li><span class="ability-tag seeker">Seeker</span><span class="ability-text">Basic weapon skin</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Access to Hide &amp; Seek</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Sprint Boost — 5s speed dash</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Compass Ping — points to nearest hider once</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Basic scoreboard stats</span></li>
             </ul>
-            <button class="btn">Select Package</button>
+            <button class="btn" data-buy="Starter" data-eur="€2.99">Get Starter</button>
           </div>
 
           <div class="price-card featured">
-            <div class="price-badge">Most Popular</div>
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><polygon points="10,2 13,8 19,9 14,14 15,20 10,17 5,20 6,14 1,9 7,8"/></svg></div>
-            <h3>Pro Bundle</h3>
-            <p class="tier-desc">Advanced perks and lobby animations.</p>
-            <div class="price">€7.00</div>
-            <div class="price-note">One-time purchase</div>
+            <span class="price-badge">Most Popular</span>
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
+            <h3>Hider Pack</h3>
+            <p class="tier-desc">Stealthier hiding, sharper seeking.</p>
+            <div class="price mono">€5.99</div>
+            <div class="price-note">One-time</div>
             <ul>
-              <li><span class="ability-tag hider">Hider</span><span class="ability-text">Double jump taunt</span></li>
-              <li><span class="ability-tag seeker">Seeker</span><span class="ability-text">Unique kill effect</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Starter</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Silent Steps — no footstep sound, 10s</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Heat Vision — highlights nearby blocks, 5s</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Priority queue join</span></li>
             </ul>
-            <button class="btn">Select Package</button>
+            <button class="btn" data-buy="Hider Pack" data-eur="€5.99">Get Hider Pack</button>
           </div>
 
           <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10h16M10 2v16"/></svg></div>
-            <h3>Ultimate Pass</h3>
-            <p class="tier-desc">All current and future season rewards.</p>
-            <div class="price">€10.00</div>
-            <div class="price-note">Max price cap</div>
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="3" y="4" width="14" height="12" rx="2"/><path d="M3 8h14"/></svg></div>
+            <h3>Seeker Elite</h3>
+            <p class="tier-desc">Full ability set, max package.</p>
+            <div class="price mono">€10.00</div>
+            <div class="price-note">One-time</div>
             <ul>
-              <li><span class="ability-tag hider">Hider</span><span class="ability-text">Exclusive disguise skins</span></li>
-              <li><span class="ability-tag seeker">Seeker</span><span class="ability-text">Custom tracker sounds</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Hider Pack</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Smoke Cloak — blinds nearby seekers, 3s</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Freeze Trap — roots one hider, 3s</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Custom particle trail + exclusive chat title</span></li>
             </ul>
-            <button class="btn">Select Package</button>
+            <button class="btn" data-buy="Seeker Elite" data-eur="€10.00">Get Seeker Elite</button>
           </div>
         </div>
 
-        <div class="shop-note">Need help with a purchase? Open a ticket on our Discord server.</div>
+        <p class="shop-note">Card payments go through our Discord ticket + Tebex store. All sales are final.</p>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= DISCORD ================= -->
+  <div class="page" data-page="discord" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Discord</h1>
+        <p>Announcements, event pings, and support all happen here.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="join-card">
+          <div class="discord-lead">
+            <div>
+              <h2 class="display" style="font-size:20px;">Cake SMP Community</h2>
+              <p>Join to get whitelisted, chat with the community, and see event announcements.</p>
+            </div>
+            <a class="btn" href="https://discord.gg/s5qvDXvdSc" target="_blank" rel="noopener">Join Discord</a>
+          </div>
+
+          <div class="join-grid discord-grid">
+            <div class="slot">
+              <h3>Invite link</h3>
+              <div class="addr-field mono" style="margin-top:12px;">discord.gg/s5qvDXvdSc</div>
+            </div>
+            <div class="slot">
+              <h3>Support</h3>
+              <p style="margin-top:12px; color:var(--text-muted); font-size:14px;">Open a ticket in #support for build help or reports.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= RULES ================= -->
+  <div class="page" data-page="rules" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Rules</h1>
+        <p>Read before you join — both apply on Discord and in-game.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="rules-grid">
+          <div class="plank">
+            <div class="plank-head"><h3>Discord Rules</h3></div>
+            <ol>
+              <li>No disrespectful behavior towards other members</li>
+              <li>No toxicity or harassment towards other members</li>
+              <li>English only in general, media, and all other public channels</li>
+              <li>No self-promotion</li>
+              <li>No ragebaiting or provoking other members</li>
+              <li>No sexist, racist, or discriminatory content</li>
+              <li>Do not post content intended to offend, target, or seriously upset other members</li>
+              <li>No spamming in general, media, and all other public channels</li>
+            </ol>
+          </div>
+          <div class="plank">
+            <div class="plank-head"><h3>Minecraft Server Rules</h3></div>
+            <ol>
+              <li>No hacking or cheating (minimaps, X-ray, hacked clients, or any other unfair modifications)</li>
+              <li>No lag machines</li>
+              <li>No mods giving an unfair advantage</li>
+              <li>No alternate accounts</li>
+              <li>No spawn/camp killing</li>
+              <li>Do not post content intended to offend, target, or seriously upset other members</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= ACCOUNT ================= -->
+  <div class="page" data-page="account" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Account</h1>
+        <p>Sign in with your Gmail address to manage your profile.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="account-shell">
+
+          <!-- logged-out view -->
+          <div class="account-panel" id="account-login-view">
+            <h2 class="display">Sign in with Gmail</h2>
+            <p class="sub">Enter your Gmail address to sign in or create your Cake SMP account.</p>
+            <div class="account-field">
+              <label for="account-email">Gmail Address</label>
+              <input type="email" id="account-email" placeholder="example@gmail.com" autocomplete="email">
+            </div>
+            <button class="btn" id="account-login-btn">Sign In / Register</button>
+          </div>
+
+          <!-- logged-in view -->
+          <div class="account-panel" id="account-profile-view" hidden>
+            <div class="account-profile-head">
+              <div class="account-avatar-lg" id="profile-avatar">G</div>
+              <div>
+                <h2 class="display" id="profile-email">example@gmail.com</h2>
+                <p class="sub" id="profile-since">Member since —</p>
+              </div>
+            </div>
+
+            <button class="btn account-logout" id="account-logout-btn">Sign Out</button>
+          </div>
+
+        </div>
       </div>
     </section>
   </div>
@@ -1100,14 +1149,376 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <div>&copy; 2026 Cake SMP. All rights reserved.</div>
-    <div class="footer-nav">
+    <span>© CakeSMP 2026</span>
+    <nav class="footer-nav">
       <button data-nav="home">Home</button>
-      <button data-nav="rules">Rules</button>
+      <button data-nav="about">About</button>
+      <button data-nav="features">Features</button>
       <button data-nav="discord">Discord</button>
-    </div>
+      <button data-nav="rules">Rules</button>
+      <button data-nav="shop">Shop</button>
+      <button data-nav="account">Account</button>
+    </nav>
   </div>
 </footer>
+
+<script>
+  // ---- animated WebGL fragment-shader background ----
+  function createShaderBackground(canvas){
+    const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+    if(!gl) return null;
+
+    const vertSrc = `
+      attribute vec2 a_pos;
+      void main(){ gl_Position = vec4(a_pos, 0.0, 1.0); }
+    `;
+    const fragSrc = `
+      precision mediump float;
+      uniform vec2 u_resolution;
+      uniform float u_time;
+
+      float hash(vec2 p){
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453123);
+      }
+      float noise(vec2 p){
+        vec2 i = floor(p);
+        vec2 f = fract(p);
+        float a = hash(i);
+        float b = hash(i + vec2(1.0, 0.0));
+        float c = hash(i + vec2(0.0, 1.0));
+        float d = hash(i + vec2(1.0, 1.0));
+        vec2 u = f * f * (3.0 - 2.0 * f);
+        return mix(a, b, u.x) + (c - a) * u.y * (1.0 - u.x) + (d - b) * u.x * u.y;
+      }
+      float fbm(vec2 p){
+        float v = 0.0;
+        float amp = 0.5;
+        for(int i = 0; i < 5; i++){
+          v += amp * noise(p);
+          p *= 2.0;
+          amp *= 0.5;
+        }
+        return v;
+      }
+      void main(){
+        vec2 uv = gl_FragCoord.xy / u_resolution.xy;
+        vec2 p = uv * vec2(3.6, 2.4);
+        p.x += u_time * 0.015;
+        float warp = fbm(p + u_time * 0.03);
+        float n = fbm(p + warp * 1.4);
+
+        float shade = smoothstep(0.15, 0.85, n);
+        vec3 base = mix(vec3(0.015, 0.015, 0.017), vec3(0.1, 0.1, 0.11), shade);
+
+        float vig = smoothstep(1.1, 0.2, length(uv - vec2(0.5, 0.4)));
+        base *= mix(0.6, 1.0, vig);
+
+        gl_FragColor = vec4(base, 1.0);
+      }
+    `;
+
+    function compile(type, src){
+      const shader = gl.createShader(type);
+      gl.shaderSource(shader, src);
+      gl.compileShader(shader);
+      if(!gl.getShaderParameter(shader, gl.COMPILE_STATUS)){
+        gl.deleteShader(shader);
+        return null;
+      }
+      return shader;
+    }
+
+    const vert = compile(gl.VERTEX_SHADER, vertSrc);
+    const frag = compile(gl.FRAGMENT_SHADER, fragSrc);
+    if(!vert || !frag) return null;
+
+    const program = gl.createProgram();
+    gl.attachShader(program, vert);
+    gl.attachShader(program, frag);
+    gl.linkProgram(program);
+    if(!gl.getProgramParameter(program, gl.LINK_STATUS)) return null;
+    gl.useProgram(program);
+
+    const posBuffer = gl.createBuffer();
+    gl.bindBuffer(gl.ARRAY_BUFFER, posBuffer);
+    gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 3,-1, -1,3]), gl.STATIC_DRAW);
+    const posLoc = gl.getAttribLocation(program, 'a_pos');
+    gl.enableVertexAttribArray(posLoc);
+    gl.vertexAttribPointer(posLoc, 2, gl.FLOAT, false, 0, 0);
+
+    const resLoc = gl.getUniformLocation(program, 'u_resolution');
+    const timeLoc = gl.getUniformLocation(program, 'u_time');
+
+    function resize(){
+      const rect = canvas.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      const w = Math.max(1, Math.round(rect.width * dpr));
+      const h = Math.max(1, Math.round(rect.height * dpr));
+      if(canvas.width !== w || canvas.height !== h){
+        canvas.width = w;
+        canvas.height = h;
+        gl.viewport(0, 0, w, h);
+      }
+    }
+
+    function draw(t){
+      resize();
+      gl.uniform2f(resLoc, canvas.width, canvas.height);
+      gl.uniform1f(timeLoc, t);
+      gl.drawArrays(gl.TRIANGLES, 0, 3);
+    }
+
+    const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let raf = null;
+
+    function start(){
+      if(reduceMotion){ draw(0); return; }
+      if(raf) return;
+      function loop(ts){
+        draw(ts * 0.001);
+        raf = requestAnimationFrame(loop);
+      }
+      raf = requestAnimationFrame(loop);
+    }
+
+    draw(0);
+    window.addEventListener('resize', () => draw(performance.now() * 0.001));
+
+    return { start };
+  }
+
+  const siteShader = createShaderBackground(document.getElementById('site-shader'));
+  if(siteShader) siteShader.start();
+
+  // ---- client-side page router ----
+  const pages = Array.from(document.querySelectorAll('.page'));
+  const navButtons = Array.from(document.querySelectorAll('[data-nav]'));
+
+  function showPage(name, scrollTargetId){
+    let matched = false;
+    pages.forEach(p => {
+      const active = p.dataset.page === name;
+      p.hidden = !active;
+      if(active) matched = true;
+    });
+    if(!matched){ pages[0].hidden = false; name = pages[0].dataset.page; }
+
+    if(name === 'account' && typeof window.refreshAccountView === 'function'){
+      window.refreshAccountView();
+    }
+
+    navButtons.forEach(b => {
+      if(b.classList.contains('wordmark') || b.closest('.footer-nav') || b.dataset.scroll) return;
+      if(b.dataset.nav === name) b.setAttribute('aria-current', 'page');
+      else b.removeAttribute('aria-current');
+    });
+
+    if(scrollTargetId){
+      requestAnimationFrame(() => {
+        document.getElementById(scrollTargetId)?.scrollIntoView({ behavior:'smooth', block:'start' });
+      });
+    } else {
+      window.scrollTo(0, 0);
+    }
+  }
+
+  function routeFromHash(){
+    const name = (location.hash.replace('#','') || 'home');
+    showPage(name);
+  }
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const name = btn.dataset.nav;
+      location.hash = name;
+      showPage(name, btn.dataset.scroll);
+    });
+  });
+
+  window.addEventListener('hashchange', routeFromHash);
+  routeFromHash();
+
+  // ---- copy to clipboard ----
+  document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const el = document.getElementById(btn.dataset.target);
+      const text = el.textContent.trim();
+      try{ await navigator.clipboard.writeText(text); }
+      catch(e){
+        const range = document.createRange();
+        range.selectNode(el);
+        window.getSelection().removeAllRanges();
+        window.getSelection().addRange(range);
+        document.execCommand('copy');
+        window.getSelection().removeAllRanges();
+      }
+      const original = btn.innerHTML;
+      btn.innerHTML = `<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M4 10l4 4 8-9"/></svg>`;
+      setTimeout(() => { btn.innerHTML = original; }, 1400);
+    });
+  });
+
+  // ---- account system (Gmail) ----
+  const ACCOUNT_KEY = 'cakesmp_gmail_account';
+
+  function loadAccount(){
+    try{
+      const raw = localStorage.getItem(ACCOUNT_KEY);
+      return raw ? JSON.parse(raw) : null;
+    }catch(e){ return null; }
+  }
+  function saveAccount(acc){
+    try{ localStorage.setItem(ACCOUNT_KEY, JSON.stringify(acc)); }catch(e){}
+  }
+  function createAccount(email){
+    const acc = {
+      email,
+      since: new Date().toISOString().slice(0,10)
+    };
+    saveAccount(acc);
+    return acc;
+  }
+
+  const headerChip = document.getElementById('header-account-chip');
+  const loginView = document.getElementById('account-login-view');
+  const profileView = document.getElementById('account-profile-view');
+  const emailInput = document.getElementById('account-email');
+
+  function updateHeaderChip(){
+    const acc = loadAccount();
+    if(acc){
+      headerChip.textContent = acc.email.slice(0,2).toUpperCase();
+      headerChip.title = acc.email;
+    } else {
+      headerChip.textContent = 'IN';
+      headerChip.title = 'Sign in';
+    }
+  }
+
+  window.refreshAccountView = function(){
+    const acc = loadAccount();
+    if(acc){
+      loginView.hidden = true;
+      profileView.hidden = false;
+      profileView.style.animation = 'none';
+      void profileView.offsetWidth;
+      profileView.style.animation = '';
+      document.getElementById('profile-avatar').textContent = acc.email.slice(0,2).toUpperCase();
+      document.getElementById('profile-email').textContent = acc.email;
+      document.getElementById('profile-since').textContent = `Member since ${acc.since}`;
+    } else {
+      loginView.hidden = false;
+      profileView.hidden = true;
+    }
+    updateHeaderChip();
+  };
+
+  document.getElementById('account-login-btn').addEventListener('click', () => {
+    const email = emailInput.value.trim();
+    if(!email || !email.endsWith('@gmail.com')){
+      alert('Molimo unesite valjanu Gmail adresu (koja završava s @gmail.com).');
+      emailInput.focus();
+      return;
+    }
+    createAccount(email);
+    window.refreshAccountView();
+  });
+  emailInput?.addEventListener('keydown', (e) => {
+    if(e.key === 'Enter') document.getElementById('account-login-btn').click();
+  });
+
+  document.getElementById('account-logout-btn').addEventListener('click', () => {
+    localStorage.removeItem(ACCOUNT_KEY);
+    window.refreshAccountView();
+  });
+
+  // ---- shop link ----
+  document.querySelectorAll('[data-buy]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      window.open('https://discord.gg/s5qvDXvdSc', '_blank', 'noopener');
+    });
+  });
+
+  updateHeaderChip();
+
+  // ---- event countdown ----
+  function nextSunday(){
+    const now = new Date();
+    const target = new Date(now);
+    const daysUntilSunday = (7 - now.getDay()) % 7 || 7;
+    target.setDate(now.getDate() + daysUntilSunday);
+    target.setHours(20, 0, 0, 0);
+    return target;
+  }
+
+  const countdownEl = document.getElementById('event-countdown');
+  if(countdownEl){
+    const target = nextSunday();
+    const unitEls = {
+      days: countdownEl.querySelector('[data-unit="days"]'),
+      hours: countdownEl.querySelector('[data-unit="hours"]'),
+      minutes: countdownEl.querySelector('[data-unit="minutes"]'),
+      seconds: countdownEl.querySelector('[data-unit="seconds"]')
+    };
+    let lastSeconds = null;
+
+    function tickCountdown(){
+      const diff = Math.max(0, target - new Date());
+      const d = Math.floor(diff / 86400000);
+      const h = Math.floor((diff % 86400000) / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+
+      unitEls.days.textContent = String(d).padStart(2, '0');
+      unitEls.hours.textContent = String(h).padStart(2, '0');
+      unitEls.minutes.textContent = String(m).padStart(2, '0');
+
+      if(s !== lastSeconds){
+        unitEls.seconds.textContent = String(s).padStart(2, '0');
+        const secCard = unitEls.seconds.closest('.countdown-unit');
+        secCard.classList.remove('tick');
+        void secCard.offsetWidth;
+        secCard.classList.add('tick');
+        lastSeconds = s;
+      }
+    }
+    tickCountdown();
+    setInterval(tickCountdown, 1000);
+  }
+
+  // ---- Live Minecraft player counts ----
+  async function updateServerStatus(host, elementId) {
+    const el = document.getElementById(elementId);
+    if (!el) return;
+
+    try {
+      const res = await fetch("https://api.mcsrvstat.us/3/" + encodeURIComponent(host), {
+        cache: "no-store"
+      });
+      if (!res.ok) throw new Error("status request failed");
+
+      const data = await res.json();
+      if (data && data.online && data.players) {
+        el.textContent = `${data.players.online} / ${data.players.max}`;
+      } else {
+        el.textContent = "Offline";
+      }
+    } catch (e) {
+      el.textContent = "Unavailable";
+    }
+  }
+
+  async function updateAllServerStatus() {
+    await Promise.all([
+      updateServerStatus("cakesmp.minecraft.co.com", "cake-online"),
+      updateServerStatus("hideseekcs.folium.lol", "hide-online-pill"),
+      updateServerStatus("hideseekcs.folium.lol", "hide-players")
+    ]);
+  }
+
+  updateAllServerStatus();
+  setInterval(updateAllServerStatus, 30000);
+</script>
 
 </body>
 </html>
