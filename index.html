@@ -1,3 +1,7 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
 <title>CakeSMP</title>
 <meta name="description" content="Minecraft SMP server — join info, features, Discord, and rules." />
 <style>
@@ -877,7 +881,8 @@
     color: var(--text);
   }
 </style>
-
+</head>
+<body>
 
 <canvas id="site-shader" aria-hidden="true"></canvas>
 
@@ -902,7 +907,6 @@
 
 <main>
 
-  <!-- ================= HOME ================= -->
   <div class="page" data-page="home">
     <section class="hero">
       <div class="hero-bg" id="hero-bg" aria-hidden="true">
@@ -968,7 +972,6 @@
     </section>
   </div>
 
-  <!-- ================= ABOUT ================= -->
   <div class="page" data-page="about" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -997,7 +1000,6 @@
     </section>
   </div>
 
-  <!-- ================= FEATURES ================= -->
   <div class="page" data-page="features" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1033,7 +1035,6 @@
     </section>
   </div>
 
-  <!-- ================= SHOP ================= -->
   <div class="page" data-page="shop" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1132,7 +1133,6 @@
     </section>
   </div>
 
-  <!-- ================= DISCORD ================= -->
   <div class="page" data-page="discord" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1166,7 +1166,6 @@
     </section>
   </div>
 
-  <!-- ================= RULES ================= -->
   <div class="page" data-page="rules" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1206,7 +1205,6 @@
     </section>
   </div>
 
-  <!-- ================= ACCOUNT ================= -->
   <div class="page" data-page="account" hidden>
     <div class="page-title">
       <div class="page-title-inner wrap">
@@ -1218,7 +1216,6 @@
       <div class="wrap">
         <div class="account-shell">
 
-          <!-- logged-out view -->
           <div class="account-panel" id="account-login-view">
             <h2 class="display">Link your account</h2>
             <p class="sub">Enter your Minecraft username to create or open your Cake SMP account. New accounts start with 500 Cake Coins.</p>
@@ -1229,7 +1226,6 @@
             <button class="btn" id="account-login-btn">Log In / Create Account</button>
           </div>
 
-          <!-- logged-in view -->
           <div class="account-panel" id="account-profile-view" hidden>
             <div class="account-profile-head">
               <div class="account-avatar-lg" id="profile-avatar">S</div>
@@ -1277,11 +1273,9 @@
 
 <script>
   // ---- animated WebGL fragment-shader background (drifting monochrome fog) ----
-  // One fixed, full-viewport canvas behind the entire site (header/main/footer
-  // all sit above it via z-index). Keeps running across every page/route.
   function createShaderBackground(canvas){
     const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-    if(!gl) return null; // falls back to the plain CSS gradient behind the canvas
+    if(!gl) return null;
 
     const vertSrc = `
       attribute vec2 a_pos;
@@ -1395,20 +1389,17 @@
       }
       raf = requestAnimationFrame(loop);
     }
-    function stop(){
-      if(raf){ cancelAnimationFrame(raf); raf = null; }
-    }
 
     draw(0);
     window.addEventListener('resize', () => draw(performance.now() * 0.001));
 
-    return { start, stop };
+    return { start };
   }
 
   const siteShader = createShaderBackground(document.getElementById('site-shader'));
   if(siteShader) siteShader.start();
 
-  // ---- client-side page router (hash based, no reload) ----
+  // ---- client-side page router ----
   const pages = Array.from(document.querySelectorAll('.page'));
   const navButtons = Array.from(document.querySelectorAll('[data-nav]'));
 
@@ -1476,7 +1467,7 @@
     });
   });
 
-  // ---- account system (demo, stored locally in this browser only) ----
+  // ---- account system ----
   const ACCOUNT_KEY = 'cakesmp_account';
   const START_COINS = 500;
 
@@ -1568,7 +1559,7 @@
     window.refreshAccountView();
   });
 
-  // ---- shop: card purchase (redirects to Discord) + coin redemption ----
+  // ---- shop: card purchase & coin redemption ----
   document.querySelectorAll('[data-buy]').forEach(btn => {
     btn.addEventListener('click', () => {
       window.open('https://discord.gg/s5qvDXvdSc', '_blank', 'noopener');
@@ -1604,7 +1595,7 @@
 
   updateHeaderChip();
 
-  // ---- event countdown: ends next Sunday, "Winner of Hide & Seek" ----
+  // ---- event countdown ----
   function nextSunday(){
     const now = new Date();
     const target = new Date(now);
@@ -1649,9 +1640,7 @@
     setInterval(tickCountdown, 1000);
   }
 
-<script>
-  // Live Minecraft player counts.
-  // Uses mcsrvstat.us public status API; if the API is unavailable, the page shows "Offline / unavailable".
+  // ---- Live Minecraft player counts ----
   async function updateServerStatus(host, elementId) {
     const el = document.getElementById(elementId);
     if (!el) return;
@@ -1676,7 +1665,6 @@
   async function updateAllServerStatus() {
     await Promise.all([
       updateServerStatus("cakesmp.minecraft.co.com", "cake-online"),
-      updateServerStatus("cakesmp.minecraft.co.com", "cake-online-main"),
       updateServerStatus("hideseekcs.folium.lol", "hide-online-pill"),
       updateServerStatus("hideseekcs.folium.lol", "hide-players")
     ]);
@@ -1685,4 +1673,6 @@
   updateAllServerStatus();
   setInterval(updateAllServerStatus, 30000);
 </script>
-</script>
+
+</body>
+</html>
