@@ -198,36 +198,16 @@
     border-radius:6px; border:1px solid var(--border-2); font-size:11px; font-weight:700; color:var(--text-dim);
   }
 
-  /* ========== SHOP LOCK ========== */
-  .shop-locked-wrapper{
-    position:relative;
-    min-height:420px;
-  }
+  /* Shop lock */
+  .shop-locked-wrapper{ position:relative; min-height:420px; }
   .shop-lock-overlay{
-    position:absolute;
-    inset:0;
-    background:rgba(5,5,5,0.92);
-    backdrop-filter:blur(8px);
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    z-index:10;
-    border-radius:18px;
+    position:absolute; inset:0; background:rgba(5,5,5,0.92); backdrop-filter:blur(8px);
+    display:flex; align-items:center; justify-content:center; z-index:10; border-radius:18px;
   }
   .shop-lock-overlay[hidden]{ display:none; }
-  .shop-lock-message{
-    text-align:center;
-    padding:40px 24px;
-  }
-  .shop-lock-message h2{
-    font-size:28px;
-    margin-bottom:12px;
-  }
-  .shop-lock-message p{
-    color:var(--text-muted);
-    margin-bottom:28px;
-    font-size:16px;
-  }
+  .shop-lock-message{ text-align:center; padding:40px 24px; }
+  .shop-lock-message h2{ font-size:28px; margin-bottom:12px; }
+  .shop-lock-message p{ color:var(--text-muted); margin-bottom:28px; font-size:16px; }
 
   .shop-intro{ text-align:center; max-width:56ch; margin:0 auto 40px; color:var(--text-muted); font-size:15px; }
   .shop-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; max-width:960px; margin:0 auto; }
@@ -494,23 +474,26 @@
     <section class="page-fill"><div class="wrap">
       <div class="rules-grid">
         <div class="plank">
-          <div class="plank-head"><h3>General</h3></div>
+          <div class="plank-head"><h3>Discord Rules</h3></div>
           <ol>
-            <li>No hacking, cheating, or x-ray of any kind.</li>
-            <li>No griefing or stealing from other players.</li>
-            <li>Be respectful — no hate speech or harassment.</li>
-            <li>No advertising other servers.</li>
-            <li>Listen to staff. Decisions are final.</li>
+            <li>No disrespectful behavior towards other members.</li>
+            <li>No toxicity or harassment towards other members.</li>
+            <li>English only in #general, #media, and all other public channels.</li>
+            <li>No self-promotion.</li>
+            <li>No ragebaiting or provoking other members.</li>
+            <li>No sexist, racist, or discriminatory content.</li>
+            <li>Do not post content intended to offend, target, or seriously upset other members.</li>
+            <li>No spamming in #general, #media, and all other public channels.</li>
           </ol>
         </div>
         <div class="plank">
-          <div class="plank-head"><h3>Hide &amp; Seek</h3></div>
+          <div class="plank-head"><h3>Minecraft Server Rules</h3></div>
           <ol>
-            <li>No combat logging or intentional lag switches.</li>
-            <li>Do not reveal hider locations outside the game.</li>
-            <li>Abilities are for fun — do not exploit them.</li>
-            <li>Keep chat clean during matches.</li>
-            <li>Have fun and play fair.</li>
+            <li>No hacking or cheating. This includes minimaps, X-ray, hacked clients, or any other unfair modifications.</li>
+            <li>No lag machines.</li>
+            <li>No mods giving an unfair advantage.</li>
+            <li>No alternate accounts.</li>
+            <li>No spawn / camp killing.</li>
           </ol>
         </div>
       </div>
@@ -523,7 +506,6 @@
     <section class="page-fill">
       <div class="wrap">
         <div class="shop-locked-wrapper">
-          <!-- LOCK OVERLAY -->
           <div class="shop-lock-overlay" id="shop-lock">
             <div class="shop-lock-message">
               <h2 class="display">To access shop please sign up</h2>
@@ -532,7 +514,6 @@
             </div>
           </div>
 
-          <!-- Actual shop content (visible only when logged in) -->
           <div id="shop-content">
             <p class="shop-intro">All purchases are cosmetic or convenience only — nothing here affects fair play in Hide &amp; Seek.</p>
             <div class="shop-grid">
@@ -639,14 +620,10 @@
           <div class="account-message" id="account-msg"></div>
         </div>
 
-        <!-- Verification -->
         <div class="account-panel" id="account-verify" hidden>
           <h2 class="display">Verify your email</h2>
           <p class="sub">Enter the 6-digit code below to activate your account.</p>
-
-          <!-- Code is shown here so you can test (real email delivery needs EmailJS) -->
           <div class="code-display" id="shown-code">------</div>
-
           <form id="verify-form">
             <div class="account-field">
               <label for="verify-code">Verification Code</label>
@@ -658,7 +635,6 @@
           <button type="button" class="btn account-logout" id="cancel-verify" style="margin-top:12px;">Cancel</button>
         </div>
 
-        <!-- Profile -->
         <div class="account-panel" id="account-profile" hidden>
           <div class="account-profile-head">
             <div class="account-avatar-lg" id="profile-avatar">CS</div>
@@ -774,7 +750,7 @@
   refreshStatus();
   setInterval(refreshStatus, 60000);
 
-  // ========== ACCOUNT + SHOP LOCK ==========
+  // Account + Shop lock
   const AUTH_KEY = 'cakesmp_user';
   const PENDING_KEY = 'cakesmp_pending';
 
@@ -797,10 +773,7 @@
     const user = getUser();
     const pending = getPending();
 
-    // Shop lock
-    if (shopLock) {
-      shopLock.hidden = !!user;   // hide lock when logged in
-    }
+    if (shopLock) shopLock.hidden = !!user;
 
     if (user) {
       authPanel.hidden = true;
@@ -816,7 +789,6 @@
       verifyPanel.hidden = false;
       profilePanel.hidden = true;
       chip.textContent = 'CS';
-      // Show the code so you can test
       document.getElementById('shown-code').textContent = pending.code;
     } else {
       authPanel.hidden = false;
@@ -876,7 +848,7 @@
     const code = String(Math.floor(100000 + Math.random() * 900000));
     setPending({ username, email, password: pass, code });
 
-    // Notify owner (no redirect)
+    // Notify owner (no page redirect)
     const body = new FormData();
     body.append('_subject', 'Cake SMP - New Account');
     body.append('_captcha', 'false');
@@ -926,7 +898,7 @@
 
   updateUI();
 
-  // Canvas
+  // Canvas background
   const canvas = document.getElementById('site-shader');
   const ctx = canvas.getContext('2d');
   let w, h, particles = [];
