@@ -108,6 +108,11 @@
     background:none;
     border:1.5px solid transparent;
     cursor:pointer;
+    transition:color 180ms ease, border-color 180ms ease, transform 180ms ease;
+  }
+  nav.primary button:hover{
+    color:var(--text);
+    transform:translateY(-1px);
   }
   nav.primary button[aria-current="page"]{
     color:var(--text);
@@ -142,11 +147,18 @@
     background:var(--line);
     color:#000000;
     cursor:pointer;
-    transition:opacity 120ms ease, transform 120ms ease;
+    transition:opacity 200ms ease, transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms ease;
     font-family:inherit;
   }
-  .btn:hover{ opacity:0.85; }
-  .btn:active{ transform:scale(0.97); }
+  .btn:hover{
+    opacity:0.92;
+    transform:translateY(-2px) scale(1.03);
+    box-shadow:0 8px 22px rgba(255,255,255,0.18);
+  }
+  .btn:active{
+    transform:translateY(0) scale(0.96);
+    box-shadow:none;
+  }
   .btn:focus-visible{ outline:2px solid var(--line); outline-offset:3px; }
 
   .avatar{
@@ -158,6 +170,12 @@
     font-size:12px; font-weight:700;
     color:var(--text-muted);
     flex:none;
+    cursor:pointer;
+    transition:transform 200ms ease, border-color 200ms ease;
+  }
+  .avatar:hover{
+    transform:scale(1.08);
+    border-color:var(--line);
   }
 
   /* ---------- page title bar ---------- */
@@ -332,9 +350,14 @@
     color:var(--text-muted);
     display:flex; align-items:center; justify-content:center;
     cursor:pointer;
-    transition:background 120ms ease, color 120ms ease, border-color 120ms ease;
+    transition:background 160ms ease, color 160ms ease, border-color 160ms ease, transform 180ms ease;
   }
-  .icon-btn:hover{ color:var(--text); border-color:var(--text); }
+  .icon-btn:hover{
+    color:var(--text);
+    border-color:var(--text);
+    transform:scale(1.1);
+  }
+  .icon-btn:active{ transform:scale(0.92); }
   .icon-btn:focus-visible{ outline:2px solid var(--line); outline-offset:2px; }
   .icon-btn svg{ width:15px; height:15px; }
 
@@ -786,6 +809,37 @@
   }
   .account-logout:hover{ color:var(--text); border-color:var(--text-muted); opacity:1; }
 
+  .account-tabs{
+    display:flex;
+    gap:8px;
+    margin-bottom:22px;
+  }
+  .account-tabs button{
+    flex:1;
+    padding:10px;
+    border-radius:10px;
+    border:1.5px solid var(--border);
+    background:var(--raised);
+    color:var(--text-muted);
+    font-weight:600;
+    font-size:14px;
+    cursor:pointer;
+    transition:all 180ms ease;
+  }
+  .account-tabs button.active{
+    background:var(--line);
+    color:#000;
+    border-color:var(--line);
+  }
+  .account-message{
+    margin-top:14px;
+    font-size:13.5px;
+    text-align:center;
+    min-height:20px;
+  }
+  .account-message.success{ color:#7dffa0; }
+  .account-message.error{ color:#ff8a8a; }
+
   /* ---------- footer ---------- */
   footer{ border-top:1px solid var(--border); padding:28px 0; }
   .footer-inner{
@@ -799,6 +853,7 @@
   .footer-nav button{
     font:inherit; background:none; border:0; padding:0; cursor:pointer;
     color:var(--text-dim);
+    transition:color 150ms ease;
   }
   .footer-nav button:hover{ color:var(--text); }
 </style>
@@ -965,6 +1020,73 @@
     </section>
   </div>
 
+  <!-- ================= DISCORD ================= -->
+  <div class="page" data-page="discord" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Discord</h1>
+        <p>Join the community, get updates, and find events.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="discord-lead">
+          <div>
+            <h2 class="display" style="font-size:24px;">Cake SMP Community</h2>
+            <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p>
+          </div>
+          <a class="btn" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Join Discord</a>
+        </div>
+        <div class="join-grid discord-grid">
+          <div class="slot">
+            <div class="slot-head"><h3>Announcements</h3></div>
+            <p style="color:var(--text-muted);font-size:14px;margin:0;">Official updates, event times, and maintenance notices are posted here first.</p>
+          </div>
+          <div class="slot">
+            <div class="slot-head"><h3>Looking for Group</h3></div>
+            <p style="color:var(--text-muted);font-size:14px;margin:0;">Find teammates for builds, trading, or Hide &amp; Seek sessions.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- ================= RULES ================= -->
+  <div class="page" data-page="rules" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Server Rules</h1>
+        <p>Keep it fair so everyone can enjoy Season 3.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="rules-grid">
+          <div class="plank">
+            <div class="plank-head"><h3>General</h3></div>
+            <ol>
+              <li>No hacking, cheating, or x-ray of any kind.</li>
+              <li>No griefing or stealing from other players.</li>
+              <li>Be respectful — no hate speech or harassment.</li>
+              <li>No advertising other servers.</li>
+              <li>Listen to staff. Decisions are final.</li>
+            </ol>
+          </div>
+          <div class="plank">
+            <div class="plank-head"><h3>Hide &amp; Seek</h3></div>
+            <ol>
+              <li>No combat logging or intentional lag switches.</li>
+              <li>Do not reveal hider locations outside the game.</li>
+              <li>Abilities are for fun — do not exploit them.</li>
+              <li>Keep chat clean during matches.</li>
+              <li>Have fun and play fair.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
   <!-- ================= SHOP ================= -->
   <div class="page" data-page="shop" hidden>
     <div class="page-title">
@@ -1002,30 +1124,108 @@
             <div class="price-note">One-time</div>
             <ul>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Starter</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Invisibility Cloak — 3s vanish once per match</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Radar Sweep — reveals hiders in a 15-block radius</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Custom kill effects &amp; chat tag</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Invisibility Pulse — 4s cloak</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Double Compass — two pings per round</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Priority queue access</span></li>
             </ul>
             <button class="btn" onclick="window.location.href='https://www.youtube.com/watch?v=Iqr3XIhSnUQ'" data-buy="Hider Pack" data-eur="€5.99">Get Hider Pack</button>
           </div>
 
           <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l7 4v8l-7 4-7-4V6l7-4z"/></svg></div>
-            <h3>Ultimate VIP</h3>
-            <p class="tier-desc">For the absolute masters of the game.</p>
+            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
+            <h3>Ultimate</h3>
+            <p class="tier-desc">Maximum abilities and perks.</p>
             <div class="price mono">€9.99</div>
             <div class="price-note">One-time</div>
             <ul>
               <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Hider Pack</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Decoy Hologram — spawn a fake clone</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Juggernaut Rush — temporary resistance boost</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Exclusive lobby particle effects</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Decoy — leave a fake trail</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Thermal Scan — brief wall vision</span></li>
+              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Custom particle trail</span></li>
             </ul>
-            <button class="btn" onclick="window.location.href='https://www.youtube.com/watch?v=Iqr3XIhSnUQ'" data-buy="Ultimate VIP" data-eur="€9.99">Get Ultimate VIP</button>
+            <button class="btn" onclick="window.location.href='https://www.youtube.com/watch?v=Iqr3XIhSnUQ'" data-buy="Ultimate" data-eur="€9.99">Get Ultimate</button>
           </div>
         </div>
+        <p class="shop-note">All purchases are final. Contact staff on Discord for support.</p>
+      </div>
+    </section>
+  </div>
 
-        <div class="shop-note">Looking for custom ranks or bundles? Join our Discord server to open a support ticket.</div>
+  <!-- ================= ACCOUNT ================= -->
+  <div class="page" data-page="account" hidden>
+    <div class="page-title">
+      <div class="page-title-inner wrap">
+        <h1 class="display">Account</h1>
+        <p>Sign in or create an account with your Minecraft username.</p>
+      </div>
+    </div>
+    <section class="page-fill">
+      <div class="wrap">
+        <div class="account-shell">
+          <!-- Logged out view -->
+          <div class="account-panel" id="account-auth">
+            <div class="account-tabs">
+              <button type="button" class="active" data-tab="signin">Sign In</button>
+              <button type="button" data-tab="signup">Sign Up</button>
+            </div>
+
+            <!-- Sign In -->
+            <div id="tab-signin">
+              <h2 class="display">Welcome back</h2>
+              <p class="sub">Use your Minecraft username to sign in.</p>
+              <form id="signin-form">
+                <div class="account-field">
+                  <label for="signin-user">Minecraft Username</label>
+                  <input type="text" id="signin-user" name="username" required autocomplete="username" placeholder="YourMinecraftName" maxlength="16">
+                </div>
+                <div class="account-field">
+                  <label for="signin-pass">Password</label>
+                  <input type="password" id="signin-pass" name="password" required autocomplete="current-password" placeholder="••••••••">
+                </div>
+                <button type="submit" class="btn">Sign In</button>
+              </form>
+            </div>
+
+            <!-- Sign Up -->
+            <div id="tab-signup" hidden>
+              <h2 class="display">Create account</h2>
+              <p class="sub">Register with your Minecraft username. A notification will be sent to the server team.</p>
+              <form id="signup-form" action="https://formsubmit.co/smatija1404@gmail.com" method="POST">
+                <input type="hidden" name="_subject" value="New Cake SMP Account Registration">
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_template" value="table">
+                <div class="account-field">
+                  <label for="signup-user">Minecraft Username</label>
+                  <input type="text" id="signup-user" name="minecraft_username" required autocomplete="username" placeholder="YourMinecraftName" maxlength="16" pattern="[A-Za-z0-9_]{3,16}">
+                </div>
+                <div class="account-field">
+                  <label for="signup-pass">Password</label>
+                  <input type="password" id="signup-pass" name="password" required autocomplete="new-password" placeholder="••••••••" minlength="6">
+                </div>
+                <div class="account-field">
+                  <label for="signup-pass2">Confirm Password</label>
+                  <input type="password" id="signup-pass2" required autocomplete="new-password" placeholder="••••••••" minlength="6">
+                </div>
+                <button type="submit" class="btn">Create Account</button>
+              </form>
+            </div>
+
+            <div class="account-message" id="account-msg"></div>
+          </div>
+
+          <!-- Logged in view -->
+          <div class="account-panel" id="account-profile" hidden>
+            <div class="account-profile-head">
+              <div class="account-avatar-lg" id="profile-avatar">CS</div>
+              <div>
+                <h2 class="display" id="profile-name">Player</h2>
+                <p class="sub">Minecraft account · Cake SMP</p>
+              </div>
+            </div>
+            <p style="color:var(--text-muted);font-size:14px;">You are signed in with your Minecraft username. Enjoy the server!</p>
+            <button type="button" class="btn account-logout" id="logout-btn">Sign Out</button>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -1034,14 +1234,256 @@
 
 <footer>
   <div class="wrap footer-inner">
-    <div>&copy; 2026 Cake SMP. Not an official Minecraft product.</div>
+    <div>© 2026 Cake SMP · Season 3</div>
     <div class="footer-nav">
       <button data-nav="home">Home</button>
       <button data-nav="rules">Rules</button>
-      <button data-nav="shop">Shop</button>
+      <button data-nav="discord">Discord</button>
+      <button data-nav="account">Account</button>
     </div>
   </div>
 </footer>
 
+<script>
+(function(){
+  // ---------- Navigation ----------
+  const pages = document.querySelectorAll('.page');
+  const navButtons = document.querySelectorAll('[data-nav]');
+
+  function showPage(name){
+    pages.forEach(p => {
+      p.hidden = p.dataset.page !== name;
+    });
+    document.querySelectorAll('nav.primary button').forEach(btn => {
+      btn.setAttribute('aria-current', btn.dataset.nav === name ? 'page' : null);
+    });
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  }
+
+  navButtons.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const target = btn.dataset.nav;
+      showPage(target);
+      if (btn.dataset.scroll === 'join') {
+        setTimeout(() => {
+          const el = document.getElementById('join');
+          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        }, 80);
+      }
+    });
+  });
+
+  // ---------- Copy buttons ----------
+  document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
+    btn.addEventListener('click', async () => {
+      const id = btn.dataset.target;
+      const el = document.getElementById(id);
+      if (!el) return;
+      try {
+        await navigator.clipboard.writeText(el.textContent.trim());
+        const original = btn.innerHTML;
+        btn.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg>';
+        setTimeout(() => { btn.innerHTML = original; }, 1400);
+      } catch(e){}
+    });
+  });
+
+  // ---------- Countdown (Days, Hours, Min, Sec) ----------
+  const targetDate = new Date('2026-09-20T18:00:00').getTime();
+  const unitEls = {
+    days: document.querySelector('[data-unit="days"]'),
+    hours: document.querySelector('[data-unit="hours"]'),
+    minutes: document.querySelector('[data-unit="minutes"]'),
+    seconds: document.querySelector('[data-unit="seconds"]')
+  };
+
+  function updateCountdown(){
+    const now = Date.now();
+    let diff = Math.max(0, targetDate - now);
+    const d = Math.floor(diff / 86400000); diff %= 86400000;
+    const h = Math.floor(diff / 3600000);  diff %= 3600000;
+    const m = Math.floor(diff / 60000);    diff %= 60000;
+    const s = Math.floor(diff / 1000);
+
+    const vals = { days:d, hours:h, minutes:m, seconds:s };
+    Object.keys(vals).forEach(k => {
+      const el = unitEls[k];
+      if (!el) return;
+      const next = String(vals[k]).padStart(2,'0');
+      if (el.textContent !== next) {
+        el.textContent = next;
+        const unit = el.closest('.countdown-unit');
+        if (unit) {
+          unit.classList.remove('tick');
+          void unit.offsetWidth;
+          unit.classList.add('tick');
+        }
+      }
+    });
+  }
+  updateCountdown();
+  setInterval(updateCountdown, 1000);
+
+  // ---------- Online status ----------
+  async function checkServer(host, elOnline, elPlayers){
+    try {
+      const res = await fetch(`https://api.mcsrvstat.us/2/${host}`);
+      const data = await res.json();
+      if (data && data.online) {
+        if (elOnline) elOnline.textContent = data.players?.online ?? 'Online';
+        if (elPlayers) elPlayers.textContent = `${data.players?.online ?? 0} / ${data.players?.max ?? '?'}`;
+      } else {
+        if (elOnline) elOnline.textContent = 'Offline';
+        if (elPlayers) elPlayers.textContent = 'Offline';
+      }
+    } catch(e) {
+      if (elOnline) elOnline.textContent = '—';
+      if (elPlayers) elPlayers.textContent = 'Unavailable';
+    }
+  }
+
+  function refreshStatus(){
+    checkServer('cakesmp.minecraft.co.com', document.getElementById('cake-online'));
+    checkServer('hideseekcs.folium.lol', document.getElementById('hide-online-pill'), document.getElementById('hide-players'));
+  }
+  refreshStatus();
+  setInterval(refreshStatus, 60000);
+
+  // ---------- Account system (Minecraft username) ----------
+  const AUTH_KEY = 'cakesmp_user';
+  const authPanel = document.getElementById('account-auth');
+  const profilePanel = document.getElementById('account-profile');
+  const msgEl = document.getElementById('account-msg');
+  const chip = document.getElementById('header-account-chip');
+
+  function getUser(){
+    try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch { return null; }
+  }
+  function setUser(u){ localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
+  function clearUser(){ localStorage.removeItem(AUTH_KEY); }
+
+  function updateUI(){
+    const user = getUser();
+    if (user) {
+      authPanel.hidden = true;
+      profilePanel.hidden = false;
+      document.getElementById('profile-name').textContent = user.username;
+      const initials = user.username.slice(0,2).toUpperCase();
+      document.getElementById('profile-avatar').textContent = initials;
+      chip.textContent = initials;
+    } else {
+      authPanel.hidden = false;
+      profilePanel.hidden = true;
+      chip.textContent = 'CS';
+    }
+  }
+
+  // Tabs
+  document.querySelectorAll('.account-tabs button').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('.account-tabs button').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      const tab = btn.dataset.tab;
+      document.getElementById('tab-signin').hidden = tab !== 'signin';
+      document.getElementById('tab-signup').hidden = tab !== 'signup';
+      msgEl.textContent = '';
+      msgEl.className = 'account-message';
+    });
+  });
+
+  // Sign In
+  document.getElementById('signin-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const username = document.getElementById('signin-user').value.trim();
+    const password = document.getElementById('signin-pass').value;
+    const stored = getUser();
+    if (stored && stored.username.toLowerCase() === username.toLowerCase() && stored.password === password) {
+      msgEl.textContent = 'Signed in successfully!';
+      msgEl.className = 'account-message success';
+      updateUI();
+    } else {
+      msgEl.textContent = 'Invalid Minecraft username or password.';
+      msgEl.className = 'account-message error';
+    }
+  });
+
+  // Sign Up — saves locally + actually emails the form to smatija1404@gmail.com
+  document.getElementById('signup-form').addEventListener('submit', e => {
+    const user = document.getElementById('signup-user').value.trim();
+    const pass = document.getElementById('signup-pass').value;
+    const pass2 = document.getElementById('signup-pass2').value;
+
+    if (pass !== pass2) {
+      e.preventDefault();
+      msgEl.textContent = 'Passwords do not match.';
+      msgEl.className = 'account-message error';
+      return;
+    }
+    if (user.length < 3) {
+      e.preventDefault();
+      msgEl.textContent = 'Minecraft username must be at least 3 characters.';
+      msgEl.className = 'account-message error';
+      return;
+    }
+
+    // Save locally so sign-in works immediately
+    setUser({ username: user, password: pass });
+    msgEl.textContent = 'Account created! Notification sent.';
+    msgEl.className = 'account-message success';
+    updateUI();
+    // Form continues to submit to FormSubmit → email is sent
+  });
+
+  document.getElementById('logout-btn').addEventListener('click', () => {
+    clearUser();
+    updateUI();
+    msgEl.textContent = 'Signed out.';
+    msgEl.className = 'account-message';
+  });
+
+  updateUI();
+
+  // ---------- Simple canvas background ----------
+  const canvas = document.getElementById('site-shader');
+  const ctx = canvas.getContext('2d');
+  let w, h, particles = [];
+
+  function resize(){
+    w = canvas.width = window.innerWidth;
+    h = canvas.height = window.innerHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  for (let i = 0; i < 60; i++) {
+    particles.push({
+      x: Math.random() * w,
+      y: Math.random() * h,
+      r: Math.random() * 1.4 + 0.3,
+      vx: (Math.random() - 0.5) * 0.25,
+      vy: (Math.random() - 0.5) * 0.25,
+      a: Math.random() * 0.35 + 0.05
+    });
+  }
+
+  function draw(){
+    ctx.clearRect(0, 0, w, h);
+    particles.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.x < 0) p.x = w;
+      if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h;
+      if (p.y > h) p.y = 0;
+      ctx.beginPath();
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(draw);
+  }
+  draw();
+})();
+</script>
 </body>
 </html>
