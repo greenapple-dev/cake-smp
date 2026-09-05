@@ -197,7 +197,8 @@
     border-radius:6px; border:1px solid var(--border-2); font-size:11px; font-weight:700; color:var(--text-dim);
   }
 
-  .shop-locked-wrapper{ position:relative; min-height:420px; }
+  /* Shop lock */
+  .shop-locked-wrapper{ position:relative; min-height:480px; }
   .shop-lock-overlay{
     position:absolute; inset:0; background:rgba(5,5,5,0.92); backdrop-filter:blur(8px);
     display:flex; align-items:center; justify-content:center; z-index:10; border-radius:18px;
@@ -208,8 +209,8 @@
   .shop-lock-message p{ color:var(--text-muted); margin-bottom:28px; font-size:16px; }
 
   .shop-intro{ text-align:center; max-width:56ch; margin:0 auto 40px; color:var(--text-muted); font-size:15px; }
-  .shop-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; max-width:960px; margin:0 auto; }
-  @media (max-width:800px){ .shop-grid{ grid-template-columns:1fr; } }
+  .shop-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; max-width:900px; margin:0 auto; }
+  @media (max-width:700px){ .shop-grid{ grid-template-columns:1fr; } }
 
   .price-card{
     position:relative; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border);
@@ -218,7 +219,8 @@
     transition:transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   }
   .price-card:hover{ transform:translateY(-6px); border-color:var(--border-2); box-shadow:0 14px 34px rgba(0,0,0,0.45); }
-  .price-card:nth-child(1){ animation-delay:0ms; } .price-card:nth-child(2){ animation-delay:90ms; } .price-card:nth-child(3){ animation-delay:180ms; }
+  .price-card:nth-child(1){ animation-delay:0ms; } .price-card:nth-child(2){ animation-delay:80ms; }
+  .price-card:nth-child(3){ animation-delay:160ms; } .price-card:nth-child(4){ animation-delay:240ms; }
   @keyframes card-in{ to{ opacity:1; transform:translateY(0); } }
 
   .price-card.featured{ border-color:var(--line); box-shadow:0 0 0 1px var(--line) inset, 0 18px 40px rgba(255,255,255,0.06); }
@@ -246,7 +248,7 @@
 
   .price-card h3{ font-size:17px; margin-bottom:4px; }
   .price-card .tier-desc{ font-size:13px; color:var(--text-muted); margin:0 0 18px; min-height:34px; }
-  .price-card .price{ font-size:30px; font-weight:700; margin-bottom:2px; }
+  .price-card .price{ font-size:28px; font-weight:700; margin-bottom:2px; }
   .price-card .price-note{ font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:20px; }
 
   .ability-tag{ display:inline-block; font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; padding:2px 7px; border-radius:5px; margin-right:8px; }
@@ -331,20 +333,22 @@
   .footer-nav button{ font:inherit; background:none; border:0; padding:0; cursor:pointer; color:var(--text-dim); }
   .footer-nav button:hover{ color:var(--text); }
 
-  /* ========== CAKER AI ASSISTANT ========== */
+  /* Caker AI */
   #caker-toggle{
     position:fixed; bottom:28px; right:28px; z-index:1000;
-    width:60px; height:60px; border-radius:50%;
-    background:var(--line); color:#000; border:none; cursor:pointer;
+    width:62px; height:62px; border-radius:50%;
+    background:var(--raised); border:2px solid var(--border-2); cursor:pointer;
     display:flex; align-items:center; justify-content:center;
-    font-size:26px; box-shadow:0 8px 28px rgba(255,255,255,0.18);
+    box-shadow:0 8px 28px rgba(0,0,0,0.45);
     transition:transform 220ms ease, box-shadow 220ms ease;
+    padding:6px; overflow:hidden;
   }
-  #caker-toggle:hover{ transform:scale(1.08); box-shadow:0 12px 32px rgba(255,255,255,0.28); }
-  #caker-toggle.open{ background:var(--raised); color:var(--text); border:1.5px solid var(--border-2); }
+  #caker-toggle:hover{ transform:scale(1.08); box-shadow:0 12px 32px rgba(255,255,255,0.12); }
+  #caker-toggle img{ width:100%; height:100%; object-fit:contain; }
+  #caker-toggle.open{ border-color:var(--line); }
 
   #caker-window{
-    position:fixed; bottom:100px; right:28px; z-index:1000;
+    position:fixed; bottom:104px; right:28px; z-index:1000;
     width:380px; max-width:calc(100vw - 32px); height:520px;
     background:var(--surface); border:1px solid var(--border-2); border-radius:20px;
     display:flex; flex-direction:column; overflow:hidden;
@@ -352,39 +356,26 @@
     opacity:0; transform:translateY(20px) scale(0.96); pointer-events:none;
     transition:opacity 240ms ease, transform 240ms ease;
   }
-  #caker-window.open{
-    opacity:1; transform:translateY(0) scale(1); pointer-events:auto;
-  }
+  #caker-window.open{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
 
   .caker-header{
-    padding:16px 18px; background:var(--raised); border-bottom:1px solid var(--border);
+    padding:14px 16px; background:var(--raised); border-bottom:1px solid var(--border);
     display:flex; align-items:center; gap:12px;
   }
   .caker-avatar{
-    width:40px; height:40px; border-radius:12px; background:var(--line); color:#000;
-    display:flex; align-items:center; justify-content:center; font-weight:800; font-size:18px;
+    width:42px; height:42px; border-radius:12px; background:transparent;
+    display:flex; align-items:center; justify-content:center; overflow:hidden;
   }
+  .caker-avatar img{ width:100%; height:100%; object-fit:contain; }
   .caker-header-info h3{ font-size:16px; margin-bottom:2px; }
   .caker-header-info span{ font-size:12px; color:var(--text-dim); }
 
-  .caker-messages{
-    flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px;
-  }
-  .caker-msg{
-    max-width:85%; padding:11px 14px; border-radius:14px; font-size:14px; line-height:1.45;
-  }
-  .caker-msg.bot{
-    background:var(--raised); border:1px solid var(--border); align-self:flex-start;
-    border-bottom-left-radius:4px;
-  }
-  .caker-msg.user{
-    background:var(--line); color:#000; align-self:flex-end;
-    border-bottom-right-radius:4px;
-  }
+  .caker-messages{ flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; }
+  .caker-msg{ max-width:85%; padding:11px 14px; border-radius:14px; font-size:14px; line-height:1.45; }
+  .caker-msg.bot{ background:var(--raised); border:1px solid var(--border); align-self:flex-start; border-bottom-left-radius:4px; }
+  .caker-msg.user{ background:var(--line); color:#000; align-self:flex-end; border-bottom-right-radius:4px; }
 
-  .caker-input-area{
-    padding:14px; border-top:1px solid var(--border); display:flex; gap:10px;
-  }
+  .caker-input-area{ padding:14px; border-top:1px solid var(--border); display:flex; gap:10px; }
   .caker-input-area input{
     flex:1; background:var(--bg-2); border:1px solid var(--border); border-radius:12px;
     padding:12px 14px; color:var(--text); font-size:14px; font-family:inherit;
@@ -392,9 +383,8 @@
   .caker-input-area input:focus{ outline:none; border-color:var(--line); }
   .caker-input-area button{
     background:var(--line); color:#000; border:none; border-radius:12px;
-    padding:0 16px; font-weight:700; cursor:pointer; transition:opacity 150ms ease;
+    padding:0 16px; font-weight:700; cursor:pointer;
   }
-  .caker-input-area button:hover{ opacity:0.85; }
 </style>
 </head>
 <body>
@@ -565,7 +555,7 @@
 
   <!-- SHOP -->
   <div class="page" data-page="shop" hidden>
-    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek — maximum price is 10 euros.</p></div></div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek. All features can be implemented via plugin.</p></div></div>
     <section class="page-fill">
       <div class="wrap">
         <div class="shop-locked-wrapper">
@@ -576,51 +566,83 @@
               <button class="btn" data-nav="account">Go to Account</button>
             </div>
           </div>
+
           <div id="shop-content">
-            <p class="shop-intro">All purchases are cosmetic or convenience only — nothing here affects fair play in Hide &amp; Seek.</p>
+            <p class="shop-intro">All purchases are one-time. Abilities work only in Hide &amp; Seek and are fully plugin-based.</p>
+
             <div class="shop-grid">
+
+              <!-- STARTER - cheap -->
               <div class="price-card">
                 <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
                 <h3>Starter</h3>
-                <p class="tier-desc">Get in and try the game mode out.</p>
-                <div class="price mono">€2.99</div>
+                <p class="tier-desc">Cheapest way to get into the fun.</p>
+                <div class="price mono">€1.99</div>
                 <div class="price-note">One-time</div>
                 <ul>
                   <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Access to Hide &amp; Seek</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Sprint Boost</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Compass Ping</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Basic particle trail</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Priority queue (small)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Custom join message</span></li>
                 </ul>
                 <button class="btn">Get Starter</button>
               </div>
+
+              <!-- HIDER PACK -->
               <div class="price-card featured">
-                <span class="price-badge">Most Popular</span>
+                <span class="price-badge">Hider Focus</span>
                 <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
                 <h3>Hider Pack</h3>
-                <p class="tier-desc">Stealthier hiding, sharper seeking.</p>
-                <div class="price mono">€5.99</div>
+                <p class="tier-desc">Everything you need to stay hidden longer.</p>
+                <div class="price mono">€4.99</div>
                 <div class="price-note">One-time</div>
                 <ul>
                   <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Everything in Starter</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Invisibility Pulse</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Double Compass</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Sprint Boost (5s)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Invisibility Pulse (4s)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Silent Footsteps</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Decoy (fake player)</span></li>
                 </ul>
                 <button class="btn">Get Hider Pack</button>
               </div>
-              <div class="price-card">
-                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
-                <h3>Ultimate</h3>
-                <p class="tier-desc">Maximum abilities and perks.</p>
-                <div class="price mono">€9.99</div>
+
+              <!-- SEEKER PACK -->
+              <div class="price-card featured">
+                <span class="price-badge">Seeker Focus</span>
+                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
+                <h3>Seeker Pack</h3>
+                <p class="tier-desc">Find hiders faster and more efficiently.</p>
+                <div class="price mono">€4.99</div>
                 <div class="price-note">One-time</div>
                 <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Everything in Hider Pack</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Decoy</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Thermal Scan</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Everything in Starter</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Upgraded Compass</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Glow Pulse (nearby)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Speed Boost (4s)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Thermal Scan (short)</span></li>
+                </ul>
+                <button class="btn">Get Seeker Pack</button>
+              </div>
+
+              <!-- ULTIMATE -->
+              <div class="price-card">
+                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
+                <h3>Ultimate Bundle</h3>
+                <p class="tier-desc">Both packs + exclusive extras.</p>
+                <div class="price mono">€8.99</div>
+                <div class="price-note">One-time · Best value</div>
+                <ul>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Full Hider Pack</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Full Seeker Pack</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Exclusive particle trail</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Highest queue priority</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Extra life (1 per game)</span></li>
                 </ul>
                 <button class="btn">Get Ultimate</button>
               </div>
+
             </div>
-            <p class="shop-note">Contact staff on Discord to purchase.</p>
+            <p class="shop-note">All abilities are server-side (plugin). Contact staff on Discord after purchase.</p>
           </div>
         </div>
       </div>
@@ -722,12 +744,16 @@
   </div>
 </footer>
 
-<!-- ========== CAKER AI ========== -->
-<button id="caker-toggle" title="Chat with Caker">🎂</button>
+<!-- CAKER -->
+<button id="caker-toggle" title="Chat with Caker">
+  <img src="caker-logo.png" alt="Caker">
+</button>
 
 <div id="caker-window">
   <div class="caker-header">
-    <div class="caker-avatar">C</div>
+    <div class="caker-avatar">
+      <img src="caker-logo.png" alt="Caker">
+    </div>
     <div class="caker-header-info">
       <h3 class="display">Caker</h3>
       <span>Cake SMP AI Assistant</span>
@@ -742,7 +768,7 @@
 
 <script>
 (function(){
-  // ---------- Navigation ----------
+  // Navigation
   const pages = document.querySelectorAll('.page');
   document.querySelectorAll('[data-nav]').forEach(btn => {
     btn.addEventListener('click', () => {
@@ -758,7 +784,7 @@
     });
   });
 
-  // ---------- Copy ----------
+  // Copy
   document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
     btn.addEventListener('click', async () => {
       const el = document.getElementById(btn.dataset.target);
@@ -772,7 +798,7 @@
     });
   });
 
-  // ---------- Countdown ----------
+  // Countdown
   const targetDate = new Date('2026-09-20T18:00:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
@@ -801,7 +827,7 @@
   updateCountdown();
   setInterval(updateCountdown, 1000);
 
-  // ---------- Online status ----------
+  // Online
   async function checkServer(host, elOnline, elPlayers){
     try {
       const res = await fetch(`https://api.mcsrvstat.us/2/${host}`);
@@ -825,7 +851,7 @@
   refreshStatus();
   setInterval(refreshStatus, 60000);
 
-  // ---------- Account + Shop lock ----------
+  // Account + Shop lock
   const AUTH_KEY = 'cakesmp_user';
   const PENDING_KEY = 'cakesmp_pending';
 
@@ -967,35 +993,31 @@
 
   updateUI();
 
-  // ---------- CAKER AI ----------
+  // Caker AI
   const cakerToggle = document.getElementById('caker-toggle');
   const cakerWindow = document.getElementById('caker-window');
   const cakerMessages = document.getElementById('caker-messages');
   const cakerInput = document.getElementById('caker-input');
   const cakerSend = document.getElementById('caker-send');
-
   let cakerOpen = false;
 
   function toggleCaker(){
     cakerOpen = !cakerOpen;
     cakerWindow.classList.toggle('open', cakerOpen);
     cakerToggle.classList.toggle('open', cakerOpen);
-    cakerToggle.textContent = cakerOpen ? '✕' : '🎂';
     if (cakerOpen && cakerMessages.children.length === 0) {
-      addBotMessage("Hey! I'm **Caker**, your Cake SMP assistant. Ask me anything about the server, how to join, rules, shop, Hide & Seek, or accounts!");
+      addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop packs, Hide & Seek abilities, or anything else!");
     }
   }
-
   cakerToggle.addEventListener('click', toggleCaker);
 
   function addBotMessage(text){
     const div = document.createElement('div');
     div.className = 'caker-msg bot';
-    div.innerHTML = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+    div.innerHTML = text;
     cakerMessages.appendChild(div);
     cakerMessages.scrollTop = cakerMessages.scrollHeight;
   }
-
   function addUserMessage(text){
     const div = document.createElement('div');
     div.className = 'caker-msg user';
@@ -1007,63 +1029,30 @@
   function cakerReply(input){
     const msg = input.toLowerCase().trim();
 
-    // Greetings
-    if (/^(hi|hey|hello|yo|sup|hola)/.test(msg)) {
-      return "Hey there! Welcome to Cake SMP Season 3. What do you need help with?";
+    if (/^(hi|hey|hello|yo|sup)/.test(msg)) return "Hey! Welcome to Cake SMP Season 3. What do you need?";
+    if (msg.includes('join') || msg.includes('ip') || msg.includes('address')) {
+      return "<strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol";
     }
-
-    // How to join
-    if (msg.includes('join') || msg.includes('ip') || msg.includes('address') || msg.includes('how to connect')) {
-      return "Easy!<br><br><strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol<br><br>Just paste the address in Minecraft and hop in!";
+    if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord. Full list is on the Rules page!";
+    if (msg.includes('shop') || msg.includes('pack') || msg.includes('hider') || msg.includes('seeker') || msg.includes('buy')) {
+      return "Shop has 4 options:<br>• <strong>Starter</strong> €1.99 – basic access + cosmetics<br>• <strong>Hider Pack</strong> €4.99 – invis, decoy, silent steps...<br>• <strong>Seeker Pack</strong> €4.99 – compass, glow, thermal...<br>• <strong>Ultimate Bundle</strong> €8.99 – both packs + extras<br><br>You need an account to see the shop!";
     }
-
-    // Rules
-    if (msg.includes('rule') || msg.includes('banned') || msg.includes('allowed')) {
-      return "Quick rules summary:<br><br>• No hacking / X-ray / unfair mods<br>• No lag machines<br>• No alternate accounts<br>• No spawn/camp killing<br>• Be respectful on Discord<br><br>Full list is on the <strong>Rules</strong> page!";
+    if (msg.includes('account') || msg.includes('sign up') || msg.includes('register')) {
+      return "Go to the Account page → Sign Up. You need Minecraft username + email. Then enter the verification code that appears.";
     }
-
-    // Shop
-    if (msg.includes('shop') || msg.includes('buy') || msg.includes('rank') || msg.includes('pack') || msg.includes('price')) {
-      return "The Shop has 3 packs for Hide & Seek abilities:<br><br>• <strong>Starter</strong> – €2.99<br>• <strong>Hider Pack</strong> – €5.99 (Most Popular)<br>• <strong>Ultimate</strong> – €9.99<br><br>You need to <strong>sign up</strong> first to access the shop!";
+    if (msg.includes('hide') || msg.includes('seek')) {
+      return "Hide & Seek server: <strong>hideseekcs.folium.lol</strong><br>Buy Hider or Seeker packs in the Shop for special abilities (all plugin-based).";
     }
+    if (msg.includes('discord')) return "There's a Join Discord button on the Discord page. Come hang out!";
+    if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI. I help with everything related to the server.";
+    if (msg.includes('help')) return "I can help with: joining the server, rules, shop packs, Hide & Seek abilities, accounts, and Discord.";
 
-    // Account / Sign up
-    if (msg.includes('account') || msg.includes('sign up') || msg.includes('register') || msg.includes('login') || msg.includes('sign in')) {
-      return "To create an account go to the <strong>Account</strong> page.<br><br>You need:<br>1. Minecraft Username<br>2. Email<br>3. Password<br><br>Then enter the verification code that appears on screen.";
-    }
-
-    // Hide and Seek
-    if (msg.includes('hide') || msg.includes('seek') || msg.includes('hns')) {
-      return "Hide & Seek is our special game mode!<br><br>Server: <strong>hideseekcs.folium.lol</strong><br><br>There are cool ability packs in the Shop (Sprint Boost, Invisibility, Thermal Scan...). Have fun!";
-    }
-
-    // Discord
-    if (msg.includes('discord')) {
-      return "Join our Discord to chat, get updates, and find people to play with! There's a big Join Discord button on the Discord page.";
-    }
-
-    // Who are you
-    if (msg.includes('who are you') || msg.includes('what are you') || msg.includes('your name')) {
-      return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant. I'm here to help you with anything related to the server. Ask away!";
-    }
-
-    // Season
-    if (msg.includes('season') || msg.includes('s3')) {
-      return "We're currently in <strong>Season 3</strong>! Fresh world, great community, weekly events, and of course... Hide & Seek.";
-    }
-
-    // Help
-    if (msg.includes('help') || msg.includes('what can you do')) {
-      return "I can help you with:<br>• How to join the server<br>• Rules<br>• Shop & ranks<br>• Account / Sign up<br>• Hide & Seek<br>• Discord<br><br>Just ask naturally!";
-    }
-
-    // Default smart fallback
     const fallbacks = [
-      "Hmm, not sure I got that. Try asking about joining, rules, shop, or Hide & Seek!",
-      "I'm still learning. Can you rephrase that? I know a lot about Cake SMP!",
-      "Interesting question! For server-related stuff I can help a lot. Try asking about IP, rules, or the shop."
+      "Not sure about that one. Try asking about the shop, IP, rules, or Hide & Seek!",
+      "Hmm, can you rephrase? I know a lot about Cake SMP.",
+      "Interesting! For server stuff just ask me about joining, packs, or rules."
     ];
-    return fallbacks[Math.floor(Math.random() * fallbacks.length)];
+    return fallbacks[Math.floor(Math.random()*fallbacks.length)];
   }
 
   function sendMessage(){
@@ -1071,19 +1060,12 @@
     if (!text) return;
     addUserMessage(text);
     cakerInput.value = '';
-
-    // Fake thinking delay
-    setTimeout(() => {
-      addBotMessage(cakerReply(text));
-    }, 400 + Math.random() * 600);
+    setTimeout(() => addBotMessage(cakerReply(text)), 350 + Math.random()*500);
   }
-
   cakerSend.addEventListener('click', sendMessage);
-  cakerInput.addEventListener('keydown', e => {
-    if (e.key === 'Enter') sendMessage();
-  });
+  cakerInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
 
-  // ---------- Canvas ----------
+  // Canvas
   const canvas = document.getElementById('site-shader');
   const ctx = canvas.getContext('2d');
   let w, h, particles = [];
