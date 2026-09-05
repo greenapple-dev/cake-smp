@@ -38,178 +38,83 @@
   img{max-width:100%;}
   ::selection{background:#ffffff; color:#000000;}
 
-  .display{
-    font-family:'Baloo 2', 'Figtree', sans-serif;
-    font-weight:700;
-  }
-  .mono{
-    font-family:'JetBrains Mono', ui-monospace, monospace;
-    font-variant-numeric:tabular-nums;
-  }
+  .display{ font-family:'Baloo 2', 'Figtree', sans-serif; font-weight:700; }
+  .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums; }
 
   .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
 
-  /* ---------- site-wide animated background ---------- */
   #site-shader{
-    position:fixed;
-    inset:0;
-    width:100vw;
-    height:100vh;
-    z-index:0;
-    display:block;
-    pointer-events:none;
+    position:fixed; inset:0; width:100vw; height:100vh; z-index:0; display:block; pointer-events:none;
   }
   header, main, footer{ position:relative; z-index:1; }
   header, footer{ flex:none; }
-  main{
-    flex:1 1 auto;
-    display:flex;
-    flex-direction:column;
-    min-height:0;
-  }
+  main{ flex:1 1 auto; display:flex; flex-direction:column; min-height:0; }
 
-  /* ---------- header ---------- */
   header{
-    position:sticky;
-    top:0;
-    z-index:30;
-    background:rgba(5,5,5,0.85);
-    backdrop-filter:blur(6px);
+    position:sticky; top:0; z-index:30;
+    background:rgba(5,5,5,0.85); backdrop-filter:blur(6px);
     border-bottom:1px solid var(--border);
   }
-  .header-inner{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    height:68px;
-  }
+  .header-inner{ display:flex; align-items:center; justify-content:space-between; height:68px; }
   .wordmark{
-    display:flex;
-    align-items:center;
-    gap:8px;
-    text-decoration:none;
-    font-size:19px;
-    cursor:pointer;
-    background:none;
-    border:0;
-    color:var(--text);
-    padding:0;
+    display:flex; align-items:center; gap:8px; text-decoration:none; font-size:19px;
+    cursor:pointer; background:none; border:0; color:var(--text); padding:0;
   }
 
   nav.primary{ display:flex; align-items:center; gap:6px; }
   nav.primary button{
-    font:inherit;
-    text-decoration:none;
-    color:var(--text-muted);
-    font-weight:600;
-    font-size:14.5px;
-    padding:8px 16px;
-    border-radius:8px;
-    background:none;
-    border:1.5px solid transparent;
-    cursor:pointer;
+    font:inherit; text-decoration:none; color:var(--text-muted); font-weight:600; font-size:14.5px;
+    padding:8px 16px; border-radius:8px; background:none; border:1.5px solid transparent; cursor:pointer;
     transition:color 180ms ease, border-color 180ms ease, transform 180ms ease;
   }
-  nav.primary button:hover{
-    color:var(--text);
-    transform:translateY(-1px);
-  }
-  nav.primary button[aria-current="page"]{
-    color:var(--text);
-    position:relative;
-  }
+  nav.primary button:hover{ color:var(--text); transform:translateY(-1px); }
+  nav.primary button[aria-current="page"]{ color:var(--text); position:relative; }
   nav.primary button[aria-current="page"]::after{
-    content:'';
-    position:absolute;
-    left:16px; right:16px; bottom:2px;
-    height:2px;
-    background:var(--line);
+    content:''; position:absolute; left:16px; right:16px; bottom:2px; height:2px; background:var(--line);
   }
-  .nav-ghost{
-    border:1.5px dashed var(--border-2) !important;
-  }
-  .nav-ghost:hover{
-    color:var(--text);
-    border-color:var(--text-muted) !important;
-  }
+  .nav-ghost{ border:1.5px dashed var(--border-2) !important; }
+  .nav-ghost:hover{ color:var(--text); border-color:var(--text-muted) !important; }
 
   .header-right{ display:flex; align-items:center; gap:14px; }
   .btn{
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    text-decoration:none;
-    font-weight:700;
-    font-size:14.5px;
-    padding:11px 22px;
-    border-radius:999px;
-    border:1.5px solid var(--line);
-    background:var(--line);
-    color:#000000;
-    cursor:pointer;
+    display:inline-flex; align-items:center; justify-content:center; text-decoration:none;
+    font-weight:700; font-size:14.5px; padding:11px 22px; border-radius:999px;
+    border:1.5px solid var(--line); background:var(--line); color:#000000; cursor:pointer;
     transition:opacity 200ms ease, transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms ease;
     font-family:inherit;
   }
-  .btn:hover{
-    opacity:0.92;
-    transform:translateY(-2px) scale(1.03);
-    box-shadow:0 8px 22px rgba(255,255,255,0.18);
-  }
-  .btn:active{
-    transform:translateY(0) scale(0.96);
-    box-shadow:none;
-  }
+  .btn:hover{ opacity:0.92; transform:translateY(-2px) scale(1.03); box-shadow:0 8px 22px rgba(255,255,255,0.18); }
+  .btn:active{ transform:translateY(0) scale(0.96); box-shadow:none; }
   .btn:focus-visible{ outline:2px solid var(--line); outline-offset:3px; }
+  .btn:disabled{ opacity:0.45; cursor:not-allowed; transform:none !important; box-shadow:none !important; }
 
   .avatar{
-    width:38px; height:38px;
-    border-radius:50%;
-    background:var(--raised);
-    border:1.5px solid var(--border-2);
-    display:flex; align-items:center; justify-content:center;
-    font-size:12px; font-weight:700;
-    color:var(--text-muted);
-    flex:none;
-    cursor:pointer;
+    width:38px; height:38px; border-radius:50%; background:var(--raised); border:1.5px solid var(--border-2);
+    display:flex; align-items:center; justify-content:center; font-size:12px; font-weight:700;
+    color:var(--text-muted); flex:none; cursor:pointer;
     transition:transform 200ms ease, border-color 200ms ease;
   }
-  .avatar:hover{
-    transform:scale(1.08);
-    border-color:var(--line);
+  .avatar:hover{ transform:scale(1.08); border-color:var(--line); }
+
+  .coins-chip{
+    display:inline-flex; align-items:center; gap:6px; padding:7px 14px; border-radius:999px;
+    background:var(--raised); border:1px solid var(--border-2); font-size:13px; font-weight:600; color:var(--text);
+  }
+  .coins-chip .coin-icon{
+    width:16px; height:16px; border-radius:50%;
+    background:linear-gradient(135deg,#ffd700,#ffaa00); box-shadow:0 0 0 2px rgba(255,215,0,0.25);
   }
 
-  /* ---------- page title bar ---------- */
-  .page-title{
-    padding:48px 0 40px;
-    border-bottom:1px solid var(--border);
-    text-align:center;
-  }
+  .page-title{ padding:48px 0 40px; border-bottom:1px solid var(--border); text-align:center; }
   .page-title h1{ font-size:34px; }
   .page-title p{ color:var(--text-muted); margin-top:10px; }
 
-  /* ---------- about ---------- */
-  .about-copy{
-    max-width:64ch;
-    margin:0 auto 40px;
-    color:var(--text-muted);
-    font-size:15.5px;
-  }
-  .about-copy + .about-copy{ margin-top:-24px; }
-  .fact-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:16px;
-  }
+  .about-copy{ max-width:64ch; margin:0 auto 40px; color:var(--text-muted); font-size:15.5px; }
+  .fact-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
   @media (max-width:680px){ .fact-grid{ grid-template-columns:1fr; } }
   .fact{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:22px;
-    text-align:center;
-    opacity:0;
-    transform:translateY(16px);
-    animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
+    background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px; text-align:center;
+    opacity:0; transform:translateY(16px); animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
     transition:transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
   }
   .fact:hover{ transform:translateY(-4px); border-color:var(--border-2); box-shadow:0 10px 26px rgba(0,0,0,0.4); }
@@ -217,169 +122,66 @@
   .fact:nth-child(2){ animation-delay:90ms; }
   .fact:nth-child(3){ animation-delay:180ms; }
   .fact .value{ font-size:24px; font-weight:700; }
-  .fact .label{
-    margin-top:6px;
-    font-size:12px;
-    color:var(--text-dim);
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-  }
+  .fact .label{ margin-top:6px; font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; }
 
-  /* ---------- page shell ---------- */
-  .page{
-    flex:1 1 auto;
-    display:flex;
-    flex-direction:column;
-    min-height:0;
-  }
+  .page{ flex:1 1 auto; display:flex; flex-direction:column; min-height:0; }
   .page[hidden]{ display:none; }
 
-  /* ---------- hero ---------- */
   .hero{
-    position:relative;
-    overflow:hidden;
-    padding:64px 0;
-    border-bottom:1px solid var(--border);
-    flex:1 1 auto;
-    display:flex;
-    align-items:center;
-    min-height:0;
+    position:relative; overflow:hidden; padding:64px 0; border-bottom:1px solid var(--border);
+    flex:1 1 auto; display:flex; align-items:center; min-height:0;
   }
   .hero > .wrap{ width:100%; }
   .hero-bg{
     position:absolute; inset:0;
-    background:
-      radial-gradient(ellipse at 50% -10%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 55%),
-      linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0.7) 100%);
-    z-index:0;
-    overflow:hidden;
+    background: radial-gradient(ellipse at 50% -10%, rgba(255,255,255,0.05) 0%, rgba(0,0,0,0) 55%),
+                linear-gradient(180deg, rgba(5,5,5,0.35) 0%, rgba(5,5,5,0.7) 100%);
+    z-index:0; overflow:hidden;
   }
-  .mountains{
-    position:absolute; bottom:0; left:0;
-    width:100%; height:34%;
-  }
+  .mountains{ position:absolute; bottom:0; left:0; width:100%; height:34%; }
 
-  .hero-inner{
-    position:relative;
-    z-index:1;
-    text-align:center;
-  }
-  .hero h1{
-    font-size:56px;
-    line-height:1.08;
-    letter-spacing:-0.01em;
-  }
-  .hero h1 .stroke{
-    color:transparent;
-    -webkit-text-stroke:2px var(--line);
-  }
-  .hero p.lede{
-    margin:22px auto 0;
-    max-width:46ch;
-    color:var(--text-muted);
-    font-size:17px;
-  }
+  .hero-inner{ position:relative; z-index:1; text-align:center; }
+  .hero h1{ font-size:56px; line-height:1.08; letter-spacing:-0.01em; }
+  .hero h1 .stroke{ color:transparent; -webkit-text-stroke:2px var(--line); }
+  .hero p.lede{ margin:22px auto 0; max-width:46ch; color:var(--text-muted); font-size:17px; }
 
   .stat-pill{
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    margin:32px auto 0;
-    padding:9px 18px;
-    border:1px solid var(--border-2);
-    border-radius:999px;
-    background:var(--surface);
-    font-size:13px;
+    display:inline-flex; align-items:center; gap:10px; margin:32px auto 0; padding:9px 18px;
+    border:1px solid var(--border-2); border-radius:999px; background:var(--surface); font-size:13px;
   }
-  .stat-pill .dot{
-    width:7px; height:7px; border-radius:50%;
-    background:var(--line);
-    box-shadow:0 0 0 3px rgba(255,255,255,0.08);
-  }
+  .stat-pill .dot{ width:7px; height:7px; border-radius:50%; background:var(--line); box-shadow:0 0 0 3px rgba(255,255,255,0.08); }
   .stat-pill span.count{ color:var(--text-muted); }
 
-  /* ---------- join card ---------- */
   .join-card{
-    position:relative;
-    z-index:1;
-    max-width:840px;
-    margin:44px auto 0;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:20px;
-    padding:36px;
+    position:relative; z-index:1; max-width:840px; margin:44px auto 0;
+    background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:36px;
   }
-  .join-card > h2{
-    font-size:26px;
-    text-align:center;
-    margin-bottom:26px;
-  }
-  .join-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:18px;
-    text-align:left;
-  }
+  .join-card > h2{ font-size:26px; text-align:center; margin-bottom:26px; }
+  .join-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; text-align:left; }
   @media (max-width:640px){ .join-grid{ grid-template-columns:1fr; } }
 
   .slot{
-    background:var(--raised);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:20px;
-    opacity:0;
-    transform:translateY(14px);
-    animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
+    background:var(--raised); border:1px solid var(--border); border-radius:14px; padding:20px;
+    opacity:0; transform:translateY(14px); animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
     transition:transform 200ms ease, border-color 200ms ease;
   }
   .slot:hover{ transform:translateY(-3px); border-color:var(--border-2); }
   .slot:nth-child(1){ animation-delay:0ms; }
   .slot:nth-child(2){ animation-delay:110ms; }
-  .slot-head{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    margin-bottom:14px;
-  }
+  .slot-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
   .slot-head h3{ font-size:16.5px; }
   .icon-btn{
-    width:30px; height:30px;
-    border-radius:8px;
-    border:1px solid var(--border-2);
-    background:transparent;
-    color:var(--text-muted);
-    display:flex; align-items:center; justify-content:center;
-    cursor:pointer;
+    width:30px; height:30px; border-radius:8px; border:1px solid var(--border-2); background:transparent;
+    color:var(--text-muted); display:flex; align-items:center; justify-content:center; cursor:pointer;
     transition:background 160ms ease, color 160ms ease, border-color 160ms ease, transform 180ms ease;
   }
-  .icon-btn:hover{
-    color:var(--text);
-    border-color:var(--text);
-    transform:scale(1.1);
-  }
+  .icon-btn:hover{ color:var(--text); border-color:var(--text); transform:scale(1.1); }
   .icon-btn:active{ transform:scale(0.92); }
-  .icon-btn:focus-visible{ outline:2px solid var(--line); outline-offset:2px; }
   .icon-btn svg{ width:15px; height:15px; }
 
-  .addr-field{
-    background:var(--bg-2);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px 14px;
-    font-size:14px;
-    color:var(--text);
-    word-break:break-all;
-  }
+  .addr-field{ background:var(--bg-2); border:1px solid var(--border); border-radius:10px; padding:12px 14px; font-size:14px; color:var(--text); word-break:break-all; }
   .addr-field + .addr-field{ margin-top:10px; }
-  .addr-label{
-    display:block;
-    font-size:11px;
-    font-weight:700;
-    color:var(--text-dim);
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-    margin:12px 0 6px;
-  }
+  .addr-label{ display:block; font-size:11px; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; margin:12px 0 6px; }
   .addr-label:first-of-type{ margin-top:0; }
 
   section{ padding:64px 0; }
@@ -387,39 +189,22 @@
   .section-head h2{ font-size:30px; }
   .section-head p{ color:var(--text-muted); margin-top:10px; }
 
-  /* ---------- features ---------- */
-  .feature-grid{
-    display:grid;
-    grid-template-columns:repeat(4, 1fr);
-    gap:16px;
-  }
+  .feature-grid{ display:grid; grid-template-columns:repeat(4, 1fr); gap:16px; }
   @media (max-width:900px){ .feature-grid{ grid-template-columns:repeat(2, 1fr); } }
   @media (max-width:520px){ .feature-grid{ grid-template-columns:1fr; } }
-  .feature-grid-2{
-    grid-template-columns:repeat(2, minmax(0, 320px));
-    max-width:680px;
-    margin:0 auto;
-  }
+  .feature-grid-2{ grid-template-columns:repeat(2, minmax(0, 320px)); max-width:680px; margin:0 auto; }
   @media (max-width:640px){ .feature-grid-2{ grid-template-columns:minmax(0, 320px); } }
   .feature{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:14px;
-    padding:22px;
-    opacity:0;
-    transform:translateY(16px);
-    animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
+    background:var(--surface); border:1px solid var(--border); border-radius:14px; padding:22px;
+    opacity:0; transform:translateY(16px); animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
     transition:transform 200ms ease, border-color 200ms ease, box-shadow 200ms ease;
   }
   .feature:hover{ transform:translateY(-4px); border-color:var(--border-2); box-shadow:0 10px 26px rgba(0,0,0,0.4); }
   .feature:nth-child(1){ animation-delay:0ms; }
   .feature:nth-child(2){ animation-delay:90ms; }
   .feature .icon{
-    width:36px; height:36px;
-    border-radius:10px;
-    border:1px solid var(--border-2);
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:14px;
+    width:36px; height:36px; border-radius:10px; border:1px solid var(--border-2);
+    display:flex; align-items:center; justify-content:center; margin-bottom:14px;
     transition:transform 200ms ease, border-color 200ms ease;
   }
   .feature:hover .icon{ transform:scale(1.08) rotate(-4deg); border-color:var(--line); }
@@ -427,41 +212,17 @@
   .feature h3{ font-size:15.5px; margin-bottom:6px; }
   .feature p{ font-size:13.5px; color:var(--text-muted); margin:0; }
 
-  /* ---------- discord ---------- */
-  .discord-lead{
-    display:flex;
-    align-items:center;
-    justify-content:space-between;
-    gap:24px;
-    flex-wrap:wrap;
-    margin-bottom:26px;
-  }
+  .discord-lead{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:26px; }
   .discord-lead p{ margin:6px 0 0; color:var(--text-muted); max-width:52ch; }
-  .discord-grid .slot h3{ font-size:16.5px; }
 
-  .page-fill{
-    flex:1 1 auto;
-    display:flex;
-    align-items:center;
-    min-height:0;
-  }
+  .page-fill{ flex:1 1 auto; display:flex; align-items:center; min-height:0; }
   .page-fill > .wrap{ width:100%; }
 
-  /* ---------- rules ---------- */
-  .rules-grid{
-    display:grid;
-    grid-template-columns:1fr 1fr;
-    gap:20px;
-  }
+  .rules-grid{ display:grid; grid-template-columns:1fr 1fr; gap:20px; }
   @media (max-width:780px){ .rules-grid{ grid-template-columns:1fr; } }
   .plank{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:16px;
-    overflow:hidden;
-    opacity:0;
-    transform:translateY(16px);
-    animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
+    background:var(--surface); border:1px solid var(--border); border-radius:16px; overflow:hidden;
+    opacity:0; transform:translateY(16px); animation:card-in 520ms cubic-bezier(.2,.7,.2,1) forwards;
     transition:transform 200ms ease, border-color 200ms ease;
   }
   .plank:hover{ transform:translateY(-3px); border-color:var(--border-2); }
@@ -469,97 +230,47 @@
   .plank:nth-child(2){ animation-delay:130ms; }
   .plank li{ transition:background 150ms ease; }
   .plank li:hover{ background:var(--raised); }
-  .plank-head{
-    padding:16px 22px;
-    border-bottom:1px solid var(--border);
-  }
+  .plank-head{ padding:16px 22px; border-bottom:1px solid var(--border); }
   .plank-head h3{ font-size:16px; }
   .plank ol{ list-style:none; margin:0; padding:0; counter-reset:rule; }
-  .plank li{
-    counter-increment:rule;
-    display:flex;
-    gap:14px;
-    padding:13px 22px;
-    border-bottom:1px solid var(--border);
-    font-size:14.5px;
-    color:var(--text);
-  }
+  .plank li{ counter-increment:rule; display:flex; gap:14px; padding:13px 22px; border-bottom:1px solid var(--border); font-size:14.5px; color:var(--text); }
   .plank li:last-child{ border-bottom:0; }
   .plank li::before{
-    content:counter(rule);
-    flex:none;
-    width:22px; height:22px;
-    display:flex; align-items:center; justify-content:center;
-    border-radius:6px;
-    border:1px solid var(--border-2);
-    font-size:11px;
-    font-weight:700;
-    color:var(--text-dim);
+    content:counter(rule); flex:none; width:22px; height:22px; display:flex; align-items:center; justify-content:center;
+    border-radius:6px; border:1px solid var(--border-2); font-size:11px; font-weight:700; color:var(--text-dim);
   }
 
-  /* ---------- shop ---------- */
-  .shop-intro{
-    text-align:center;
-    max-width:56ch;
-    margin:0 auto 40px;
-    color:var(--text-muted);
-    font-size:15px;
+  .shop-intro{ text-align:center; max-width:56ch; margin:0 auto 24px; color:var(--text-muted); font-size:15px; }
+  .shop-coins-bar{
+    display:flex; align-items:center; justify-content:center; gap:16px; margin:0 auto 36px; max-width:420px;
+    background:var(--surface); border:1px solid var(--border-2); border-radius:14px; padding:14px 22px;
   }
-  .shop-grid{
-    display:grid;
-    grid-template-columns:repeat(3, 1fr);
-    gap:18px;
-    align-items:stretch;
-    max-width:960px;
-    margin:0 auto;
-  }
+  .shop-coins-bar .coins-value{ font-size:22px; font-weight:700; }
+  .shop-coins-bar .add-coins-btn{ padding:8px 16px; font-size:13px; }
+
+  .shop-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:18px; align-items:stretch; max-width:960px; margin:0 auto; }
   @media (max-width:800px){ .shop-grid{ grid-template-columns:1fr; } }
 
   .price-card{
-    position:relative;
-    display:flex;
-    flex-direction:column;
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:26px 22px;
-    opacity:0;
-    transform:translateY(18px);
+    position:relative; display:flex; flex-direction:column; background:var(--surface); border:1px solid var(--border);
+    border-radius:18px; padding:26px 22px; opacity:0; transform:translateY(18px);
     animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
     transition:transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
   }
-  .price-card:hover{
-    transform:translateY(-6px);
-    border-color:var(--border-2);
-    box-shadow:0 14px 34px rgba(0,0,0,0.45);
-  }
+  .price-card:hover{ transform:translateY(-6px); border-color:var(--border-2); box-shadow:0 14px 34px rgba(0,0,0,0.45); }
   .price-card:nth-child(1){ animation-delay:0ms; }
   .price-card:nth-child(2){ animation-delay:90ms; }
   .price-card:nth-child(3){ animation-delay:180ms; }
 
-  @keyframes card-in{
-    to{ opacity:1; transform:translateY(0); }
-  }
+  @keyframes card-in{ to{ opacity:1; transform:translateY(0); } }
 
-  .price-card.featured{
-    border-color:var(--line);
-    box-shadow:0 0 0 1px var(--line) inset, 0 18px 40px rgba(255,255,255,0.06);
-  }
+  .price-card.featured{ border-color:var(--line); box-shadow:0 0 0 1px var(--line) inset, 0 18px 40px rgba(255,255,255,0.06); }
   .price-card.featured:hover{ transform:translateY(-9px); }
 
   .price-badge{
-    position:absolute;
-    top:-12px; left:50%;
-    transform:translateX(-50%);
-    background:var(--line);
-    color:#000;
-    font-size:11px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-    padding:5px 14px;
-    border-radius:999px;
-    white-space:nowrap;
+    position:absolute; top:-12px; left:50%; transform:translateX(-50%);
+    background:var(--line); color:#000; font-size:11px; font-weight:700; text-transform:uppercase;
+    letter-spacing:0.05em; padding:5px 14px; border-radius:999px; white-space:nowrap;
     animation:badge-pop 560ms cubic-bezier(.2,.7,.2,1) 300ms backwards;
   }
   @keyframes badge-pop{
@@ -569,299 +280,114 @@
   }
 
   .price-card .icon{
-    width:40px; height:40px;
-    border-radius:11px;
-    border:1px solid var(--border-2);
-    display:flex; align-items:center; justify-content:center;
-    margin-bottom:16px;
+    width:40px; height:40px; border-radius:11px; border:1px solid var(--border-2);
+    display:flex; align-items:center; justify-content:center; margin-bottom:16px;
     transition:transform 220ms ease, border-color 220ms ease;
   }
-  .price-card:hover .icon{
-    transform:scale(1.08) rotate(-4deg);
-    border-color:var(--line);
-  }
+  .price-card:hover .icon{ transform:scale(1.08) rotate(-4deg); border-color:var(--line); }
   .price-card .icon svg{ width:19px; height:19px; }
 
   .price-card h3{ font-size:17px; margin-bottom:4px; }
-  .price-card .tier-desc{
-    font-size:13px;
-    color:var(--text-muted);
-    margin:0 0 18px;
-    min-height:34px;
-  }
-  .price-card .price{
-    font-size:30px;
-    font-weight:700;
-    margin-bottom:2px;
-  }
-  .price-card .price-note{
-    font-size:11.5px;
-    color:var(--text-dim);
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-    margin-bottom:20px;
-  }
-  .ability-tag{
-    display:inline-block;
-    font-size:9.5px;
-    font-weight:700;
-    text-transform:uppercase;
-    letter-spacing:0.04em;
-    padding:2px 7px;
-    border-radius:5px;
-    margin-right:8px;
-    flex:none;
-  }
+  .price-card .tier-desc{ font-size:13px; color:var(--text-muted); margin:0 0 18px; min-height:34px; }
+  .price-card .price{ font-size:30px; font-weight:700; margin-bottom:2px; }
+  .price-card .price-note{ font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:20px; }
+  .ability-tag{ display:inline-block; font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; padding:2px 7px; border-radius:5px; margin-right:8px; flex:none; }
   .ability-tag.hider{ background:rgba(255,255,255,0.09); color:var(--text); }
   .ability-tag.seeker{ background:var(--line); color:#000; }
-  .price-card li{
-    flex-wrap:wrap;
-  }
+  .price-card li{ flex-wrap:wrap; }
   .price-card li .ability-text{ flex:1; }
-  .price-card ul{
-    list-style:none;
-    margin:0 0 22px;
-    padding:0;
-    flex:1 1 auto;
-  }
-  .price-card li{
-    display:flex;
-    align-items:flex-start;
-    gap:9px;
-    font-size:13.5px;
-    color:var(--text);
-    padding:7px 0;
-    border-top:1px solid var(--border);
-  }
+  .price-card ul{ list-style:none; margin:0 0 22px; padding:0; flex:1 1 auto; }
+  .price-card li{ display:flex; align-items:flex-start; gap:9px; font-size:13.5px; color:var(--text); padding:7px 0; border-top:1px solid var(--border); }
   .price-card li:first-child{ border-top:0; }
-  .price-card li svg{
-    flex:none;
-    width:14px; height:14px;
-    margin-top:2px;
-    color:var(--text-muted);
-  }
+  .price-card li svg{ flex:none; width:14px; height:14px; margin-top:2px; color:var(--text-muted); }
   .price-card.featured li svg{ color:var(--line); }
 
-  .price-card .btn{
-    width:100%;
-    background:transparent;
-    color:var(--text);
-    border:1.5px solid var(--border-2);
-  }
-  .price-card .btn:hover{
-    background:var(--raised);
-    opacity:1;
-  }
-  .price-card.featured .btn{
-    background:var(--line);
-    color:#000;
-    border-color:var(--line);
-  }
+  .price-card .btn{ width:100%; background:transparent; color:var(--text); border:1.5px solid var(--border-2); }
+  .price-card .btn:hover{ background:var(--raised); opacity:1; }
+  .price-card.featured .btn{ background:var(--line); color:#000; border-color:var(--line); }
   .price-card.featured .btn:hover{ opacity:0.85; }
 
-  .shop-note{
-    text-align:center;
-    margin-top:28px;
-    font-size:12.5px;
-    color:var(--text-dim);
-  }
+  .shop-note{ text-align:center; margin-top:28px; font-size:12.5px; color:var(--text-dim); }
 
-  @media (prefers-reduced-motion: reduce){
-    .price-card, .price-badge{ animation:none; opacity:1; transform:none; }
+  .purchase-toast{
+    position:fixed; bottom:28px; left:50%; transform:translateX(-50%) translateY(20px);
+    background:var(--line); color:#000; padding:14px 24px; border-radius:999px; font-weight:700; font-size:14.5px;
+    opacity:0; pointer-events:none; transition:opacity 280ms ease, transform 280ms ease; z-index:100;
+    box-shadow:0 10px 30px rgba(0,0,0,0.4);
   }
+  .purchase-toast.show{ opacity:1; transform:translateX(-50%) translateY(0); }
 
-  /* ---------- event countdown ---------- */
+  @media (prefers-reduced-motion: reduce){ .price-card, .price-badge{ animation:none; opacity:1; transform:none; } }
+
   .countdown-card{
-    position:relative;
-    max-width:560px;
-    margin:0 auto 40px;
-    background:var(--surface);
-    border:1px solid var(--border-2);
-    border-radius:18px;
-    padding:24px 28px;
-    text-align:center;
-    opacity:0;
-    transform:translateY(14px);
-    animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
+    position:relative; max-width:560px; margin:0 auto 40px; background:var(--surface);
+    border:1px solid var(--border-2); border-radius:18px; padding:24px 28px; text-align:center;
+    opacity:0; transform:translateY(14px); animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
   }
-  .countdown-head{
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    gap:9px;
-    margin-bottom:16px;
-    font-size:12.5px;
-    color:var(--text-muted);
-    text-transform:uppercase;
-    letter-spacing:0.06em;
-  }
-  .countdown-head .dot{
-    width:7px; height:7px; border-radius:50%;
-    background:var(--line);
-    box-shadow:0 0 0 3px rgba(255,255,255,0.08);
-    animation:pulse-dot 1.6s ease-in-out infinite;
-  }
-  @keyframes pulse-dot{
-    0%,100%{ opacity:1; transform:scale(1); }
-    50%{ opacity:0.4; transform:scale(0.7); }
-  }
+  .countdown-head{ display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:16px; font-size:12.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; }
+  .countdown-head .dot{ width:7px; height:7px; border-radius:50%; background:var(--line); box-shadow:0 0 0 3px rgba(255,255,255,0.08); animation:pulse-dot 1.6s ease-in-out infinite; }
+  @keyframes pulse-dot{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(0.7); } }
   .countdown-title{ font-size:19px; margin-bottom:18px; }
-  .countdown-units{
-    display:flex;
-    justify-content:center;
-    gap:12px;
-  }
-  .countdown-unit{
-    background:var(--bg-2);
-    border:1px solid var(--border);
-    border-radius:12px;
-    padding:12px 16px;
-    min-width:64px;
-    transition:transform 200ms ease, border-color 200ms ease;
-  }
+  .countdown-units{ display:flex; justify-content:center; gap:12px; }
+  .countdown-unit{ background:var(--bg-2); border:1px solid var(--border); border-radius:12px; padding:12px 16px; min-width:64px; transition:transform 200ms ease, border-color 200ms ease; }
   .countdown-unit:hover{ transform:translateY(-3px); border-color:var(--line); }
-  .countdown-unit .num{
-    font-size:26px;
-    font-weight:700;
-    transition:transform 160ms ease;
-  }
+  .countdown-unit .num{ font-size:26px; font-weight:700; transition:transform 160ms ease; }
   .countdown-unit.tick .num{ animation:tick-pop 320ms ease; }
-  @keyframes tick-pop{
-    0%{ transform:scale(1); }
-    40%{ transform:scale(1.18); }
-    100%{ transform:scale(1); }
-  }
-  .countdown-unit .unit-label{
-    margin-top:4px;
-    font-size:10.5px;
-    color:var(--text-dim);
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-  }
+  @keyframes tick-pop{ 0%{ transform:scale(1); } 40%{ transform:scale(1.18); } 100%{ transform:scale(1); } }
+  .countdown-unit .unit-label{ margin-top:4px; font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; }
 
-  /* ---------- account ---------- */
-  .account-shell{
-    max-width:560px;
-    margin:0 auto;
-  }
+  .account-shell{ max-width:560px; margin:0 auto; }
   .account-panel{
-    background:var(--surface);
-    border:1px solid var(--border);
-    border-radius:18px;
-    padding:30px;
-    opacity:0;
-    transform:translateY(16px);
-    animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
+    background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:30px;
+    opacity:0; transform:translateY(16px); animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
   }
   .account-panel h2{ font-size:22px; margin-bottom:6px; }
   .account-panel .sub{ color:var(--text-muted); font-size:13.5px; margin-bottom:24px; }
   .account-field{ margin-bottom:16px; }
   .account-field label{
-    display:block;
-    font-size:11.5px;
-    font-weight:700;
-    color:var(--text-dim);
-    text-transform:uppercase;
-    letter-spacing:0.05em;
-    margin-bottom:7px;
+    display:block; font-size:11.5px; font-weight:700; color:var(--text-dim);
+    text-transform:uppercase; letter-spacing:0.05em; margin-bottom:7px;
   }
   .account-field input{
-    width:100%;
-    background:var(--bg-2);
-    border:1px solid var(--border);
-    border-radius:10px;
-    padding:12px 14px;
-    font-size:14.5px;
-    color:var(--text);
-    font-family:inherit;
+    width:100%; background:var(--bg-2); border:1px solid var(--border); border-radius:10px;
+    padding:12px 14px; font-size:14.5px; color:var(--text); font-family:inherit;
     transition:border-color 150ms ease;
   }
   .account-field input:focus{ outline:none; border-color:var(--line); }
   .account-panel .btn{ width:100%; margin-top:6px; }
 
-  .account-profile-head{
-    display:flex;
-    align-items:center;
-    gap:16px;
-    margin-bottom:22px;
-  }
+  .account-profile-head{ display:flex; align-items:center; gap:16px; margin-bottom:22px; }
   .account-avatar-lg{
-    width:56px; height:56px;
-    border-radius:16px;
-    background:var(--raised);
-    border:1.5px solid var(--border-2);
-    display:flex; align-items:center; justify-content:center;
-    font-size:18px; font-weight:700;
-    color:var(--text);
-    flex:none;
+    width:56px; height:56px; border-radius:16px; background:var(--raised); border:1.5px solid var(--border-2);
+    display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; color:var(--text); flex:none;
     transition:transform 200ms ease;
   }
   .account-profile-head:hover .account-avatar-lg{ transform:scale(1.05) rotate(-2deg); }
   .account-profile-head h2{ font-size:19px; margin-bottom:2px; }
   .account-profile-head .sub{ margin:0; font-size:12.5px; }
 
-  .account-logout{
-    width:100%;
-    margin-top:22px;
-    background:transparent;
-    color:var(--text-muted);
-    border:1.5px solid var(--border-2);
-  }
+  .account-logout{ width:100%; margin-top:22px; background:transparent; color:var(--text-muted); border:1.5px solid var(--border-2); }
   .account-logout:hover{ color:var(--text); border-color:var(--text-muted); opacity:1; }
 
-  .account-tabs{
-    display:flex;
-    gap:8px;
-    margin-bottom:22px;
-  }
+  .account-tabs{ display:flex; gap:8px; margin-bottom:22px; }
   .account-tabs button{
-    flex:1;
-    padding:10px;
-    border-radius:10px;
-    border:1.5px solid var(--border);
-    background:var(--raised);
-    color:var(--text-muted);
-    font-weight:600;
-    font-size:14px;
-    cursor:pointer;
-    transition:all 180ms ease;
+    flex:1; padding:10px; border-radius:10px; border:1.5px solid var(--border); background:var(--raised);
+    color:var(--text-muted); font-weight:600; font-size:14px; cursor:pointer; transition:all 180ms ease;
   }
-  .account-tabs button.active{
-    background:var(--line);
-    color:#000;
-    border-color:var(--line);
-  }
-  .account-message{
-    margin-top:14px;
-    font-size:13.5px;
-    text-align:center;
-    min-height:20px;
-  }
+  .account-tabs button.active{ background:var(--line); color:#000; border-color:var(--line); }
+  .account-message{ margin-top:14px; font-size:13.5px; text-align:center; min-height:20px; }
   .account-message.success{ color:#7dffa0; }
   .account-message.error{ color:#ff8a8a; }
 
-  /* ---------- footer ---------- */
+  .verify-code-input{
+    letter-spacing:0.4em; font-size:22px; text-align:center; font-weight:700;
+  }
+
   footer{ border-top:1px solid var(--border); padding:28px 0; }
-  .footer-inner{
-    display:flex; align-items:center; justify-content:space-between;
-    flex-wrap:wrap; gap:12px;
-    font-size:13px; color:var(--text-dim);
-  }
-  .footer-inner a{ color:var(--text-dim); text-decoration:underline; text-underline-offset:2px; }
-  .footer-inner a:hover{ color:var(--text); }
+  .footer-inner{ display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px; font-size:13px; color:var(--text-dim); }
   .footer-nav{ display:flex; gap:18px; }
-  .footer-nav button{
-    font:inherit; background:none; border:0; padding:0; cursor:pointer;
-    color:var(--text-dim);
-    transition:color 150ms ease;
-  }
+  .footer-nav button{ font:inherit; background:none; border:0; padding:0; cursor:pointer; color:var(--text-dim); transition:color 150ms ease; }
   .footer-nav button:hover{ color:var(--text); }
-</style>
-<style>
-  #hide-online-pill, #cake-online, #hide-players {
-    font-weight: 700;
-    color: var(--text);
-  }
 </style>
 </head>
 <body>
@@ -881,6 +407,10 @@
       <button class="nav-ghost" data-nav="account">Account</button>
     </nav>
     <div class="header-right">
+      <div class="coins-chip" title="Your coins">
+        <span class="coin-icon"></span>
+        <span id="header-coins">50</span>
+      </div>
       <button class="btn" data-nav="home" data-scroll="join">Play Now</button>
       <button class="avatar" id="header-account-chip" data-nav="account" aria-label="Account">CS</button>
     </div>
@@ -889,25 +419,22 @@
 
 <main>
 
-  <!-- ================= HOME ================= -->
+  <!-- HOME -->
   <div class="page" data-page="home">
     <section class="hero">
-      <div class="hero-bg" id="hero-bg" aria-hidden="true">
+      <div class="hero-bg" aria-hidden="true">
         <svg class="mountains" viewBox="0 0 100 30" preserveAspectRatio="none">
           <polygon points="0,30 0,18 14,9 26,20 38,6 50,22 63,11 76,24 88,14 100,20 100,30" fill="#0f0f0f"/>
           <polygon points="0,30 0,24 18,15 34,26 50,17 68,27 84,19 100,26 100,30" fill="#050505"/>
         </svg>
       </div>
-
       <div class="wrap hero-inner">
         <h1 class="display">Cake SMP <span class="stroke">Season 3</span></h1>
         <p class="lede">Vanilla survival focused on building, community, and creativity.</p>
-
         <div class="stat-pill">
           <span class="dot"></span>
           <span class="count">Cake SMP: <strong id="cake-online">Checking...</strong> · Hide &amp; Seek: <strong id="hide-online-pill">Checking...</strong></span>
         </div>
-
         <div class="join-card" id="join">
           <h2 class="display">Join Now</h2>
           <div class="join-grid">
@@ -923,7 +450,6 @@
               <span class="addr-label">Port</span>
               <div class="addr-field mono">25565</div>
             </div>
-
             <div class="slot">
               <div class="slot-head">
                 <h3>Bedrock Edition</h3>
@@ -937,7 +463,6 @@
               <div class="addr-field mono">25565</div>
             </div>
           </div>
-
           <div class="slot" style="margin-top:18px; grid-column:1 / -1;">
             <div class="slot-head">
               <h3>Cake SMP Hide &amp; Seek</h3>
@@ -955,279 +480,224 @@
     </section>
   </div>
 
-  <!-- ================= ABOUT ================= -->
+  <!-- ABOUT -->
   <div class="page" data-page="about" hidden>
-    <div class="page-title">
-      <div class="page-title-inner wrap">
-        <h1 class="display">About Cake SMP</h1>
-        <p>Who we are and what this server is actually about.</p>
+    <div class="page-title"><div class="wrap"><h1 class="display">About Cake SMP</h1><p>Who we are and what this server is actually about.</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <p class="about-copy">Cake SMP started as a small survival world for a handful of friends who wanted a vanilla server without the griefing, the pay-to-win ranks, or the noise. Season 3 keeps that same idea: build things, play fair, and stick around for the people, not the plugins.</p>
+      <div class="fact-grid">
+        <div class="fact"><div class="value display">2026</div><div class="label">Founded</div></div>
+        <div class="fact"><div class="value display">10+</div><div class="label">Daily players</div></div>
+        <div class="fact"><div class="value display">Vanilla</div><div class="label">Playstyle</div></div>
       </div>
-    </div>
-    <section class="page-fill">
-      <div class="wrap">
-        <p class="about-copy">Cake SMP started as a small survival world for a handful of friends who wanted a vanilla server without the griefing, the pay-to-win ranks, or the noise. Season 3 keeps that same idea: build things, play fair, and stick around for the people, not the plugins.</p>
-        <div class="fact-grid">
-          <div class="fact">
-            <div class="value display">2026</div>
-            <div class="label">Founded</div>
-          </div>
-          <div class="fact">
-            <div class="value display">10+</div>
-            <div class="label">Daily players</div>
-          </div>
-          <div class="fact">
-            <div class="value display">Vanilla</div>
-            <div class="label">Playstyle</div>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div></section>
   </div>
 
-  <!-- ================= FEATURES ================= -->
+  <!-- FEATURES -->
   <div class="page" data-page="features" hidden>
-    <div class="page-title">
-      <div class="page-title-inner wrap">
-        <h1 class="display">Server Features</h1>
-        <p>What makes Cake SMP worth logging into.</p>
-      </div>
-    </div>
-    <section class="page-fill">
-      <div class="wrap">
-        <div class="countdown-card" id="event-countdown">
-          <div class="countdown-head"><span class="dot"></span><span>Live Event</span></div>
-          <h3 class="countdown-title display">Winner of Hide &amp; Seek</h3>
-          <div class="countdown-units">
-            <div class="countdown-unit"><div class="num mono" data-unit="days">00</div><div class="unit-label">Days</div></div>
-            <div class="countdown-unit"><div class="num mono" data-unit="hours">00</div><div class="unit-label">Hours</div></div>
-            <div class="countdown-unit"><div class="num mono" data-unit="minutes">00</div><div class="unit-label">Min</div></div>
-            <div class="countdown-unit"><div class="num mono" data-unit="seconds">00</div><div class="unit-label">Sec</div></div>
-          </div>
-        </div>
-        <div class="feature-grid feature-grid-2">
-          <div class="feature">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
-            <h3>Weekly events</h3>
-            <p>Build contests and minigames run every week for the community.</p>
-          </div>
-          <div class="feature">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17V9l6-5 6 5v8"/><path d="M8 17v-5h4v5"/></svg></div>
-            <h3>Active moderation</h3>
-            <p>Staff online daily to keep the server fair and hacker-free.</p>
-          </div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Server Features</h1><p>What makes Cake SMP worth logging into.</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <div class="countdown-card">
+        <div class="countdown-head"><span class="dot"></span><span>Live Event</span></div>
+        <h3 class="countdown-title display">Winner of Hide &amp; Seek</h3>
+        <div class="countdown-units">
+          <div class="countdown-unit"><div class="num mono" data-unit="days">00</div><div class="unit-label">Days</div></div>
+          <div class="countdown-unit"><div class="num mono" data-unit="hours">00</div><div class="unit-label">Hours</div></div>
+          <div class="countdown-unit"><div class="num mono" data-unit="minutes">00</div><div class="unit-label">Min</div></div>
+          <div class="countdown-unit"><div class="num mono" data-unit="seconds">00</div><div class="unit-label">Sec</div></div>
         </div>
       </div>
-    </section>
+      <div class="feature-grid feature-grid-2">
+        <div class="feature">
+          <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
+          <h3>Weekly events</h3><p>Build contests and minigames run every week for the community.</p>
+        </div>
+        <div class="feature">
+          <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17V9l6-5 6 5v8"/><path d="M8 17v-5h4v5"/></svg></div>
+          <h3>Active moderation</h3><p>Staff online daily to keep the server fair and hacker-free.</p>
+        </div>
+      </div>
+    </div></section>
   </div>
 
-  <!-- ================= DISCORD ================= -->
+  <!-- DISCORD -->
   <div class="page" data-page="discord" hidden>
-    <div class="page-title">
-      <div class="page-title-inner wrap">
-        <h1 class="display">Discord</h1>
-        <p>Join the community, get updates, and find events.</p>
+    <div class="page-title"><div class="wrap"><h1 class="display">Discord</h1><p>Join the community, get updates, and find events.</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <div class="discord-lead">
+        <div><h2 class="display" style="font-size:24px;">Cake SMP Community</h2>
+        <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p></div>
+        <a class="btn" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Join Discord</a>
       </div>
-    </div>
-    <section class="page-fill">
-      <div class="wrap">
-        <div class="discord-lead">
-          <div>
-            <h2 class="display" style="font-size:24px;">Cake SMP Community</h2>
-            <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p>
-          </div>
-          <a class="btn" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Join Discord</a>
-        </div>
-        <div class="join-grid discord-grid">
-          <div class="slot">
-            <div class="slot-head"><h3>Announcements</h3></div>
-            <p style="color:var(--text-muted);font-size:14px;margin:0;">Official updates, event times, and maintenance notices are posted here first.</p>
-          </div>
-          <div class="slot">
-            <div class="slot-head"><h3>Looking for Group</h3></div>
-            <p style="color:var(--text-muted);font-size:14px;margin:0;">Find teammates for builds, trading, or Hide &amp; Seek sessions.</p>
-          </div>
-        </div>
-      </div>
-    </section>
+    </div></section>
   </div>
 
-  <!-- ================= RULES ================= -->
+  <!-- RULES -->
   <div class="page" data-page="rules" hidden>
-    <div class="page-title">
-      <div class="page-title-inner wrap">
-        <h1 class="display">Server Rules</h1>
-        <p>Keep it fair so everyone can enjoy Season 3.</p>
-      </div>
-    </div>
-    <section class="page-fill">
-      <div class="wrap">
-        <div class="rules-grid">
-          <div class="plank">
-            <div class="plank-head"><h3>General</h3></div>
-            <ol>
-              <li>No hacking, cheating, or x-ray of any kind.</li>
-              <li>No griefing or stealing from other players.</li>
-              <li>Be respectful — no hate speech or harassment.</li>
-              <li>No advertising other servers.</li>
-              <li>Listen to staff. Decisions are final.</li>
-            </ol>
-          </div>
-          <div class="plank">
-            <div class="plank-head"><h3>Hide &amp; Seek</h3></div>
-            <ol>
-              <li>No combat logging or intentional lag switches.</li>
-              <li>Do not reveal hider locations outside the game.</li>
-              <li>Abilities are for fun — do not exploit them.</li>
-              <li>Keep chat clean during matches.</li>
-              <li>Have fun and play fair.</li>
-            </ol>
-          </div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Server Rules</h1><p>Keep it fair so everyone can enjoy Season 3.</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <div class="rules-grid">
+        <div class="plank">
+          <div class="plank-head"><h3>General</h3></div>
+          <ol>
+            <li>No hacking, cheating, or x-ray of any kind.</li>
+            <li>No griefing or stealing from other players.</li>
+            <li>Be respectful — no hate speech or harassment.</li>
+            <li>No advertising other servers.</li>
+            <li>Listen to staff. Decisions are final.</li>
+          </ol>
+        </div>
+        <div class="plank">
+          <div class="plank-head"><h3>Hide &amp; Seek</h3></div>
+          <ol>
+            <li>No combat logging or intentional lag switches.</li>
+            <li>Do not reveal hider locations outside the game.</li>
+            <li>Abilities are for fun — do not exploit them.</li>
+            <li>Keep chat clean during matches.</li>
+            <li>Have fun and play fair.</li>
+          </ol>
         </div>
       </div>
-    </section>
+    </div></section>
   </div>
 
-  <!-- ================= SHOP ================= -->
+  <!-- SHOP -->
   <div class="page" data-page="shop" hidden>
-    <div class="page-title">
-      <div class="page-title-inner wrap">
-        <h1 class="display">Shop</h1>
-        <p>Unlock abilities for Hide &amp; Seek — maximum price is 10 euros.</p>
+    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek — pay with coins (for testing).</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <p class="shop-intro">All purchases are for testing. When you buy a pack, an email is sent to the server owner.</p>
+      <div class="shop-coins-bar">
+        <div class="coins-chip"><span class="coin-icon"></span><span>Your Coins: <strong id="shop-coins" class="coins-value">50</strong></span></div>
+        <button type="button" class="btn add-coins-btn" id="add-test-coins">+20 Test Coins</button>
       </div>
-    </div>
-    <section class="page-fill">
-      <div class="wrap">
-        <p class="shop-intro">All purchases are cosmetic or convenience only — nothing here affects fair play in Hide &amp; Seek.</p>
-
-        <div class="shop-grid">
-          <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
-            <h3>Starter</h3>
-            <p class="tier-desc">Get in and try the game mode out.</p>
-            <div class="price mono">€2.99</div>
-            <div class="price-note">One-time</div>
-            <ul>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Access to Hide &amp; Seek</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Sprint Boost — 5s speed dash</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Compass Ping — points to nearest hider once</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Basic scoreboard stats</span></li>
-            </ul>
-            <button class="btn" onclick="window.location.href='https://www.youtube.com/watch?v=Iqr3XIhSnUQ'" data-buy="Starter" data-eur="€2.99">Get Starter</button>
-          </div>
-
-          <div class="price-card featured">
-            <span class="price-badge">Most Popular</span>
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
-            <h3>Hider Pack</h3>
-            <p class="tier-desc">Stealthier hiding, sharper seeking.</p>
-            <div class="price mono">€5.99</div>
-            <div class="price-note">One-time</div>
-            <ul>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Starter</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Invisibility Pulse — 4s cloak</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Double Compass — two pings per round</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Priority queue access</span></li>
-            </ul>
-            <button class="btn" onclick="window.location.href='https://www.youtube.com/watch?v=Iqr3XIhSnUQ'" data-buy="Hider Pack" data-eur="€5.99">Get Hider Pack</button>
-          </div>
-
-          <div class="price-card">
-            <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
-            <h3>Ultimate</h3>
-            <p class="tier-desc">Maximum abilities and perks.</p>
-            <div class="price mono">€9.99</div>
-            <div class="price-note">One-time</div>
-            <ul>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Hider Pack</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Decoy — leave a fake trail</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Thermal Scan — brief wall vision</span></li>
-              <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Custom particle trail</span></li>
-            </ul>
-            <button class="btn" onclick="window.location.href='https://www.youtube.com/watch?v=Iqr3XIhSnUQ'" data-buy="Ultimate" data-eur="€9.99">Get Ultimate</button>
-          </div>
+      <div class="shop-grid">
+        <div class="price-card">
+          <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
+          <h3>Starter</h3><p class="tier-desc">Get in and try the game mode out.</p>
+          <div class="price mono">3 Coins</div><div class="price-note">One-time</div>
+          <ul>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Access to Hide &amp; Seek</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Sprint Boost</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Compass Ping</span></li>
+          </ul>
+          <button class="btn buy-btn" data-pack="Starter" data-cost="3">Get Starter</button>
         </div>
-        <p class="shop-note">All purchases are final. Contact staff on Discord for support.</p>
+        <div class="price-card featured">
+          <span class="price-badge">Most Popular</span>
+          <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
+          <h3>Hider Pack</h3><p class="tier-desc">Stealthier hiding, sharper seeking.</p>
+          <div class="price mono">6 Coins</div><div class="price-note">One-time</div>
+          <ul>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Starter</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Invisibility Pulse</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Double Compass</span></li>
+          </ul>
+          <button class="btn buy-btn" data-pack="Hider Pack" data-cost="6">Get Hider Pack</button>
+        </div>
+        <div class="price-card">
+          <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
+          <h3>Ultimate</h3><p class="tier-desc">Maximum abilities and perks.</p>
+          <div class="price mono">10 Coins</div><div class="price-note">One-time</div>
+          <ul>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-text">Everything in Hider Pack</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span class="ability-text">Decoy</span></li>
+            <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span class="ability-text">Thermal Scan</span></li>
+          </ul>
+          <button class="btn buy-btn" data-pack="Ultimate" data-cost="10">Get Ultimate</button>
+        </div>
       </div>
-    </section>
+      <p class="shop-note">Buying a pack sends an email notification to the owner.</p>
+    </div></section>
   </div>
 
-  <!-- ================= ACCOUNT ================= -->
+  <!-- ACCOUNT -->
   <div class="page" data-page="account" hidden>
-    <div class="page-title">
-      <div class="page-title-inner wrap">
-        <h1 class="display">Account</h1>
-        <p>Sign in or create an account with your Minecraft username.</p>
-      </div>
-    </div>
-    <section class="page-fill">
-      <div class="wrap">
-        <div class="account-shell">
-          <!-- Logged out view -->
-          <div class="account-panel" id="account-auth">
-            <div class="account-tabs">
-              <button type="button" class="active" data-tab="signin">Sign In</button>
-              <button type="button" data-tab="signup">Sign Up</button>
-            </div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Account</h1><p>Sign in or create an account with your Minecraft username + email.</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <div class="account-shell">
 
-            <!-- Sign In -->
-            <div id="tab-signin">
-              <h2 class="display">Welcome back</h2>
-              <p class="sub">Use your Minecraft username to sign in.</p>
-              <form id="signin-form">
-                <div class="account-field">
-                  <label for="signin-user">Minecraft Username</label>
-                  <input type="text" id="signin-user" name="username" required autocomplete="username" placeholder="YourMinecraftName" maxlength="16">
-                </div>
-                <div class="account-field">
-                  <label for="signin-pass">Password</label>
-                  <input type="password" id="signin-pass" name="password" required autocomplete="current-password" placeholder="••••••••">
-                </div>
-                <button type="submit" class="btn">Sign In</button>
-              </form>
-            </div>
-
-            <!-- Sign Up -->
-            <div id="tab-signup" hidden>
-              <h2 class="display">Create account</h2>
-              <p class="sub">Register with your Minecraft username. A notification will be sent to the server team.</p>
-              <form id="signup-form" action="https://formsubmit.co/smatija1404@gmail.com" method="POST">
-                <input type="hidden" name="_subject" value="New Cake SMP Account Registration">
-                <input type="hidden" name="_captcha" value="false">
-                <input type="hidden" name="_template" value="table">
-                <div class="account-field">
-                  <label for="signup-user">Minecraft Username</label>
-                  <input type="text" id="signup-user" name="minecraft_username" required autocomplete="username" placeholder="YourMinecraftName" maxlength="16" pattern="[A-Za-z0-9_]{3,16}">
-                </div>
-                <div class="account-field">
-                  <label for="signup-pass">Password</label>
-                  <input type="password" id="signup-pass" name="password" required autocomplete="new-password" placeholder="••••••••" minlength="6">
-                </div>
-                <div class="account-field">
-                  <label for="signup-pass2">Confirm Password</label>
-                  <input type="password" id="signup-pass2" required autocomplete="new-password" placeholder="••••••••" minlength="6">
-                </div>
-                <button type="submit" class="btn">Create Account</button>
-              </form>
-            </div>
-
-            <div class="account-message" id="account-msg"></div>
+        <!-- AUTH (Sign In / Sign Up) -->
+        <div class="account-panel" id="account-auth">
+          <div class="account-tabs">
+            <button type="button" class="active" data-tab="signin">Sign In</button>
+            <button type="button" data-tab="signup">Sign Up</button>
           </div>
 
-          <!-- Logged in view -->
-          <div class="account-panel" id="account-profile" hidden>
-            <div class="account-profile-head">
-              <div class="account-avatar-lg" id="profile-avatar">CS</div>
-              <div>
-                <h2 class="display" id="profile-name">Player</h2>
-                <p class="sub">Minecraft account · Cake SMP</p>
+          <!-- SIGN IN -->
+          <div id="tab-signin">
+            <h2 class="display">Welcome back</h2>
+            <p class="sub">Use your Minecraft username to sign in.</p>
+            <form id="signin-form">
+              <div class="account-field">
+                <label for="signin-user">Minecraft Username</label>
+                <input type="text" id="signin-user" required maxlength="16" placeholder="YourMinecraftName">
               </div>
-            </div>
-            <p style="color:var(--text-muted);font-size:14px;">You are signed in with your Minecraft username. Enjoy the server!</p>
-            <button type="button" class="btn account-logout" id="logout-btn">Sign Out</button>
+              <div class="account-field">
+                <label for="signin-pass">Password</label>
+                <input type="password" id="signin-pass" required placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn">Sign In</button>
+            </form>
           </div>
+
+          <!-- SIGN UP -->
+          <div id="tab-signup" hidden>
+            <h2 class="display">Create account</h2>
+            <p class="sub">Minecraft username and email are both required. You will receive a verification code.</p>
+            <form id="signup-form">
+              <div class="account-field">
+                <label for="signup-user">Minecraft Username *</label>
+                <input type="text" id="signup-user" required maxlength="16" pattern="[A-Za-z0-9_]{3,16}" placeholder="YourMinecraftName">
+              </div>
+              <div class="account-field">
+                <label for="signup-email">Email *</label>
+                <input type="email" id="signup-email" required placeholder="you@gmail.com">
+              </div>
+              <div class="account-field">
+                <label for="signup-pass">Password *</label>
+                <input type="password" id="signup-pass" required minlength="6" placeholder="••••••••">
+              </div>
+              <div class="account-field">
+                <label for="signup-pass2">Confirm Password *</label>
+                <input type="password" id="signup-pass2" required minlength="6" placeholder="••••••••">
+              </div>
+              <button type="submit" class="btn">Create Account</button>
+            </form>
+          </div>
+
+          <div class="account-message" id="account-msg"></div>
         </div>
+
+        <!-- VERIFICATION STEP -->
+        <div class="account-panel" id="account-verify" hidden>
+          <h2 class="display">Verify your email</h2>
+          <p class="sub">A 6-digit code was sent. Check your email (and also the owner notification). Enter the code below.</p>
+          <form id="verify-form">
+            <div class="account-field">
+              <label for="verify-code">Verification Code</label>
+              <input type="text" id="verify-code" class="verify-code-input" required maxlength="6" placeholder="000000" autocomplete="one-time-code">
+            </div>
+            <button type="submit" class="btn">Verify & Activate</button>
+          </form>
+          <div class="account-message" id="verify-msg"></div>
+          <button type="button" class="btn account-logout" id="cancel-verify" style="margin-top:12px;">Cancel</button>
+        </div>
+
+        <!-- PROFILE (logged in) -->
+        <div class="account-panel" id="account-profile" hidden>
+          <div class="account-profile-head">
+            <div class="account-avatar-lg" id="profile-avatar">CS</div>
+            <div>
+              <h2 class="display" id="profile-name">Player</h2>
+              <p class="sub" id="profile-email">email@example.com</p>
+            </div>
+          </div>
+          <p style="color:var(--text-muted);font-size:14px;">You are signed in with your Minecraft username.</p>
+          <button type="button" class="btn account-logout" id="logout-btn">Sign Out</button>
+        </div>
+
       </div>
-    </section>
+    </div></section>
   </div>
 
 </main>
@@ -1244,31 +714,36 @@
   </div>
 </footer>
 
+<!-- Hidden form used to send verification email to owner -->
+<form id="notify-form" action="https://formsubmit.co/smatija1404@gmail.com" method="POST" style="display:none;">
+  <input type="hidden" name="_subject" id="notify-subject" value="Cake SMP - New Account Verification">
+  <input type="hidden" name="_captcha" value="false">
+  <input type="hidden" name="_template" value="table">
+  <input type="hidden" name="minecraft_username" id="notify-username">
+  <input type="hidden" name="player_email" id="notify-email">
+  <input type="hidden" name="verification_code" id="notify-code">
+  <input type="hidden" name="message" id="notify-message">
+</form>
+
+<div class="purchase-toast" id="toast"></div>
+
 <script>
 (function(){
   // ---------- Navigation ----------
   const pages = document.querySelectorAll('.page');
   const navButtons = document.querySelectorAll('[data-nav]');
-
   function showPage(name){
-    pages.forEach(p => {
-      p.hidden = p.dataset.page !== name;
-    });
+    pages.forEach(p => p.hidden = p.dataset.page !== name);
     document.querySelectorAll('nav.primary button').forEach(btn => {
       btn.setAttribute('aria-current', btn.dataset.nav === name ? 'page' : null);
     });
     window.scrollTo({ top: 0, behavior: 'smooth' });
   }
-
   navButtons.forEach(btn => {
     btn.addEventListener('click', () => {
-      const target = btn.dataset.nav;
-      showPage(target);
+      showPage(btn.dataset.nav);
       if (btn.dataset.scroll === 'join') {
-        setTimeout(() => {
-          const el = document.getElementById('join');
-          if (el) el.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        }, 80);
+        setTimeout(() => document.getElementById('join')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
       }
     });
   });
@@ -1276,19 +751,18 @@
   // ---------- Copy buttons ----------
   document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
     btn.addEventListener('click', async () => {
-      const id = btn.dataset.target;
-      const el = document.getElementById(id);
+      const el = document.getElementById(btn.dataset.target);
       if (!el) return;
       try {
         await navigator.clipboard.writeText(el.textContent.trim());
         const original = btn.innerHTML;
         btn.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg>';
-        setTimeout(() => { btn.innerHTML = original; }, 1400);
+        setTimeout(() => btn.innerHTML = original, 1400);
       } catch(e){}
     });
   });
 
-  // ---------- Countdown (Days, Hours, Min, Sec) ----------
+  // ---------- Countdown ----------
   const targetDate = new Date('2026-09-20T18:00:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
@@ -1296,15 +770,12 @@
     minutes: document.querySelector('[data-unit="minutes"]'),
     seconds: document.querySelector('[data-unit="seconds"]')
   };
-
   function updateCountdown(){
-    const now = Date.now();
-    let diff = Math.max(0, targetDate - now);
+    let diff = Math.max(0, targetDate - Date.now());
     const d = Math.floor(diff / 86400000); diff %= 86400000;
     const h = Math.floor(diff / 3600000);  diff %= 3600000;
     const m = Math.floor(diff / 60000);    diff %= 60000;
     const s = Math.floor(diff / 1000);
-
     const vals = { days:d, hours:h, minutes:m, seconds:s };
     Object.keys(vals).forEach(k => {
       const el = unitEls[k];
@@ -1313,11 +784,7 @@
       if (el.textContent !== next) {
         el.textContent = next;
         const unit = el.closest('.countdown-unit');
-        if (unit) {
-          unit.classList.remove('tick');
-          void unit.offsetWidth;
-          unit.classList.add('tick');
-        }
+        if (unit) { unit.classList.remove('tick'); void unit.offsetWidth; unit.classList.add('tick'); }
       }
     });
   }
@@ -1329,7 +796,7 @@
     try {
       const res = await fetch(`https://api.mcsrvstat.us/2/${host}`);
       const data = await res.json();
-      if (data && data.online) {
+      if (data?.online) {
         if (elOnline) elOnline.textContent = data.players?.online ?? 'Online';
         if (elPlayers) elPlayers.textContent = `${data.players?.online ?? 0} / ${data.players?.max ?? '?'}`;
       } else {
@@ -1341,7 +808,6 @@
       if (elPlayers) elPlayers.textContent = 'Unavailable';
     }
   }
-
   function refreshStatus(){
     checkServer('cakesmp.minecraft.co.com', document.getElementById('cake-online'));
     checkServer('hideseekcs.folium.lol', document.getElementById('hide-online-pill'), document.getElementById('hide-players'));
@@ -1349,30 +815,88 @@
   refreshStatus();
   setInterval(refreshStatus, 60000);
 
-  // ---------- Account system (Minecraft username) ----------
-  const AUTH_KEY = 'cakesmp_user';
-  const authPanel = document.getElementById('account-auth');
-  const profilePanel = document.getElementById('account-profile');
-  const msgEl = document.getElementById('account-msg');
-  const chip = document.getElementById('header-account-chip');
-
-  function getUser(){
-    try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch { return null; }
+  // ---------- Coins system ----------
+  const COINS_KEY = 'cakesmp_coins';
+  function getCoins(){ return parseInt(localStorage.getItem(COINS_KEY) || '50', 10); }
+  function setCoins(n){ localStorage.setItem(COINS_KEY, String(n)); updateCoinsUI(); }
+  function updateCoinsUI(){
+    const c = getCoins();
+    document.getElementById('header-coins').textContent = c;
+    document.getElementById('shop-coins').textContent = c;
   }
+  document.getElementById('add-test-coins').addEventListener('click', () => setCoins(getCoins() + 20));
+  updateCoinsUI();
+
+  // ---------- Purchase ----------
+  function showToast(msg){
+    const t = document.getElementById('toast');
+    t.textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2800);
+  }
+  document.querySelectorAll('.buy-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      const cost = parseInt(btn.dataset.cost, 10);
+      const pack = btn.dataset.pack;
+      const coins = getCoins();
+      if (coins < cost) {
+        showToast('Not enough coins!');
+        return;
+      }
+      setCoins(coins - cost);
+      showToast(`Purchased ${pack}!`);
+
+      // Notify owner
+      const user = getUser();
+      const form = document.getElementById('notify-form');
+      document.getElementById('notify-subject').value = `Cake SMP - Purchase: ${pack}`;
+      document.getElementById('notify-username').value = user?.username || 'Guest';
+      document.getElementById('notify-email').value = user?.email || 'No email';
+      document.getElementById('notify-code').value = `Pack: ${pack} | Cost: ${cost} coins`;
+      document.getElementById('notify-message').value = `Someone bought ${pack} for ${cost} coins.`;
+      form.submit();
+    });
+  });
+
+  // ---------- Account system ----------
+  const AUTH_KEY = 'cakesmp_user';
+  const PENDING_KEY = 'cakesmp_pending';
+
+  const authPanel   = document.getElementById('account-auth');
+  const verifyPanel = document.getElementById('account-verify');
+  const profilePanel= document.getElementById('account-profile');
+  const msgEl       = document.getElementById('account-msg');
+  const verifyMsg   = document.getElementById('verify-msg');
+  const chip        = document.getElementById('header-account-chip');
+
+  function getUser(){ try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch { return null; } }
   function setUser(u){ localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
   function clearUser(){ localStorage.removeItem(AUTH_KEY); }
+  function getPending(){ try { return JSON.parse(localStorage.getItem(PENDING_KEY)); } catch { return null; } }
+  function setPending(p){ localStorage.setItem(PENDING_KEY, JSON.stringify(p)); }
+  function clearPending(){ localStorage.removeItem(PENDING_KEY); }
 
   function updateUI(){
     const user = getUser();
+    const pending = getPending();
+
     if (user) {
       authPanel.hidden = true;
+      verifyPanel.hidden = true;
       profilePanel.hidden = false;
       document.getElementById('profile-name').textContent = user.username;
+      document.getElementById('profile-email').textContent = user.email || '';
       const initials = user.username.slice(0,2).toUpperCase();
       document.getElementById('profile-avatar').textContent = initials;
       chip.textContent = initials;
+    } else if (pending) {
+      authPanel.hidden = true;
+      verifyPanel.hidden = false;
+      profilePanel.hidden = true;
+      chip.textContent = 'CS';
     } else {
       authPanel.hidden = false;
+      verifyPanel.hidden = true;
       profilePanel.hidden = true;
       chip.textContent = 'CS';
     }
@@ -1383,9 +907,8 @@
     btn.addEventListener('click', () => {
       document.querySelectorAll('.account-tabs button').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      const tab = btn.dataset.tab;
-      document.getElementById('tab-signin').hidden = tab !== 'signin';
-      document.getElementById('tab-signup').hidden = tab !== 'signup';
+      document.getElementById('tab-signin').hidden = btn.dataset.tab !== 'signin';
+      document.getElementById('tab-signup').hidden = btn.dataset.tab !== 'signup';
       msgEl.textContent = '';
       msgEl.className = 'account-message';
     });
@@ -1407,78 +930,98 @@
     }
   });
 
-  // Sign Up — saves locally + actually emails the form to smatija1404@gmail.com
+  // Sign Up → generate code + notify owner + show verification
   document.getElementById('signup-form').addEventListener('submit', e => {
-    const user = document.getElementById('signup-user').value.trim();
-    const pass = document.getElementById('signup-pass').value;
-    const pass2 = document.getElementById('signup-pass2').value;
+    e.preventDefault();
+    const username = document.getElementById('signup-user').value.trim();
+    const email    = document.getElementById('signup-email').value.trim();
+    const pass     = document.getElementById('signup-pass').value;
+    const pass2    = document.getElementById('signup-pass2').value;
 
     if (pass !== pass2) {
-      e.preventDefault();
       msgEl.textContent = 'Passwords do not match.';
       msgEl.className = 'account-message error';
       return;
     }
-    if (user.length < 3) {
-      e.preventDefault();
+    if (username.length < 3) {
       msgEl.textContent = 'Minecraft username must be at least 3 characters.';
       msgEl.className = 'account-message error';
       return;
     }
 
-    // Save locally so sign-in works immediately
-    setUser({ username: user, password: pass });
-    msgEl.textContent = 'Account created! Notification sent.';
-    msgEl.className = 'account-message success';
+    // Generate 6-digit code
+    const code = String(Math.floor(100000 + Math.random() * 900000));
+
+    // Save as pending
+    setPending({ username, email, password: pass, code });
+
+    // Send notification email to owner with the code
+    document.getElementById('notify-subject').value = 'Cake SMP - New Account Verification Code';
+    document.getElementById('notify-username').value = username;
+    document.getElementById('notify-email').value = email;
+    document.getElementById('notify-code').value = code;
+    document.getElementById('notify-message').value = `New registration.\nMinecraft: ${username}\nEmail: ${email}\nVerification Code: ${code}`;
+    document.getElementById('notify-form').submit();
+
+    msgEl.textContent = '';
+    updateUI(); // shows verification panel
+  });
+
+  // Verify code
+  document.getElementById('verify-form').addEventListener('submit', e => {
+    e.preventDefault();
+    const entered = document.getElementById('verify-code').value.trim();
+    const pending = getPending();
+    if (!pending) {
+      verifyMsg.textContent = 'No pending registration found.';
+      verifyMsg.className = 'account-message error';
+      return;
+    }
+    if (entered === pending.code) {
+      // Activate account
+      setUser({ username: pending.username, email: pending.email, password: pending.password });
+      clearPending();
+      verifyMsg.textContent = 'Account verified and activated!';
+      verifyMsg.className = 'account-message success';
+      setTimeout(updateUI, 800);
+    } else {
+      verifyMsg.textContent = 'Incorrect code. Please try again.';
+      verifyMsg.className = 'account-message error';
+    }
+  });
+
+  document.getElementById('cancel-verify').addEventListener('click', () => {
+    clearPending();
     updateUI();
-    // Form continues to submit to FormSubmit → email is sent
   });
 
   document.getElementById('logout-btn').addEventListener('click', () => {
     clearUser();
     updateUI();
-    msgEl.textContent = 'Signed out.';
-    msgEl.className = 'account-message';
   });
 
   updateUI();
 
-  // ---------- Simple canvas background ----------
+  // ---------- Canvas background ----------
   const canvas = document.getElementById('site-shader');
   const ctx = canvas.getContext('2d');
   let w, h, particles = [];
-
-  function resize(){
-    w = canvas.width = window.innerWidth;
-    h = canvas.height = window.innerHeight;
-  }
-  window.addEventListener('resize', resize);
-  resize();
-
+  function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
+  addEventListener('resize', resize); resize();
   for (let i = 0; i < 60; i++) {
     particles.push({
-      x: Math.random() * w,
-      y: Math.random() * h,
-      r: Math.random() * 1.4 + 0.3,
-      vx: (Math.random() - 0.5) * 0.25,
-      vy: (Math.random() - 0.5) * 0.25,
-      a: Math.random() * 0.35 + 0.05
+      x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.4+0.3,
+      vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25, a: Math.random()*0.35+0.05
     });
   }
-
   function draw(){
-    ctx.clearRect(0, 0, w, h);
+    ctx.clearRect(0,0,w,h);
     particles.forEach(p => {
-      p.x += p.vx;
-      p.y += p.vy;
-      if (p.x < 0) p.x = w;
-      if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h;
-      if (p.y > h) p.y = 0;
-      ctx.beginPath();
-      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(255,255,255,${p.a})`;
-      ctx.fill();
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
+      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
+      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
+      ctx.fillStyle = `rgba(255,255,255,${p.a})`; ctx.fill();
     });
     requestAnimationFrame(draw);
   }
