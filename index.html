@@ -5,7 +5,7 @@
 <title>CakeSMP</title>
 <meta name="description" content="Minecraft SMP server — join info, features, Discord, and rules." />
 <style>
-  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&display=swap');
 
   :root{
     --bg: #050505; --bg-2: #0c0c0c; --surface: #111111; --raised: #161616;
@@ -25,7 +25,12 @@
   a{color:inherit;}
   ::selection{background:#ffffff; color:#000000;}
 
-  .display{ font-family:'Baloo 2', 'Figtree', sans-serif; font-weight:700; }
+  .display{
+    font-family:'Press Start 2P', 'Baloo 2', monospace;
+    font-weight:400;
+    letter-spacing:0.02em;
+    line-height:1.4;
+  }
   .mono{ font-family:'JetBrains Mono', ui-monospace, monospace; font-variant-numeric:tabular-nums; }
   .wrap{ max-width:1120px; margin:0 auto; padding:0 24px; }
 
@@ -41,28 +46,48 @@
   }
   .header-inner{ display:flex; align-items:center; justify-content:space-between; height:68px; }
   .wordmark{
-    display:flex; align-items:center; gap:8px; font-size:19px; cursor:pointer;
+    display:flex; align-items:center; gap:8px; font-size:15px; cursor:pointer;
     background:none; border:0; color:var(--text); padding:0;
   }
 
-  nav.primary{ display:flex; align-items:center; gap:6px; }
+  nav.primary{ display:flex; align-items:center; gap:8px; }
   nav.primary button{
-    font:inherit; color:var(--text-muted); font-weight:600; font-size:14.5px;
-    padding:8px 16px; border-radius:8px; background:none; border:1.5px solid transparent; cursor:pointer;
-    transition:color 180ms ease, transform 180ms ease;
+    font:inherit; color:var(--text-muted); font-weight:600; font-size:13.5px;
+    padding:8px 16px; border-radius:10px; background:none; border:1.5px solid transparent; cursor:pointer;
+    transition: all 220ms cubic-bezier(0.2,0.8,0.2,1);
+    position:relative;
   }
-  nav.primary button:hover{ color:var(--text); transform:translateY(-1px); }
-  nav.primary button[aria-current="page"]{ color:var(--text); position:relative; }
+  nav.primary button:hover{
+    color:var(--text);
+    transform:translateY(-2px) scale(1.04);
+  }
+  nav.primary button[aria-current="page"]{
+    color:var(--text);
+  }
   nav.primary button[aria-current="page"]::after{
-    content:''; position:absolute; left:16px; right:16px; bottom:2px; height:2px; background:var(--line);
+    content:''; position:absolute; left:14px; right:14px; bottom:3px; height:2px; background:var(--line);
+    border-radius:2px;
   }
-  .nav-ghost{ border:1.5px dashed var(--border-2) !important; }
-  .nav-ghost:hover{ border-color:var(--text-muted) !important; }
+
+  /* Dashed nav buttons – better animation */
+  .nav-ghost{
+    border:1.5px dashed var(--border-2) !important;
+    background:rgba(255,255,255,0.02) !important;
+  }
+  .nav-ghost:hover{
+    border-color:var(--line) !important;
+    background:rgba(255,255,255,0.06) !important;
+    box-shadow:0 0 0 1px rgba(255,255,255,0.1), 0 6px 18px rgba(0,0,0,0.35);
+    transform:translateY(-2px) scale(1.05);
+  }
+  .nav-ghost:active{
+    transform:translateY(0) scale(0.97);
+  }
 
   .header-right{ display:flex; align-items:center; gap:14px; }
   .btn{
     display:inline-flex; align-items:center; justify-content:center;
-    font-weight:700; font-size:14.5px; padding:11px 22px; border-radius:999px;
+    font-weight:700; font-size:14px; padding:11px 22px; border-radius:999px;
     border:1.5px solid var(--line); background:var(--line); color:#000; cursor:pointer;
     transition:opacity 200ms ease, transform 220ms cubic-bezier(0.2,0.8,0.2,1), box-shadow 220ms ease;
     font-family:inherit;
@@ -78,8 +103,8 @@
   .avatar:hover{ transform:scale(1.08); border-color:var(--line); }
 
   .page-title{ padding:48px 0 40px; border-bottom:1px solid var(--border); text-align:center; }
-  .page-title h1{ font-size:34px; }
-  .page-title p{ color:var(--text-muted); margin-top:10px; }
+  .page-title h1{ font-size:26px; }
+  .page-title p{ color:var(--text-muted); margin-top:14px; font-size:15px; }
 
   .about-copy{ max-width:64ch; margin:0 auto 40px; color:var(--text-muted); font-size:15.5px; }
   .fact-grid{ display:grid; grid-template-columns:repeat(3, 1fr); gap:16px; }
@@ -91,8 +116,8 @@
   }
   .fact:hover{ transform:translateY(-4px); border-color:var(--border-2); box-shadow:0 10px 26px rgba(0,0,0,0.4); }
   .fact:nth-child(1){ animation-delay:0ms; } .fact:nth-child(2){ animation-delay:90ms; } .fact:nth-child(3){ animation-delay:180ms; }
-  .fact .value{ font-size:24px; font-weight:700; }
-  .fact .label{ margin-top:6px; font-size:12px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; }
+  .fact .value{ font-size:18px; }
+  .fact .label{ margin-top:8px; font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.06em; }
 
   .page{ flex:1 1 auto; display:flex; flex-direction:column; min-height:0; }
   .page[hidden]{ display:none; }
@@ -111,9 +136,9 @@
   .mountains{ position:absolute; bottom:0; left:0; width:100%; height:34%; }
 
   .hero-inner{ position:relative; z-index:1; text-align:center; }
-  .hero h1{ font-size:56px; line-height:1.08; letter-spacing:-0.01em; }
-  .hero h1 .stroke{ color:transparent; -webkit-text-stroke:2px var(--line); }
-  .hero p.lede{ margin:22px auto 0; max-width:46ch; color:var(--text-muted); font-size:17px; }
+  .hero h1{ font-size:38px; line-height:1.25; }
+  .hero h1 .stroke{ color:transparent; -webkit-text-stroke:1.5px var(--line); }
+  .hero p.lede{ margin:22px auto 0; max-width:46ch; color:var(--text-muted); font-size:16px; }
 
   .stat-pill{
     display:inline-flex; align-items:center; gap:10px; margin:32px auto 0; padding:9px 18px;
@@ -125,7 +150,7 @@
     position:relative; z-index:1; max-width:840px; margin:44px auto 0;
     background:var(--surface); border:1px solid var(--border); border-radius:20px; padding:36px;
   }
-  .join-card > h2{ font-size:26px; text-align:center; margin-bottom:26px; }
+  .join-card > h2{ font-size:20px; text-align:center; margin-bottom:26px; }
   .join-grid{ display:grid; grid-template-columns:1fr 1fr; gap:18px; text-align:left; }
   @media (max-width:640px){ .join-grid{ grid-template-columns:1fr; } }
 
@@ -137,7 +162,7 @@
   .slot:hover{ transform:translateY(-3px); border-color:var(--border-2); }
   .slot:nth-child(1){ animation-delay:0ms; } .slot:nth-child(2){ animation-delay:110ms; }
   .slot-head{ display:flex; align-items:center; justify-content:space-between; margin-bottom:14px; }
-  .slot-head h3{ font-size:16.5px; }
+  .slot-head h3{ font-size:14px; }
   .icon-btn{
     width:30px; height:30px; border-radius:8px; border:1px solid var(--border-2); background:transparent;
     color:var(--text-muted); display:flex; align-items:center; justify-content:center; cursor:pointer;
@@ -169,7 +194,7 @@
   }
   .feature:hover .icon{ transform:scale(1.08) rotate(-4deg); border-color:var(--line); }
   .feature .icon svg{ width:18px; height:18px; }
-  .feature h3{ font-size:15.5px; margin-bottom:6px; }
+  .feature h3{ font-size:13px; margin-bottom:8px; }
   .feature p{ font-size:13.5px; color:var(--text-muted); margin:0; }
 
   .discord-lead{ display:flex; align-items:center; justify-content:space-between; gap:24px; flex-wrap:wrap; margin-bottom:26px; }
@@ -188,7 +213,7 @@
   .plank:hover{ transform:translateY(-3px); border-color:var(--border-2); }
   .plank:nth-child(1){ animation-delay:0ms; } .plank:nth-child(2){ animation-delay:130ms; }
   .plank-head{ padding:16px 22px; border-bottom:1px solid var(--border); }
-  .plank-head h3{ font-size:16px; }
+  .plank-head h3{ font-size:13px; }
   .plank ol{ list-style:none; margin:0; padding:0; counter-reset:rule; }
   .plank li{ counter-increment:rule; display:flex; gap:14px; padding:13px 22px; border-bottom:1px solid var(--border); font-size:14.5px; }
   .plank li:last-child{ border-bottom:0; }
@@ -197,15 +222,34 @@
     border-radius:6px; border:1px solid var(--border-2); font-size:11px; font-weight:700; color:var(--text-dim);
   }
 
+  /* ========== SHOP COMING SOON ========== */
   .shop-locked-wrapper{ position:relative; min-height:480px; }
-  .shop-lock-overlay{
-    position:absolute; inset:0; background:rgba(5,5,5,0.92); backdrop-filter:blur(8px);
-    display:flex; align-items:center; justify-content:center; z-index:10; border-radius:18px;
+  .shop-coming-soon{
+    position:absolute; inset:0;
+    background:rgba(0,0,0,0.88);
+    backdrop-filter:blur(10px);
+    display:flex; align-items:center; justify-content:center;
+    z-index:20; border-radius:18px;
+    animation:fadeInOverlay 0.6s ease;
   }
-  .shop-lock-overlay[hidden]{ display:none; }
-  .shop-lock-message{ text-align:center; padding:40px 24px; }
-  .shop-lock-message h2{ font-size:28px; margin-bottom:12px; }
-  .shop-lock-message p{ color:var(--text-muted); margin-bottom:28px; font-size:16px; }
+  @keyframes fadeInOverlay{
+    from{ opacity:0; }
+    to{ opacity:1; }
+  }
+  .shop-coming-soon-text{
+    text-align:center;
+    font-family:'Press Start 2P', monospace;
+    font-size:16px;
+    line-height:1.7;
+    color:#fff;
+    max-width:90%;
+    animation:pulseText 2.4s ease-in-out infinite;
+    text-shadow:0 0 20px rgba(255,255,255,0.25);
+  }
+  @keyframes pulseText{
+    0%,100%{ opacity:0.85; transform:scale(1); }
+    50%{ opacity:1; transform:scale(1.03); }
+  }
 
   .shop-intro{ text-align:center; max-width:56ch; margin:0 auto 40px; color:var(--text-muted); font-size:15px; }
   .shop-grid{ display:grid; grid-template-columns:repeat(2, 1fr); gap:18px; max-width:900px; margin:0 auto; }
@@ -227,7 +271,7 @@
 
   .price-badge{
     position:absolute; top:-12px; left:50%; transform:translateX(-50%);
-    background:var(--line); color:#000; font-size:11px; font-weight:700; text-transform:uppercase;
+    background:var(--line); color:#000; font-size:10px; font-weight:700; text-transform:uppercase;
     letter-spacing:0.05em; padding:5px 14px; border-radius:999px;
     animation:badge-pop 560ms cubic-bezier(.2,.7,.2,1) 300ms backwards;
   }
@@ -245,12 +289,12 @@
   .price-card:hover .icon{ transform:scale(1.08) rotate(-4deg); border-color:var(--line); }
   .price-card .icon svg{ width:19px; height:19px; }
 
-  .price-card h3{ font-size:17px; margin-bottom:4px; }
+  .price-card h3{ font-size:14px; margin-bottom:6px; }
   .price-card .tier-desc{ font-size:13px; color:var(--text-muted); margin:0 0 18px; min-height:34px; }
-  .price-card .price{ font-size:28px; font-weight:700; margin-bottom:2px; }
-  .price-card .price-note{ font-size:11.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:20px; }
+  .price-card .price{ font-size:22px; font-weight:700; margin-bottom:2px; }
+  .price-card .price-note{ font-size:11px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:20px; }
 
-  .ability-tag{ display:inline-block; font-size:9.5px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; padding:2px 7px; border-radius:5px; margin-right:8px; }
+  .ability-tag{ display:inline-block; font-size:9px; font-weight:700; text-transform:uppercase; letter-spacing:0.04em; padding:2px 7px; border-radius:5px; margin-right:8px; }
   .ability-tag.hider{ background:rgba(255,255,255,0.09); color:var(--text); }
   .ability-tag.seeker{ background:var(--line); color:#000; }
 
@@ -271,27 +315,27 @@
     border-radius:18px; padding:24px 28px; text-align:center;
     opacity:0; transform:translateY(14px); animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
   }
-  .countdown-head{ display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:16px; font-size:12.5px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; }
+  .countdown-head{ display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:16px; font-size:12px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; }
   .countdown-head .dot{ width:7px; height:7px; border-radius:50%; background:var(--line); box-shadow:0 0 0 3px rgba(255,255,255,0.08); animation:pulse-dot 1.6s ease-in-out infinite; }
   @keyframes pulse-dot{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(0.7); } }
-  .countdown-title{ font-size:19px; margin-bottom:18px; }
+  .countdown-title{ font-size:15px; margin-bottom:18px; }
   .countdown-units{ display:flex; justify-content:center; gap:12px; }
   .countdown-unit{ background:var(--bg-2); border:1px solid var(--border); border-radius:12px; padding:12px 16px; min-width:64px; transition:transform 200ms ease, border-color 200ms ease; }
   .countdown-unit:hover{ transform:translateY(-3px); border-color:var(--line); }
-  .countdown-unit .num{ font-size:26px; font-weight:700; }
+  .countdown-unit .num{ font-size:22px; font-weight:700; }
   .countdown-unit.tick .num{ animation:tick-pop 320ms ease; }
   @keyframes tick-pop{ 0%{ transform:scale(1); } 40%{ transform:scale(1.18); } 100%{ transform:scale(1); } }
-  .countdown-unit .unit-label{ margin-top:4px; font-size:10.5px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; }
+  .countdown-unit .unit-label{ margin-top:4px; font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; }
 
   .account-shell{ max-width:560px; margin:0 auto; }
   .account-panel{
     background:var(--surface); border:1px solid var(--border); border-radius:18px; padding:30px;
     opacity:0; transform:translateY(16px); animation:card-in 560ms cubic-bezier(.2,.7,.2,1) forwards;
   }
-  .account-panel h2{ font-size:22px; margin-bottom:6px; }
+  .account-panel h2{ font-size:16px; margin-bottom:8px; }
   .account-panel .sub{ color:var(--text-muted); font-size:13.5px; margin-bottom:24px; }
   .account-field{ margin-bottom:16px; }
-  .account-field label{ display:block; font-size:11.5px; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:7px; }
+  .account-field label{ display:block; font-size:11px; font-weight:700; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; margin-bottom:7px; }
   .account-field input{
     width:100%; background:var(--bg-2); border:1px solid var(--border); border-radius:10px;
     padding:12px 14px; font-size:14.5px; color:var(--text); font-family:inherit; transition:border-color 150ms ease;
@@ -304,7 +348,7 @@
     width:56px; height:56px; border-radius:16px; background:var(--raised); border:1.5px solid var(--border-2);
     display:flex; align-items:center; justify-content:center; font-size:18px; font-weight:700; color:var(--text);
   }
-  .account-profile-head h2{ font-size:19px; margin-bottom:2px; }
+  .account-profile-head h2{ font-size:15px; margin-bottom:4px; }
   .account-profile-head .sub{ margin:0; font-size:12.5px; }
 
   .account-logout{ width:100%; margin-top:22px; background:transparent; color:var(--text-muted); border:1.5px solid var(--border-2); }
@@ -313,7 +357,7 @@
   .account-tabs{ display:flex; gap:8px; margin-bottom:22px; }
   .account-tabs button{
     flex:1; padding:10px; border-radius:10px; border:1.5px solid var(--border); background:var(--raised);
-    color:var(--text-muted); font-weight:600; font-size:14px; cursor:pointer; transition:all 180ms ease;
+    color:var(--text-muted); font-weight:600; font-size:13.5px; cursor:pointer; transition:all 180ms ease;
   }
   .account-tabs button.active{ background:var(--line); color:#000; border-color:var(--line); }
   .account-message{ margin-top:14px; font-size:13.5px; text-align:center; min-height:20px; }
@@ -323,7 +367,7 @@
   .verify-code-input{ letter-spacing:0.4em; font-size:22px; text-align:center; font-weight:700; }
   .code-display{
     background:var(--bg-2); border:1px dashed var(--border-2); border-radius:12px;
-    padding:16px; text-align:center; margin-bottom:20px; font-size:28px; font-weight:700; letter-spacing:0.3em;
+    padding:16px; text-align:center; margin-bottom:20px; font-size:24px; font-weight:700; letter-spacing:0.3em;
   }
 
   footer{ border-top:1px solid var(--border); padding:28px 0; }
@@ -367,8 +411,8 @@
     display:flex; align-items:center; justify-content:center; overflow:hidden;
   }
   .caker-avatar img{ width:100%; height:100%; object-fit:contain; }
-  .caker-header-info h3{ font-size:16px; margin-bottom:2px; }
-  .caker-header-info span{ font-size:12px; color:var(--text-dim); }
+  .caker-header-info h3{ font-size:13px; margin-bottom:3px; }
+  .caker-header-info span{ font-size:11px; color:var(--text-dim); }
 
   .caker-messages{ flex:1; overflow-y:auto; padding:18px; display:flex; flex-direction:column; gap:12px; }
   .caker-msg{ max-width:85%; padding:11px 14px; border-radius:14px; font-size:14px; line-height:1.45; }
@@ -433,7 +477,7 @@
           <div class="join-grid">
             <div class="slot">
               <div class="slot-head">
-                <h3>Java Edition</h3>
+                <h3 class="display">Java Edition</h3>
                 <button class="icon-btn" data-target="java-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
               </div>
               <span class="addr-label">Server Address</span>
@@ -443,7 +487,7 @@
             </div>
             <div class="slot">
               <div class="slot-head">
-                <h3>Bedrock Edition</h3>
+                <h3 class="display">Bedrock Edition</h3>
                 <button class="icon-btn" data-target="bedrock-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
               </div>
               <span class="addr-label">Server Address</span>
@@ -454,7 +498,7 @@
           </div>
           <div class="slot" style="margin-top:18px;">
             <div class="slot-head">
-              <h3>Cake SMP Hide &amp; Seek</h3>
+              <h3 class="display">Cake SMP Hide &amp; Seek</h3>
               <button class="icon-btn" data-target="hide-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
             </div>
             <span class="addr-label">Server Address</span>
@@ -497,11 +541,11 @@
       <div class="feature-grid-2">
         <div class="feature">
           <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
-          <h3>Weekly events</h3><p>Build contests and minigames run every week for the community.</p>
+          <h3 class="display">Weekly events</h3><p>Build contests and minigames run every week for the community.</p>
         </div>
         <div class="feature">
           <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 17V9l6-5 6 5v8"/><path d="M8 17v-5h4v5"/></svg></div>
-          <h3>Active moderation</h3><p>Staff online daily to keep the server fair and hacker-free.</p>
+          <h3 class="display">Active moderation</h3><p>Staff online daily to keep the server fair and hacker-free.</p>
         </div>
       </div>
     </div></section>
@@ -513,7 +557,7 @@
     <section class="page-fill"><div class="wrap">
       <div class="discord-lead">
         <div>
-          <h2 class="display" style="font-size:24px;">Cake SMP Community</h2>
+          <h2 class="display" style="font-size:18px;">Cake SMP Community</h2>
           <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p>
         </div>
         <a class="btn" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Join Discord</a>
@@ -527,7 +571,7 @@
     <section class="page-fill"><div class="wrap">
       <div class="rules-grid">
         <div class="plank">
-          <div class="plank-head"><h3>Discord Rules</h3></div>
+          <div class="plank-head"><h3 class="display">Discord Rules</h3></div>
           <ol>
             <li>No disrespectful behavior towards other members.</li>
             <li>No toxicity or harassment towards other members.</li>
@@ -540,7 +584,7 @@
           </ol>
         </div>
         <div class="plank">
-          <div class="plank-head"><h3>Minecraft Server Rules</h3></div>
+          <div class="plank-head"><h3 class="display">Minecraft Server Rules</h3></div>
           <ol>
             <li>No hacking or cheating. This includes minimaps, X-ray, hacked clients, or any other unfair modifications.</li>
             <li>No lag machines.</li>
@@ -555,88 +599,71 @@
 
   <!-- SHOP -->
   <div class="page" data-page="shop" hidden>
-    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek. All features can be implemented via plugin.</p></div></div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek.</p></div></div>
     <section class="page-fill">
       <div class="wrap">
         <div class="shop-locked-wrapper">
-          <div class="shop-lock-overlay" id="shop-lock">
-            <div class="shop-lock-message">
-              <h2 class="display">To access shop please sign up</h2>
-              <p>Create an account or sign in to view and purchase packs.</p>
-              <button class="btn" data-nav="account">Go to Account</button>
+          <!-- COMING SOON OVERLAY -->
+          <div class="shop-coming-soon">
+            <div class="shop-coming-soon-text">
+              It coming soon<br>or not<br>we will see...
             </div>
           </div>
 
-          <div id="shop-content">
-            <p class="shop-intro">All purchases are one-time. Abilities work only in Hide &amp; Seek and are fully plugin-based.</p>
-
+          <div id="shop-content" style="opacity:0.15; pointer-events:none;">
+            <p class="shop-intro">All purchases are one-time. Abilities work only in Hide &amp; Seek.</p>
             <div class="shop-grid">
               <div class="price-card">
                 <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
-                <h3>Starter</h3>
+                <h3 class="display">Starter</h3>
                 <p class="tier-desc">Cheapest way to get into the fun.</p>
                 <div class="price mono">€1.99</div>
                 <div class="price-note">One-time</div>
                 <ul>
                   <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Access to Hide &amp; Seek</span></li>
                   <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Basic particle trail</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Priority queue (small)</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Custom join message</span></li>
                 </ul>
                 <button class="btn">Get Starter</button>
               </div>
-
               <div class="price-card featured">
                 <span class="price-badge">Hider Focus</span>
                 <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
-                <h3>Hider Pack</h3>
-                <p class="tier-desc">Everything you need to stay hidden longer.</p>
+                <h3 class="display">Hider Pack</h3>
+                <p class="tier-desc">Stay hidden longer.</p>
                 <div class="price mono">€4.99</div>
                 <div class="price-note">One-time</div>
                 <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Everything in Starter</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Sprint Boost (5s)</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Invisibility Pulse (4s)</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Silent Footsteps</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Decoy (fake player)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Sprint Boost</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Invisibility Pulse</span></li>
                 </ul>
                 <button class="btn">Get Hider Pack</button>
               </div>
-
               <div class="price-card featured">
                 <span class="price-badge">Seeker Focus</span>
                 <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
-                <h3>Seeker Pack</h3>
-                <p class="tier-desc">Find hiders faster and more efficiently.</p>
+                <h3 class="display">Seeker Pack</h3>
+                <p class="tier-desc">Find them faster.</p>
                 <div class="price mono">€4.99</div>
                 <div class="price-note">One-time</div>
                 <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Everything in Starter</span></li>
                   <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Upgraded Compass</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Glow Pulse (nearby)</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Speed Boost (4s)</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Thermal Scan (short)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Thermal Scan</span></li>
                 </ul>
                 <button class="btn">Get Seeker Pack</button>
               </div>
-
               <div class="price-card">
                 <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
-                <h3>Ultimate Bundle</h3>
-                <p class="tier-desc">Both packs + exclusive extras.</p>
+                <h3 class="display">Ultimate</h3>
+                <p class="tier-desc">Both packs + extras.</p>
                 <div class="price mono">€8.99</div>
-                <div class="price-note">One-time · Best value</div>
+                <div class="price-note">Best value</div>
                 <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Full Hider Pack</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Full Seeker Pack</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Exclusive particle trail</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Highest queue priority</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Extra life (1 per game)</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Full Hider + Seeker</span></li>
+                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Extra life</span></li>
                 </ul>
                 <button class="btn">Get Ultimate</button>
               </div>
             </div>
-            <p class="shop-note">All abilities are server-side (plugin). Contact staff on Discord after purchase.</p>
           </div>
         </div>
       </div>
@@ -850,7 +877,7 @@
   refreshStatus();
   setInterval(refreshStatus, 60000);
 
-  // Account + Shop lock
+  // Account
   const AUTH_KEY = 'cakesmp_user';
   const PENDING_KEY = 'cakesmp_pending';
 
@@ -860,7 +887,6 @@
   const msgEl        = document.getElementById('account-msg');
   const verifyMsg    = document.getElementById('verify-msg');
   const chip         = document.getElementById('header-account-chip');
-  const shopLock     = document.getElementById('shop-lock');
 
   function getUser(){ try { return JSON.parse(localStorage.getItem(AUTH_KEY)); } catch { return null; } }
   function setUser(u){ localStorage.setItem(AUTH_KEY, JSON.stringify(u)); }
@@ -872,7 +898,6 @@
   function updateUI(){
     const user = getUser();
     const pending = getPending();
-    if (shopLock) shopLock.hidden = !!user;
 
     if (user) {
       authPanel.hidden = true;
@@ -1005,7 +1030,7 @@
     cakerWindow.classList.toggle('open', cakerOpen);
     cakerToggle.classList.toggle('open', cakerOpen);
     if (cakerOpen && cakerMessages.children.length === 0) {
-      addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop packs, Hide & Seek abilities, or anything else!");
+      addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop, Hide & Seek or anything else!");
     }
   }
   cakerToggle.addEventListener('click', toggleCaker);
@@ -1027,29 +1052,28 @@
 
   function cakerReply(input){
     const msg = input.toLowerCase().trim();
-
     if (/^(hi|hey|hello|yo|sup)/.test(msg)) return "Hey! Welcome to Cake SMP Season 3. What do you need?";
     if (msg.includes('join') || msg.includes('ip') || msg.includes('address')) {
       return "<strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol";
     }
-    if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord. Full list is on the Rules page!";
-    if (msg.includes('shop') || msg.includes('pack') || msg.includes('hider') || msg.includes('seeker') || msg.includes('buy')) {
-      return "Shop has 4 options:<br>• <strong>Starter</strong> €1.99 – basic access + cosmetics<br>• <strong>Hider Pack</strong> €4.99 – invis, decoy, silent steps...<br>• <strong>Seeker Pack</strong> €4.99 – compass, glow, thermal...<br>• <strong>Ultimate Bundle</strong> €8.99 – both packs + extras<br><br>You need an account to see the shop!";
+    if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord.";
+    if (msg.includes('shop') || msg.includes('pack') || msg.includes('buy')) {
+      return "Shop is currently <strong>coming soon</strong>... or not, we will see 👀";
     }
     if (msg.includes('account') || msg.includes('sign up') || msg.includes('register')) {
-      return "Go to the Account page → Sign Up. You need Minecraft username + email. Then enter the verification code that appears.";
+      return "Go to the Account page → Sign Up. You need Minecraft username + email.";
     }
     if (msg.includes('hide') || msg.includes('seek')) {
-      return "Hide & Seek server: <strong>hideseekcs.folium.lol</strong><br>Buy Hider or Seeker packs in the Shop for special abilities (all plugin-based).";
+      return "Hide & Seek server: <strong>hideseekcs.folium.lol</strong>";
     }
-    if (msg.includes('discord')) return "There's a Join Discord button on the Discord page. Come hang out!";
-    if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI. I help with everything related to the server.";
-    if (msg.includes('help')) return "I can help with: joining the server, rules, shop packs, Hide & Seek abilities, accounts, and Discord.";
+    if (msg.includes('discord')) return "There's a Join Discord button on the Discord page!";
+    if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
+    if (msg.includes('help')) return "I can help with: joining, rules, shop status, Hide & Seek, accounts and Discord.";
 
     const fallbacks = [
-      "Not sure about that one. Try asking about the shop, IP, rules, or Hide & Seek!",
+      "Not sure about that one. Try asking about the IP, rules or shop!",
       "Hmm, can you rephrase? I know a lot about Cake SMP.",
-      "Interesting! For server stuff just ask me about joining, packs, or rules."
+      "Interesting! Ask me about joining, packs or rules."
     ];
     return fallbacks[Math.floor(Math.random()*fallbacks.length)];
   }
