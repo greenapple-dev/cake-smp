@@ -649,14 +649,14 @@
               </div>
               <div class="account-field">
                 <label for="app-age">Age *</label>
-                <input type="number" id="app-age" required min="13" max="99" placeholder="16">
+                <input type="number" id="app-age" required min="1" max="99" placeholder="16">
               </div>
               <div class="account-field">
                 <label for="app-timezone">Timezone *</label>
                 <input type="text" id="app-timezone" required placeholder="e.g. CET / EST / UTC+1">
               </div>
-              <div class="account-field">
-                <label for="app-experience">Minecraft / moderation experience *</label>
+              <div class="account-field" id="field-experience">
+                <label for="app-experience" id="label-experience">Minecraft / moderation experience *</label>
                 <textarea id="app-experience" required placeholder="Have you been staff before? How long have you played Minecraft? Any relevant experience?"></textarea>
               </div>
               <div class="account-field">
@@ -667,13 +667,13 @@
                 <label for="app-activity">How many hours per week can you be active? *</label>
                 <input type="text" id="app-activity" required placeholder="e.g. 8–12 hours">
               </div>
-              <div class="account-field">
-                <label for="app-scenario">Scenario: A player is using X-ray and refuses to listen. What do you do? *</label>
+              <div class="account-field" id="field-scenario">
+                <label for="app-scenario" id="label-scenario">Scenario: A player is using X-ray and refuses to listen. What do you do? *</label>
                 <textarea id="app-scenario" required placeholder="Describe your steps clearly."></textarea>
               </div>
-              <div class="checkbox-row">
+              <div class="checkbox-row" id="field-accept">
                 <input type="checkbox" id="app-accept" required>
-                <label for="app-accept">Do you accept to be a staff of Cake SMP without being paid or having OP on the main server? *</label>
+                <label for="app-accept" id="label-accept">Do you accept to be a staff of Cake SMP without being paid or having OP on the main server? *</label>
               </div>
               <button type="submit" class="btn" id="app-send-btn">Send Application</button>
               <button type="button" class="btn app-back" id="app-back-role">Back to roles</button>
@@ -1177,10 +1177,66 @@
   const appFormPanel = document.getElementById('app-form-panel');
   const appMsg = document.getElementById('app-msg');
   const continueRoleBtn = document.getElementById('app-continue-role');
+  const APP_BLOCK_KEY = 'cakesmp_app_block_until';
+
+  function isAppBlocked(){
+    const until = parseInt(localStorage.getItem(APP_BLOCK_KEY) || '0', 10);
+    return until > Date.now();
+  }
+  function setAppBlock(ms){
+    localStorage.setItem(APP_BLOCK_KEY, String(Date.now() + ms));
+  }
+  function getAppBlockRemaining(){
+    const until = parseInt(localStorage.getItem(APP_BLOCK_KEY) || '0', 10);
+    return Math.max(0, until - Date.now());
+  }
+
+  function applyRoleFormFields(role){
+    const isVA = role === 'Voice Actor';
+    const expLabel = document.getElementById('label-experience');
+    const expArea = document.getElementById('app-experience');
+    const scenLabel = document.getElementById('label-scenario');
+    const scenArea = document.getElementById('app-scenario');
+    const acceptLabel = document.getElementById('label-accept');
+
+    if (isVA) {
+      expLabel.textContent = 'Voice acting / recording experience *';
+      expArea.placeholder = 'Any previous voice work, mic setup, software you use, sample description of your voice, etc.';
+      scenLabel.textContent = 'Describe how you would record and deliver voice lines / announcements for Cake SMP *';
+      scenArea.placeholder = 'Equipment, process, turnaround time, style of delivery...';
+      acceptLabel.textContent = 'Do you accept to only provide voice messages/lines for Cake SMP (unpaid, no OP, no other staff duties)? *';
+    } else {
+      expLabel.textContent = 'Minecraft / moderation experience *';
+      expArea.placeholder = 'Have you been staff before? How long have you played Minecraft? Any relevant experience?';
+      scenLabel.textContent = 'Scenario: A player is using X-ray and refuses to listen. What do you do? *';
+      scenArea.placeholder = 'Describe your steps clearly.';
+      acceptLabel.textContent = 'Do you accept to be a staff of Cake SMP without being paid or having OP on the main server? *';
+    }
+  }
 
   function updateApplicationUI(){
     const user = getUser();
     if (!appLocked || !appRoleSelect || !appFormPanel) return;
+
+    // Age block (under 13) — blocks entire application area for 1 hour
+    if (isAppBlocked()) {
+      appLocked.hidden = false;
+      appRoleSelect.hidden = true;
+      appFormPanel.hidden = true;
+      const mins = Math.ceil(getAppBlockRemaining() / 60000);
+      appLocked.querySelector('h2').textContent = 'Application blocked';
+      appLocked.querySelector('p').textContent = 'Message owner for this! (Blocked for ~' + mins + ' more minute' + (mins === 1 ? '' : 's') + ')';
+      const goBtn = appLocked.querySelector('button');
+      if (goBtn) goBtn.style.display = 'none';
+      return;
+    } else {
+      // restore locked panel text if not blocked
+      appLocked.querySelector('h2').textContent = 'Account required';
+      appLocked.querySelector('p').textContent = 'You need to be signed in with your Minecraft account before you can submit a staff application.';
+      const goBtn = appLocked.querySelector('button');
+      if (goBtn) goBtn.style.display = '';
+    }
+
     if (!user) {
       appLocked.hidden = false;
       appRoleSelect.hidden = true;
@@ -1196,6 +1252,7 @@
       appFormPanel.hidden = false;
       document.getElementById('app-selected-role').textContent = selectedRole;
       document.getElementById('app-mc').value = user.username;
+      applyRoleFormFields(selectedRole);
     }
   }
 
@@ -1245,12 +1302,36 @@
     const user = getUser();
     if (!user || !selectedRole) return;
 
+    if (isAppBlocked()) {
+      appMsg.textContent = 'Message owner for this!';
+      appMsg.className = 'account-message error';
+      updateApplicationUI();
+      return;
+    }
+
+    const ageVal = parseInt(document.getElementById('app-age').value.trim(), 10);
+    if (!isNaN(ageVal) && ageVal < 13) {
+      setAppBlock(60 * 60 * 1000); // 1 hour
+      appMsg.textContent = 'Message owner for this!';
+      appMsg.className = 'account-message error';
+      selectedRole = null;
+      document.querySelectorAll('.role-card').forEach(c => c.classList.remove('selected'));
+      continueRoleBtn.disabled = true;
+      continueRoleBtn.style.opacity = '0.5';
+      continueRoleBtn.style.cursor = 'not-allowed';
+      updateApplicationUI();
+      return;
+    }
+
     if (!document.getElementById('app-accept').checked) {
-      appMsg.textContent = 'You must accept the unpaid / no-OP condition.';
+      appMsg.textContent = selectedRole === 'Voice Actor'
+        ? 'You must accept the voice-only (unpaid, no OP, no other duties) condition.'
+        : 'You must accept the unpaid / no-OP condition.';
       appMsg.className = 'account-message error';
       return;
     }
 
+    const isVA = selectedRole === 'Voice Actor';
     const data = {
       role: selectedRole,
       minecraft: document.getElementById('app-mc').value.trim(),
@@ -1261,7 +1342,9 @@
       why: document.getElementById('app-why').value.trim(),
       activity: document.getElementById('app-activity').value.trim(),
       scenario: document.getElementById('app-scenario').value.trim(),
-      accept: 'Yes – accepts unpaid staff without OP on main server'
+      accept: isVA
+        ? 'Yes – accepts voice messages/lines only (unpaid, no OP, no other staff duties)'
+        : 'Yes – accepts unpaid staff without OP on main server'
     };
 
     const sendBtn = document.getElementById('app-send-btn');
@@ -1296,7 +1379,7 @@
           <tr><td colspan="2" style="padding:0 0 12px;color:#f5f5f5;line-height:1.5;">${data.experience.replace(/\n/g,'<br>')}</td></tr>
           <tr><td colspan="2" style="padding:8px 0 6px;color:#6b6b6b;border-top:1px solid #2a2a2a;">Why this role</td></tr>
           <tr><td colspan="2" style="padding:0 0 12px;color:#f5f5f5;line-height:1.5;">${data.why.replace(/\n/g,'<br>')}</td></tr>
-          <tr><td colspan="2" style="padding:8px 0 6px;color:#6b6b6b;border-top:1px solid #2a2a2a;">Scenario answer</td></tr>
+          <tr><td colspan="2" style="padding:8px 0 6px;color:#6b6b6b;border-top:1px solid #2a2a2a;">${data.role === 'Voice Actor' ? 'Voice process / delivery' : 'Scenario answer'}</td></tr>
           <tr><td colspan="2" style="padding:0 0 12px;color:#f5f5f5;line-height:1.5;">${data.scenario.replace(/\n/g,'<br>')}</td></tr>
           <tr><td colspan="2" style="padding:14px 0 0;border-top:1px solid #2a2a2a;">
             <span style="display:inline-block;background:#ffffff;color:#000;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;">${data.accept}</span>
@@ -1324,8 +1407,8 @@
     body.append('Weekly Activity', data.activity);
     body.append('Experience', data.experience);
     body.append('Why this role', data.why);
-    body.append('Scenario answer', data.scenario);
-    body.append('Unpaid / No OP acceptance', data.accept);
+    body.append(isVA ? 'Voice process / delivery' : 'Scenario answer', data.scenario);
+    body.append(isVA ? 'Voice-only acceptance' : 'Unpaid / No OP acceptance', data.accept);
     // Also send HTML version if supported
     body.append('_html', htmlBody);
 
