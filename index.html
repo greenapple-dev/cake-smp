@@ -455,6 +455,23 @@
   .account-message.success{ color:#7dffa0; }
   .account-message.error{ color:#ff8a8a; }
 
+  .notif-card{
+    background:var(--raised); border:1px solid var(--border); border-radius:12px; padding:14px 16px; margin-bottom:10px;
+    font-size:13.5px; color:var(--text-muted); text-align:left;
+  }
+  .notif-card.accepted{ border-color:rgba(125,255,160,0.35); }
+  .notif-card.declined{ border-color:rgba(255,138,138,0.35); }
+  .notif-card strong{ color:var(--text); }
+  .owner-app-card{
+    background:var(--bg-2); border:1px solid var(--border); border-radius:14px; padding:16px; margin-bottom:12px; text-align:left;
+  }
+  .owner-app-card h4{ margin:0 0 8px; font-size:14px; color:var(--text); }
+  .owner-app-card p{ margin:0 0 6px; font-size:12.5px; color:var(--text-muted); }
+  .owner-app-actions{ display:flex; gap:8px; margin-top:12px; flex-wrap:wrap; }
+  .owner-app-actions .btn{ flex:1; min-width:100px; padding:10px 14px; font-size:13px; }
+  .btn-decline{ background:transparent !important; color:#ff8a8a !important; border:1.5px solid rgba(255,138,138,0.5) !important; }
+  #confetti-canvas{ position:fixed; inset:0; width:100%; height:100%; pointer-events:none; z-index:9999; }
+
   .verify-code-input{ letter-spacing:0.4em; font-size:22px; text-align:center; font-weight:700; }
   .code-display{
     background:var(--bg-2); border:1px dashed var(--border-2); border-radius:12px;
@@ -784,6 +801,10 @@
                 <input type="checkbox" id="app-accept" required>
                 <label for="app-accept" id="label-accept">Do you accept to be a staff of Cake SMP without being paid or having OP on the main server? *</label>
               </div>
+              <div class="checkbox-row" id="field-no-ping">
+                <input type="checkbox" id="app-no-ping" required>
+                <label for="app-no-ping">Do you accept to not ping owner to speed the progress? *</label>
+              </div>
               <button type="submit" class="btn" id="app-send-btn">Send Application</button>
               <button type="button" class="btn app-back" id="app-back-role">Back to roles</button>
             </form>
@@ -843,109 +864,9 @@
 
   <!-- SHOP -->
   <div class="page" data-page="shop" hidden>
-    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Support the server or unlock Hide &amp; Seek abilities.</p></div></div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek.</p></div></div>
     <section class="page-fill">
       <div class="wrap">
-
-        <!-- STORE: Support -->
-        <p class="shop-section-label">Store · Support</p>
-        <div class="support-card" id="store-root">
-          <div class="store-steps" id="store-steps">
-            <span class="store-step-pill active" data-step="1">1 · Amount</span>
-            <span class="store-step-pill" data-step="2">2 · Checkout</span>
-            <span class="store-step-pill" data-step="3">3 · Pay</span>
-          </div>
-
-          <!-- STEP 1: amount -->
-          <div class="store-panel" id="store-step-1">
-            <h2 class="display">Support</h2>
-            <p class="support-text">Support is a money you send to help us out and to make Cake smp even better you do not have to donate if you dont want to we are greatful for everything!</p>
-            <p class="support-100">100% goes to the server (Masterbank). Checkout stays on this website.</p>
-            <div class="support-amount-row">
-              <input type="number" id="support-amount" min="1" max="500" step="1" value="5" inputmode="numeric" aria-label="Donation amount">
-              <div class="currency-toggle" role="group" aria-label="Currency">
-                <button type="button" class="active" data-currency="EUR">EU €</button>
-                <button type="button" data-currency="USD">$ USD</button>
-              </div>
-            </div>
-            <div class="support-presets">
-              <button type="button" data-preset="5">5</button>
-              <button type="button" data-preset="10">10</button>
-              <button type="button" data-preset="20">20</button>
-              <button type="button" data-preset="50">50</button>
-              <button type="button" data-preset="100">100</button>
-            </div>
-            <button type="button" class="btn" id="store-to-checkout" style="width:100%;">Continue to checkout</button>
-            <div class="support-msg" id="support-msg"></div>
-          </div>
-
-          <!-- STEP 2: checkout -->
-          <div class="store-panel" id="store-step-2" hidden>
-            <h2 class="display">Checkout</h2>
-            <p class="support-100" style="margin-bottom:14px;">Review your order, then choose how to pay.</p>
-            <div class="checkout-summary">
-              <div class="checkout-row"><span>Item</span><strong id="checkout-item">Cake SMP Support</strong></div>
-              <div class="checkout-row"><span>Minecraft (optional)</span>
-                <input type="text" id="checkout-mc" maxlength="16" placeholder="YourName" style="width:140px; background:var(--surface); border:1px solid var(--border); border-radius:8px; padding:6px 10px; color:var(--text); font:inherit; font-size:13px;">
-              </div>
-              <div class="checkout-row checkout-total"><span>Total</span><strong id="checkout-total">€5</strong></div>
-            </div>
-            <div class="pay-methods">
-              <label class="pay-method selected">
-                <input type="radio" name="pay-method" value="bank" checked>
-                <div>
-                  <h4>Bank transfer (card / IBAN)</h4>
-                  <p>Pay from your bank app · goes to Masterbank · instant details on site</p>
-                </div>
-              </label>
-              <label class="pay-method">
-                <input type="radio" name="pay-method" value="paypal">
-                <div>
-                  <h4>PayPal / Card</h4>
-                  <p>Pay with PayPal balance or linked card (opens PayPal checkout)</p>
-                </div>
-              </label>
-            </div>
-            <div class="store-actions">
-              <button type="button" class="btn btn-ghost-store" id="store-back-1">Back</button>
-              <button type="button" class="btn" id="store-to-pay">Pay now</button>
-            </div>
-            <div class="support-msg" id="checkout-msg"></div>
-          </div>
-
-          <!-- STEP 3: pay / done -->
-          <div class="store-panel" id="store-step-3" hidden>
-            <div id="store-pay-bank">
-              <h2 class="display">Complete payment</h2>
-              <p class="support-100">Transfer the exact amount. Use the order ID as payment description so we can match it.</p>
-              <div class="checkout-summary">
-                <div class="checkout-row"><span>Order ID</span><strong class="mono" id="pay-order-id">—</strong></div>
-                <div class="checkout-row"><span>Amount</span><strong class="mono" id="pay-amount">—</strong></div>
-                <div class="checkout-row"><span>IBAN</span>
-                  <span style="display:flex;align-items:center;gap:6px;">
-                    <strong class="mono" id="pay-iban" style="font-size:12.5px;">—</strong>
-                    <button type="button" class="icon-btn" id="support-copy-iban" title="Copy IBAN" style="width:30px;height:30px;">
-                      <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg>
-                    </button>
-                  </span>
-                </div>
-                <div class="checkout-row"><span>Description</span><strong class="mono" id="pay-desc">—</strong></div>
-              </div>
-              <p style="font-size:12.5px;color:var(--text-dim);margin:0 0 14px;line-height:1.45;">After you pay, keep the order ID. Staff will confirm when the transfer arrives (Masterbank).</p>
-              <div class="store-actions">
-                <button type="button" class="btn btn-ghost-store" id="store-back-2">Back</button>
-                <button type="button" class="btn" id="store-mark-paid">I have paid</button>
-              </div>
-            </div>
-            <div id="store-pay-done" hidden class="order-success-box">
-              <h2 class="display">Order placed</h2>
-              <p class="support-text" style="margin-bottom:0;">Thank you! Your order is registered on the website.</p>
-              <div class="order-id" id="done-order-id">—</div>
-              <p style="font-size:13px;color:var(--text-muted);">We will match your bank transfer using this Order ID. You can close this page.</p>
-              <button type="button" class="btn" id="store-new-order" style="margin-top:12px;">New support order</button>
-            </div>
-          </div>
-        </div>
 
         <!-- PACKS (coming soon) -->
         <p class="shop-section-label">Hide &amp; Seek packs</p>
@@ -1091,6 +1012,26 @@
             </div>
           </div>
           <p style="color:var(--text-muted);font-size:14px;">You are signed in with your Minecraft username.</p>
+
+          <div id="account-notifications" style="margin:18px 0;"></div>
+
+          <div style="margin:20px 0; padding-top:16px; border-top:1px solid var(--border);">
+            <h3 class="display" style="font-size:13px; margin-bottom:10px;">Owner panel</h3>
+            <div id="owner-login-row">
+              <div class="account-field">
+                <label for="owner-pass">Owner password</label>
+                <input type="password" id="owner-pass" placeholder="••••••••">
+              </div>
+              <button type="button" class="btn" id="owner-unlock-btn" style="width:100%;">Unlock review</button>
+              <div class="account-message" id="owner-msg"></div>
+            </div>
+            <div id="owner-apps-panel" hidden>
+              <p style="font-size:13px;color:var(--text-muted);margin:0 0 12px;">Pending staff applications (this browser).</p>
+              <div id="owner-apps-list"></div>
+              <button type="button" class="btn account-logout" id="owner-lock-btn" style="margin-top:12px;">Lock owner panel</button>
+            </div>
+          </div>
+
           <button type="button" class="btn account-logout" id="logout-btn">Sign Out</button>
         </div>
       </div>
@@ -1113,34 +1054,10 @@
       <button data-nav="discord">Discord</button>
       <button data-nav="features">Features</button>
     </div>
-    <div class="footer-cards" aria-label="Accepted payment methods">
-      <span class="footer-cards-label">Payments</span>
-      <span class="footer-card-logo" title="Visa">
-        <svg viewBox="0 0 52 18" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <rect width="52" height="18" rx="3" fill="#1A1F71"/>
-          <text x="26" y="13" text-anchor="middle" font-family="Arial,Helvetica,sans-serif" font-weight="800" font-size="11" fill="#FFFFFF" letter-spacing="1">VISA</text>
-        </svg>
-      </span>
-      <span class="footer-card-logo" title="Mastercard">
-        <svg viewBox="0 0 48 30" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <circle cx="18" cy="15" r="12" fill="#EB001B"/>
-          <circle cx="30" cy="15" r="12" fill="#F79E1B"/>
-          <path d="M24 6.5a12 12 0 0 1 0 17 12 12 0 0 1 0-17z" fill="#FF5F00"/>
-        </svg>
-      </span>
-      <span class="footer-card-logo" title="PayPal">
-        <svg viewBox="0 0 72 20" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <text x="0" y="15" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="13" fill="#9ec9ff">Pay</text>
-          <text x="26" y="15" font-family="Arial,Helvetica,sans-serif" font-weight="700" font-size="13" fill="#5ec8ff">Pal</text>
-        </svg>
-      </span>
-      <span class="footer-card-logo masterbank" title="Goes to Masterbank card">
-        <svg width="14" height="14" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true"><rect x="2" y="5" width="16" height="11" rx="2"/><path d="M2 9h16"/></svg>
-        Masterbank
-      </span>
-    </div>
   </div>
 </footer>
+
+<canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
 <!-- CAKER -->
 <button id="caker-toggle" title="Chat with Caker">
@@ -1166,6 +1083,13 @@
 
 <script>
 (function(){
+  // To donate to help us out go here: YOUR_PAYPAL_LINK
+  // Example: https://paypal.me/yourname
+  // To donate to help us out go here:
+  const DONATE_LINK = 'https://www.paypal.com/ncp/payment/US53VAW94MF7S';
+  // Owner panel password (Accept / Decline applications)
+  const OWNER_PASSWORD = 'cakesmp-owner'; // !!!CHANGE THIS!!!
+
   // Navigation
   const pages = document.querySelectorAll('.page');
   document.querySelectorAll('[data-nav]').forEach(btn => {
@@ -1192,7 +1116,7 @@
     const shop = document.querySelector('.page[data-page="shop"]');
     if (!shop) return;
     const animated = shop.querySelectorAll(
-      '.shop-section-label, .support-card, .support-card h2, .support-card .support-text, .support-card .support-100, .support-cards-row, .support-amount-row, .support-presets button, #support-donate-btn, .shop-locked-wrapper, .price-card'
+      '.shop-section-label, .shop-locked-wrapper, .price-card'
     );
     animated.forEach(el => {
       el.style.animation = 'none';
@@ -1583,6 +1507,11 @@
       appMsg.className = 'account-message error';
       return;
     }
+    if (!document.getElementById('app-no-ping').checked) {
+      appMsg.textContent = 'You must accept not to ping the owner to speed up the process.';
+      appMsg.className = 'account-message error';
+      return;
+    }
 
     const isVA = selectedRole === 'Voice Actor';
     const data = {
@@ -1597,7 +1526,8 @@
       scenario: document.getElementById('app-scenario').value.trim(),
       accept: isVA
         ? 'Yes – accepts voice messages/lines only (unpaid, no OP, no other staff duties)'
-        : 'Yes – accepts unpaid staff without OP on main server'
+        : 'Yes – accepts unpaid staff without OP on main server',
+      noPing: 'Yes – will not ping owner to speed progress'
     };
 
     const sendBtn = document.getElementById('app-send-btn');
@@ -1636,6 +1566,7 @@
           <tr><td colspan="2" style="padding:0 0 12px;color:#f5f5f5;line-height:1.5;">${data.scenario.replace(/\n/g,'<br>')}</td></tr>
           <tr><td colspan="2" style="padding:14px 0 0;border-top:1px solid #2a2a2a;">
             <span style="display:inline-block;background:#ffffff;color:#000;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;">${data.accept}</span>
+            <span style="display:inline-block;background:#ffffff;color:#000;font-size:12px;font-weight:700;padding:6px 12px;border-radius:999px;margin-left:8px;">${data.noPing}</span>
           </td></tr>
         </table>
       </div>
@@ -1662,6 +1593,7 @@
     body.append('Why this role', data.why);
     body.append(isVA ? 'Voice process / delivery' : 'Scenario answer', data.scenario);
     body.append(isVA ? 'Voice-only acceptance' : 'Unpaid / No OP acceptance', data.accept);
+    body.append('No ping owner', data.noPing);
     // Also send HTML version if supported
     body.append('_html', htmlBody);
 
@@ -1670,11 +1602,24 @@
         method: 'POST',
         body: body
       });
+      // Save for owner review (this browser / shared device)
+      try {
+        const apps = JSON.parse(localStorage.getItem('cakesmp_applications') || '[]');
+        apps.unshift({
+          id: 'APP-' + Date.now().toString(36).toUpperCase(),
+          ...data,
+          email: user.email || '',
+          status: 'pending',
+          createdAt: new Date().toISOString()
+        });
+        localStorage.setItem('cakesmp_applications', JSON.stringify(apps.slice(0, 100)));
+      } catch (e) {}
       appMsg.textContent = 'Application sent successfully! Staff will review it soon.';
       appMsg.className = 'account-message success';
       document.getElementById('application-form').reset();
       document.getElementById('app-mc').value = user.username;
       document.getElementById('app-accept').checked = false;
+      document.getElementById('app-no-ping').checked = false;
     } catch (err) {
       appMsg.textContent = 'Something went wrong. Please try again later.';
       appMsg.className = 'account-message error';
@@ -1684,181 +1629,199 @@
     }
   });
 
-  // ========== STORE (Support checkout on-site) ==========
-  //
-  // !!!CHANGE TO YOUR CARD!!!
-  const SUPPORT_IBAN = 'HR5924840083238633347'; // !!!CHANGE TO YOUR CARD!!!
-  // Optional: PayPal.me username for card/PayPal path (leave empty to disable)
-  const SUPPORT_PAYPAL_ME = ''; // !!!CHANGE TO YOUR CARD!!! e.g. 'cakesmp'
-  //
-  let supportCurrency = 'EUR';
-  let storeOrder = null;
-  const supportAmountEl = document.getElementById('support-amount');
-  const supportMsg = document.getElementById('support-msg');
-  const checkoutMsg = document.getElementById('checkout-msg');
+  // ========== OWNER REVIEW + NOTIFICATIONS ==========
+  const APPS_KEY = 'cakesmp_applications';
+  const NOTIF_KEY = 'cakesmp_notifications';
+  const OWNER_UNLOCK_KEY = 'cakesmp_owner_ok';
 
-  function storeSetStep(n){
-    [1,2,3].forEach(i => {
-      const panel = document.getElementById('store-step-' + i);
-      if (panel) panel.hidden = i !== n;
-    });
-    document.querySelectorAll('.store-step-pill').forEach(p => {
-      const s = parseInt(p.dataset.step, 10);
-      p.classList.toggle('active', s === n);
-      p.classList.toggle('done', s < n);
-    });
+  function getApps(){ try { return JSON.parse(localStorage.getItem(APPS_KEY) || '[]'); } catch { return []; } }
+  function saveApps(list){ localStorage.setItem(APPS_KEY, JSON.stringify(list)); }
+  function getNotifs(){ try { return JSON.parse(localStorage.getItem(NOTIF_KEY) || '{}'); } catch { return {}; } }
+  function saveNotifs(map){ localStorage.setItem(NOTIF_KEY, JSON.stringify(map)); }
+
+  function pushNotif(username, notif){
+    const key = (username || '').toLowerCase();
+    if (!key) return;
+    const map = getNotifs();
+    if (!map[key]) map[key] = [];
+    map[key].unshift({ ...notif, id: 'N-' + Date.now(), at: new Date().toISOString(), read: false });
+    map[key] = map[key].slice(0, 30);
+    saveNotifs(map);
   }
 
-  function getStoreAmount(){
-    const amount = parseFloat((supportAmountEl && supportAmountEl.value) || '');
-    return amount;
+  function fireConfetti(){
+    const canvas = document.getElementById('confetti-canvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    canvas.width = innerWidth; canvas.height = innerHeight;
+    const pieces = Array.from({ length: 120 }, () => ({
+      x: Math.random() * canvas.width,
+      y: -20 - Math.random() * canvas.height * 0.3,
+      r: 3 + Math.random() * 5,
+      vx: -2 + Math.random() * 4,
+      vy: 2 + Math.random() * 4,
+      color: ['#fff','#7dffa0','#ffd76a','#8ab4ff','#ff8a8a'][Math.floor(Math.random()*5)],
+      life: 80 + Math.random() * 40
+    }));
+    let frame = 0;
+    function tick(){
+      frame++;
+      ctx.clearRect(0,0,canvas.width,canvas.height);
+      pieces.forEach(p => {
+        p.x += p.vx; p.y += p.vy; p.vy += 0.05; p.life--;
+        ctx.globalAlpha = Math.max(0, p.life / 60);
+        ctx.fillStyle = p.color;
+        ctx.fillRect(p.x, p.y, p.r, p.r * 1.4);
+      });
+      if (frame < 100) requestAnimationFrame(tick);
+      else { ctx.clearRect(0,0,canvas.width,canvas.height); ctx.globalAlpha = 1; }
+    }
+    tick();
   }
 
-  function formatMoney(amount, currency){
-    const symbol = currency === 'EUR' ? '€' : '$';
-    return symbol + (Math.round(amount * 100) / 100);
-  }
-
-  function makeOrderId(){
-    const t = Date.now().toString(36).toUpperCase();
-    const r = Math.random().toString(36).slice(2, 6).toUpperCase();
-    return 'CS-' + t.slice(-4) + r;
-  }
-
-  function notifyOrder(order, status){
-    try {
-      const body = new FormData();
-      body.append('_subject', `Cake SMP Store — ${order.item} — ${order.amount} ${order.currency} — ${order.id}`);
-      body.append('_captcha', 'false');
-      body.append('Order ID', order.id);
-      body.append('Item', order.item);
-      body.append('Amount', String(order.amount));
-      body.append('Currency', order.currency);
-      body.append('Minecraft', order.mc || '—');
-      body.append('Payment method', order.method);
-      body.append('Status', status);
-      body.append('Time', new Date().toUTCString());
-      fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', { method: 'POST', body }).catch(() => {});
-    } catch (e) {}
-  }
-
-  document.querySelectorAll('.currency-toggle button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.currency-toggle button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      supportCurrency = btn.dataset.currency;
-    });
-  });
-
-  document.querySelectorAll('.support-presets button').forEach(btn => {
-    btn.addEventListener('click', () => {
-      document.querySelectorAll('.support-presets button').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      if (supportAmountEl) supportAmountEl.value = btn.dataset.preset;
-      if (supportMsg) { supportMsg.textContent = ''; supportMsg.className = 'support-msg'; }
-    });
-  });
-
-  document.querySelectorAll('.pay-method').forEach(label => {
-    label.addEventListener('click', () => {
-      document.querySelectorAll('.pay-method').forEach(l => l.classList.remove('selected'));
-      label.classList.add('selected');
-      const input = label.querySelector('input');
-      if (input) input.checked = true;
-    });
-  });
-
-  document.getElementById('store-to-checkout')?.addEventListener('click', () => {
-    const amount = getStoreAmount();
-    if (isNaN(amount) || amount < 1) {
-      supportMsg.textContent = 'Minimum is 1. Enter an amount between 1 and 500.';
-      supportMsg.className = 'support-msg error';
+  function renderNotifications(){
+    const box = document.getElementById('account-notifications');
+    if (!box) return;
+    const user = getUser();
+    if (!user) { box.innerHTML = ''; return; }
+    const list = (getNotifs()[(user.username || '').toLowerCase()] || []);
+    if (!list.length) {
+      box.innerHTML = '';
       return;
     }
-    if (amount > 500) {
-      supportMsg.textContent = 'Maximum is 500.';
-      supportMsg.className = 'support-msg error';
+    let confettiNeeded = false;
+    box.innerHTML = '<h3 class="display" style="font-size:13px;margin-bottom:10px;">Messages</h3>' + list.map(n => {
+      if (n.type === 'accepted' && !n.read) confettiNeeded = true;
+      const cls = n.type === 'accepted' ? 'accepted' : (n.type === 'declined' ? 'declined' : '');
+      return `<div class="notif-card ${cls}"><strong>${n.title}</strong><br>${n.body}</div>`;
+    }).join('');
+    // mark read
+    const map = getNotifs();
+    const key = (user.username || '').toLowerCase();
+    if (map[key]) {
+      map[key] = map[key].map(n => ({ ...n, read: true }));
+      saveNotifs(map);
+    }
+    if (confettiNeeded) setTimeout(fireConfetti, 200);
+  }
+
+  function renderOwnerApps(){
+    const listEl = document.getElementById('owner-apps-list');
+    if (!listEl) return;
+    const pending = getApps().filter(a => a.status === 'pending');
+    if (!pending.length) {
+      listEl.innerHTML = '<p style="font-size:13px;color:var(--text-dim);">No pending applications.</p>';
       return;
     }
-    supportMsg.textContent = '';
-    const totalEl = document.getElementById('checkout-total');
-    if (totalEl) totalEl.textContent = formatMoney(amount, supportCurrency);
-    storeSetStep(2);
-  });
+    listEl.innerHTML = pending.map(a => `
+      <div class="owner-app-card" data-app-id="${a.id}">
+        <h4 class="display">${a.role} — ${a.minecraft}</h4>
+        <p>Discord: ${a.discord || '—'} · Age: ${a.age || '—'} · ${a.timezone || ''}</p>
+        <p>Activity: ${a.activity || '—'}</p>
+        <p style="max-height:60px;overflow:hidden;">${(a.why || '').slice(0, 160)}</p>
+        <div class="owner-app-actions">
+          <button type="button" class="btn owner-accept" data-id="${a.id}">Accept</button>
+          <button type="button" class="btn btn-decline owner-decline" data-id="${a.id}">Decline</button>
+        </div>
+      </div>
+    `).join('');
 
-  document.getElementById('store-back-1')?.addEventListener('click', () => storeSetStep(1));
-  document.getElementById('store-back-2')?.addEventListener('click', () => {
-    document.getElementById('store-pay-bank').hidden = false;
-    document.getElementById('store-pay-done').hidden = true;
-    storeSetStep(2);
-  });
+    listEl.querySelectorAll('.owner-accept').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const apps = getApps();
+        const app = apps.find(x => x.id === id);
+        if (!app) return;
+        app.status = 'accepted';
+        app.decidedAt = new Date().toISOString();
+        saveApps(apps);
+        pushNotif(app.minecraft, {
+          type: 'accepted',
+          title: 'Application accepted 🎉',
+          body: `Your application for <strong>${app.role}</strong> was accepted. Welcome to the team!`
+        });
+        // email owner log
+        try {
+          const body = new FormData();
+          body.append('_subject', `Cake SMP — ACCEPTED ${app.role} — ${app.minecraft}`);
+          body.append('_captcha', 'false');
+          body.append('Status', 'Accepted');
+          body.append('Role', app.role);
+          body.append('Minecraft', app.minecraft);
+          fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', { method: 'POST', body }).catch(() => {});
+        } catch (e) {}
+        fireConfetti();
+        renderOwnerApps();
+      });
+    });
 
-  document.getElementById('store-to-pay')?.addEventListener('click', () => {
-    const amount = getStoreAmount();
-    const method = (document.querySelector('input[name="pay-method"]:checked') || {}).value || 'bank';
-    const mc = (document.getElementById('checkout-mc')?.value || '').trim();
-    const order = {
-      id: makeOrderId(),
-      item: 'Cake SMP Support',
-      amount: Math.round(amount * 100) / 100,
-      currency: supportCurrency,
-      mc,
-      method
-    };
-    storeOrder = order;
-
-    if (method === 'paypal') {
-      if (!SUPPORT_PAYPAL_ME) {
-        if (checkoutMsg) {
-          checkoutMsg.textContent = 'PayPal is not set up yet. Choose Bank transfer or ask staff.';
-          checkoutMsg.className = 'support-msg error';
+    listEl.querySelectorAll('.owner-decline').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const id = btn.dataset.id;
+        const reason = prompt('Decline reason (required):');
+        if (reason === null) return;
+        const trimmed = (reason || '').trim();
+        if (!trimmed) {
+          alert('Please enter a reason.');
+          return;
         }
-        return;
-      }
-      notifyOrder(order, 'Redirected to PayPal');
-      const payUrl = `https://www.paypal.com/paypalme/${encodeURIComponent(SUPPORT_PAYPAL_ME)}/${order.amount}${order.currency === 'EUR' ? 'EUR' : 'USD'}`;
-      window.open(payUrl, '_blank', 'noopener,noreferrer');
-      document.getElementById('done-order-id').textContent = order.id;
-      document.getElementById('store-pay-bank').hidden = true;
-      document.getElementById('store-pay-done').hidden = false;
-      storeSetStep(3);
-      return;
+        const apps = getApps();
+        const app = apps.find(x => x.id === id);
+        if (!app) return;
+        app.status = 'declined';
+        app.reason = trimmed;
+        app.decidedAt = new Date().toISOString();
+        saveApps(apps);
+        pushNotif(app.minecraft, {
+          type: 'declined',
+          title: 'Application declined',
+          body: `Your application for <strong>${app.role}</strong> was declined. Reason: ${trimmed}`
+        });
+        try {
+          const body = new FormData();
+          body.append('_subject', `Cake SMP — DECLINED ${app.role} — ${app.minecraft}`);
+          body.append('_captcha', 'false');
+          body.append('Status', 'Declined');
+          body.append('Reason', trimmed);
+          body.append('Role', app.role);
+          body.append('Minecraft', app.minecraft);
+          fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', { method: 'POST', body }).catch(() => {});
+        } catch (e) {}
+        renderOwnerApps();
+      });
+    });
+  }
+
+  function setOwnerUnlocked(on){
+    if (on) localStorage.setItem(OWNER_UNLOCK_KEY, '1');
+    else localStorage.removeItem(OWNER_UNLOCK_KEY);
+    const login = document.getElementById('owner-login-row');
+    const panel = document.getElementById('owner-apps-panel');
+    if (login) login.hidden = !!on;
+    if (panel) panel.hidden = !on;
+    if (on) renderOwnerApps();
+  }
+
+  document.getElementById('owner-unlock-btn')?.addEventListener('click', () => {
+    const pass = (document.getElementById('owner-pass')?.value || '');
+    const msg = document.getElementById('owner-msg');
+    if (pass === OWNER_PASSWORD) {
+      setOwnerUnlocked(true);
+      if (msg) { msg.textContent = 'Owner panel unlocked.'; msg.className = 'account-message success'; }
+    } else {
+      if (msg) { msg.textContent = 'Wrong password.'; msg.className = 'account-message error'; }
     }
-
-    // Bank transfer — full flow stays on website
-    document.getElementById('pay-order-id').textContent = order.id;
-    document.getElementById('pay-amount').textContent = formatMoney(order.amount, order.currency) + ' (' + order.currency + ')';
-    document.getElementById('pay-iban').textContent = SUPPORT_IBAN;
-    document.getElementById('pay-desc').textContent = order.id;
-    document.getElementById('store-pay-bank').hidden = false;
-    document.getElementById('store-pay-done').hidden = true;
-    if (checkoutMsg) { checkoutMsg.textContent = ''; checkoutMsg.className = 'support-msg'; }
-    notifyOrder(order, 'Awaiting bank transfer');
-    storeSetStep(3);
   });
+  document.getElementById('owner-lock-btn')?.addEventListener('click', () => setOwnerUnlocked(false));
 
-  document.getElementById('support-copy-iban')?.addEventListener('click', async () => {
-    try {
-      await navigator.clipboard.writeText(SUPPORT_IBAN);
-      const btn = document.getElementById('support-copy-iban');
-      const original = btn.innerHTML;
-      btn.innerHTML = '<svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg>';
-      setTimeout(() => { btn.innerHTML = original; }, 1400);
-    } catch (e) {}
-  });
-
-  document.getElementById('store-mark-paid')?.addEventListener('click', () => {
-    if (storeOrder) notifyOrder(storeOrder, 'Player marked as paid');
-    document.getElementById('done-order-id').textContent = storeOrder ? storeOrder.id : '—';
-    document.getElementById('store-pay-bank').hidden = true;
-    document.getElementById('store-pay-done').hidden = false;
-  });
-
-  document.getElementById('store-new-order')?.addEventListener('click', () => {
-    storeOrder = null;
-    storeSetStep(1);
-    if (supportMsg) { supportMsg.textContent = ''; supportMsg.className = 'support-msg'; }
-  });
+  // Hook into existing updateUI to show notifications
+  const _origUpdateUI = updateUI;
+  updateUI = function(){
+    _origUpdateUI();
+    renderNotifications();
+    if (localStorage.getItem(OWNER_UNLOCK_KEY) === '1') setOwnerUnlocked(true);
+  };
+  updateUI();
 
   // Caker AI
   const cakerToggle = document.getElementById('caker-toggle');
@@ -1900,11 +1863,14 @@
       return "<strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol";
     }
     if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord.";
-    if (msg.includes('support') || msg.includes('donate') || msg.includes('donation') || msg.includes('store')) {
-      return "Go to <strong>Shop</strong> → Store. Pick amount (1–500), checkout on the website, then pay by bank transfer (IBAN) or PayPal. 100% helps Cake SMP!";
+    if (msg.includes('support') || msg.includes('donate') || msg.includes('donation')) {
+      if (DONATE_LINK && DONATE_LINK !== 'YOUR_PAYPAL_LINK') {
+        return 'To donate to help us out go here: <a href="' + DONATE_LINK + '" target="_blank" rel="noopener">' + DONATE_LINK + '</a>';
+      }
+      return 'To donate to help us out go here: YOUR_PAYPAL_LINK';
     }
     if (msg.includes('shop') || msg.includes('pack') || msg.includes('buy')) {
-      return "On <strong>Shop</strong> open the <strong>Support store</strong> — full checkout on the site. Hide & Seek packs are still coming soon 👀";
+      return "Shop packs for Hide & Seek are still <strong>coming soon</strong>... or not, we will see 👀";
     }
     if (msg.includes('account') || msg.includes('sign up') || msg.includes('register')) {
       return "Click the circle avatar in the top right → Sign Up. You need Minecraft username + email.";
@@ -1914,7 +1880,7 @@
     }
     if (msg.includes('discord')) return "There's a Join Discord button on the Discord page!";
     if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
-    if (msg.includes('help')) return "I can help with: joining, rules, Support donations, Hide & Seek, accounts, applications and Discord.";
+    if (msg.includes('help')) return "I can help with: joining, rules, shop status, Hide & Seek, accounts, applications and Discord.";
     if (msg.includes('application') || msg.includes('apply') || msg.includes('staff') || msg.includes('mod')) {
       return "Go to <strong>Features</strong> (you must be signed in). Scroll down to Staff Application, choose Mod, Event Manager, Discord Staff, Developer or Voice Actor, fill the form and send it.";
     }
