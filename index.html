@@ -600,24 +600,51 @@
     padding:0 16px; font-weight:700; cursor:pointer;
   }
 
-  /* Messages (inbox) — same style as Caker */
+  /* Pixel / Minecraft-style chat button */
   #msg-toggle{
     position:fixed; bottom:28px; right:104px; z-index:1000;
-    width:62px; height:62px; border-radius:50%;
-    background:var(--raised); border:2px solid var(--border-2); cursor:pointer;
+    width:56px; height:56px; border-radius:0;
+    image-rendering: pixelated;
+    background:#3a3a3a;
+    border:3px solid #1a1a1a;
+    box-shadow:
+      inset 2px 2px 0 #5a5a5a,
+      inset -2px -2px 0 #222,
+      4px 4px 0 rgba(0,0,0,0.45);
+    cursor:pointer;
     display:none; align-items:center; justify-content:center;
-    box-shadow:0 8px 28px rgba(0,0,0,0.45);
-    transition:transform 220ms ease, box-shadow 220ms ease;
-    color:var(--text);
+    transition:transform 80ms steps(2), box-shadow 80ms steps(2);
+    color:#e8e8e8;
   }
   #msg-toggle.visible{ display:flex; }
-  #msg-toggle:hover{ transform:scale(1.08); box-shadow:0 12px 32px rgba(255,255,255,0.12); }
-  #msg-toggle.open{ border-color:var(--line); }
-  #msg-toggle svg{ width:26px; height:26px; }
+  #msg-toggle:hover{
+    transform: translate(-1px, -1px);
+    background:#4a4a4a;
+    box-shadow:
+      inset 2px 2px 0 #6a6a6a,
+      inset -2px -2px 0 #2a2a2a,
+      5px 5px 0 rgba(0,0,0,0.5);
+  }
+  #msg-toggle:active{
+    transform: translate(1px, 1px);
+    box-shadow:
+      inset 2px 2px 0 #222,
+      inset -2px -2px 0 #555,
+      2px 2px 0 rgba(0,0,0,0.4);
+  }
+  #msg-toggle.open{
+    background:#55ff55;
+    color:#0a1a0a;
+    border-color:#1a3a1a;
+  }
+  #msg-toggle svg{ width:28px; height:28px; }
   #msg-toggle .msg-badge{
-    position:absolute; top:4px; right:4px; min-width:18px; height:18px; padding:0 5px;
-    border-radius:999px; background:var(--line); color:#000; font-size:10px; font-weight:800;
+    position:absolute; top:-6px; right:-6px; min-width:18px; height:18px; padding:0 4px;
+    border-radius:0; border:2px solid #1a1a1a;
+    background:#ff5555; color:#fff; font-size:11px; font-weight:800;
+    font-family: 'Courier New', monospace;
     display:none; align-items:center; justify-content:center;
+    box-shadow: 2px 2px 0 rgba(0,0,0,0.4);
   }
   #msg-toggle .msg-badge.show{ display:flex; }
 
@@ -647,6 +674,16 @@
     cursor:pointer; transition:all 180ms ease;
   }
   .header-refresh:hover{ color:var(--text); border-color:var(--line); transform:translateY(-1px); }
+
+  .btn-discord-join{
+    animation: discord-pulse 2.2s ease-in-out infinite;
+  }
+  .btn-discord-join:hover{ animation: none; transform: translateY(-2px); }
+  @keyframes discord-pulse{
+    0%, 100% { box-shadow: 0 0 0 0 rgba(88, 101, 242, 0.4); }
+    50% { box-shadow: 0 0 0 12px rgba(88, 101, 242, 0); }
+  }
+
   @media (max-width:720px){
     #msg-toggle{ right:28px; bottom:104px; }
     #msg-window{ right:28px; bottom:180px; height:min(520px, 60vh); }
@@ -878,7 +915,7 @@
           <h2 class="display" style="font-size:18px;">Cake SMP Community</h2>
           <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p>
         </div>
-        <a class="btn" href="https://discord.gg/your-invite" target="_blank" rel="noopener">Join Discord</a>
+        <a class="btn btn-discord-join" href="https://discord.gg/ZanK5XZA" target="_blank" rel="noopener">Join Discord</a>
       </div>
     </div></section>
   </div>
@@ -1167,6 +1204,8 @@
   // Every application / owner mail goes here
   const OWNER_EMAIL = 'smatija1404@gmail.com';
   const PAGE_KEY = 'cakesmp_current_page';
+  // Staff application accept invite (shown only in accept messages)
+  const STAFF_DISCORD_INVITE = 'https://discord.gg/ZanK5XZA';
 
   // Navigation
   const pages = document.querySelectorAll('.page');
@@ -1829,13 +1868,10 @@
       box.innerHTML = '';
       return;
     }
-    let confettiNeeded = false;
     box.innerHTML = '<h3 class="display" style="font-size:13px;margin-bottom:10px;">Messages</h3>' + list.map(n => {
-      if (n.type === 'accepted' && !n.read) confettiNeeded = true;
       const cls = n.type === 'accepted' ? 'accepted' : (n.type === 'declined' ? 'declined' : '');
       return `<div class="notif-card ${cls}"><strong>${n.title}</strong><br>${n.body}</div>`;
     }).join('');
-    if (confettiNeeded) setTimeout(fireConfetti, 200);
   }
 
   function markInboxRead(){
@@ -1883,7 +1919,7 @@
         pushNotif(app.minecraft, {
           type: 'accepted',
           title: 'Application accepted 🎉',
-          body: `Your application for <strong>${app.role}</strong> was <strong>accepted</strong>. Welcome to the team!`
+          body: `Your application for <strong>${app.role}</strong> was <strong>accepted</strong>. Welcome to the team!<br><br>Join the staff Discord:<br><a href="${STAFF_DISCORD_INVITE}" target="_blank" rel="noopener">${STAFF_DISCORD_INVITE}</a>`
         });
         // email owner log
         try {
@@ -1895,7 +1931,6 @@
           body.append('Minecraft', app.minecraft);
           fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, { method: 'POST', body }).catch(() => {});
         } catch (e) {}
-        fireConfetti();
         renderOwnerApps();
         renderInbox();
       });
@@ -1979,9 +2014,12 @@
     msgWindow.classList.toggle('open', msgOpen);
     msgToggle.classList.toggle('open', msgOpen);
     if (msgOpen) {
+      const user = getUser();
+      const list = user ? (getNotifs()[(user.username || '').toLowerCase()] || []) : [];
+      const hasUnreadAccept = list.some(n => n.type === 'accepted' && !n.read);
       renderInbox();
+      if (hasUnreadAccept) fireConfetti();
       markInboxRead();
-      // close Caker if open
       if (typeof cakerOpen !== 'undefined' && cakerOpen) {
         cakerOpen = false;
         cakerWindow.classList.remove('open');
@@ -2053,7 +2091,7 @@
     if (msg.includes('hide') || msg.includes('seek')) {
       return "Hide & Seek server: <strong>hideseekcs.folium.lol</strong>";
     }
-    if (msg.includes('discord')) return "There's a Join Discord button on the Discord page!";
+    if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/ZanK5XZA" target="_blank" rel="noopener">discord.gg/ZanK5XZA</a> (also on the Discord page).';
     if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
     if (msg.includes('help')) return "I can help with: joining, rules, shop status, Hide & Seek, accounts, applications and Discord.";
     if (msg.includes('application') || msg.includes('apply') || msg.includes('staff') || msg.includes('mod')) {
