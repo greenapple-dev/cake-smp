@@ -407,7 +407,12 @@
   .countdown-head{ display:flex; align-items:center; justify-content:center; gap:9px; margin-bottom:16px; font-size:12px; color:var(--text-muted); text-transform:uppercase; letter-spacing:0.06em; }
   .countdown-head .dot{ width:7px; height:7px; border-radius:50%; background:var(--line); box-shadow:0 0 0 3px rgba(255,255,255,0.08); animation:pulse-dot 1.6s ease-in-out infinite; }
   @keyframes pulse-dot{ 0%,100%{ opacity:1; transform:scale(1); } 50%{ opacity:0.4; transform:scale(0.7); } }
-  .countdown-title{ font-size:15px; margin-bottom:18px; }
+  .countdown-title{
+    font-size:15px; margin-bottom:18px; cursor:pointer;
+    transition: color 160ms ease, transform 160ms ease;
+    display:inline-block;
+  }
+  .countdown-title:hover{ color:#fff; transform:scale(1.03); text-decoration:underline; text-underline-offset:4px; }
   .countdown-units{ display:flex; justify-content:center; gap:12px; }
   .countdown-unit{ background:var(--bg-2); border:1px solid var(--border); border-radius:12px; padding:12px 16px; min-width:64px; transition:transform 200ms ease, border-color 200ms ease; }
   .countdown-unit:hover{ transform:translateY(-3px); border-color:var(--line); }
@@ -415,6 +420,14 @@
   .countdown-unit.tick .num{ animation:tick-pop 320ms ease; }
   @keyframes tick-pop{ 0%{ transform:scale(1); } 40%{ transform:scale(1.18); } 100%{ transform:scale(1); } }
   .countdown-unit .unit-label{ margin-top:4px; font-size:10px; color:var(--text-dim); text-transform:uppercase; letter-spacing:0.05em; }
+  .countdown-video-wrap{
+    display:none; margin:0 auto; border-radius:14px; overflow:hidden;
+    border:1px solid var(--border-2); background:#000; max-width:100%;
+  }
+  .countdown-video-wrap.playing{ display:block; }
+  .countdown-video-wrap video{ width:100%; display:block; max-height:320px; background:#000; }
+  .countdown-card.video-mode .countdown-units{ display:none; }
+  .countdown-card.video-mode .countdown-title{ pointer-events:none; opacity:0.7; cursor:default; text-decoration:none; }
 
   .account-shell{ max-width:560px; margin:0 auto; }
   .account-panel{
@@ -760,14 +773,17 @@
   <div class="page" data-page="features" hidden>
     <div class="page-title"><div class="wrap"><h1 class="display">Server Features</h1><p>What makes Cake SMP worth logging into.</p></div></div>
     <section class="page-fill"><div class="wrap">
-      <div class="countdown-card">
+      <div class="countdown-card" id="countdown-card">
         <div class="countdown-head"><span class="dot"></span><span>Live Event</span></div>
-        <h3 class="countdown-title display">Winner of Hide &amp; Seek</h3>
-        <div class="countdown-units">
+        <h3 class="countdown-title display" id="countdown-event-name" title="Click to play event video">Cake events release</h3>
+        <div class="countdown-units" id="countdown-units">
           <div class="countdown-unit"><div class="num mono" data-unit="days">00</div><div class="unit-label">Days</div></div>
           <div class="countdown-unit"><div class="num mono" data-unit="hours">00</div><div class="unit-label">Hours</div></div>
           <div class="countdown-unit"><div class="num mono" data-unit="minutes">00</div><div class="unit-label">Min</div></div>
           <div class="countdown-unit"><div class="num mono" data-unit="seconds">00</div><div class="unit-label">Sec</div></div>
+        </div>
+        <div class="countdown-video-wrap" id="countdown-video-wrap">
+          <video id="countdown-event-video" src="eventvideo.mp4" playsinline controls></video>
         </div>
       </div>
       <div class="feature-grid-2">
@@ -1247,8 +1263,9 @@
     });
   });
 
-  // Countdown
-  const targetDate = new Date('2026-09-20T18:00:00').getTime();
+  // Countdown — Cake events release · tomorrow 6:00 PM CET/CEST
+  // 2026-09-20 18:00 in Central Europe (CEST = UTC+2 in September)
+  const targetDate = new Date('2026-09-20T18:00:00+02:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
     hours: document.querySelector('[data-unit="hours"]'),
@@ -1275,6 +1292,37 @@
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  // Click event name → play eventvideo.mp4, then back to countdown
+  const countdownCard = document.getElementById('countdown-card');
+  const countdownEventName = document.getElementById('countdown-event-name');
+  const countdownVideoWrap = document.getElementById('countdown-video-wrap');
+  const countdownEventVideo = document.getElementById('countdown-event-video');
+
+  function stopEventVideo(){
+    if (countdownEventVideo) {
+      countdownEventVideo.pause();
+      countdownEventVideo.currentTime = 0;
+    }
+    if (countdownVideoWrap) countdownVideoWrap.classList.remove('playing');
+    if (countdownCard) countdownCard.classList.remove('video-mode');
+  }
+
+  function playEventVideo(){
+    if (!countdownEventVideo || !countdownCard || !countdownVideoWrap) return;
+    countdownCard.classList.add('video-mode');
+    countdownVideoWrap.classList.add('playing');
+    countdownEventVideo.currentTime = 0;
+    const p = countdownEventVideo.play();
+    if (p && typeof p.catch === 'function') p.catch(() => {});
+  }
+
+  countdownEventName?.addEventListener('click', () => {
+    if (countdownCard?.classList.contains('video-mode')) return;
+    playEventVideo();
+  });
+  countdownEventVideo?.addEventListener('ended', stopEventVideo);
+  countdownEventVideo?.addEventListener('error', stopEventVideo);
 
   // Online
   async function checkServer(host, elOnline, elPlayers){
@@ -2081,71 +2129,4 @@
       return "<strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol";
     }
     if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord.";
-    if (msg.includes('support') || msg.includes('donate') || msg.includes('donation')) {
-      if (DONATE_LINK && DONATE_LINK !== 'YOUR_PAYPAL_LINK') {
-        return 'To donate to help us out go here: <a href="' + DONATE_LINK + '" target="_blank" rel="noopener">' + DONATE_LINK + '</a>';
-      }
-      return 'To donate to help us out go here: YOUR_PAYPAL_LINK';
-    }
-    if (msg.includes('shop') || msg.includes('pack') || msg.includes('buy')) {
-      return "Shop packs for Hide & Seek are still <strong>coming soon</strong>... or not, we will see 👀";
-    }
-    if (msg.includes('account') || msg.includes('sign up') || msg.includes('register')) {
-      return "Click the circle avatar in the top right → Sign Up. You need Minecraft username + email.";
-    }
-    if (msg.includes('hide') || msg.includes('seek')) {
-      return "Hide & Seek server: <strong>hideseekcs.folium.lol</strong>";
-    }
-    if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/ZanK5XZA" target="_blank" rel="noopener">discord.gg/ZanK5XZA</a> (also on the Discord page).';
-    if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
-    if (msg.includes('help')) return "I can help with: joining, rules, shop status, Hide & Seek, accounts, applications and Discord.";
-    if (msg.includes('application') || msg.includes('apply') || msg.includes('staff') || msg.includes('mod')) {
-      return "Go to <strong>Features</strong> (you must be signed in). Scroll down to Staff Application, choose Mod, Event Manager, Discord Staff, Developer or Voice Actor, fill the form and send it.";
-    }
-
-    const fallbacks = [
-      "Not sure about that one. Try asking about the IP, rules, shop or applications!",
-      "Hmm, can you rephrase? I know a lot about Cake SMP.",
-      "Interesting! Ask me about joining, packs, rules or staff applications."
-    ];
-    return fallbacks[Math.floor(Math.random()*fallbacks.length)];
-  }
-
-  function sendMessage(){
-    const text = cakerInput.value.trim();
-    if (!text) return;
-    addUserMessage(text);
-    cakerInput.value = '';
-    setTimeout(() => addBotMessage(cakerReply(text)), 350 + Math.random()*500);
-  }
-  cakerSend.addEventListener('click', sendMessage);
-  cakerInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
-
-  // Canvas
-  const canvas = document.getElementById('site-shader');
-  const ctx = canvas.getContext('2d');
-  let w, h, particles = [];
-  function resize(){ w = canvas.width = innerWidth; h = canvas.height = innerHeight; }
-  addEventListener('resize', resize); resize();
-  for (let i = 0; i < 60; i++) {
-    particles.push({
-      x: Math.random()*w, y: Math.random()*h, r: Math.random()*1.4+0.3,
-      vx: (Math.random()-0.5)*0.25, vy: (Math.random()-0.5)*0.25, a: Math.random()*0.35+0.05
-    });
-  }
-  function draw(){
-    ctx.clearRect(0,0,w,h);
-    particles.forEach(p => {
-      p.x += p.vx; p.y += p.vy;
-      if (p.x < 0) p.x = w; if (p.x > w) p.x = 0;
-      if (p.y < 0) p.y = h; if (p.y > h) p.y = 0;
-      ctx.beginPath(); ctx.arc(p.x, p.y, p.r, 0, Math.PI*2);
-      ctx.fillStyle = `rgba(255,255,255,${p.a})`; ctx.fill();
-    });
-    requestAnimationFrame(draw);
-  }
-  draw();
-})();
-</script>
-</body>
-</html>
+    if (msg.includes('support') || msg.includes('donate
