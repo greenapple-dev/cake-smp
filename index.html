@@ -599,6 +599,58 @@
     background:var(--line); color:#000; border:none; border-radius:12px;
     padding:0 16px; font-weight:700; cursor:pointer;
   }
+
+  /* Messages (inbox) — same style as Caker */
+  #msg-toggle{
+    position:fixed; bottom:28px; right:104px; z-index:1000;
+    width:62px; height:62px; border-radius:50%;
+    background:var(--raised); border:2px solid var(--border-2); cursor:pointer;
+    display:none; align-items:center; justify-content:center;
+    box-shadow:0 8px 28px rgba(0,0,0,0.45);
+    transition:transform 220ms ease, box-shadow 220ms ease;
+    color:var(--text);
+  }
+  #msg-toggle.visible{ display:flex; }
+  #msg-toggle:hover{ transform:scale(1.08); box-shadow:0 12px 32px rgba(255,255,255,0.12); }
+  #msg-toggle.open{ border-color:var(--line); }
+  #msg-toggle svg{ width:26px; height:26px; }
+  #msg-toggle .msg-badge{
+    position:absolute; top:4px; right:4px; min-width:18px; height:18px; padding:0 5px;
+    border-radius:999px; background:var(--line); color:#000; font-size:10px; font-weight:800;
+    display:none; align-items:center; justify-content:center;
+  }
+  #msg-toggle .msg-badge.show{ display:flex; }
+
+  #msg-window{
+    position:fixed; bottom:104px; right:104px; z-index:1000;
+    width:380px; max-width:calc(100vw - 32px); height:520px;
+    background:var(--surface); border:1px solid var(--border-2); border-radius:20px;
+    display:flex; flex-direction:column; overflow:hidden;
+    box-shadow:0 20px 50px rgba(0,0,0,0.55);
+    opacity:0; transform:translateY(20px) scale(0.96); pointer-events:none;
+    transition:opacity 240ms ease, transform 240ms ease;
+  }
+  #msg-window.open{ opacity:1; transform:translateY(0) scale(1); pointer-events:auto; }
+  .msg-list{ flex:1; overflow-y:auto; padding:16px; display:flex; flex-direction:column; gap:10px; }
+  .msg-empty{ color:var(--text-dim); font-size:13.5px; text-align:center; margin:auto; padding:24px; }
+  .msg-item{
+    background:var(--raised); border:1px solid var(--border); border-radius:14px; padding:12px 14px;
+    font-size:13.5px; color:var(--text-muted); line-height:1.45;
+  }
+  .msg-item.accepted{ border-color:rgba(125,255,160,0.35); }
+  .msg-item.declined{ border-color:rgba(255,138,138,0.35); }
+  .msg-item strong{ color:var(--text); display:block; margin-bottom:4px; }
+  .msg-item .msg-meta{ font-size:11px; color:var(--text-dim); margin-top:8px; }
+  .header-refresh{
+    font:inherit; font-weight:700; font-size:13px; padding:8px 14px; border-radius:10px;
+    border:1.5px solid var(--border-2); background:rgba(255,255,255,0.02); color:var(--text-muted);
+    cursor:pointer; transition:all 180ms ease;
+  }
+  .header-refresh:hover{ color:var(--text); border-color:var(--line); transform:translateY(-1px); }
+  @media (max-width:720px){
+    #msg-toggle{ right:28px; bottom:104px; }
+    #msg-window{ right:28px; bottom:180px; height:min(520px, 60vh); }
+  }
 </style>
 </head>
 <body>
@@ -617,6 +669,7 @@
       <button class="nav-ghost" data-nav="shop">Shop</button>
     </nav>
     <div class="header-right">
+      <button type="button" class="header-refresh" id="page-refresh-btn" title="Refresh this page">Refresh</button>
       <button class="btn" data-nav="home" data-scroll="join">Play Now</button>
       <button class="avatar" id="header-account-chip" data-nav="account" aria-label="Account">CS</button>
     </div>
@@ -1059,6 +1112,28 @@
 
 <canvas id="confetti-canvas" aria-hidden="true"></canvas>
 
+<!-- MESSAGES -->
+<button id="msg-toggle" title="Messages" aria-label="Messages">
+  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
+  </svg>
+  <span class="msg-badge" id="msg-badge">0</span>
+</button>
+<div id="msg-window">
+  <div class="caker-header">
+    <div class="caker-avatar" style="background:var(--raised);border:1px solid var(--border-2);color:var(--text);">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/></svg>
+    </div>
+    <div class="caker-header-info">
+      <h3 class="display">Messages</h3>
+      <span>Application results · reason &amp; why</span>
+    </div>
+  </div>
+  <div class="msg-list" id="msg-list">
+    <div class="msg-empty">Sign in to see messages about your applications.</div>
+  </div>
+</div>
+
 <!-- CAKER -->
 <button id="caker-toggle" title="Chat with Caker">
   <img src="Cake.jpeg" alt="Caker">
@@ -1089,27 +1164,48 @@
   const DONATE_LINK = 'https://www.paypal.com/ncp/payment/US53VAW94MF7S';
   // Owner panel password (Accept / Decline applications)
   const OWNER_PASSWORD = 'cakesmp-owner'; // !!!CHANGE THIS!!!
+  // Every application / owner mail goes here
+  const OWNER_EMAIL = 'smatija1404@gmail.com';
+  const PAGE_KEY = 'cakesmp_current_page';
 
   // Navigation
   const pages = document.querySelectorAll('.page');
+  function goToPage(name, opts){
+    opts = opts || {};
+    pages.forEach(p => p.hidden = p.dataset.page !== name);
+    document.querySelectorAll('nav.primary button').forEach(b => {
+      b.setAttribute('aria-current', b.dataset.nav === name ? 'page' : null);
+    });
+    try { sessionStorage.setItem(PAGE_KEY, name); } catch (e) {}
+    if (!opts.silentScroll) window.scrollTo({ top: 0, behavior: opts.instant ? 'auto' : 'smooth' });
+    if (name === 'features' && typeof updateApplicationUI === 'function') updateApplicationUI();
+    if (name === 'shop' && typeof replayShopAnimations === 'function') replayShopAnimations();
+  }
+
   document.querySelectorAll('[data-nav]').forEach(btn => {
     btn.addEventListener('click', () => {
       const name = btn.dataset.nav;
-      pages.forEach(p => p.hidden = p.dataset.page !== name);
-      document.querySelectorAll('nav.primary button').forEach(b => {
-        b.setAttribute('aria-current', b.dataset.nav === name ? 'page' : null);
-      });
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      goToPage(name);
       if (btn.dataset.scroll === 'join') {
         setTimeout(() => document.getElementById('join')?.scrollIntoView({ behavior: 'smooth', block: 'center' }), 80);
       }
-      if (name === 'features') {
-        updateApplicationUI();
-      }
-      if (name === 'shop') {
-        replayShopAnimations();
-      }
     });
+  });
+
+  // Restore page after Refresh (stay where you were)
+  try {
+    const saved = sessionStorage.getItem(PAGE_KEY);
+    if (saved && document.querySelector('.page[data-page="' + saved + '"]')) {
+      goToPage(saved, { instant: true, silentScroll: true });
+    }
+  } catch (e) {}
+
+  document.getElementById('page-refresh-btn')?.addEventListener('click', () => {
+    try {
+      const current = document.querySelector('.page:not([hidden])');
+      if (current && current.dataset.page) sessionStorage.setItem(PAGE_KEY, current.dataset.page);
+    } catch (e) {}
+    location.reload();
   });
 
   function replayShopAnimations(){
@@ -1305,7 +1401,7 @@
     body.append('player_email', email);
     body.append('verification_code', code);
 
-    fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', {
+    fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, {
       method: 'POST',
       body: body
     }).catch(() => {});
@@ -1598,7 +1694,7 @@
     body.append('_html', htmlBody);
 
     try {
-      await fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', {
+      await fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, {
         method: 'POST',
         body: body
       });
@@ -1679,10 +1775,54 @@
     tick();
   }
 
+  function renderInbox(){
+    const listEl = document.getElementById('msg-list');
+    const badge = document.getElementById('msg-badge');
+    const toggle = document.getElementById('msg-toggle');
+    const win = document.getElementById('msg-window');
+    const user = getUser();
+    if (!listEl) return;
+
+    // Only show Messages button after owner Accept / Decline reply
+    const list = user ? (getNotifs()[(user.username || '').toLowerCase()] || []) : [];
+    const hasOwnerReply = list.length > 0;
+
+    if (toggle) {
+      if (hasOwnerReply) toggle.classList.add('visible');
+      else {
+        toggle.classList.remove('visible', 'open');
+        if (win) win.classList.remove('open');
+        if (typeof msgOpen !== 'undefined') msgOpen = false;
+      }
+    }
+
+    if (!user) {
+      listEl.innerHTML = '<div class="msg-empty">Sign in to see messages about your applications (reason &amp; why).</div>';
+      if (badge) badge.classList.remove('show');
+      return;
+    }
+
+    const unread = list.filter(n => !n.read).length;
+    if (badge) {
+      if (unread > 0) { badge.textContent = String(unread); badge.classList.add('show'); }
+      else badge.classList.remove('show');
+    }
+    if (!list.length) {
+      listEl.innerHTML = '<div class="msg-empty">No messages yet.</div>';
+      return;
+    }
+    listEl.innerHTML = list.map(n => {
+      const cls = n.type === 'accepted' ? 'accepted' : (n.type === 'declined' ? 'declined' : '');
+      const when = n.at ? new Date(n.at).toLocaleString() : '';
+      return `<div class="msg-item ${cls}"><strong>${n.title}</strong><div>${n.body}</div><div class="msg-meta">${when}</div></div>`;
+    }).join('');
+  }
+
   function renderNotifications(){
     const box = document.getElementById('account-notifications');
-    if (!box) return;
     const user = getUser();
+    renderInbox();
+    if (!box) return;
     if (!user) { box.innerHTML = ''; return; }
     const list = (getNotifs()[(user.username || '').toLowerCase()] || []);
     if (!list.length) {
@@ -1695,14 +1835,19 @@
       const cls = n.type === 'accepted' ? 'accepted' : (n.type === 'declined' ? 'declined' : '');
       return `<div class="notif-card ${cls}"><strong>${n.title}</strong><br>${n.body}</div>`;
     }).join('');
-    // mark read
+    if (confettiNeeded) setTimeout(fireConfetti, 200);
+  }
+
+  function markInboxRead(){
+    const user = getUser();
+    if (!user) return;
     const map = getNotifs();
     const key = (user.username || '').toLowerCase();
     if (map[key]) {
       map[key] = map[key].map(n => ({ ...n, read: true }));
       saveNotifs(map);
     }
-    if (confettiNeeded) setTimeout(fireConfetti, 200);
+    renderInbox();
   }
 
   function renderOwnerApps(){
@@ -1738,7 +1883,7 @@
         pushNotif(app.minecraft, {
           type: 'accepted',
           title: 'Application accepted 🎉',
-          body: `Your application for <strong>${app.role}</strong> was accepted. Welcome to the team!`
+          body: `Your application for <strong>${app.role}</strong> was <strong>accepted</strong>. Welcome to the team!`
         });
         // email owner log
         try {
@@ -1748,10 +1893,11 @@
           body.append('Status', 'Accepted');
           body.append('Role', app.role);
           body.append('Minecraft', app.minecraft);
-          fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', { method: 'POST', body }).catch(() => {});
+          fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, { method: 'POST', body }).catch(() => {});
         } catch (e) {}
         fireConfetti();
         renderOwnerApps();
+        renderInbox();
       });
     });
 
@@ -1775,7 +1921,7 @@
         pushNotif(app.minecraft, {
           type: 'declined',
           title: 'Application declined',
-          body: `Your application for <strong>${app.role}</strong> was declined. Reason: ${trimmed}`
+          body: `Your application for <strong>${app.role}</strong> was declined.<br><strong>Reason:</strong> ${trimmed}`
         });
         try {
           const body = new FormData();
@@ -1785,9 +1931,10 @@
           body.append('Reason', trimmed);
           body.append('Role', app.role);
           body.append('Minecraft', app.minecraft);
-          fetch('https://formsubmit.co/ajax/smatija1404@gmail.com', { method: 'POST', body }).catch(() => {});
+          fetch('https://formsubmit.co/ajax/' + OWNER_EMAIL, { method: 'POST', body }).catch(() => {});
         } catch (e) {}
         renderOwnerApps();
+        renderInbox();
       });
     });
   }
@@ -1823,6 +1970,27 @@
   };
   updateUI();
 
+  // Messages inbox (like Caker)
+  const msgToggle = document.getElementById('msg-toggle');
+  const msgWindow = document.getElementById('msg-window');
+  let msgOpen = false;
+  function toggleMessages(){
+    msgOpen = !msgOpen;
+    msgWindow.classList.toggle('open', msgOpen);
+    msgToggle.classList.toggle('open', msgOpen);
+    if (msgOpen) {
+      renderInbox();
+      markInboxRead();
+      // close Caker if open
+      if (typeof cakerOpen !== 'undefined' && cakerOpen) {
+        cakerOpen = false;
+        cakerWindow.classList.remove('open');
+        cakerToggle.classList.remove('open');
+      }
+    }
+  }
+  msgToggle?.addEventListener('click', toggleMessages);
+
   // Caker AI
   const cakerToggle = document.getElementById('caker-toggle');
   const cakerWindow = document.getElementById('caker-window');
@@ -1835,8 +2003,15 @@
     cakerOpen = !cakerOpen;
     cakerWindow.classList.toggle('open', cakerOpen);
     cakerToggle.classList.toggle('open', cakerOpen);
-    if (cakerOpen && cakerMessages.children.length === 0) {
-      addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop, Hide & Seek, applications or anything else!");
+    if (cakerOpen) {
+      if (msgOpen) {
+        msgOpen = false;
+        msgWindow.classList.remove('open');
+        msgToggle.classList.remove('open');
+      }
+      if (cakerMessages.children.length === 0) {
+        addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop, Hide & Seek, applications or anything else!");
+      }
     }
   }
   cakerToggle.addEventListener('click', toggleCaker);
