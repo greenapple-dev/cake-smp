@@ -684,6 +684,116 @@
     50%{ box-shadow: 0 0 0 2px #fff, 0 0 32px rgba(125,255,160,0.35), 0 14px 40px rgba(0,0,0,0.5); }
   }
 
+
+  .countdown-title.purple-grad{
+    background: linear-gradient(105deg, #c084fc 0%, #a855f7 35%, #7c3aed 70%, #e879f9 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent !important;
+    text-shadow: none;
+    animation: purple-shine 3.2s ease-in-out infinite;
+  }
+  @keyframes purple-shine{
+    0%,100%{ filter: brightness(1); }
+    50%{ filter: brightness(1.25); }
+  }
+  .countdown-card.next-event{
+    border-color: rgba(168,85,247,0.55) !important;
+    box-shadow: 0 0 0 1px rgba(168,85,247,0.25), 0 12px 36px rgba(0,0,0,0.45);
+  }
+  .countdown-card.next-event .countdown-unit:hover{
+    border-color: #a855f7;
+  }
+  .countdown-card.next-event .countdown-head .dot{
+    background: #a855f7;
+    box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
+  }
+
+
+  /* Release / cancel sequence overlays */
+  #release-overlay{
+    position:fixed; inset:0; z-index:10000;
+    display:flex; align-items:center; justify-content:center;
+    pointer-events:none; opacity:0;
+    transition: opacity 0.5s ease;
+    background: rgba(0,0,0,0.55);
+    backdrop-filter: blur(8px);
+  }
+  #release-overlay.show{ opacity:1; pointer-events:auto; }
+  #release-overlay .release-panel{
+    text-align:center; max-width:min(520px, 92vw);
+    padding:36px 28px; border-radius:20px;
+    background:var(--surface); border:1px solid var(--border-2);
+    box-shadow:0 24px 60px rgba(0,0,0,0.55);
+    transform: scale(0.85) translateY(20px);
+    transition: transform 0.55s cubic-bezier(.2,.8,.2,1);
+  }
+  #release-overlay.show .release-panel{ transform: scale(1) translateY(0); }
+  #release-overlay .release-label{
+    font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
+    color:var(--text-dim); margin-bottom:12px;
+  }
+  #release-overlay .release-ip{
+    font-family:'JetBrains Mono', monospace;
+    font-size: clamp(18px, 4vw, 26px);
+    font-weight:700; letter-spacing:0.04em;
+    margin:8px 0 6px; color:#fff;
+    animation: ip-pop 0.6s cubic-bezier(.2,.8,.2,1) both;
+  }
+  #release-overlay .release-bedrock{
+    font-family:'JetBrains Mono', monospace;
+    font-size:15px; color:var(--text-muted); margin-top:18px;
+    animation: ip-pop 0.6s cubic-bezier(.2,.8,.2,1) 0.25s both;
+  }
+  #release-overlay .release-bedrock .soon{
+    color:#c084fc; font-weight:700;
+  }
+  @keyframes ip-pop{
+    0%{ opacity:0; transform:scale(0.6) translateY(12px); }
+    70%{ opacity:1; transform:scale(1.06) translateY(0); }
+    100%{ opacity:1; transform:scale(1); }
+  }
+  #cancel-overlay{
+    position:fixed; inset:0; z-index:10001;
+    background:#000; color:#fff;
+    display:flex; align-items:center; justify-content:center;
+    opacity:0; pointer-events:none;
+    transition: opacity 1.1s ease;
+  }
+  #cancel-overlay.show{ opacity:1; pointer-events:auto; }
+  #cancel-overlay .cancel-text{
+    font-family:'Press Start 2P', monospace;
+    font-size: clamp(11px, 2.8vw, 16px);
+    line-height:1.85; text-align:center;
+    max-width:min(560px, 90vw);
+    opacity:0; transform:translateY(16px);
+    transition: opacity 1s ease 0.4s, transform 1s ease 0.4s;
+    text-shadow: 0 0 24px rgba(255,100,100,0.25);
+  }
+  #cancel-overlay.show .cancel-text{
+    opacity:1; transform:translateY(0);
+  }
+  body.release-shake{
+    animation: release-shake 0.55s cubic-bezier(.36,.07,.19,.97) both;
+  }
+  @keyframes release-shake{
+    0%,100%{ transform:translate(0,0); }
+    15%{ transform:translate(-8px, 3px); }
+    30%{ transform:translate(7px, -4px); }
+    45%{ transform:translate(-5px, 2px); }
+    60%{ transform:translate(4px, -2px); }
+    75%{ transform:translate(-2px, 1px); }
+  }
+  body.release-flash::after{
+    content:''; position:fixed; inset:0; z-index:9998;
+    background:#fff; pointer-events:none;
+    animation: flash-out 0.7s ease forwards;
+  }
+  @keyframes flash-out{
+    0%{ opacity:0.85; }
+    100%{ opacity:0; }
+  }
+
 </style>
 </head>
 <body>
@@ -801,6 +911,17 @@
   <div class="page" data-page="features" hidden>
     <div class="page-title"><div class="wrap"><h1 class="display">Server Features</h1><p>What makes Cake SMP worth logging into.</p></div></div>
     <section class="page-fill"><div class="wrap">
+      <!-- Next event countdown (Features) -->
+      <div class="countdown-card next-event" id="features-countdown-card" style="margin-bottom:36px;">
+        <div class="countdown-head"><span class="dot"></span><span>Upcoming</span></div>
+        <h3 class="countdown-title display purple-grad" id="features-countdown-name">Next event · 10.10.2026</h3>
+        <div class="countdown-units" id="features-countdown-units">
+          <div class="countdown-unit"><div class="num mono" data-funit="days">00</div><div class="unit-label">Days</div></div>
+          <div class="countdown-unit"><div class="num mono" data-funit="hours">00</div><div class="unit-label">Hours</div></div>
+          <div class="countdown-unit"><div class="num mono" data-funit="minutes">00</div><div class="unit-label">Min</div></div>
+          <div class="countdown-unit"><div class="num mono" data-funit="seconds">00</div><div class="unit-label">Sec</div></div>
+        </div>
+      </div>
       <div class="feature-grid-2">
         <div class="feature">
           <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
@@ -1310,130 +1431,281 @@
     });
   });
 
-  // Countdown — Season 4 · testing 14:50 CEST today (2026-09-24)
+  // Countdown — Season 4 · testing 14:55 CEST today (2026-09-24)
   // When it hits 00:00:00:00 → cool chiptune music (Web Audio, no file) + animation
-  const targetDate = new Date('2026-09-24T14:50:00+02:00').getTime();
+  const targetDate = new Date('2026-09-24T14:55:00+02:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
     hours: document.querySelector('[data-unit="hours"]'),
     minutes: document.querySelector('[data-unit="minutes"]'),
     seconds: document.querySelector('[data-unit="seconds"]')
   };
+  const featureUnitEls = {
+    days: document.querySelector('[data-funit="days"]'),
+    hours: document.querySelector('[data-funit="hours"]'),
+    minutes: document.querySelector('[data-funit="minutes"]'),
+    seconds: document.querySelector('[data-funit="seconds"]')
+  };
+  // Features page always counts to Oct 10 2026 18:00 CET
+  const FEATURES_TARGET = new Date('2026-10-10T18:00:00+02:00').getTime();
   let countdownFinished = false;
 
-  // Cool chiptune-style jingle (no external audio file)
-  function playSeason4Jingle(){
-    try {
-      const AC = window.AudioContext || window.webkitAudioContext;
-      if (!AC) return;
-      const ctx = new AC();
-      // Browsers often suspend AudioContext until a user gesture — resume if needed
-      if (ctx.state === 'suspended') {
-        const unlock = () => { ctx.resume().then(() => playNotes(ctx)).catch(()=>{}); document.removeEventListener('click', unlock); document.removeEventListener('keydown', unlock); };
-        document.addEventListener('click', unlock, { once: true });
-        document.addEventListener('keydown', unlock, { once: true });
-        // also try resume immediately (works if already interacted)
-        ctx.resume().then(() => playNotes(ctx)).catch(()=>{});
-        return;
-      }
-      playNotes(ctx);
-    } catch (e) {}
+  // ========== AUDIO + RELEASE SEQUENCE ==========
+  function getAudioCtx(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return null;
+    if (!window.__cakeAC) window.__cakeAC = new AC();
+    return window.__cakeAC;
+  }
+  function withAudio(fn){
+    const ctx = getAudioCtx();
+    if (!ctx) return;
+    const run = () => { try { fn(ctx); } catch(e) {} };
+    if (ctx.state === 'suspended') {
+      ctx.resume().then(run).catch(() => {});
+      const unlock = () => { ctx.resume().then(run).catch(()=>{}); document.removeEventListener('click', unlock); };
+      document.addEventListener('click', unlock, { once: true });
+    } else run();
   }
 
-  function playNotes(ctx){
-    try {
+  // Better triumphant release jingle
+  function playSeason4Jingle(){
+    withAudio((ctx) => {
       const master = ctx.createGain();
-      master.gain.value = 0.22;
+      master.gain.value = 0.28;
       master.connect(ctx.destination);
 
-      // Notes: C5 E5 G5 C6  |  G5 A5 B5 C6  |  short arpeggio ending
-      const notes = [
-        {f:523.25, t:0.00, d:0.18},
-        {f:659.25, t:0.18, d:0.18},
-        {f:783.99, t:0.36, d:0.18},
-        {f:1046.5, t:0.54, d:0.28},
-        {f:783.99, t:0.90, d:0.16},
-        {f:880.00, t:1.06, d:0.16},
-        {f:987.77, t:1.22, d:0.16},
-        {f:1046.5, t:1.38, d:0.45},
-        // sparkle
-        {f:1318.5, t:1.90, d:0.12},
-        {f:1568.0, t:2.02, d:0.12},
-        {f:2093.0, t:2.14, d:0.25}
+      // brighter lead
+      const melody = [
+        {f:523.25, t:0.00, d:0.14}, {f:659.25, t:0.14, d:0.14},
+        {f:783.99, t:0.28, d:0.14}, {f:1046.5, t:0.42, d:0.22},
+        {f:987.77, t:0.68, d:0.12}, {f:1046.5, t:0.80, d:0.12},
+        {f:1174.7, t:0.92, d:0.12}, {f:1318.5, t:1.04, d:0.35},
+        {f:1046.5, t:1.45, d:0.12}, {f:1318.5, t:1.57, d:0.12},
+        {f:1568.0, t:1.69, d:0.12}, {f:2093.0, t:1.81, d:0.40}
       ];
-
-      notes.forEach(n => {
+      melody.forEach(n => {
         const osc = ctx.createOscillator();
         const g = ctx.createGain();
+        const f = ctx.createBiquadFilter();
         osc.type = 'square';
         osc.frequency.value = n.f;
+        f.type = 'lowpass';
+        f.frequency.value = 3200;
         g.gain.setValueAtTime(0, ctx.currentTime + n.t);
-        g.gain.linearRampToValueAtTime(0.55, ctx.currentTime + n.t + 0.02);
+        g.gain.linearRampToValueAtTime(0.5, ctx.currentTime + n.t + 0.015);
         g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
-        osc.connect(g);
-        g.connect(master);
+        osc.connect(f); f.connect(g); g.connect(master);
         osc.start(ctx.currentTime + n.t);
-        osc.stop(ctx.currentTime + n.t + n.d + 0.05);
+        osc.stop(ctx.currentTime + n.t + n.d + 0.04);
       });
+      // bass
+      [{f:130.81,t:0,d:0.55},{f:164.81,t:0.55,d:0.45},{f:196.00,t:1.0,d:0.9}].forEach(n => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'triangle';
+        o.frequency.value = n.f;
+        g.gain.setValueAtTime(0.22, ctx.currentTime + n.t);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
+        o.connect(g); g.connect(master);
+        o.start(ctx.currentTime + n.t);
+        o.stop(ctx.currentTime + n.t + n.d + 0.05);
+      });
+      // noise hit
+      try {
+        const len = ctx.sampleRate * 0.08;
+        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
+        const d = buf.getChannelData(0);
+        for (let i=0;i<len;i++) d[i] = (Math.random()*2-1) * (1-i/len);
+        const src = ctx.createBufferSource();
+        src.buffer = buf;
+        const g = ctx.createGain();
+        g.gain.value = 0.18;
+        src.connect(g); g.connect(master);
+        src.start(ctx.currentTime);
+      } catch(e) {}
+    });
+  }
 
-      // soft bass under first half
-      const bass = ctx.createOscillator();
-      const bg = ctx.createGain();
-      bass.type = 'triangle';
-      bass.frequency.value = 130.81;
-      bg.gain.setValueAtTime(0.18, ctx.currentTime);
-      bg.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 1.6);
-      bass.connect(bg);
-      bg.connect(master);
-      bass.start(ctx.currentTime);
-      bass.stop(ctx.currentTime + 1.7);
+  // Short sad pad for cancel
+  function playSadMusic(){
+    withAudio((ctx) => {
+      const master = ctx.createGain();
+      master.gain.value = 0.2;
+      master.connect(ctx.destination);
+      // minor descending: A3 C4 E4  →  G3 B3 D4  →  F3
+      const notes = [
+        {f:220.00, t:0.0, d:1.2},
+        {f:261.63, t:0.15, d:1.2},
+        {f:329.63, t:0.3, d:1.3},
+        {f:196.00, t:1.5, d:1.4},
+        {f:246.94, t:1.7, d:1.3},
+        {f:293.66, t:1.9, d:1.4},
+        {f:174.61, t:3.2, d:2.2}
+      ];
+      notes.forEach(n => {
+        const o = ctx.createOscillator();
+        const g = ctx.createGain();
+        o.type = 'sine';
+        o.frequency.value = n.f;
+        g.gain.setValueAtTime(0, ctx.currentTime + n.t);
+        g.gain.linearRampToValueAtTime(0.35, ctx.currentTime + n.t + 0.25);
+        g.gain.linearRampToValueAtTime(0.2, ctx.currentTime + n.t + n.d * 0.6);
+        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
+        o.connect(g); g.connect(master);
+        o.start(ctx.currentTime + n.t);
+        o.stop(ctx.currentTime + n.t + n.d + 0.1);
+      });
+    });
+  }
 
-      // auto-close context later
-      setTimeout(() => { try { ctx.close(); } catch(e){} }, 3500);
-    } catch (e) {}
+  function sickReleaseAnimation(){
+    document.body.classList.add('release-shake', 'release-flash');
+    setTimeout(() => document.body.classList.remove('release-shake'), 600);
+    setTimeout(() => document.body.classList.remove('release-flash'), 800);
+    if (typeof fireConfetti === 'function') {
+      try { fireConfetti(); } catch(e) {}
+      setTimeout(() => { try { fireConfetti(); } catch(e) {} }, 400);
+    }
+    const card = document.getElementById('countdown-card');
+    if (card) {
+      card.classList.add('season4-live');
+      card.style.transition = 'transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s ease';
+      card.style.transform = 'scale(1.06)';
+      card.style.boxShadow = '0 0 0 2px #fff, 0 0 50px rgba(255,255,255,0.4)';
+      setTimeout(() => { card.style.transform = 'scale(1)'; }, 500);
+    }
+  }
+
+  function showIpReveal(){
+    // Update real join fields
+    const javaEl = document.getElementById('java-addr');
+    if (javaEl) javaEl.textContent = 'playcakesmp.net';
+    const bedEl = document.getElementById('bedrock-addr');
+    if (bedEl) bedEl.textContent = 'Coming soon...';
+
+    const ov = document.getElementById('release-overlay');
+    if (ov) {
+      ov.classList.add('show');
+      ov.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function hideIpReveal(){
+    const ov = document.getElementById('release-overlay');
+    if (ov) {
+      ov.classList.remove('show');
+      ov.setAttribute('aria-hidden', 'true');
+    }
+  }
+
+  function showCancelScreen(){
+    hideIpReveal();
+    playSadMusic();
+    const ov = document.getElementById('cancel-overlay');
+    if (ov) {
+      ov.classList.add('show');
+      ov.setAttribute('aria-hidden', 'false');
+    }
+  }
+
+  function hideCancelScreen(){
+    const ov = document.getElementById('cancel-overlay');
+    if (ov) {
+      ov.classList.remove('show');
+      ov.setAttribute('aria-hidden', 'true');
+    }
   }
 
   function celebrateCountdownZero(){
     if (countdownFinished) return;
     countdownFinished = true;
 
-    // Music
     playSeason4Jingle();
+    sickReleaseAnimation();
 
-    // Animation: confetti + card pulse/glow
-    if (typeof fireConfetti === 'function') {
-      try { fireConfetti(); } catch(e) {}
-    }
-
-    const card = document.getElementById('countdown-card');
-    if (card) {
-      card.classList.add('season4-live');
-      card.style.boxShadow = '0 0 0 2px #fff, 0 0 40px rgba(255,255,255,0.35), 0 18px 50px rgba(0,0,0,0.5)';
-      card.style.transition = 'box-shadow 400ms ease, transform 400ms ease';
-      card.style.transform = 'scale(1.03)';
-      setTimeout(() => {
-        card.style.transform = 'scale(1)';
-      }, 600);
-    }
-
-    // Change title + units to LIVE state
     const title = document.getElementById('countdown-event-name');
     if (title) {
       title.textContent = 'Season 4 — LIVE';
       title.style.color = '#7dffa0';
+      title.classList.remove('purple-grad');
     }
     Object.keys(unitEls).forEach(k => {
       const el = unitEls[k];
       if (el) el.textContent = '00';
     });
+
+    // Timeline:
+    // 0.0s  music + sick anim
+    // 2.8s  IP reveal (playcakesmp.net / Coming soon)
+    // 7.0s  black + sad music + cancel text
+    // 13.5s back to normal → next event countdown
+    setTimeout(showIpReveal, 2800);
+    setTimeout(showCancelScreen, 7000);
+    setTimeout(() => {
+      hideCancelScreen();
+      startNextEventCountdown();
+    }, 13500);
+  }
+
+  // Next event: 10 Oct 2026 18:00 CET/CEST (UTC+2)
+  let nextTargetDate = null;
+  let nextPhase = false;
+
+  function startNextEventCountdown(){
+    nextPhase = true;
+    nextTargetDate = new Date('2026-10-10T18:00:00+02:00').getTime();
+    countdownFinished = false;
+
+    const card = document.getElementById('countdown-card');
+    if (card) {
+      card.classList.remove('season4-live', 'video-mode');
+      card.classList.add('next-event');
+      card.style.boxShadow = '';
+      card.style.transform = '';
+    }
+    try {
+      const v = document.getElementById('countdown-event-video');
+      if (v) { v.pause(); v.currentTime = 0; }
+      const wrap = document.getElementById('countdown-video-wrap');
+      if (wrap) wrap.classList.remove('playing');
+    } catch(e) {}
+
+    const head = card && card.querySelector('.countdown-head span:last-child');
+    if (head) head.textContent = 'Upcoming';
+
+    const title = document.getElementById('countdown-event-name');
+    if (title) {
+      title.textContent = 'Next event · 10.10.2026';
+      title.style.color = '';
+      title.classList.add('purple-grad');
+      title.removeAttribute('title');
+    }
+
+    const units = document.getElementById('countdown-units');
+    if (units) units.style.display = '';
+
+    updateCountdown();
   }
 
   function updateCountdown(){
-    let diff = Math.max(0, targetDate - Date.now());
-    if (diff <= 0) {
+    const target = nextPhase && nextTargetDate ? nextTargetDate : targetDate;
+    let diff = Math.max(0, target - Date.now());
+
+    if (!nextPhase && diff <= 0) {
       celebrateCountdownZero();
       return;
     }
+    if (nextPhase && diff <= 0) {
+      Object.keys(unitEls).forEach(k => {
+        const el = unitEls[k];
+        if (el) el.textContent = '00';
+      });
+      const title = document.getElementById('countdown-event-name');
+      if (title) title.textContent = 'Event — LIVE';
+      return;
+    }
+
     const d = Math.floor(diff / 86400000); diff %= 86400000;
     const h = Math.floor(diff / 3600000);  diff %= 3600000;
     const m = Math.floor(diff / 60000);    diff %= 60000;
@@ -1452,6 +1724,28 @@
   }
   updateCountdown();
   setInterval(updateCountdown, 1000);
+
+  function updateFeaturesCountdown(){
+    let diff = Math.max(0, FEATURES_TARGET - Date.now());
+    const d = Math.floor(diff / 86400000); diff %= 86400000;
+    const h = Math.floor(diff / 3600000);  diff %= 3600000;
+    const m = Math.floor(diff / 60000);    diff %= 60000;
+    const s = Math.floor(diff / 1000);
+    const vals = { days:d, hours:h, minutes:m, seconds:s };
+    Object.keys(vals).forEach(k => {
+      const el = featureUnitEls[k];
+      if (!el) return;
+      const next = String(vals[k]).padStart(2,'0');
+      if (el.textContent !== next) {
+        el.textContent = next;
+        const unit = el.closest('.countdown-unit');
+        if (unit) { unit.classList.remove('tick'); void unit.offsetWidth; unit.classList.add('tick'); }
+      }
+    });
+  }
+  updateFeaturesCountdown();
+  setInterval(updateFeaturesCountdown, 1000);
+
 
   // Click event name → play eventvideo.mp4, then back to countdown
   const countdownCard = document.getElementById('countdown-card');
@@ -2432,5 +2726,19 @@
   draw();
 })();
 </script>
+
+<!-- Release IP reveal + Cancel sequence -->
+<div id="release-overlay" aria-hidden="true">
+  <div class="release-panel">
+    <div class="release-label display">Season 4 · Server IP</div>
+    <div class="release-ip mono" id="release-ip-java">playcakesmp.net</div>
+    <div style="font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;">Java Edition</div>
+    <div class="release-bedrock">Bedrock Edition · <span class="soon">Coming soon...</span></div>
+  </div>
+</div>
+<div id="cancel-overlay" aria-hidden="true">
+  <div class="cancel-text">Cake events is canceled<br>because of some stuff...</div>
+</div>
+
 </body>
 </html>
