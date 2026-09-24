@@ -704,6 +704,14 @@
   .countdown-card.next-event .countdown-unit:hover{
     border-color: #a855f7;
   }
+  .animated-dots{ display:inline-block; width:1.6em; text-align:left; animation:dot-bounce 1.2s steps(4,end) infinite; }
+  @keyframes dot-bounce{
+    0%{ opacity:.15; transform:translateY(0); }
+    25%{ opacity:.45; transform:translateY(-1px); }
+    50%{ opacity:.75; transform:translateY(0); }
+    75%,100%{ opacity:1; transform:translateY(0); }
+  }
+
   .countdown-card.next-event .countdown-head .dot{
     background: #a855f7;
     box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
@@ -736,7 +744,6 @@
   }
   .slot:nth-child(1){ animation-delay: 320ms !important; }
   .slot:nth-child(2){ animation-delay: 480ms !important; }
-  .join-card > .slot{ animation-delay: 640ms !important; } /* Hide & Seek full-width */
   @keyframes slot-break-in{
     0%{
       opacity:0;
@@ -850,8 +857,8 @@
         </div>
         <!-- Event countdown on Home -->
         <div class="countdown-card" id="countdown-card" style="margin-top:28px; margin-bottom:8px;">
-          <div class="countdown-head"><span class="dot"></span><span>Live Event</span></div>
-          <h3 class="countdown-title display" id="countdown-event-name" title="Click to play event video">End fight</h3>
+          <div class="countdown-head"><span class="dot"></span><span>Upcoming</span></div>
+          <h3 class="countdown-title display" id="countdown-event-name" title="Season 4 countdown">Season 4</h3>
           <div class="countdown-units" id="countdown-units">
             <div class="countdown-unit"><div class="num mono" data-unit="days">00</div><div class="unit-label">Days</div></div>
             <div class="countdown-unit"><div class="num mono" data-unit="hours">00</div><div class="unit-label">Hours</div></div>
@@ -875,7 +882,7 @@
                 <button class="icon-btn" data-target="java-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
               </div>
               <span class="addr-label">Server Address</span>
-              <div class="addr-field mono" id="java-addr">cakesmp.minecraft.co.com</div>
+              <div class="addr-field mono" id="java-addr">playcakesmp.net</div>
               <span class="addr-label">Port</span>
               <div class="addr-field mono">25565</div>
             </div>
@@ -885,17 +892,10 @@
                 <button class="icon-btn" data-target="bedrock-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
               </div>
               <span class="addr-label">Server Address</span>
-              <div class="addr-field mono" id="bedrock-addr">Coming soon...</div>
+              <div class="addr-field mono" id="bedrock-addr">Coming soon<span class="animated-dots" aria-hidden="true">...</span></div>
               <span class="addr-label">Port</span>
               <div class="addr-field mono">25565</div>
             </div>
-          </div>
-          <div class="slot slot-canceled" style="margin-top:18px;" id="hide-canceled-slot">
-            <div class="slot-head">
-              <h3 class="display">Cake SMP Hide &amp; Seek</h3>
-            </div>
-            <button type="button" class="canceled-text" id="project-canceled-btn" title="...">
-              Project canceled...</button>
           </div>
         </div>
       </div>
@@ -922,7 +922,7 @@
       <!-- Next event countdown (Features) -->
       <div class="countdown-card next-event" id="features-countdown-card" style="margin-bottom:36px;">
         <div class="countdown-head"><span class="dot"></span><span>Upcoming</span></div>
-        <h3 class="countdown-title display purple-grad" id="features-countdown-name">End fight · 10.10.2026</h3>
+        <h3 class="countdown-title display" id="features-countdown-name">Season 4</h3>
         <div class="countdown-units" id="features-countdown-units">
           <div class="countdown-unit"><div class="num mono" data-funit="days">00</div><div class="unit-label">Days</div></div>
           <div class="countdown-unit"><div class="num mono" data-funit="hours">00</div><div class="unit-label">Hours</div></div>
@@ -1399,9 +1399,12 @@
     });
   });
 
-  // Countdown — Season 4 · Saturday 18:00 CEST exact today (2026-09-24)
-  // When it hits 00:00:00:00 → cool chiptune music (Web Audio, no file) + animation
-  const targetDate = new Date('2026-09-26T18:00:00+02:00').getTime();
+  // Event countdown state machine
+  // Season 4 releases: September 26, 2026 at 18:00 CET.
+  // End fight: October 10, 2026 at 18:00 CET.
+  const SEASON4_TARGET = new Date('2026-09-26T18:00:00+01:00').getTime();
+  const END_FIGHT_TARGET = new Date('2026-10-10T18:00:00+01:00').getTime();
+
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
     hours: document.querySelector('[data-unit="hours"]'),
@@ -1414,131 +1417,98 @@
     minutes: document.querySelector('[data-funit="minutes"]'),
     seconds: document.querySelector('[data-funit="seconds"]')
   };
-  // Features page always counts to Oct 10 2026 18:00 CET
-  const FEATURES_TARGET = new Date('2026-10-10T18:00:00+02:00').getTime();
-  let countdownFinished = false;
 
-  // Countdown only — End fight · Saturday 26.09.2026 18:00:00 CEST (exact)
-  let countdownFinished = false;
-  let nextTargetDate = null;
-  let nextPhase = false;
+  let eventPhase = Date.now() < SEASON4_TARGET ? 'season4' :
+                   Date.now() < END_FIGHT_TARGET ? 'endfight' : 'finished';
 
-  function celebrateCountdownZero(){
-    if (countdownFinished) return;
-    countdownFinished = true;
-
-    const title = document.getElementById('countdown-event-name');
-    if (title) {
-      title.textContent = 'End fight — LIVE';
-      title.style.color = '#7dffa0';
-      title.classList.remove('purple-grad');
-    }
-    Object.keys(unitEls).forEach(k => {
-      const el = unitEls[k];
-      if (el) el.textContent = '00';
+  function setUnits(map, values) {
+    Object.keys(values).forEach(k => {
+      const el = map[k];
+      if (!el) return;
+      const next = String(values[k]).padStart(2, '0');
+      if (el.textContent !== next) {
+        el.textContent = next;
+        const unit = el.closest('.countdown-unit');
+        if (unit) {
+          unit.classList.remove('tick');
+          void unit.offsetWidth;
+          unit.classList.add('tick');
+        }
+      }
     });
-    const card = document.getElementById('countdown-card');
-    if (card) {
-      card.classList.add('season4-live');
-    }
-
-    // After a short moment → Features (next event countdown)
-    setTimeout(startNextEventCountdown, 2500);
   }
 
-  function startNextEventCountdown(){
-    nextPhase = true;
-    nextTargetDate = new Date('2026-10-10T18:00:00+02:00').getTime();
-    countdownFinished = false;
-
-    const card = document.getElementById('countdown-card');
-    if (card) {
-      card.classList.remove('season4-live', 'video-mode');
-      card.style.display = 'none';
-    }
-    try {
-      const v = document.getElementById('countdown-event-video');
-      if (v) { v.pause(); v.currentTime = 0; }
-      const wrap = document.getElementById('countdown-video-wrap');
-      if (wrap) wrap.classList.remove('playing');
-    } catch(e) {}
-
-    const fTitle = document.getElementById('features-countdown-name');
-    if (fTitle) {
-      fTitle.textContent = 'End fight · 10.10.2026';
-      fTitle.classList.add('purple-grad');
-    }
-    const fCard = document.getElementById('features-countdown-card');
-    if (fCard) {
-      fCard.classList.add('next-event');
-      fCard.style.display = '';
-    }
-
-    try {
-      if (typeof goToPage === 'function') goToPage('features');
-    } catch(e) {}
-
-    updateCountdown();
-  }
-
-  function updateCountdown(){
-    const target = nextPhase && nextTargetDate ? nextTargetDate : targetDate;
+  function getParts(target) {
     let diff = Math.max(0, target - Date.now());
-
-    if (!nextPhase && diff <= 0) {
-      celebrateCountdownZero();
-      return;
-    }
-    if (nextPhase && diff <= 0) {
-      Object.keys(unitEls).forEach(k => {
-        const el = unitEls[k];
-        if (el) el.textContent = '00';
-      });
-      const title = document.getElementById('countdown-event-name');
-      if (title) title.textContent = 'Event — LIVE';
-      return;
-    }
-
     const d = Math.floor(diff / 86400000); diff %= 86400000;
-    const h = Math.floor(diff / 3600000);  diff %= 3600000;
-    const m = Math.floor(diff / 60000);    diff %= 60000;
+    const h = Math.floor(diff / 3600000); diff %= 3600000;
+    const m = Math.floor(diff / 60000); diff %= 60000;
     const s = Math.floor(diff / 1000);
-    const vals = { days:d, hours:h, minutes:m, seconds:s };
-    Object.keys(vals).forEach(k => {
-      const el = unitEls[k];
+    return { days:d, hours:h, minutes:m, seconds:s };
+  }
+
+  function setCountdownTitle(title, purple) {
+    ['countdown-event-name', 'features-countdown-name'].forEach(id => {
+      const el = document.getElementById(id);
       if (!el) return;
-      const next = String(vals[k]).padStart(2,'0');
-      if (el.textContent !== next) {
-        el.textContent = next;
-        const unit = el.closest('.countdown-unit');
-        if (unit) { unit.classList.remove('tick'); void unit.offsetWidth; unit.classList.add('tick'); }
-      }
+      el.textContent = title;
+      el.classList.toggle('purple-grad', !!purple);
+      el.style.color = purple ? '' : '';
     });
   }
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
 
-  function updateFeaturesCountdown(){
-    let diff = Math.max(0, FEATURES_TARGET - Date.now());
-    const d = Math.floor(diff / 86400000); diff %= 86400000;
-    const h = Math.floor(diff / 3600000);  diff %= 3600000;
-    const m = Math.floor(diff / 60000);    diff %= 60000;
-    const s = Math.floor(diff / 1000);
-    const vals = { days:d, hours:h, minutes:m, seconds:s };
-    Object.keys(vals).forEach(k => {
-      const el = featureUnitEls[k];
-      if (!el) return;
-      const next = String(vals[k]).padStart(2,'0');
-      if (el.textContent !== next) {
-        el.textContent = next;
-        const unit = el.closest('.countdown-unit');
-        if (unit) { unit.classList.remove('tick'); void unit.offsetWidth; unit.classList.add('tick'); }
-      }
-    });
+  function syncEventUI() {
+    const homeCard = document.getElementById('countdown-card');
+    const featureCard = document.getElementById('features-countdown-card');
+
+    if (eventPhase === 'season4') {
+      setCountdownTitle('Season 4', false);
+      homeCard?.classList.remove('next-event', 'season4-live');
+      featureCard?.classList.remove('next-event');
+      if (homeCard) homeCard.style.display = '';
+      if (featureCard) featureCard.style.display = '';
+      setUnits(unitEls, getParts(SEASON4_TARGET));
+      setUnits(featureUnitEls, getParts(SEASON4_TARGET));
+      return;
+    }
+
+    if (eventPhase === 'endfight') {
+      setCountdownTitle('End fight', true);
+      homeCard?.classList.remove('season4-live');
+      homeCard?.classList.add('next-event');
+      featureCard?.classList.add('next-event');
+      if (homeCard) homeCard.style.display = '';
+      if (featureCard) featureCard.style.display = '';
+      setUnits(unitEls, getParts(END_FIGHT_TARGET));
+      setUnits(featureUnitEls, getParts(END_FIGHT_TARGET));
+      return;
+    }
+
+    // End fight has finished: remove the event countdown from Home.
+    if (homeCard) {
+      homeCard.style.display = 'none';
+      homeCard.classList.remove('next-event', 'season4-live');
+    }
+    if (featureCard) {
+      featureCard.style.display = '';
+      featureCard.classList.remove('next-event');
+    }
+    setCountdownTitle('End fight — LIVE', true);
+    setUnits(unitEls, {days:0,hours:0,minutes:0,seconds:0});
+    setUnits(featureUnitEls, {days:0,hours:0,minutes:0,seconds:0});
   }
-  updateFeaturesCountdown();
-  setInterval(updateFeaturesCountdown, 1000);
 
+  function updateCountdowns() {
+    const now = Date.now();
+    const nextPhase = now < SEASON4_TARGET ? 'season4' :
+                      now < END_FIGHT_TARGET ? 'endfight' : 'finished';
+
+    if (nextPhase !== eventPhase) eventPhase = nextPhase;
+    syncEventUI();
+  }
+
+  updateCountdowns();
+  setInterval(updateCountdowns, 1000);
 
   // Click event name → play eventvideo.mp4, then back to countdown
   const countdownCard = document.getElementById('countdown-card');
@@ -1608,7 +1578,7 @@
     }
   }
   function refreshStatus(){
-    checkServer('cakesmp.minecraft.co.com', document.getElementById('cake-online'));
+    checkServer('playcakesmp.net', document.getElementById('cake-online'));
   }
   refreshStatus();
   setInterval(refreshStatus, 60000);
@@ -2424,7 +2394,7 @@
         msgToggle.classList.remove('open');
       }
       if (cakerMessages.children.length === 0) {
-        addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop, Hide & Seek, applications or anything else!");
+        addBotMessage("Hey! I'm <strong>Caker</strong>, your Cake SMP assistant. Ask me about joining, rules, shop, applications or anything else!");
       }
     }
   }
@@ -2449,7 +2419,7 @@
     const msg = input.toLowerCase().trim();
     if (/^(hi|hey|hello|yo|sup)/.test(msg)) return "Hey! Welcome to Cake SMP Season 3. What do you need?";
     if (msg.includes('join') || msg.includes('ip') || msg.includes('address')) {
-      return "<strong>Java:</strong> cakesmp.minecraft.co.com<br><strong>Bedrock:</strong> 185.207.164.151:25565<br><strong>Hide & Seek:</strong> hideseekcs.folium.lol";
+      return "<strong>Java:</strong> playcakesmp.net<br><strong>Bedrock:</strong> Coming soon...";
     }
     if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord.";
     if (msg.includes('support') || msg.includes('donate') || msg.includes('donation')) {
@@ -2469,7 +2439,7 @@
     }
     if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/DQTPNzqtp" target="_blank" rel="noopener">discord.gg/DQTPNzqtp</a>';
     if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
-    if (msg.includes('help')) return "I can help with: joining, rules, shop status, Hide & Seek, accounts, applications and Discord.";
+    if (msg.includes('help')) return "I can help with: joining, rules, shop status, accounts, applications and Discord.";
     if (msg.includes('application') || msg.includes('apply') || msg.includes('staff') || msg.includes('mod')) {
       return "Go to <strong>Features</strong> (you must be signed in). Scroll down to Staff Application, choose Mod, Event Manager, Discord Staff, Developer or Voice Actor, fill the form and send it.";
     }
