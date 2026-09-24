@@ -794,6 +794,100 @@
     100%{ opacity:0; }
   }
 
+
+  /* Join / Connect — break-off + entrance */
+  .join-card{
+    opacity:0;
+    transform: translateY(28px) scale(0.96);
+    animation: join-card-in 700ms cubic-bezier(.2,.8,.2,1) 180ms forwards;
+  }
+  @keyframes join-card-in{
+    to{ opacity:1; transform: translateY(0) scale(1); }
+  }
+  .join-card > h2{
+    opacity:0;
+    animation: fade-up 500ms ease 280ms forwards;
+  }
+  @keyframes fade-up{
+    from{ opacity:0; transform: translateY(12px); }
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .slot{
+    position: relative;
+    /* override older opacity/transform if any — keep card-in but stronger */
+    animation: slot-break-in 720ms cubic-bezier(.18,.9,.2,1.05) forwards !important;
+  }
+  .slot:nth-child(1){ animation-delay: 320ms !important; }
+  .slot:nth-child(2){ animation-delay: 480ms !important; }
+  .join-card > .slot{ animation-delay: 640ms !important; } /* Hide & Seek full-width */
+  @keyframes slot-break-in{
+    0%{
+      opacity:0;
+      transform: translateY(40px) rotate(-2.5deg) scale(0.92);
+      filter: blur(4px);
+    }
+    55%{
+      opacity:1;
+      filter: blur(0);
+      transform: translateY(-6px) rotate(0.8deg) scale(1.02);
+    }
+    100%{
+      opacity:1;
+      transform: translateY(0) rotate(0) scale(1);
+      filter: blur(0);
+    }
+  }
+  .slot:hover{
+    transform: translateY(-5px) !important;
+    border-color: var(--border-2);
+    box-shadow: 0 14px 32px rgba(0,0,0,0.45), 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .slot .addr-field{
+    transition: transform 220ms ease, border-color 220ms ease, box-shadow 220ms ease;
+  }
+  .slot:hover .addr-field{
+    border-color: var(--border-2);
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.04);
+  }
+  .slot .slot-head h3{
+    transition: letter-spacing 220ms ease, color 220ms ease;
+  }
+  .slot:hover .slot-head h3{ letter-spacing: 0.04em; }
+
+  /* Discord page animations */
+  .page[data-page="discord"] .page-title{
+    opacity:0;
+    animation: fade-up 560ms ease forwards;
+  }
+  .page[data-page="discord"] .discord-lead{
+    opacity:0;
+    transform: translateY(24px);
+    animation: discord-lead-in 700ms cubic-bezier(.2,.8,.2,1) 120ms forwards;
+  }
+  @keyframes discord-lead-in{
+    to{ opacity:1; transform: translateY(0); }
+  }
+  .page[data-page="discord"] .discord-lead h2{
+    opacity:0;
+    animation: fade-up 500ms ease 220ms forwards;
+  }
+  .page[data-page="discord"] .discord-lead p{
+    opacity:0;
+    animation: fade-up 500ms ease 320ms forwards;
+  }
+  .page[data-page="discord"] .btn-discord-join{
+    opacity:0;
+    transform: scale(0.85);
+    animation: discord-btn-in 600ms cubic-bezier(.2,.8,.2,1) 420ms forwards;
+  }
+  @keyframes discord-btn-in{
+    to{ opacity:1; transform: scale(1); }
+  }
+  /* replay helper class */
+  .anim-replay{
+    animation: none !important;
+  }
+
 </style>
 </head>
 <body>
@@ -840,7 +934,7 @@
         <!-- Event countdown on Home -->
         <div class="countdown-card" id="countdown-card" style="margin-top:28px; margin-bottom:8px;">
           <div class="countdown-head"><span class="dot"></span><span>Live Event</span></div>
-          <h3 class="countdown-title display" id="countdown-event-name" title="Click to play event video">Season 4</h3>
+          <h3 class="countdown-title display" id="countdown-event-name" title="Click to play event video">End fight</h3>
           <div class="countdown-units" id="countdown-units">
             <div class="countdown-unit"><div class="num mono" data-unit="days">00</div><div class="unit-label">Days</div></div>
             <div class="countdown-unit"><div class="num mono" data-unit="hours">00</div><div class="unit-label">Hours</div></div>
@@ -914,7 +1008,7 @@
       <!-- Next event countdown (Features) -->
       <div class="countdown-card next-event" id="features-countdown-card" style="margin-bottom:36px;">
         <div class="countdown-head"><span class="dot"></span><span>Upcoming</span></div>
-        <h3 class="countdown-title display purple-grad" id="features-countdown-name">Next event · 10.10.2026</h3>
+        <h3 class="countdown-title display purple-grad" id="features-countdown-name">End fight · 10.10.2026</h3>
         <div class="countdown-units" id="features-countdown-units">
           <div class="countdown-unit"><div class="num mono" data-funit="days">00</div><div class="unit-label">Days</div></div>
           <div class="countdown-unit"><div class="num mono" data-funit="hours">00</div><div class="unit-label">Hours</div></div>
@@ -1338,6 +1432,24 @@
   // Every application / owner mail goes here
   const OWNER_EMAIL = 'smatija1404@gmail.com';
   const PAGE_KEY = 'cakesmp_current_page';
+
+  // Unlock Web Audio on first user gesture (required by browsers)
+  (function unlockAudioEarly(){
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) return;
+    const resume = () => {
+      try {
+        if (!window.__cakeAC) window.__cakeAC = new AC();
+        if (window.__cakeAC.state === 'suspended') window.__cakeAC.resume();
+      } catch(e) {}
+    };
+    ['click','keydown','touchstart','pointerdown'].forEach(ev => {
+      document.addEventListener(ev, resume, { capture: true, passive: true });
+    });
+    // try once immediately (works if already interacted)
+    resume();
+  })();
+
   // Staff application accept invite (shown only in accept messages)
   const STAFF_DISCORD_INVITE = 'https://discord.gg/ZanK5XZA';
 
@@ -1364,6 +1476,8 @@
     try {
       if (name === 'features' && typeof updateApplicationUI === 'function') updateApplicationUI();
       if (name === 'shop' && typeof replayShopAnimations === 'function') replayShopAnimations();
+      if (name === 'discord' && typeof replayDiscordAnimations === 'function') replayDiscordAnimations();
+      if (name === 'home' && typeof replayJoinAnimations === 'function') replayJoinAnimations();
     } catch (e) {}
   }
 
@@ -1417,6 +1531,28 @@
     });
   }
 
+  function replayDiscordAnimations(){
+    const page = document.querySelector('.page[data-page="discord"]');
+    if (!page) return;
+    const els = page.querySelectorAll('.page-title, .discord-lead, .discord-lead h2, .discord-lead p, .btn-discord-join');
+    els.forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+  }
+
+  function replayJoinAnimations(){
+    const home = document.querySelector('.page[data-page="home"]');
+    if (!home) return;
+    const els = home.querySelectorAll('.join-card, .join-card > h2, .slot');
+    els.forEach(el => {
+      el.style.animation = 'none';
+      void el.offsetWidth;
+      el.style.animation = '';
+    });
+  }
+
   // Copy
   document.querySelectorAll('.icon-btn[data-target]').forEach(btn => {
     btn.addEventListener('click', async () => {
@@ -1431,9 +1567,9 @@
     });
   });
 
-  // Countdown — Season 4 · testing 14:55 CEST today (2026-09-24)
+  // Countdown — Season 4 · testing 15:10 CEST today (2026-09-24)
   // When it hits 00:00:00:00 → cool chiptune music (Web Audio, no file) + animation
-  const targetDate = new Date('2026-09-24T14:55:00+02:00').getTime();
+  const targetDate = new Date('2026-09-24T15:10:00+02:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
     hours: document.querySelector('[data-unit="hours"]'),
@@ -1454,7 +1590,11 @@
   function getAudioCtx(){
     const AC = window.AudioContext || window.webkitAudioContext;
     if (!AC) return null;
-    if (!window.__cakeAC) window.__cakeAC = new AC();
+    try {
+      if (!window.__cakeAC || window.__cakeAC.state === 'closed') {
+        window.__cakeAC = new AC();
+      }
+    } catch(e) { return null; }
     return window.__cakeAC;
   }
   function withAudio(fn){
@@ -1462,17 +1602,26 @@
     if (!ctx) return;
     const run = () => { try { fn(ctx); } catch(e) {} };
     if (ctx.state === 'suspended') {
-      ctx.resume().then(run).catch(() => {});
-      const unlock = () => { ctx.resume().then(run).catch(()=>{}); document.removeEventListener('click', unlock); };
-      document.addEventListener('click', unlock, { once: true });
-    } else run();
+      ctx.resume().then(run).catch(() => {
+        // last resort: play on next click
+        const once = () => {
+          ctx.resume().then(run).catch(()=>{});
+          document.removeEventListener('click', once);
+          document.removeEventListener('keydown', once);
+        };
+        document.addEventListener('click', once);
+        document.addEventListener('keydown', once);
+      });
+    } else {
+      run();
+    }
   }
 
   // Better triumphant release jingle
   function playSeason4Jingle(){
     withAudio((ctx) => {
       const master = ctx.createGain();
-      master.gain.value = 0.28;
+      master.gain.value = 0.45;
       master.connect(ctx.destination);
 
       // brighter lead
@@ -1531,7 +1680,7 @@
   function playSadMusic(){
     withAudio((ctx) => {
       const master = ctx.createGain();
-      master.gain.value = 0.2;
+      master.gain.value = 0.38;
       master.connect(ctx.destination);
       // minor descending: A3 C4 E4  →  G3 B3 D4  →  F3
       const notes = [
@@ -1626,7 +1775,7 @@
 
     const title = document.getElementById('countdown-event-name');
     if (title) {
-      title.textContent = 'Season 4 — LIVE';
+      title.textContent = 'End fight — LIVE';
       title.style.color = '#7dffa0';
       title.classList.remove('purple-grad');
     }
@@ -1657,12 +1806,11 @@
     nextTargetDate = new Date('2026-10-10T18:00:00+02:00').getTime();
     countdownFinished = false;
 
+    // Hide home countdown card after release sequence — next event lives on Features
     const card = document.getElementById('countdown-card');
     if (card) {
       card.classList.remove('season4-live', 'video-mode');
-      card.classList.add('next-event');
-      card.style.boxShadow = '';
-      card.style.transform = '';
+      card.style.display = 'none';
     }
     try {
       const v = document.getElementById('countdown-event-video');
@@ -1671,19 +1819,22 @@
       if (wrap) wrap.classList.remove('playing');
     } catch(e) {}
 
-    const head = card && card.querySelector('.countdown-head span:last-child');
-    if (head) head.textContent = 'Upcoming';
-
-    const title = document.getElementById('countdown-event-name');
-    if (title) {
-      title.textContent = 'Next event · 10.10.2026';
-      title.style.color = '';
-      title.classList.add('purple-grad');
-      title.removeAttribute('title');
+    // Features countdown is the "old place" with purple gradient
+    const fTitle = document.getElementById('features-countdown-name');
+    if (fTitle) {
+      fTitle.textContent = 'End fight · 10.10.2026';
+      fTitle.classList.add('purple-grad');
+    }
+    const fCard = document.getElementById('features-countdown-card');
+    if (fCard) {
+      fCard.classList.add('next-event');
+      fCard.style.display = '';
     }
 
-    const units = document.getElementById('countdown-units');
-    if (units) units.style.display = '';
+    // Navigate to Features (countdown returns to Features)
+    try {
+      if (typeof goToPage === 'function') goToPage('features');
+    } catch(e) {}
 
     updateCountdown();
   }
@@ -2730,7 +2881,7 @@
 <!-- Release IP reveal + Cancel sequence -->
 <div id="release-overlay" aria-hidden="true">
   <div class="release-panel">
-    <div class="release-label display">Season 4 · Server IP</div>
+    <div class="release-label display">End fight · Server IP</div>
     <div class="release-ip mono" id="release-ip-java">playcakesmp.net</div>
     <div style="font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;">Java Edition</div>
     <div class="release-bedrock">Bedrock Edition · <span class="soon">Coming soon...</span></div>
