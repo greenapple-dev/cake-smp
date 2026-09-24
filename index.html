@@ -708,90 +708,7 @@
     background: #a855f7;
     box-shadow: 0 0 0 3px rgba(168,85,247,0.2);
   }
-
-
-  /* Release / cancel sequence overlays */
-  #release-overlay{
-    position:fixed; inset:0; z-index:10000;
-    display:flex; align-items:center; justify-content:center;
-    pointer-events:none; opacity:0;
-    transition: opacity 0.5s ease;
-    background: rgba(0,0,0,0.55);
-    backdrop-filter: blur(8px);
-  }
-  #release-overlay.show{ opacity:1; pointer-events:auto; }
-  #release-overlay .release-panel{
-    text-align:center; max-width:min(520px, 92vw);
-    padding:36px 28px; border-radius:20px;
-    background:var(--surface); border:1px solid var(--border-2);
-    box-shadow:0 24px 60px rgba(0,0,0,0.55);
-    transform: scale(0.85) translateY(20px);
-    transition: transform 0.55s cubic-bezier(.2,.8,.2,1);
-  }
-  #release-overlay.show .release-panel{ transform: scale(1) translateY(0); }
-  #release-overlay .release-label{
-    font-size:11px; text-transform:uppercase; letter-spacing:0.1em;
-    color:var(--text-dim); margin-bottom:12px;
-  }
-  #release-overlay .release-ip{
-    font-family:'JetBrains Mono', monospace;
-    font-size: clamp(18px, 4vw, 26px);
-    font-weight:700; letter-spacing:0.04em;
-    margin:8px 0 6px; color:#fff;
-    animation: ip-pop 0.6s cubic-bezier(.2,.8,.2,1) both;
-  }
-  #release-overlay .release-bedrock{
-    font-family:'JetBrains Mono', monospace;
-    font-size:15px; color:var(--text-muted); margin-top:18px;
-    animation: ip-pop 0.6s cubic-bezier(.2,.8,.2,1) 0.25s both;
-  }
-  #release-overlay .release-bedrock .soon{
-    color:#c084fc; font-weight:700;
-  }
-  @keyframes ip-pop{
-    0%{ opacity:0; transform:scale(0.6) translateY(12px); }
-    70%{ opacity:1; transform:scale(1.06) translateY(0); }
-    100%{ opacity:1; transform:scale(1); }
-  }
-  #cancel-overlay{
-    position:fixed; inset:0; z-index:10001;
-    background:#000; color:#fff;
-    display:flex; align-items:center; justify-content:center;
-    opacity:0; pointer-events:none;
-    transition: opacity 1.1s ease;
-  }
-  #cancel-overlay.show{ opacity:1; pointer-events:auto; }
-  #cancel-overlay .cancel-text{
-    font-family:'Press Start 2P', monospace;
-    font-size: clamp(11px, 2.8vw, 16px);
-    line-height:1.85; text-align:center;
-    max-width:min(560px, 90vw);
-    opacity:0; transform:translateY(16px);
-    transition: opacity 1s ease 0.4s, transform 1s ease 0.4s;
-    text-shadow: 0 0 24px rgba(255,100,100,0.25);
-  }
-  #cancel-overlay.show .cancel-text{
-    opacity:1; transform:translateY(0);
-  }
-  body.release-shake{
-    animation: release-shake 0.55s cubic-bezier(.36,.07,.19,.97) both;
-  }
-  @keyframes release-shake{
-    0%,100%{ transform:translate(0,0); }
-    15%{ transform:translate(-8px, 3px); }
-    30%{ transform:translate(7px, -4px); }
-    45%{ transform:translate(-5px, 2px); }
-    60%{ transform:translate(4px, -2px); }
-    75%{ transform:translate(-2px, 1px); }
-  }
-  body.release-flash::after{
-    content:''; position:fixed; inset:0; z-index:9998;
-    background:#fff; pointer-events:none;
-    animation: flash-out 0.7s ease forwards;
-  }
-  @keyframes flash-out{
-    0%{ opacity:0.85; }
-    100%{ opacity:0; }
+100%{ opacity:0; }
   }
 
 
@@ -903,7 +820,7 @@
       <button class="nav-ghost" data-nav="features">Features</button>
       <button class="nav-ghost" data-nav="discord">Discord</button>
       <button class="nav-ghost" data-nav="rules">Rules</button>
-      <button class="nav-ghost" data-nav="shop">Shop</button>
+      <button class="nav-ghost" data-nav="shop">Support</button>
     </nav>
     <div class="header-right">
       <button type="button" class="header-refresh" id="page-refresh-btn" title="Refresh this page">Refresh</button>
@@ -929,7 +846,7 @@
         <p class="lede">Vanilla survival focused on building, community, and creativity.</p>
         <div class="stat-pill">
           <span class="dot"></span>
-          <span class="count">Cake SMP: <strong id="cake-online">Checking...</strong> · Hide &amp; Seek: <strong id="hide-online-pill">Checking...</strong></span>
+          <span class="count">Cake SMP: <strong id="cake-online">Checking...</strong></span>
         </div>
         <!-- Event countdown on Home -->
         <div class="countdown-card" id="countdown-card" style="margin-top:28px; margin-bottom:8px;">
@@ -968,20 +885,17 @@
                 <button class="icon-btn" data-target="bedrock-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
               </div>
               <span class="addr-label">Server Address</span>
-              <div class="addr-field mono" id="bedrock-addr">185.207.164.151:25565</div>
+              <div class="addr-field mono" id="bedrock-addr">Coming soon...</div>
               <span class="addr-label">Port</span>
               <div class="addr-field mono">25565</div>
             </div>
           </div>
-          <div class="slot" style="margin-top:18px;">
+          <div class="slot slot-canceled" style="margin-top:18px;" id="hide-canceled-slot">
             <div class="slot-head">
               <h3 class="display">Cake SMP Hide &amp; Seek</h3>
-              <button class="icon-btn" data-target="hide-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
             </div>
-            <span class="addr-label">Server Address</span>
-            <div class="addr-field mono" id="hide-addr">hideseekcs.folium.lol</div>
-            <span class="addr-label">Online Players</span>
-            <div class="addr-field mono" id="hide-players">Checking...</div>
+            <button type="button" class="canceled-text" id="project-canceled-btn" title="...">
+              Project canceled...</button>
           </div>
         </div>
       </div>
@@ -1134,7 +1048,7 @@
           <h2 class="display" style="font-size:18px;">Cake SMP Community</h2>
           <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p>
         </div>
-        <a class="btn btn-discord-join" href="https://discord.gg/ZanK5XZA" target="_blank" rel="noopener">Join Discord</a>
+        <a class="btn btn-discord-join" href="https://discord.gg/DQTPNzqtp" target="_blank" rel="noopener">Join Discord</a>
       </div>
     </div></section>
   </div>
@@ -1173,77 +1087,13 @@
 
   <!-- SHOP -->
   <div class="page" data-page="shop" hidden>
-    <div class="page-title"><div class="wrap"><h1 class="display">Shop</h1><p>Unlock abilities for Hide &amp; Seek.</p></div></div>
-    <section class="page-fill">
-      <div class="wrap">
-
-        <!-- PACKS (coming soon) -->
-        <p class="shop-section-label">Hide &amp; Seek packs</p>
-        <div class="shop-locked-wrapper">
-          <div class="shop-coming-soon">
-            <div class="shop-coming-soon-text">
-              It coming soon<br>or not<br>we will see...
-            </div>
-          </div>
-
-          <div id="shop-content" style="opacity:0.15; pointer-events:none;">
-            <p class="shop-intro">All purchases are one-time. Abilities work only in Hide &amp; Seek.</p>
-            <div class="shop-grid">
-              <div class="price-card">
-                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2v16M2 10h16"/></svg></div>
-                <h3 class="display">Starter</h3>
-                <p class="tier-desc">Cheapest way to get into the fun.</p>
-                <div class="price mono">€1.99</div>
-                <div class="price-note">One-time</div>
-                <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Access to Hide &amp; Seek</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Basic particle trail</span></li>
-                </ul>
-                <button class="btn">Get Starter</button>
-              </div>
-              <div class="price-card featured">
-                <span class="price-badge">Hider Focus</span>
-                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M10 2l2.3 5.9 6.3.5-4.8 4.1 1.5 6.2L10 15.8l-5.3 2.9 1.5-6.2-4.8-4.1 6.3-.5z"/></svg></div>
-                <h3 class="display">Hider Pack</h3>
-                <p class="tier-desc">Stay hidden longer.</p>
-                <div class="price mono">€4.99</div>
-                <div class="price-note">One-time</div>
-                <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Sprint Boost</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag hider">Hider</span><span>Invisibility Pulse</span></li>
-                </ul>
-                <button class="btn">Get Hider Pack</button>
-              </div>
-              <div class="price-card featured">
-                <span class="price-badge">Seeker Focus</span>
-                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="10" cy="10" r="7"/><path d="M10 6v4l3 2"/></svg></div>
-                <h3 class="display">Seeker Pack</h3>
-                <p class="tier-desc">Find them faster.</p>
-                <div class="price mono">€4.99</div>
-                <div class="price-note">One-time</div>
-                <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Upgraded Compass</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span class="ability-tag seeker">Seeker</span><span>Thermal Scan</span></li>
-                </ul>
-                <button class="btn">Get Seeker Pack</button>
-              </div>
-              <div class="price-card">
-                <div class="icon"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M4 4h12v12H4z"/><path d="M8 8h4v4H8z"/></svg></div>
-                <h3 class="display">Ultimate</h3>
-                <p class="tier-desc">Both packs + extras.</p>
-                <div class="price mono">€8.99</div>
-                <div class="price-note">Best value</div>
-                <ul>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Full Hider + Seeker</span></li>
-                  <li><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 10l4 4 8-9"/></svg><span>Extra life</span></li>
-                </ul>
-                <button class="btn">Get Ultimate</button>
-              </div>
-            </div>
-          </div>
-        </div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Support</h1><p>Help keep Cake SMP running.</p></div></div>
+    <section class="page-fill"><div class="wrap">
+      <div class="support-simple">
+        <p class="support-simple-text">To support us go here</p>
+        <a class="btn" id="support-paypal-btn" href="https://www.paypal.com/ncp/payment/US53VAW94MF7S" target="_blank" rel="noopener">Support</a>
       </div>
-    </section>
+    </div></section>
   </div>
 
   <!-- ACCOUNT -->
@@ -1432,26 +1282,8 @@
   // Every application / owner mail goes here
   const OWNER_EMAIL = 'smatija1404@gmail.com';
   const PAGE_KEY = 'cakesmp_current_page';
-
-  // Unlock Web Audio on first user gesture (required by browsers)
-  (function unlockAudioEarly(){
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return;
-    const resume = () => {
-      try {
-        if (!window.__cakeAC) window.__cakeAC = new AC();
-        if (window.__cakeAC.state === 'suspended') window.__cakeAC.resume();
-      } catch(e) {}
-    };
-    ['click','keydown','touchstart','pointerdown'].forEach(ev => {
-      document.addEventListener(ev, resume, { capture: true, passive: true });
-    });
-    // try once immediately (works if already interacted)
-    resume();
-  })();
-
-  // Staff application accept invite (shown only in accept messages)
-  const STAFF_DISCORD_INVITE = 'https://discord.gg/ZanK5XZA';
+// Staff application accept invite (shown only in accept messages)
+  const STAFF_DISCORD_INVITE = 'https://discord.gg/DQTPNzqtp';
 
   // Navigation (hardened — always keep one page visible)
   const pages = document.querySelectorAll('.page');
@@ -1567,9 +1399,9 @@
     });
   });
 
-  // Countdown — Season 4 · testing 15:10 CEST today (2026-09-24)
+  // Countdown — Season 4 · Saturday 18:00 CEST exact today (2026-09-24)
   // When it hits 00:00:00:00 → cool chiptune music (Web Audio, no file) + animation
-  const targetDate = new Date('2026-09-24T15:10:00+02:00').getTime();
+  const targetDate = new Date('2026-09-26T18:00:00+02:00').getTime();
   const unitEls = {
     days: document.querySelector('[data-unit="days"]'),
     hours: document.querySelector('[data-unit="hours"]'),
@@ -1586,192 +1418,14 @@
   const FEATURES_TARGET = new Date('2026-10-10T18:00:00+02:00').getTime();
   let countdownFinished = false;
 
-  // ========== AUDIO + RELEASE SEQUENCE ==========
-  function getAudioCtx(){
-    const AC = window.AudioContext || window.webkitAudioContext;
-    if (!AC) return null;
-    try {
-      if (!window.__cakeAC || window.__cakeAC.state === 'closed') {
-        window.__cakeAC = new AC();
-      }
-    } catch(e) { return null; }
-    return window.__cakeAC;
-  }
-  function withAudio(fn){
-    const ctx = getAudioCtx();
-    if (!ctx) return;
-    const run = () => { try { fn(ctx); } catch(e) {} };
-    if (ctx.state === 'suspended') {
-      ctx.resume().then(run).catch(() => {
-        // last resort: play on next click
-        const once = () => {
-          ctx.resume().then(run).catch(()=>{});
-          document.removeEventListener('click', once);
-          document.removeEventListener('keydown', once);
-        };
-        document.addEventListener('click', once);
-        document.addEventListener('keydown', once);
-      });
-    } else {
-      run();
-    }
-  }
-
-  // Better triumphant release jingle
-  function playSeason4Jingle(){
-    withAudio((ctx) => {
-      const master = ctx.createGain();
-      master.gain.value = 0.45;
-      master.connect(ctx.destination);
-
-      // brighter lead
-      const melody = [
-        {f:523.25, t:0.00, d:0.14}, {f:659.25, t:0.14, d:0.14},
-        {f:783.99, t:0.28, d:0.14}, {f:1046.5, t:0.42, d:0.22},
-        {f:987.77, t:0.68, d:0.12}, {f:1046.5, t:0.80, d:0.12},
-        {f:1174.7, t:0.92, d:0.12}, {f:1318.5, t:1.04, d:0.35},
-        {f:1046.5, t:1.45, d:0.12}, {f:1318.5, t:1.57, d:0.12},
-        {f:1568.0, t:1.69, d:0.12}, {f:2093.0, t:1.81, d:0.40}
-      ];
-      melody.forEach(n => {
-        const osc = ctx.createOscillator();
-        const g = ctx.createGain();
-        const f = ctx.createBiquadFilter();
-        osc.type = 'square';
-        osc.frequency.value = n.f;
-        f.type = 'lowpass';
-        f.frequency.value = 3200;
-        g.gain.setValueAtTime(0, ctx.currentTime + n.t);
-        g.gain.linearRampToValueAtTime(0.5, ctx.currentTime + n.t + 0.015);
-        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
-        osc.connect(f); f.connect(g); g.connect(master);
-        osc.start(ctx.currentTime + n.t);
-        osc.stop(ctx.currentTime + n.t + n.d + 0.04);
-      });
-      // bass
-      [{f:130.81,t:0,d:0.55},{f:164.81,t:0.55,d:0.45},{f:196.00,t:1.0,d:0.9}].forEach(n => {
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = 'triangle';
-        o.frequency.value = n.f;
-        g.gain.setValueAtTime(0.22, ctx.currentTime + n.t);
-        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
-        o.connect(g); g.connect(master);
-        o.start(ctx.currentTime + n.t);
-        o.stop(ctx.currentTime + n.t + n.d + 0.05);
-      });
-      // noise hit
-      try {
-        const len = ctx.sampleRate * 0.08;
-        const buf = ctx.createBuffer(1, len, ctx.sampleRate);
-        const d = buf.getChannelData(0);
-        for (let i=0;i<len;i++) d[i] = (Math.random()*2-1) * (1-i/len);
-        const src = ctx.createBufferSource();
-        src.buffer = buf;
-        const g = ctx.createGain();
-        g.gain.value = 0.18;
-        src.connect(g); g.connect(master);
-        src.start(ctx.currentTime);
-      } catch(e) {}
-    });
-  }
-
-  // Short sad pad for cancel
-  function playSadMusic(){
-    withAudio((ctx) => {
-      const master = ctx.createGain();
-      master.gain.value = 0.38;
-      master.connect(ctx.destination);
-      // minor descending: A3 C4 E4  →  G3 B3 D4  →  F3
-      const notes = [
-        {f:220.00, t:0.0, d:1.2},
-        {f:261.63, t:0.15, d:1.2},
-        {f:329.63, t:0.3, d:1.3},
-        {f:196.00, t:1.5, d:1.4},
-        {f:246.94, t:1.7, d:1.3},
-        {f:293.66, t:1.9, d:1.4},
-        {f:174.61, t:3.2, d:2.2}
-      ];
-      notes.forEach(n => {
-        const o = ctx.createOscillator();
-        const g = ctx.createGain();
-        o.type = 'sine';
-        o.frequency.value = n.f;
-        g.gain.setValueAtTime(0, ctx.currentTime + n.t);
-        g.gain.linearRampToValueAtTime(0.35, ctx.currentTime + n.t + 0.25);
-        g.gain.linearRampToValueAtTime(0.2, ctx.currentTime + n.t + n.d * 0.6);
-        g.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + n.t + n.d);
-        o.connect(g); g.connect(master);
-        o.start(ctx.currentTime + n.t);
-        o.stop(ctx.currentTime + n.t + n.d + 0.1);
-      });
-    });
-  }
-
-  function sickReleaseAnimation(){
-    document.body.classList.add('release-shake', 'release-flash');
-    setTimeout(() => document.body.classList.remove('release-shake'), 600);
-    setTimeout(() => document.body.classList.remove('release-flash'), 800);
-    if (typeof fireConfetti === 'function') {
-      try { fireConfetti(); } catch(e) {}
-      setTimeout(() => { try { fireConfetti(); } catch(e) {} }, 400);
-    }
-    const card = document.getElementById('countdown-card');
-    if (card) {
-      card.classList.add('season4-live');
-      card.style.transition = 'transform 0.45s cubic-bezier(.2,.8,.2,1), box-shadow 0.45s ease';
-      card.style.transform = 'scale(1.06)';
-      card.style.boxShadow = '0 0 0 2px #fff, 0 0 50px rgba(255,255,255,0.4)';
-      setTimeout(() => { card.style.transform = 'scale(1)'; }, 500);
-    }
-  }
-
-  function showIpReveal(){
-    // Update real join fields
-    const javaEl = document.getElementById('java-addr');
-    if (javaEl) javaEl.textContent = 'playcakesmp.net';
-    const bedEl = document.getElementById('bedrock-addr');
-    if (bedEl) bedEl.textContent = 'Coming soon...';
-
-    const ov = document.getElementById('release-overlay');
-    if (ov) {
-      ov.classList.add('show');
-      ov.setAttribute('aria-hidden', 'false');
-    }
-  }
-
-  function hideIpReveal(){
-    const ov = document.getElementById('release-overlay');
-    if (ov) {
-      ov.classList.remove('show');
-      ov.setAttribute('aria-hidden', 'true');
-    }
-  }
-
-  function showCancelScreen(){
-    hideIpReveal();
-    playSadMusic();
-    const ov = document.getElementById('cancel-overlay');
-    if (ov) {
-      ov.classList.add('show');
-      ov.setAttribute('aria-hidden', 'false');
-    }
-  }
-
-  function hideCancelScreen(){
-    const ov = document.getElementById('cancel-overlay');
-    if (ov) {
-      ov.classList.remove('show');
-      ov.setAttribute('aria-hidden', 'true');
-    }
-  }
+  // Countdown only — End fight · Saturday 26.09.2026 18:00:00 CEST (exact)
+  let countdownFinished = false;
+  let nextTargetDate = null;
+  let nextPhase = false;
 
   function celebrateCountdownZero(){
     if (countdownFinished) return;
     countdownFinished = true;
-
-    playSeason4Jingle();
-    sickReleaseAnimation();
 
     const title = document.getElementById('countdown-event-name');
     if (title) {
@@ -1783,30 +1437,20 @@
       const el = unitEls[k];
       if (el) el.textContent = '00';
     });
+    const card = document.getElementById('countdown-card');
+    if (card) {
+      card.classList.add('season4-live');
+    }
 
-    // Timeline:
-    // 0.0s  music + sick anim
-    // 2.8s  IP reveal (playcakesmp.net / Coming soon)
-    // 7.0s  black + sad music + cancel text
-    // 13.5s back to normal → next event countdown
-    setTimeout(showIpReveal, 2800);
-    setTimeout(showCancelScreen, 7000);
-    setTimeout(() => {
-      hideCancelScreen();
-      startNextEventCountdown();
-    }, 13500);
+    // After a short moment → Features (next event countdown)
+    setTimeout(startNextEventCountdown, 2500);
   }
-
-  // Next event: 10 Oct 2026 18:00 CET/CEST (UTC+2)
-  let nextTargetDate = null;
-  let nextPhase = false;
 
   function startNextEventCountdown(){
     nextPhase = true;
     nextTargetDate = new Date('2026-10-10T18:00:00+02:00').getTime();
     countdownFinished = false;
 
-    // Hide home countdown card after release sequence — next event lives on Features
     const card = document.getElementById('countdown-card');
     if (card) {
       card.classList.remove('season4-live', 'video-mode');
@@ -1819,7 +1463,6 @@
       if (wrap) wrap.classList.remove('playing');
     } catch(e) {}
 
-    // Features countdown is the "old place" with purple gradient
     const fTitle = document.getElementById('features-countdown-name');
     if (fTitle) {
       fTitle.textContent = 'End fight · 10.10.2026';
@@ -1831,7 +1474,6 @@
       fCard.style.display = '';
     }
 
-    // Navigate to Features (countdown returns to Features)
     try {
       if (typeof goToPage === 'function') goToPage('features');
     } catch(e) {}
@@ -1967,7 +1609,6 @@
   }
   function refreshStatus(){
     checkServer('cakesmp.minecraft.co.com', document.getElementById('cake-online'));
-    checkServer('hideseekcs.folium.lol', document.getElementById('hide-online-pill'), document.getElementById('hide-players'));
   }
   refreshStatus();
   setInterval(refreshStatus, 60000);
@@ -2818,15 +2459,15 @@
       return 'To donate to help us out go here: YOUR_PAYPAL_LINK';
     }
     if (msg.includes('shop') || msg.includes('pack') || msg.includes('buy')) {
-      return "Shop packs for Hide & Seek are still <strong>coming soon</strong>... or not, we will see 👀";
+      return 'To support us go to the <strong>Support</strong> page, or open: <a href="https://www.paypal.com/ncp/payment/US53VAW94MF7S" target="_blank" rel="noopener">PayPal Support</a>';
     }
     if (msg.includes('account') || msg.includes('sign up') || msg.includes('register')) {
       return "Click the circle avatar in the top right → Sign Up. You need Minecraft username + email.";
     }
     if (msg.includes('hide') || msg.includes('seek')) {
-      return "Hide & Seek server: <strong>hideseekcs.folium.lol</strong>";
+      return "Hide & Seek: <strong>Project canceled...</strong>";
     }
-    if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/ZanK5XZA" target="_blank" rel="noopener">discord.gg/ZanK5XZA</a> (also on the Discord page).';
+    if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/DQTPNzqtp" target="_blank" rel="noopener">discord.gg/DQTPNzqtp</a>';
     if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
     if (msg.includes('help')) return "I can help with: joining, rules, shop status, Hide & Seek, accounts, applications and Discord.";
     if (msg.includes('application') || msg.includes('apply') || msg.includes('staff') || msg.includes('mod')) {
@@ -2850,6 +2491,39 @@
   }
   cakerSend.addEventListener('click', sendMessage);
   cakerInput.addEventListener('keydown', e => { if (e.key === 'Enter') sendMessage(); });
+
+
+  // Project canceled — click easter egg
+  (function(){
+    const btn = document.getElementById('project-canceled-btn');
+    if (!btn) return;
+    let clicks = 0;
+    btn.addEventListener('click', () => {
+      clicks++;
+      if (clicks === 1) {
+        btn.textContent = 'Really canceled...';
+        btn.classList.add('secret-open');
+      } else if (clicks === 2) {
+        btn.textContent = 'Or is it...?';
+      } else if (clicks === 3) {
+        btn.textContent = 'Nothing to see here.';
+        btn.style.color = '#ff8a8a';
+      } else {
+        btn.textContent = 'Project canceled...';
+        btn.classList.remove('secret-open');
+        btn.style.color = '';
+        clicks = 0;
+        // subtle glitch on the slot
+        const slot = document.getElementById('hide-canceled-slot');
+        if (slot) {
+          slot.style.transition = 'transform 0.15s ease';
+          slot.style.transform = 'translateX(-6px)';
+          setTimeout(() => { slot.style.transform = 'translateX(6px)'; }, 80);
+          setTimeout(() => { slot.style.transform = ''; }, 160);
+        }
+      }
+    });
+  })();
 
   // Canvas
   const canvas = document.getElementById('site-shader');
@@ -2877,19 +2551,6 @@
   draw();
 })();
 </script>
-
-<!-- Release IP reveal + Cancel sequence -->
-<div id="release-overlay" aria-hidden="true">
-  <div class="release-panel">
-    <div class="release-label display">End fight · Server IP</div>
-    <div class="release-ip mono" id="release-ip-java">playcakesmp.net</div>
-    <div style="font-size:12px;color:var(--text-dim);text-transform:uppercase;letter-spacing:0.06em;">Java Edition</div>
-    <div class="release-bedrock">Bedrock Edition · <span class="soon">Coming soon...</span></div>
-  </div>
-</div>
-<div id="cancel-overlay" aria-hidden="true">
-  <div class="cancel-text">Cake events is canceled<br>because of some stuff...</div>
-</div>
 
 </body>
 </html>
