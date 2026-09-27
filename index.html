@@ -903,24 +903,6 @@
           <span class="dot"></span>
           <span class="count">Cake SMP: <strong id="cake-online">Checking...</strong></span>
         </div>
-        <!-- Event countdown on Home -->
-        <div class="countdown-card" id="countdown-card" style="margin-top:28px; margin-bottom:8px;">
-          <div class="countdown-head"><span class="dot"></span><span>Upcoming</span></div>
-          <h3 class="countdown-title display" id="countdown-event-name" title="Season 4 countdown">Season 4</h3>
-          <div class="countdown-units" id="countdown-units">
-            <div class="countdown-unit"><div class="num mono" data-unit="days">00</div><div class="unit-label">Days</div></div>
-            <div class="countdown-unit"><div class="num mono" data-unit="hours">00</div><div class="unit-label">Hours</div></div>
-            <div class="countdown-unit"><div class="num mono" data-unit="minutes">00</div><div class="unit-label">Min</div></div>
-            <div class="countdown-unit"><div class="num mono" data-unit="seconds">00</div><div class="unit-label">Sec</div></div>
-          </div>
-          <div class="countdown-video-wrap" id="countdown-video-wrap">
-            <video id="countdown-event-video" playsinline controls preload="metadata">
-              <source src="eventvideo.mp4" type="video/mp4">
-            </video>
-          </div>
-          <p id="countdown-video-error" style="display:none;margin:12px 0 0;font-size:13px;color:#ff8a8a;">Video not found. Put <strong>eventvideo.mp4</strong> next to index.html.</p>
-        </div>
-
         <div class="join-card" id="join">
           <h2 class="display">Join Now</h2>
           <div class="join-grid">
@@ -931,8 +913,6 @@
               </div>
               <span class="addr-label">Server Address</span>
               <div class="addr-field mono" id="java-addr">playcakesmp.net</div>
-              <span class="addr-label">Port</span>
-              <div class="addr-field mono">25565</div>
             </div>
             <div class="slot">
               <div class="slot-head">
@@ -940,9 +920,9 @@
                 <button class="icon-btn" data-target="bedrock-addr"><svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="1.6"><rect x="6" y="6" width="11" height="11" rx="2"/><path d="M3 13.5V4.5A1.5 1.5 0 0 1 4.5 3h9"/></svg></button>
               </div>
               <span class="addr-label">Server Address</span>
-              <div class="addr-field mono" id="bedrock-addr">Coming soon<span class="animated-dots" aria-hidden="true">...</span></div>
+              <div class="addr-field mono" id="bedrock-addr">playcakesmp.net</div>
               <span class="addr-label">Port</span>
-              <div class="addr-field mono">25565</div>
+              <div class="addr-field mono">25140</div>
             </div>
           </div>
         </div>
@@ -1455,12 +1435,6 @@
   const SEASON4_TARGET = new Date('2026-09-26T18:00:00+01:00').getTime();
   const END_FIGHT_TARGET = new Date('2026-10-10T18:00:00+01:00').getTime();
 
-  const unitEls = {
-    days: document.querySelector('[data-unit="days"]'),
-    hours: document.querySelector('[data-unit="hours"]'),
-    minutes: document.querySelector('[data-unit="minutes"]'),
-    seconds: document.querySelector('[data-unit="seconds"]')
-  };
   const featureUnitEls = {
     days: document.querySelector('[data-funit="days"]'),
     hours: document.querySelector('[data-funit="hours"]'),
@@ -1497,54 +1471,34 @@
     return { days:d, hours:h, minutes:m, seconds:s };
   }
 
-  function setCountdownTitle(title, purple) {
-    ['countdown-event-name', 'features-countdown-name'].forEach(id => {
-      const el = document.getElementById(id);
-      if (!el) return;
-      el.textContent = title;
-      el.classList.toggle('purple-grad', !!purple);
-      el.style.color = purple ? '' : '';
-    });
-  }
-
   function syncEventUI() {
-    const homeCard = document.getElementById('countdown-card');
     const featureCard = document.getElementById('features-countdown-card');
+    const featureTitle = document.getElementById('features-countdown-name');
+
+    if (!featureCard || !featureTitle) return;
 
     if (eventPhase === 'season4') {
-      setCountdownTitle('Season 4', false);
-      homeCard?.classList.remove('next-event', 'season4-live');
-      featureCard?.classList.remove('next-event');
-      if (homeCard) homeCard.style.display = '';
-      if (featureCard) featureCard.style.display = '';
-      setUnits(unitEls, getParts(SEASON4_TARGET));
+      featureTitle.textContent = 'Season 4';
+      featureTitle.classList.remove('purple-grad');
+      featureCard.classList.remove('next-event');
+      featureCard.style.display = '';
       setUnits(featureUnitEls, getParts(SEASON4_TARGET));
       return;
     }
 
     if (eventPhase === 'endfight') {
-      setCountdownTitle('End fight', true);
-      homeCard?.classList.remove('season4-live');
-      homeCard?.classList.add('next-event');
-      featureCard?.classList.add('next-event');
-      if (homeCard) homeCard.style.display = '';
-      if (featureCard) featureCard.style.display = '';
-      setUnits(unitEls, getParts(END_FIGHT_TARGET));
+      featureTitle.textContent = 'End fight';
+      featureTitle.classList.add('purple-grad');
+      featureCard.classList.add('next-event');
+      featureCard.style.display = '';
       setUnits(featureUnitEls, getParts(END_FIGHT_TARGET));
       return;
     }
 
-    // End fight has finished: remove the event countdown from Home.
-    if (homeCard) {
-      homeCard.style.display = 'none';
-      homeCard.classList.remove('next-event', 'season4-live');
-    }
-    if (featureCard) {
-      featureCard.style.display = '';
-      featureCard.classList.remove('next-event');
-    }
-    setCountdownTitle('End fight — LIVE', true);
-    setUnits(unitEls, {days:0,hours:0,minutes:0,seconds:0});
+    featureTitle.textContent = 'End fight — LIVE';
+    featureTitle.classList.add('purple-grad');
+    featureCard.classList.remove('next-event');
+    featureCard.style.display = '';
     setUnits(featureUnitEls, {days:0,hours:0,minutes:0,seconds:0});
   }
 
@@ -1559,56 +1513,6 @@
 
   updateCountdowns();
   setInterval(updateCountdowns, 1000);
-
-  // Click event name → play eventvideo.mp4, then back to countdown
-  const countdownCard = document.getElementById('countdown-card');
-  const countdownEventName = document.getElementById('countdown-event-name');
-  const countdownVideoWrap = document.getElementById('countdown-video-wrap');
-  const countdownEventVideo = document.getElementById('countdown-event-video');
-  const countdownVideoError = document.getElementById('countdown-video-error');
-
-  function stopEventVideo(){
-    try {
-      if (countdownEventVideo) {
-        countdownEventVideo.pause();
-        countdownEventVideo.currentTime = 0;
-      }
-    } catch (e) {}
-    if (countdownVideoWrap) countdownVideoWrap.classList.remove('playing');
-    if (countdownCard) countdownCard.classList.remove('video-mode');
-    if (countdownVideoError) countdownVideoError.style.display = 'none';
-  }
-
-  function playEventVideo(){
-    if (!countdownEventVideo || !countdownCard || !countdownVideoWrap) return;
-    if (countdownVideoError) countdownVideoError.style.display = 'none';
-    countdownCard.classList.add('video-mode');
-    countdownVideoWrap.classList.add('playing');
-    try { countdownEventVideo.currentTime = 0; } catch (e) {}
-    const p = countdownEventVideo.play();
-    if (p && typeof p.catch === 'function') {
-      p.catch(() => {
-        if (countdownVideoError) countdownVideoError.style.display = 'block';
-        // still show player so user can press play manually
-      });
-    }
-  }
-
-  if (countdownEventName) {
-    countdownEventName.addEventListener('click', (e) => {
-      e.preventDefault();
-      e.stopPropagation();
-      if (countdownCard && countdownCard.classList.contains('video-mode')) return;
-      playEventVideo();
-    });
-  }
-  if (countdownEventVideo) {
-    countdownEventVideo.addEventListener('ended', stopEventVideo);
-    countdownEventVideo.addEventListener('error', () => {
-      if (countdownVideoError) countdownVideoError.style.display = 'block';
-      stopEventVideo();
-    });
-  }
 
   // Online
   async function checkServer(host, elOnline, elPlayers){
@@ -2469,7 +2373,7 @@
     const msg = input.toLowerCase().trim();
     if (/^(hi|hey|hello|yo|sup)/.test(msg)) return "Hey! Welcome to Cake SMP Season 3. What do you need?";
     if (msg.includes('join') || msg.includes('ip') || msg.includes('address')) {
-      return "<strong>Java:</strong> playcakesmp.net<br><strong>Bedrock:</strong> Coming soon...";
+      return "<strong>Java:</strong> playcakesmp.net<br><strong>Bedrock:</strong> playcakesmp.net<br><strong>Bedrock Port:</strong> 25140";
     }
     if (msg.includes('rule')) return "No hacking, no lag machines, no alts, no spawn killing, and be respectful on Discord.";
     if (msg.includes('support') || msg.includes('donate') || msg.includes('donation')) {
