@@ -2,10 +2,13 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<title>CakeSMP</title>
-<meta name="description" content="Minecraft SMP server — join info, features, Discord, and rules." />
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#090d1b">
+<title>Cake SMP — Play. Build. Belong.</title>
+<meta name="description" content="Join Cake SMP, a Minecraft survival community with events, friends, and an open Admin application. Java and Bedrock information here." />
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@600;700;800&family=Figtree:wght@400;500;600;700&family=JetBrains+Mono:wght@400;600&family=Press+Start+2P&display=swap');
+  @import url('https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;600;700&display=swap');
 
   :root{
     --bg: #050505; --bg-2: #0c0c0c; --surface: #111111; --raised: #161616;
@@ -860,6 +863,93 @@
     animation: none !important;
   }
 
+
+/* ===================== CAKE SMP • V2 DESIGN LAYER ===================== */
+
+:root{--bg:#080b16;--bg-2:#0c1221;--surface:#121a2c;--raised:#1b253b;--border:rgba(157,175,226,.14);--border-2:rgba(183,196,241,.28);--text:#f5f6ff;--text-muted:#b5bfd6;--text-dim:#8794b2;--line:#fec477;--violet:#9d80ff;--cyan:#72d7e9}
+html{scroll-behavior:smooth;scroll-padding-top:112px}
+body{font-family:'DM Sans',sans-serif;line-height:1.6;overflow-x:hidden;background:radial-gradient(ellipse 75% 35% at 70% 0%,rgba(110,74,198,.13),transparent 80%),#080b16}
+body::before{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(138,154,219,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(138,154,219,.025) 1px,transparent 1px);background-size:58px 58px;pointer-events:none;z-index:0;mask-image:linear-gradient(#000,transparent 85%)}
+.display{font-family:'Space Grotesk',sans-serif;letter-spacing:-.045em;font-weight:700;line-height:1.14}
+h1,h2,h3{letter-spacing:-.035em}
+::selection{background:#a282ff;color:#fff}
+header{background:rgba(9,12,25,.8);backdrop-filter:blur(22px);border-bottom:1px solid rgba(178,188,230,.11)}
+.header-inner{height:78px;gap:22px}.wrap{max-width:1220px;padding:0 30px}
+.wordmark{gap:11px;font-size:22px;white-space:nowrap;letter-spacing:-1.2px}
+.brand-mark{width:38px;height:38px;border-radius:11px;display:inline-flex;align-items:center;justify-content:center;background:linear-gradient(135deg,#f9cf85,#f19687);color:#191224;box-shadow:0 3px 24px rgba(245,161,104,.21);font-weight:800;font-size:22px;transform:rotate(-5deg)}
+.brand-accent{color:#ffcd87}
+nav.primary{gap:2px}nav.primary button{border-radius:11px;font-size:13px;padding:10px 13px;color:#b5bfd6}
+nav.primary button:hover{color:#fff;transform:translateY(-1px)}
+nav.primary button[aria-current="page"]{color:#fff;background:rgba(151,132,255,.12)}
+nav.primary button[aria-current="page"]::after{left:14px;right:14px;bottom:5px;height:2px;background:#c6a3ff}
+nav.primary .nav-ghost{border:1px solid transparent!important;background:transparent!important}
+nav.primary .nav-ghost:hover{background:rgba(255,255,255,.05)!important;border-color:rgba(255,255,255,.06)!important;box-shadow:none;transform:translateY(-1px)}
+.nav-apply{color:#ffca8e!important}.nav-star{display:inline-flex;margin-left:4px;padding:2px 5px;font-size:8px;letter-spacing:.03em;background:rgba(255,189,101,.15);border-radius:4px;color:#f9bd77;vertical-align:middle}
+.header-right{gap:12px}.header-refresh{padding:7px 13px;border-radius:11px;font-size:23px;line-height:1.2;min-width:40px}
+.btn{background:linear-gradient(130deg,#ffdb91,#ffb56a);border:0;color:#201527;box-shadow:0 8px 28px rgba(238,168,95,.11);padding:12px 22px;font-size:13px;min-height:44px;gap:8px}
+.btn:hover{box-shadow:0 12px 38px rgba(255,172,92,.25);opacity:1;transform:translateY(-3px)}
+.btn:focus-visible,button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible{outline:2px solid #b19cff;outline-offset:3px}
+.avatar{border-radius:12px;width:40px;height:40px;background:linear-gradient(130deg,#31304d,#1c2d41);color:#eee4ff}
+.page:not([hidden]){animation:page-fade .36s ease both}@keyframes page-fade{from{opacity:.5;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.hero{min-height:760px;overflow:hidden;position:relative;flex:1 0 auto;padding:104px 0 90px;background:radial-gradient(circle at 78% 32%,rgba(126,77,227,.3),transparent 36%),radial-gradient(circle at 17% 9%,rgba(64,134,177,.12),transparent 39%),linear-gradient(180deg,rgba(8,10,19,.12),#080b16)}
+.hero-bg{background:radial-gradient(circle at 52% 12%,rgba(250,187,121,.055),transparent 45%);z-index:0}
+.mountains{height:30%;opacity:.38;filter:drop-shadow(0 0 60px rgba(105,76,149,.09))}.mountains polygon:first-child{fill:#171c34}.mountains polygon:last-child{fill:#0b1021}
+.hero-inner{max-width:1170px}.hero-eyebrow,.recruit-kicker{display:inline-flex;align-items:center;gap:10px;background:rgba(169,147,255,.08);border:1px solid rgba(169,147,255,.19);color:#d8c9ff;padding:10px 15px;border-radius:100px;font-size:11px;font-weight:800;letter-spacing:.14em;text-transform:uppercase}
+.live-dot{width:8px;height:8px;background:#ad91ff;box-shadow:0 0 0 4px rgba(173,145,255,.11);border-radius:100%;display:inline-block;animation:breathe 2s ease-in-out infinite}@keyframes breathe{50%{box-shadow:0 0 0 7px rgba(173,145,255,0)}}
+.hero h1{font-size:clamp(51px,6.7vw,98px);letter-spacing:-.075em;line-height:.96;margin:26px 0 0;color:#fff;filter:drop-shadow(0 10px 30px rgba(4,4,19,.23))}
+.gradient-words{background:linear-gradient(100deg,#fff1bb 0%,#ffb981 24%,#d6a4fc 59%,#9ce9ed 100%);color:transparent;-webkit-background-clip:text;background-clip:text;background-size:200% 100%;animation:shift-gradient 9s ease infinite}@keyframes shift-gradient{50%{background-position:100% 0}}
+.hero p.lede{font-size:clamp(16px,1.4vw,19px);max-width:580px;line-height:1.7;margin:24px auto 0;color:#b7c0d6}
+.hero-buttons{display:flex;justify-content:center;gap:12px;margin:30px auto 0;flex-wrap:wrap}
+.hero-primary,.hero-secondary{font-size:14px;padding:15px 25px}.hero-secondary{background:rgba(255,255,255,.05);color:#ece8ff;border:1px solid rgba(202,199,255,.19)}.hero-secondary:hover{background:rgba(255,255,255,.10);box-shadow:0 10px 27px rgba(105,68,187,.16)}
+.hero .stat-pill{margin:22px auto 0;background:rgba(17,27,43,.8);border:1px solid rgba(158,172,216,.18);color:#d3dded}.hero .stat-pill .dot{background:#73e6aa;box-shadow:0 0 0 4px rgba(115,230,170,.10)}
+.hero-spark{position:absolute;color:#c9a7ff;opacity:.42;pointer-events:none;font-size:36px;animation:spark-floating 7s ease-in-out infinite}.hero-spark-one{top:22%;left:11%}.hero-spark-two{right:13%;top:32%;animation-delay:-3s;font-size:23px}@keyframes spark-floating{50%{transform:translateY(-20px) rotate(15deg);opacity:.7}}
+.join-card{max-width:860px;margin-top:52px;text-align:left;background:linear-gradient(135deg,rgba(27,36,58,.94),rgba(13,18,34,.97));border:1px solid rgba(184,176,255,.19);border-radius:25px;padding:31px;box-shadow:0 22px 80px rgba(0,0,0,.3),0 0 60px rgba(139,118,244,.055)}
+.join-head{display:flex;gap:24px;justify-content:space-between;align-items:center;margin-bottom:21px}.join-head h2{font-size:24px;margin:4px 0 0;text-align:left}.join-quick-note{font-size:12px;color:#929eb9;text-align:right;max-width:170px}
+.eyebrow{display:block;text-transform:uppercase;font-weight:800;letter-spacing:.14em;font-size:11px;color:#c9a1ff}.center-text{text-align:center}
+.join-grid{gap:12px}.slot{background:rgba(12,19,33,.75);border:1px solid rgba(170,184,225,.12);border-radius:15px;padding:20px}.slot:hover{border-color:rgba(246,189,129,.4)!important}
+.slot-head h3{font-size:17px}.addr-field{font-size:14px;background:rgba(4,8,17,.6);border:1px solid rgba(164,174,209,.15);color:#fff}
+.icon-btn{background:rgba(255,255,255,.03);border-color:rgba(185,193,229,.24)}.icon-btn:hover{border-color:#ffbd77;color:#ffbd77}
+.page-title{padding:76px 0 52px;background:radial-gradient(ellipse 55% 80% at 50% -20%,rgba(133,92,230,.18),transparent);border-bottom:1px solid rgba(167,179,222,.12)}
+.page-title h1{font-size:clamp(30px,4vw,48px)}.page-title p{font-size:15px}
+.feature,.fact,.plank,.countdown-card,.account-panel,.app-role-select,.app-form-panel,.app-locked,.support-simple{background:linear-gradient(135deg,#151d31,#101729);border:1px solid rgba(167,179,222,.15);border-radius:20px;box-shadow:0 14px 42px rgba(0,0,0,.15)}
+.feature-grid-2{max-width:850px;grid-template-columns:repeat(2,1fr);gap:18px}.feature{padding:28px}.feature h3{font-size:17px}.feature p{font-size:14px}.feature .icon{background:rgba(150,119,250,.09);color:#c7a5ff}
+.fact .value{font-size:23px}.fact .label{font-size:11px}.fact-grid{gap:18px}
+.countdown-card{max-width:700px;padding:28px}.countdown-card .countdown-title{font-size:18px;font-family:'Space Grotesk',sans-serif;line-height:1.5}
+.feature-recruit{display:flex;align-items:center;justify-content:space-between;gap:30px;max-width:850px;margin:42px auto 0;padding:31px 33px;background:linear-gradient(100deg,rgba(103,69,171,.27),rgba(34,29,64,.55));border:1px solid rgba(181,154,255,.25);border-radius:22px}
+.feature-recruit h2{font-family:'Space Grotesk';font-size:clamp(23px,2.5vw,32px);line-height:1.15;margin:8px 0}.feature-recruit p{margin:0;color:#b9c2d9;font-size:14px;max-width:550px}.feature-recruit .btn{white-space:nowrap}
+.recruit-hero{position:relative;padding:85px 0 75px;text-align:center;overflow:hidden;background:radial-gradient(ellipse 62% 90% at 50% 8%,rgba(133,91,243,.27),transparent),radial-gradient(circle at 85% 90%,rgba(255,180,103,.09),transparent 30%);border-bottom:1px solid rgba(168,175,221,.12)}
+.recruit-hero::before{content:'';position:absolute;width:530px;height:530px;left:50%;top:-345px;transform:translateX(-50%);border:1px solid rgba(211,184,255,.22);box-shadow:0 0 0 75px rgba(183,150,255,.023),0 0 0 155px rgba(183,150,255,.018);border-radius:50%;pointer-events:none}
+.recruit-intro{position:relative}.recruit-intro h1{font-family:'Space Grotesk',sans-serif;font-size:clamp(45px,5.4vw,78px);line-height:1.08;letter-spacing:-.072em;max-width:850px;margin:25px auto 0;color:#fff}
+.recruit-intro h1 em{font-style:normal;color:#ffcb95;background:linear-gradient(110deg,#ffbe77,#d3aaff);color:transparent;-webkit-background-clip:text;background-clip:text}
+.recruit-intro>p{font-size:17px;max-width:670px;color:#adb8d2;margin:22px auto 0}
+.recruit-detail-row{display:flex;justify-content:center;flex-wrap:wrap;gap:10px;margin-top:27px}.recruit-detail-row span{display:inline-block;background:rgba(255,255,255,.04);border:1px solid rgba(180,190,232,.12);padding:9px 14px;border-radius:100px;font-size:12px;color:#d6d9e9}
+.ways-section{padding:75px 0 65px}.section-head{display:flex;align-items:end;justify-content:space-between;gap:20px;margin-bottom:30px}.section-head h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(30px,3.5vw,44px);margin:8px 0 0}.section-head>p{color:#a8b5d0;max-width:330px;margin:0}
+.ways-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.way-card{display:flex;flex-direction:column;min-height:318px;position:relative;overflow:hidden;padding:26px 26px 24px;background:linear-gradient(145deg,#151d32,#101625);border:1px solid rgba(157,175,226,.17);border-radius:22px;transition:transform .33s cubic-bezier(.2,.8,.2,1),box-shadow .33s ease,border-color .33s ease;animation:card-in .65s both}
+.way-card:nth-child(2){animation-delay:.1s}.way-card:nth-child(3){animation-delay:.2s}.way-card:hover{transform:translateY(-9px);box-shadow:0 22px 50px rgba(0,0,0,.3);border-color:rgba(181,147,250,.46)}
+.way-card::after{content:'';position:absolute;left:-150%;top:0;width:70%;height:100%;transform:skewX(-21deg);background:linear-gradient(90deg,transparent,rgba(255,255,255,.055),transparent);transition:left .75s ease;pointer-events:none}.way-card:hover::after{left:160%}
+.way-top{display:flex;align-items:center;justify-content:space-between;gap:16px}.way-number{font-size:10px;letter-spacing:.14em;font-weight:800;color:#b4a7dc}.way-icon{display:flex;align-items:center;justify-content:center;width:50px;height:50px;border-radius:15px;background:rgba(152,118,255,.10);border:1px solid rgba(179,159,255,.14);color:#cbafff;font-size:23px;font-weight:700}
+.way-card h3{font-family:'Space Grotesk',sans-serif;font-size:23px;margin:19px 0 8px}.way-card p{font-size:14px;line-height:1.7;color:#b1bfd7;margin:0 0 16px}.way-note{font-size:11.5px;color:#8394af;margin:auto 0 14px}
+.way-link{display:flex;align-items:center;justify-content:space-between;width:100%;padding:13px 15px;text-decoration:none;text-align:left;border-radius:12px;border:1px solid rgba(181,188,235,.22);background:rgba(255,255,255,.045);color:#f4efff;font-family:inherit;font-weight:800;font-size:13px;cursor:pointer;transition:all .2s ease}.way-link:hover{background:rgba(255,255,255,.10);border-color:rgba(228,213,255,.43);transform:translateY(-2px)}
+.featured-way{background:linear-gradient(155deg,#302347,#241a3b 45%,#15182b);border-color:rgba(222,176,255,.40);box-shadow:0 12px 60px rgba(135,66,232,.10)}.featured-way .way-number{color:#ffc67e}.featured-way .way-icon{background:rgba(255,189,114,.16);color:#ffcf8d}.featured-way .way-link{background:linear-gradient(120deg,#ffdb91,#ffb86d);color:#271b2c;border-color:transparent}
+.application-zone{border-top:1px solid rgba(171,177,225,.12);padding:79px 0 100px;background:linear-gradient(180deg,rgba(141,110,255,.055),transparent 40%)}
+.app-main-layout{display:grid;grid-template-columns:minmax(220px,.75fr) minmax(0,1.55fr);gap:44px;align-items:start}
+.app-aside{padding:30px 5px;position:sticky;top:116px}.app-aside h2{font-family:'Space Grotesk',sans-serif;font-size:clamp(29px,3vw,44px);line-height:1.12;max-width:360px;margin:15px 0}.app-aside p{font-size:14px;color:#aab8d2;line-height:1.75}.aside-divider{height:1px;background:rgba(166,178,226,.18);margin:33px 0}.aside-label{font-size:10px;letter-spacing:.13em;font-weight:800;color:#889bb7}.mini-step{display:flex;align-items:center;gap:13px;margin-top:17px;font-size:13px;color:#c6d0e0}.mini-step b{display:flex;align-items:center;justify-content:center;width:30px;height:30px;border-radius:9px;background:rgba(152,126,247,.12);color:#c9b2ff;font-size:11px}.aside-warning{margin-top:29px;border-left:2px solid #ffc67e;background:rgba(255,185,109,.05);padding:12px 14px;font-size:12px;color:#c8c0bb}
+.existing-staff-form{padding:0;border:0;margin:0}.app-shell{max-width:none}.app-main .app-locked,.app-main .app-role-select,.app-main .app-form-panel{padding:32px 32px 29px;background:linear-gradient(145deg,#172035,#11192d);border:1px solid rgba(180,187,236,.18);border-radius:22px}
+.app-main .existing-staff-form>h2{font-size:31px!important}.app-main .existing-staff-form>p{max-width:570px!important;color:#aeb9d0!important;margin-bottom:29px!important}
+.role-grid{gap:12px}.role-card{background:rgba(11,17,30,.7);border:1px solid rgba(155,167,219,.17);border-radius:14px;padding:21px 17px;min-height:135px;display:flex;flex-direction:column;justify-content:center}.role-card h3{font-size:17px;margin-bottom:6px}.role-card p{font-size:12px}.role-card:hover{background:#19243b;border-color:rgba(200,163,255,.53)}.role-card.selected{background:rgba(161,124,255,.16);border-color:#b79afa;box-shadow:0 0 0 1px rgba(179,155,253,.3) inset}.role-card.admin-role{grid-column:span 2;min-height:117px;background:linear-gradient(120deg,rgba(154,103,230,.18),rgba(255,185,105,.055));border-color:rgba(201,153,255,.36)}.role-hot{display:inline-block;align-self:center;margin-bottom:8px;border-radius:100px;padding:3px 8px;font-size:9px;font-weight:800;letter-spacing:.13em;color:#ffda9f;background:rgba(249,196,112,.11)}
+.app-form-panel .sub,.app-role-select .sub{color:#a9b7d1}.account-field{margin-bottom:18px}.account-field label{font-size:11px;letter-spacing:.07em;color:#bfccdf}.account-field input,.account-field textarea,.account-field select{background:#0b1221;border:1px solid rgba(161,175,228,.19);border-radius:11px;color:#f6f5ff;transition:border-color .18s ease,box-shadow .18s ease}.account-field input:focus,.account-field textarea:focus{border-color:#b49aff;box-shadow:0 0 0 3px rgba(170,140,255,.10)}.account-field textarea{min-height:125px}
+.form-privacy{padding:12px 14px;background:rgba(135,150,222,.065);border:1px solid rgba(157,174,226,.13);border-radius:11px;font-size:12px;line-height:1.55;color:#adbada;margin:16px 0}.honeypot{position:absolute!important;left:-10000px!important;opacity:0!important;width:1px!important;height:1px!important;pointer-events:none!important}
+#app-send-btn{width:100%;margin-top:12px;padding:16px 22px;font-size:14px}#app-back-role{width:100%;margin:10px 0 0}.account-message{line-height:1.5}
+.thankyou-band{padding:43px 0;background:linear-gradient(90deg,rgba(117,85,188,.15),rgba(242,161,110,.08));border-top:1px solid rgba(191,167,255,.13);text-align:center}.thankyou-band span{font-size:10px;letter-spacing:.16em;font-weight:800;color:#c4a4ff}.thankyou-band p{font-size:17px;margin:11px auto 0;max-width:750px;color:#bbc4de}.thankyou-band strong{color:#ffce9b}
+footer{background:#090e1a;border-top:1px solid rgba(162,170,215,.13);padding:36px 0}.footer-nav button:hover{color:#ffc987}
+#caker-window,#msg-window{background:#151e30;border-color:rgba(182,185,236,.25);box-shadow:0 25px 65px rgba(0,0,0,.5)}#caker-toggle,#msg-toggle{background:#1d2740;border:2px solid rgba(178,170,241,.38)}
+@media(max-width:1160px){.header-inner{gap:13px}nav.primary button{font-size:12px;padding:9px 8px}.wordmark{font-size:19px}.header-play{padding:11px 14px}.nav-star{display:none}}
+@media(max-width:900px){.header-inner{height:auto;min-height:70px;flex-wrap:wrap;padding-top:10px;padding-bottom:8px;row-gap:3px}.wordmark{margin-right:auto}.header-right{margin-left:auto}nav.primary{order:3;flex-basis:100%;width:100%;overflow-x:auto;justify-content:flex-start;gap:5px;white-space:nowrap;padding:4px 0 2px;scrollbar-width:none}nav.primary::-webkit-scrollbar{display:none}nav.primary button{flex:none;padding:10px 12px}.hero{padding-top:78px;min-height:690px}.app-main-layout{grid-template-columns:1fr;gap:14px}.app-aside{position:static;padding:10px 5px 22px}.app-aside h2{max-width:100%}.aside-divider,.aside-label,.mini-step{display:none}.aside-warning{margin-top:14px}.ways-grid{grid-template-columns:1fr 1fr}.ways-grid .featured-way{grid-column:span 2}.ways-grid .featured-way{min-height:250px}}
+@media(max-width:650px){.wrap{padding:0 18px}.header-inner{padding-top:9px}.header-play{display:none}.header-refresh{padding:8px 10px}.brand-mark{width:34px;height:34px}.wordmark{font-size:19px}.hero{padding:76px 0 60px;min-height:0}.hero h1{font-size:clamp(46px,11vw,70px)}.hero-eyebrow{font-size:9px;padding:9px 11px}.hero p.lede{font-size:15px}.hero-spark{display:none}.join-card{margin:36px auto 0;padding:20px 15px;border-radius:18px}.join-head{display:block}.join-head h2{font-size:23px}.join-quick-note{display:none}.join-grid{grid-template-columns:1fr}.slot{padding:18px}.feature-recruit{flex-direction:column;align-items:start;padding:25px}.feature-grid-2{grid-template-columns:1fr}.section-head{display:block}.section-head>p{margin-top:12px}.ways-section{padding:55px 0}.ways-grid{grid-template-columns:1fr}.ways-grid .featured-way{grid-column:span 1}.way-card,.ways-grid .featured-way{min-height:280px}.recruit-hero{padding:65px 0 58px}.recruit-intro h1{font-size:clamp(40px,10vw,60px)}.recruit-intro>p{font-size:15px}.application-zone{padding:50px 0 70px}.app-main .app-locked,.app-main .app-role-select,.app-main .app-form-panel{padding:23px 19px}.app-main .existing-staff-form>h2{font-size:27px!important}.role-grid{grid-template-columns:1fr}.role-card.admin-role{grid-column:span 1}.role-card{min-height:100px}.page-title{padding:55px 0 39px}.countdown-unit{min-width:0;padding:11px 10px}.countdown-units{gap:7px}.countdown-unit .num{font-size:17px}.hero-buttons .btn{flex:1 1 auto}.thankyou-band p{font-size:15px}#caker-toggle,#msg-toggle{width:50px;height:50px}#caker-toggle{right:15px;bottom:15px}#msg-toggle{right:15px;bottom:75px}#caker-window{right:12px;bottom:77px;height:min(520px,70vh)}#msg-window{right:12px;bottom:138px;height:min(520px,65vh)}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;scroll-behavior:auto!important;transition-duration:.01ms!important}.hero-spark{display:none}}
+
+.btn.app-back,.btn.account-logout{background:transparent!important;color:#bbc5dc!important;border:1px solid rgba(174,186,226,.25)!important;box-shadow:none!important}.btn.app-back:hover,.btn.account-logout:hover{background:rgba(255,255,255,.055)!important;border-color:rgba(200,193,254,.40)!important}
 </style>
 </head>
 <body>
@@ -868,18 +958,19 @@
 
 <header>
   <div class="wrap header-inner">
-    <button class="wordmark display" data-nav="home"><span>Cake SMP</span></button>
+    <button class="wordmark display" data-nav="home"><span class="brand-mark" aria-hidden="true">C</span><span>CAKE<span class="brand-accent">SMP</span></span></button>
     <nav class="primary">
       <button data-nav="home">Home</button>
       <button class="nav-ghost" data-nav="about">About</button>
       <button class="nav-ghost" data-nav="features">Features</button>
+      <button class="nav-ghost nav-apply" data-nav="apply">Applications <span class="nav-star">1 OPEN</span></button>
       <button class="nav-ghost" data-nav="discord">Discord</button>
       <button class="nav-ghost" data-nav="rules">Rules</button>
       <button class="nav-ghost" data-nav="shop">Support</button>
     </nav>
     <div class="header-right">
-      <button type="button" class="header-refresh" id="page-refresh-btn" title="Refresh this page">Refresh</button>
-      <button class="btn" data-nav="home" data-scroll="join">Play Now</button>
+      <button type="button" class="header-refresh" id="page-refresh-btn" title="Refresh this page" aria-label="Refresh page">↻</button>
+      <button class="btn header-play" data-nav="home" data-scroll="join">Play now ↗</button>
       <button class="avatar" id="header-account-chip" data-nav="account" aria-label="Account">CS</button>
     </div>
   </div>
@@ -897,14 +988,16 @@
         </svg>
       </div>
       <div class="wrap hero-inner">
-        <h1 class="display">Cake SMP <span class="stroke">Season 3</span></h1>
-        <p class="lede">Vanilla survival focused on building, community, and creativity.</p>
+        <span class="hero-eyebrow"><span class="live-dot"></span> WELCOME TO YOUR NEXT ADVENTURE</span>
+        <h1 class="display">YOUR WORLD.<br><span class="gradient-words">YOUR STORY.</span></h1>
+        <p class="lede">Build empires. Make rivals. Discover something new. An unforgettable Minecraft survival community starts here.</p>
+        <div class="hero-buttons"><button class="btn hero-primary" data-nav="home" data-scroll="join">Start playing <span aria-hidden="true">↗</span></button><button class="btn hero-secondary" data-nav="apply">Apply for Admin <span aria-hidden="true">→</span></button></div>
         <div class="stat-pill">
           <span class="dot"></span>
-          <span class="count">Cake SMP: <strong id="cake-online">Checking...</strong></span>
+          <span class="count">Server status: <strong id="cake-online">Checking...</strong></span>
         </div>
         <div class="join-card" id="join">
-          <h2 class="display">Join Now</h2>
+          <div class="join-head"><div><span class="eyebrow">YOUR ADVENTURE STARTS HERE</span><h2 class="display">Connect to Cake SMP</h2></div><span class="join-quick-note">Copy your IP and join in Minecraft</span></div>
           <div class="join-grid">
             <div class="slot">
               <div class="slot-head">
@@ -927,6 +1020,7 @@
           </div>
         </div>
       </div>
+      <div class="hero-spark hero-spark-one" aria-hidden="true">✦</div><div class="hero-spark hero-spark-two" aria-hidden="true">✦</div>
     </section>
   </div>
 
@@ -934,7 +1028,7 @@
   <div class="page" data-page="about" hidden>
     <div class="page-title"><div class="wrap"><h1 class="display">About Cake SMP</h1><p>Who we are and what this server is actually about.</p></div></div>
     <section class="page-fill"><div class="wrap">
-      <p class="about-copy">Cake SMP started as a small survival world for a handful of friends who wanted a vanilla server without the griefing, the pay-to-win ranks, or the noise. Season 3 keeps that same idea: build things, play fair, and stick around for the people, not the plugins.</p>
+      <p class="about-copy">Cake SMP started as a small survival world for a handful of friends who wanted a vanilla server without the griefing, the pay-to-win ranks, or the noise. Every new chapter keeps that same idea: build things, play fair, and stick around for the people, not the plugins.</p>
       <div class="fact-grid">
         <div class="fact"><div class="value display">2026</div><div class="label">Founded</div></div>
         <div class="fact"><div class="value display">10+</div><div class="label">Daily players</div></div>
@@ -969,41 +1063,89 @@
         </div>
       </div>
 
-      <!-- Staff Application (inside Features) -->
-      <div style="margin-top:56px; padding-top:40px; border-top:1px solid var(--border);">
-        <h2 class="display" style="font-size:18px; text-align:center; margin-bottom:8px;">Staff Application</h2>
-        <p style="text-align:center; color:var(--text-muted); font-size:14.5px; margin:0 auto 28px; max-width:48ch;">Apply for Mod, Event Manager, Discord Staff, Developer or Voice Actor. Account required.</p>
+      <div class="feature-recruit">
+        <div><span class="eyebrow">NOW RECRUITING</span><h2>Think you could help run Cake SMP?</h2>
+        <p>One Admin position is open. Apply by video, Discord ticket, or right here on the website — no account needed.</p></div>
+        <button class="btn" data-nav="apply">View applications <span aria-hidden="true">↗</span></button>
+      </div>
+    </div></section>
+  </div>
+
+  <!-- APPLICATIONS: three paths + public form -->
+  <div class="page" data-page="apply" hidden>
+    <section class="recruit-hero">
+      <div class="wrap recruit-intro">
+        <div class="recruit-kicker"><span class="live-dot"></span> TEAM RECRUITMENT • 1 ADMIN OPENING</div>
+        <h1>Be part of <em>something bigger.</em></h1>
+        <p>We’re looking for one dedicated Admin to help shape Cake SMP. Good judgement, fairness and commitment matter more than flashy promises.</p>
+        <div class="recruit-detail-row"><span>⚔️ Minecraft community</span><span>🛡️ Fair-play first</span><span>✨ No website signup</span></div>
+      </div>
+    </section>
+    <section class="ways-section">
+      <div class="wrap">
+        <div class="section-head"><div><span class="eyebrow">THREE WAYS TO APPLY</span><h2>Choose your path.</h2></div><p>Pick whichever method lets you show us your strengths.</p></div>
+        <div class="ways-grid">
+          <article class="way-card"><div class="way-top"><span class="way-number">01 / VIDEO</span><span class="way-icon">▶</span></div>
+            <h3>Create a video</h3><p>Explain what makes you a good Admin. Show us your experience, ideas and how you'd help the community.</p>
+            <span class="way-note">Share your video link in a Discord ticket.</span>
+            <a class="way-link" href="https://discord.gg/k4fnTFyex" target="_blank" rel="noopener noreferrer">Open Discord <span aria-hidden="true">↗</span></a></article>
+          <article class="way-card"><div class="way-top"><span class="way-number">02 / DISCORD</span><span class="way-icon">#</span></div>
+            <h3>Open a ticket</h3><p>Tell us why you want to join the team, what you've done before and what you'd change for the better.</p>
+            <span class="way-note">Use the ticket channel in our Discord.</span>
+            <a class="way-link" href="https://discord.gg/k4fnTFyex" target="_blank" rel="noopener noreferrer">Join Discord <span aria-hidden="true">↗</span></a></article>
+          <article class="way-card featured-way"><div class="way-top"><span class="way-number">03 / RECOMMENDED</span><span class="way-icon">✎</span></div>
+            <h3>Apply on the website</h3><p>Complete a proper application, directly on Cake SMP. No account, no password and no login.</p>
+            <span class="way-note">Applications are emailed to our staff.</span>
+            <button class="way-link" id="quick-admin-apply" type="button">Start application <span aria-hidden="true">↗</span></button></article>
+        </div>
+      </div>
+    </section>
+    <section class="application-zone" id="apply-form-section"><div class="wrap">
+      <div class="app-main-layout"><div class="app-aside"><span class="eyebrow">READY WHEN YOU ARE</span>
+        <h2>Your next chapter starts here.</h2><p>Read each question and take your time. We review the quality of your application, not just its length.</p>
+        <div class="aside-divider"></div><span class="aside-label">THE PROCESS</span>
+        <div class="mini-step"><b>01</b><span>Choose your position</span></div><div class="mini-step"><b>02</b><span>Complete the form</span></div><div class="mini-step"><b>03</b><span>Submit for review</span></div>
+        <div class="aside-warning">Applications do not guarantee a role. Only one Admin will be selected.</div>
+      </div><div class="app-main">      <!-- Staff application: original form preserved, account gate removed -->
+      <div class="existing-staff-form">
+        <span class="eyebrow center-text">THE APPLICATION FORM</span><h2 class="display" style="font-size:27px; text-align:center; margin-bottom:8px;">Apply to join our team</h2>
+        <p style="text-align:center; color:var(--text-muted); font-size:14.5px; margin:0 auto 28px; max-width:48ch;">No website account needed. Choose an open position, answer the questions, and submit your application directly.</p>
         <div class="app-shell">
 
           <!-- Not logged in -->
           <div class="app-locked" id="app-locked">
-            <h2 class="display" style="font-size:16px;">Account required</h2>
-            <p>You need to be signed in with your Minecraft account before you can submit a staff application.</p>
-            <button class="btn" data-nav="account">Go to Account</button>
+            <h2 class="display" style="font-size:16px;">Applications temporarily unavailable</h2>
+            <p>Please check back later or open a ticket on Discord.</p>
+            <a class="btn" href="https://discord.gg/k4fnTFyex" target="_blank" rel="noopener noreferrer">Open Discord</a>
           </div>
 
           <!-- Role selection -->
           <div class="app-role-select" id="app-role-select" hidden>
             <h2 class="display" style="font-size:16px;">Choose a role</h2>
-            <p class="sub" style="color:var(--text-muted); font-size:13.5px; margin:8px 0 0;">Select the position you want to apply for. You can only apply for one role at a time.</p>
+            <p class="sub" style="color:var(--text-muted); font-size:13.5px; margin:8px 0 0;">Select the position you want to apply for. Choose one role to complete at a time. You can also apply for the single Admin opening.</p>
             <div class="role-grid">
+              <div class="role-card admin-role" data-role="Admin" role="button" tabindex="0" aria-label="Apply for Admin">
+                <span class="role-hot">1 SPOT OPEN</span>
+                <h3 class="display">👑 Admin</h3>
+                <p>Lead the community, help players, and keep the server fair.</p>
+              </div>
               <div class="role-card closed" data-role="Mod" aria-disabled="true">
                 <h3 class="display">Mod</h3>
                 <p>In-game moderation, reports and player help.</p>
               </div>
-              <div class="role-card" data-role="Event Manager">
+              <div class="role-card" data-role="Event Manager" role="button" tabindex="0">
                 <h3 class="display">Event Manager</h3>
                 <p>Plan and run weekly events &amp; contests.</p>
               </div>
-              <div class="role-card" data-role="Discord Staff">
+              <div class="role-card" data-role="Discord Staff" role="button" tabindex="0">
                 <h3 class="display">Discord Staff</h3>
                 <p>Moderate Discord, help members, keep chat clean.</p>
               </div>
-              <div class="role-card" data-role="Developer">
+              <div class="role-card" data-role="Developer" role="button" tabindex="0">
                 <h3 class="display">Developer</h3>
                 <p>Plugins, website, tools and technical work.</p>
               </div>
-              <div class="role-card" data-role="Voice Actor">
+              <div class="role-card" data-role="Voice Actor" role="button" tabindex="0">
                 <h3 class="display">Voice Actor</h3>
                 <p>Voice lines, announcements, event narration and more.</p>
               </div>
@@ -1018,11 +1160,15 @@
             <form id="application-form">
               <div class="account-field">
                 <label for="app-mc">Minecraft Username *</label>
-                <input type="text" id="app-mc" required maxlength="16" readonly>
+                <input type="text" id="app-mc" required minlength="3" maxlength="16" pattern="[A-Za-z0-9_]{3,16}" autocomplete="username" placeholder="YourMinecraftName">
               </div>
               <div class="account-field">
-                <label for="app-discord">Discord Username (with tag) *</label>
+                <label for="app-discord">Discord Username *</label>
                 <input type="text" id="app-discord" required placeholder="username or username#0000">
+              </div>
+              <div class="account-field">
+                <label for="app-email">Contact email (optional)</label>
+                <input type="email" id="app-email" maxlength="160" placeholder="Only if you prefer an email reply" autocomplete="email">
               </div>
               <div class="account-field">
                 <label for="app-age">Age *</label>
@@ -1056,15 +1202,18 @@
                 <input type="checkbox" id="app-no-ping" required>
                 <label for="app-no-ping">Do you accept to not ping owner to speed the progress? *</label>
               </div>
-              <button type="submit" class="btn" id="app-send-btn">Send Application</button>
+              <div class="form-privacy">🔒 No Cake SMP account or password required. Your answers are sent to the staff review email. Don't include passwords or private information.</div>
+              <input type="text" id="app-honey" name="website" tabindex="-1" autocomplete="off" class="honeypot" aria-hidden="true">
+              <button type="submit" class="btn" id="app-send-btn">Submit my application →</button>
               <button type="button" class="btn app-back" id="app-back-role">Back to roles</button>
             </form>
-            <div class="account-message" id="app-msg"></div>
+            <div class="account-message" id="app-msg" role="status" aria-live="polite"></div>
           </div>
 
         </div>
-      </div>
+      </div></div></div>
     </div></section>
+    <section class="thankyou-band"><div class="wrap"><span>COMMUNITY SPOTLIGHT</span><p>Special thanks to <strong>Zerostify</strong> for helping make Cake SMP better for everyone. Your support makes a difference. 💜</p></div></section>
   </div>
 
   <!-- DISCORD -->
@@ -1074,16 +1223,16 @@
       <div class="discord-lead">
         <div>
           <h2 class="display" style="font-size:18px;">Cake SMP Community</h2>
-          <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Season 3.</p>
+          <p>Talk builds, report issues, join Hide &amp; Seek queues, and stay up to date with Cake SMP.</p>
         </div>
-        <a class="btn btn-discord-join" href="https://discord.gg/DQTPNzqtp" target="_blank" rel="noopener">Join Discord</a>
+        <a class="btn btn-discord-join" href="https://discord.gg/k4fnTFyex" target="_blank" rel="noopener">Join Discord</a>
       </div>
     </div></section>
   </div>
 
   <!-- RULES -->
   <div class="page" data-page="rules" hidden>
-    <div class="page-title"><div class="wrap"><h1 class="display">Server Rules</h1><p>Keep it fair so everyone can enjoy Season 3.</p></div></div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Server Rules</h1><p>Keep it fair so everyone can enjoy Cake SMP.</p></div></div>
     <section class="page-fill"><div class="wrap">
       <div class="rules-grid">
         <div class="plank">
@@ -1128,7 +1277,7 @@
 
   <!-- ACCOUNT -->
   <div class="page" data-page="account" hidden>
-    <div class="page-title"><div class="wrap"><h1 class="display">Account</h1><p>Sign in or create an account with your Minecraft username + email.</p></div></div>
+    <div class="page-title"><div class="wrap"><h1 class="display">Account</h1><p>Optional local account settings. Applications work without an account.</p></div></div>
     <section class="page-fill"><div class="wrap">
       <div class="account-shell">
         <div class="account-panel" id="account-auth">
@@ -1200,7 +1349,7 @@
               <p class="sub" id="profile-email">email@example.com</p>
             </div>
           </div>
-          <p style="color:var(--text-muted);font-size:14px;">You are signed in with your Minecraft username.</p>
+          <p style="color:var(--text-muted);font-size:14px;">Local-browser profile (not required for staff applications).</p>
 
           <div id="account-notifications" style="margin:18px 0;"></div>
 
@@ -1216,8 +1365,7 @@
             </div>
             <div id="owner-apps-panel" hidden>
               <p style="font-size:13px;color:var(--text-muted);margin:0 0 12px;">
-                All applications are emailed to <strong style="color:var(--text);">smatija1404@gmail.com</strong>.
-                Accept / Decline below is for apps saved on this device. You can also add one from an email:
+                Applications are emailed to the staff review inbox. <strong style="color:var(--text);">This panel only holds applications saved on this device</strong> — email submissions from other players are not automatically synced here. Add one from an email for local review:
               </p>
               <div style="display:grid; gap:8px; margin-bottom:14px; text-align:left;">
                 <input type="text" id="owner-add-mc" placeholder="Minecraft username" style="width:100%;background:var(--bg-2);border:1px solid var(--border);border-radius:10px;padding:10px 12px;color:var(--text);font:inherit;">
@@ -1241,7 +1389,7 @@
 <footer>
   <div class="wrap footer-inner">
     <div>
-      © 2026 Cake SMP · Season 3
+      © 2026 Cake SMP · Made for the community
       <div class="footer-disclaimer">
         All content on this website is original. Cake SMP is an unofficial Minecraft fan server and is not affiliated with, endorsed by, or connected to Mojang Studios or Microsoft in any way. Minecraft is a trademark of Mojang Studios.
       </div>
@@ -1251,6 +1399,7 @@
       <button data-nav="rules">Rules</button>
       <button data-nav="discord">Discord</button>
       <button data-nav="features">Features</button>
+      <button data-nav="apply">Applications</button>
     </div>
   </div>
 </footer>
@@ -1281,13 +1430,13 @@
 
 <!-- CAKER -->
 <button id="caker-toggle" title="Chat with Caker">
-  <img src="Cake.jpeg" alt="Caker">
+  <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20rx%3D%2225%22%20fill%3D%22%23251c40%22%2F%3E%3Cpath%20d%3D%22M18%2042h60v32H18z%22%20fill%3D%22%23e8a35a%22%2F%3E%3Cpath%20d%3D%22M18%2042q0-14%2014-14h32q14%200%2014%2014v9q-8%208-16%200-8%209-16%200-8%209-16%200-8%207-12%200z%22%20fill%3D%22%23ffdbdf%22%2F%3E%3Cpath%20d%3D%22M18%2067h60v7H18z%22%20fill%3D%22%23f7ce7f%22%2F%3E%3Ccircle%20cx%3D%2239%22%20cy%3D%2256%22%20r%3D%224%22%20fill%3D%22%2332283f%22%2F%3E%3Ccircle%20cx%3D%2259%22%20cy%3D%2256%22%20r%3D%224%22%20fill%3D%22%2332283f%22%2F%3E%3Cpath%20d%3D%22M45%2064q4%204%208%200%22%20fill%3D%22none%22%20stroke%3D%22%2332283f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M48%2028V16%22%20stroke%3D%22%239e84f6%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M48%2014q-7-9%200-12%208%205%200%2012%22%20fill%3D%22%23ffc96a%22%2F%3E%3C%2Fsvg%3E" alt="Caker">
 </button>
 
 <div id="caker-window">
   <div class="caker-header">
     <div class="caker-avatar">
-      <img src="Cake.jpeg" alt="Caker">
+      <img src="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2296%22%20height%3D%2296%22%20viewBox%3D%220%200%2096%2096%22%3E%3Crect%20width%3D%2296%22%20height%3D%2296%22%20rx%3D%2225%22%20fill%3D%22%23251c40%22%2F%3E%3Cpath%20d%3D%22M18%2042h60v32H18z%22%20fill%3D%22%23e8a35a%22%2F%3E%3Cpath%20d%3D%22M18%2042q0-14%2014-14h32q14%200%2014%2014v9q-8%208-16%200-8%209-16%200-8%209-16%200-8%207-12%200z%22%20fill%3D%22%23ffdbdf%22%2F%3E%3Cpath%20d%3D%22M18%2067h60v7H18z%22%20fill%3D%22%23f7ce7f%22%2F%3E%3Ccircle%20cx%3D%2239%22%20cy%3D%2256%22%20r%3D%224%22%20fill%3D%22%2332283f%22%2F%3E%3Ccircle%20cx%3D%2259%22%20cy%3D%2256%22%20r%3D%224%22%20fill%3D%22%2332283f%22%2F%3E%3Cpath%20d%3D%22M45%2064q4%204%208%200%22%20fill%3D%22none%22%20stroke%3D%22%2332283f%22%20stroke-width%3D%223%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M48%2028V16%22%20stroke%3D%22%239e84f6%22%20stroke-width%3D%225%22%20stroke-linecap%3D%22round%22%2F%3E%3Cpath%20d%3D%22M48%2014q-7-9%200-12%208%205%200%2012%22%20fill%3D%22%23ffc96a%22%2F%3E%3C%2Fsvg%3E" alt="Caker">
     </div>
     <div class="caker-header-info">
       <h3 class="display">Caker</h3>
@@ -1312,6 +1461,7 @@
   // Every application / owner mail goes here
   const OWNER_EMAIL = 'smatija1404@gmail.com';
   const PAGE_KEY = 'cakesmp_current_page';
+  let msgOpen = false; // must exist before initial renderInbox()
 // Staff application accept invite (shown only in accept messages)
   const STAFF_DISCORD_INVITE = 'https://discord.gg/DQTPNzqtp';
 
@@ -1430,10 +1580,8 @@
   });
 
   // Event countdown state machine
-  // Season 4 releases: September 26, 2026 at 18:00 CET.
-  // End fight: October 10, 2026 at 18:00 CET.
-  const SEASON4_TARGET = new Date('2026-09-26T18:00:00+01:00').getTime();
-  const END_FIGHT_TARGET = new Date('2026-10-10T18:00:00+01:00').getTime();
+  // Next announced Cake SMP event: Purge, November 14, 2026, at 18:00 CET.
+  const PURGE_TARGET = new Date('2026-11-14T18:00:00+01:00').getTime();
 
   const featureUnitEls = {
     days: document.querySelector('[data-funit="days"]'),
@@ -1442,8 +1590,7 @@
     seconds: document.querySelector('[data-funit="seconds"]')
   };
 
-  let eventPhase = Date.now() < SEASON4_TARGET ? 'season4' :
-                   Date.now() < END_FIGHT_TARGET ? 'endfight' : 'finished';
+  let eventPhase = Date.now() < PURGE_TARGET ? 'upcoming' : 'finished';
 
   function setUnits(map, values) {
     Object.keys(values).forEach(k => {
@@ -1474,42 +1621,19 @@
   function syncEventUI() {
     const featureCard = document.getElementById('features-countdown-card');
     const featureTitle = document.getElementById('features-countdown-name');
-
     if (!featureCard || !featureTitle) return;
-
-    if (eventPhase === 'season4') {
-      featureTitle.textContent = 'Season 4';
-      featureTitle.classList.remove('purple-grad');
-      featureCard.classList.remove('next-event');
-      featureCard.style.display = '';
-      setUnits(featureUnitEls, getParts(SEASON4_TARGET));
-      return;
-    }
-
-    if (eventPhase === 'endfight') {
-      featureTitle.textContent = 'End fight';
-      featureTitle.classList.add('purple-grad');
-      featureCard.classList.add('next-event');
-      featureCard.style.display = '';
-      setUnits(featureUnitEls, getParts(END_FIGHT_TARGET));
-      return;
-    }
-
-    featureTitle.textContent = 'End fight — LIVE';
+    featureCard.classList.add('next-event');
     featureTitle.classList.add('purple-grad');
-    featureCard.classList.remove('next-event');
-    featureCard.style.display = '';
-    setUnits(featureUnitEls, {days:0,hours:0,minutes:0,seconds:0});
+    if (Date.now() < PURGE_TARGET) {
+      featureTitle.textContent = 'The Purge • 14 NOV • 18:00 CET';
+      setUnits(featureUnitEls, getParts(PURGE_TARGET));
+    } else {
+      featureTitle.textContent = 'The Purge — event date passed';
+      setUnits(featureUnitEls, { days: 0, hours: 0, minutes: 0, seconds: 0 });
+    }
   }
 
-  function updateCountdowns() {
-    const now = Date.now();
-    const nextPhase = now < SEASON4_TARGET ? 'season4' :
-                      now < END_FIGHT_TARGET ? 'endfight' : 'finished';
-
-    if (nextPhase !== eventPhase) eventPhase = nextPhase;
-    syncEventUI();
-  }
+  function updateCountdowns() { syncEventUI(); }
 
   updateCountdowns();
   setInterval(updateCountdowns, 1000);
@@ -1519,6 +1643,8 @@
     try {
       const res = await fetch(`https://api.mcsrvstat.us/2/${host}`);
       const data = await res.json();
+      const statusDot = elOnline?.closest('.stat-pill')?.querySelector('.dot');
+      if (statusDot) statusDot.style.background = data?.online ? '#73e6aa' : '#fa8a8a';
       if (data?.online) {
         if (elOnline) elOnline.textContent = data.players?.online ?? 'Online';
         if (elPlayers) elPlayers.textContent = `${data.players?.online ?? 0} / ${data.players?.max ?? '?'}`;
@@ -1527,6 +1653,8 @@
         if (elPlayers) elPlayers.textContent = 'Offline';
       }
     } catch(e) {
+      const statusDot = elOnline?.closest('.stat-pill')?.querySelector('.dot');
+      if (statusDot) statusDot.style.background = '#8996b2';
       if (elOnline) elOnline.textContent = '—';
       if (elPlayers) elPlayers.textContent = 'Unavailable';
     }
@@ -1542,6 +1670,7 @@
   const ACCOUNTS_KEY = 'cakesmp_accounts';
   const PENDING_KEY = 'cakesmp_pending';
 
+  const authTabs     = document.querySelector('.account-tabs');
   const authPanel    = document.getElementById('account-auth');
   const verifyPanel  = document.getElementById('account-verify');
   const profilePanel = document.getElementById('account-profile');
@@ -1565,6 +1694,7 @@
   function updateUI(){
     const user = getUser();
     const pending = getPending();
+    if (authTabs) authTabs.hidden = false;
 
     if (user) {
       authPanel.hidden = true;
@@ -1761,6 +1891,7 @@
 
   function applyRoleFormFields(role){
     const isVA = role === 'Voice Actor';
+    const isAdmin = role === 'Admin';
     const expLabel = document.getElementById('label-experience');
     const expArea = document.getElementById('app-experience');
     const scenLabel = document.getElementById('label-scenario');
@@ -1778,7 +1909,14 @@
       expArea.placeholder = 'Have you been staff before? How long have you played Minecraft? Any relevant experience?';
       scenLabel.textContent = 'Scenario: A player is using X-ray and refuses to listen. What do you do? *';
       scenArea.placeholder = 'Describe your steps clearly.';
-      acceptLabel.textContent = 'Do you accept to be a staff of Cake SMP without being paid or having OP on the main server? *';
+      acceptLabel.textContent = isAdmin
+        ? 'Do you understand that applying is voluntary and that permissions are granted only by the owner if selected? *'
+        : 'Do you accept to be a staff of Cake SMP without being paid or having OP on the main server? *';
+      if (isAdmin) {
+        expLabel.textContent = 'Your leadership / Minecraft moderation experience *';
+        scenLabel.textContent = 'A friend of yours is cheating. How would you handle it fairly? *';
+        scenArea.placeholder = 'Explain what you would do and why.';
+      }
     }
   }
 
@@ -1799,18 +1937,13 @@
       return;
     } else {
       // restore locked panel text if not blocked
-      appLocked.querySelector('h2').textContent = 'Account required';
-      appLocked.querySelector('p').textContent = 'You need to be signed in with your Minecraft account before you can submit a staff application.';
+      appLocked.querySelector('h2').textContent = 'Applications unavailable';
+      appLocked.querySelector('p').textContent = 'Please use Discord to contact the staff team.';
       const goBtn = appLocked.querySelector('button');
       if (goBtn) goBtn.style.display = '';
     }
 
-    if (!user) {
-      appLocked.hidden = false;
-      appRoleSelect.hidden = true;
-      appFormPanel.hidden = true;
-      return;
-    }
+    // Public staff applications: a local browser account is NOT required.
     appLocked.hidden = true;
     if (!selectedRole) {
       appRoleSelect.hidden = false;
@@ -1819,7 +1952,9 @@
       appRoleSelect.hidden = true;
       appFormPanel.hidden = false;
       document.getElementById('app-selected-role').textContent = selectedRole;
-      document.getElementById('app-mc').value = user.username;
+      // Prefill for existing signed-in users, but leave the input editable for guests.
+      const mc = document.getElementById('app-mc');
+      if (user && user.username && !mc.value.trim()) mc.value = user.username;
       applyRoleFormFields(selectedRole);
     }
   }
@@ -1836,6 +1971,23 @@
 
   // Init account + application UI after all helpers exist
   updateUI();
+
+  function jumpToAdminForm(){
+    selectedRole = 'Admin';
+    document.querySelectorAll('.role-card').forEach(c => c.classList.toggle('selected', c.dataset.role === 'Admin'));
+    continueRoleBtn.disabled = false;
+    continueRoleBtn.style.opacity = '1';
+    continueRoleBtn.style.cursor = 'pointer';
+    updateApplicationUI();
+    document.getElementById('apply-form-section')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    setTimeout(() => document.getElementById('app-mc')?.focus({ preventScroll: true }), 600);
+  }
+  document.getElementById('quick-admin-apply')?.addEventListener('click', jumpToAdminForm);
+  document.querySelectorAll('.role-card').forEach(card => {
+    card.addEventListener('keydown', (e) => {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); card.click(); }
+    });
+  });
 
   document.querySelectorAll('.role-card').forEach(card => {
     card.addEventListener('click', () => {
@@ -1873,7 +2025,7 @@
   document.getElementById('application-form').addEventListener('submit', async (e) => {
     e.preventDefault();
     const user = getUser();
-    if (!user || !selectedRole) return;
+    if (!selectedRole) return;
 
     if (isAppBlocked()) {
       appMsg.textContent = 'Message owner for this!';
@@ -1882,6 +2034,14 @@
       return;
     }
 
+    const mcName = document.getElementById('app-mc').value.trim();
+    if (!/^[A-Za-z0-9_]{3,16}$/.test(mcName)) {
+      appMsg.textContent = 'Please enter a valid Minecraft username (3–16 letters, numbers or _).';
+      appMsg.className = 'account-message error';
+      return;
+    }
+    // Hidden honeypot to reduce automated spam without requiring an account.
+    if (document.getElementById('app-honey')?.value.trim()) return;
     const ageVal = parseInt(document.getElementById('app-age').value.trim(), 10);
     if (!isNaN(ageVal) && ageVal < 13) {
       setAppBlock(60 * 60 * 1000); // 1 hour
@@ -1912,8 +2072,9 @@
     const isVA = selectedRole === 'Voice Actor';
     const data = {
       role: selectedRole,
-      minecraft: document.getElementById('app-mc').value.trim(),
+      minecraft: mcName,
       discord: document.getElementById('app-discord').value.trim(),
+      email: document.getElementById('app-email').value.trim(),
       age: document.getElementById('app-age').value.trim(),
       timezone: document.getElementById('app-timezone').value.trim(),
       experience: document.getElementById('app-experience').value.trim(),
@@ -1935,10 +2096,11 @@
     body.append('_subject', 'Cake SMP Staff Application — ' + data.role + ' — ' + data.minecraft);
     body.append('_captcha', 'false');
     body.append('_template', 'table');
-    body.append('_replyto', user.email || OWNER_EMAIL);
+    if (data.email || (user && user.email)) body.append('_replyto', data.email || user.email);
+    body.append('_honey', document.getElementById('app-honey')?.value || '');
     body.append('Role', data.role);
     body.append('Minecraft Username', data.minecraft);
-    body.append('Account Email', user.email || '—');
+    body.append('Contact Email (optional)', data.email || (user && user.email) || '—');
     body.append('Discord', data.discord);
     body.append('Age', data.age);
     body.append('Timezone', data.timezone);
@@ -1961,7 +2123,7 @@
         const json = await res.json();
         // FormSubmit returns { success: "..." } or { error: "..." }
         if (json && json.error) ok = false;
-        if (json && json.success) ok = true;
+        if (json && (json.success === true || typeof json.success === 'string')) ok = true;
       } catch (e) {}
 
       if (!ok) {
@@ -1976,17 +2138,17 @@
         apps.unshift({
           id: 'APP-' + Date.now().toString(36).toUpperCase(),
           ...data,
-          email: user.email || '',
+          email: data.email || (user && user.email) || '',
           status: 'pending',
           createdAt: new Date().toISOString()
         });
         localStorage.setItem('cakesmp_applications', JSON.stringify(apps.slice(0, 100)));
       } catch (e) {}
 
-      appMsg.textContent = 'Application sent successfully! Staff will review it soon.';
+      appMsg.textContent = 'Application submitted! The staff review email service accepted your request. Keep an eye on Discord for updates.';
       appMsg.className = 'account-message success';
       document.getElementById('application-form').reset();
-      document.getElementById('app-mc').value = user.username;
+      document.getElementById('app-mc').value = (user && user.username) || '';
       document.getElementById('app-accept').checked = false;
       document.getElementById('app-no-ping').checked = false;
     } catch (err) {
@@ -1994,7 +2156,7 @@
       appMsg.className = 'account-message error';
     } finally {
       sendBtn.disabled = false;
-      sendBtn.textContent = 'Send Application';
+      sendBtn.textContent = 'Submit my application →';
     }
   });
 
@@ -2308,7 +2470,6 @@
   // Messages inbox (like Caker)
   const msgToggle = document.getElementById('msg-toggle');
   const msgWindow = document.getElementById('msg-window');
-  let msgOpen = false;
   function toggleMessages(){
     msgOpen = !msgOpen;
     msgWindow.classList.toggle('open', msgOpen);
@@ -2371,7 +2532,7 @@
 
   function cakerReply(input){
     const msg = input.toLowerCase().trim();
-    if (/^(hi|hey|hello|yo|sup)/.test(msg)) return "Hey! Welcome to Cake SMP Season 3. What do you need?";
+    if (/^(hi|hey|hello|yo|sup)/.test(msg)) return "Hey! Welcome to Cake SMP. What do you need?";
     if (msg.includes('join') || msg.includes('ip') || msg.includes('address')) {
       return "<strong>Java:</strong> playcakesmp.net<br><strong>Bedrock:</strong> playcakesmp.net<br><strong>Bedrock Port:</strong> 25140";
     }
@@ -2386,16 +2547,16 @@
       return 'To support us go to the <strong>Support</strong> page, or open: <a href="https://www.paypal.com/ncp/payment/US53VAW94MF7S" target="_blank" rel="noopener">PayPal Support</a>';
     }
     if (msg.includes('account') || msg.includes('sign up') || msg.includes('register')) {
-      return "Click the circle avatar in the top right → Sign Up. You need Minecraft username + email.";
+      return "Accounts are optional and saved on this device. To apply for staff, just open Applications; you don't need an account.";
     }
     if (msg.includes('hide') || msg.includes('seek')) {
       return "Hide & Seek: <strong>Project canceled...</strong>";
     }
-    if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/DQTPNzqtp" target="_blank" rel="noopener">discord.gg/DQTPNzqtp</a>';
+    if (msg.includes('discord')) return 'Join our Discord: <a href="https://discord.gg/k4fnTFyex" target="_blank" rel="noopener">discord.gg/k4fnTFyex</a>';
     if (msg.includes('who are you') || msg.includes('caker')) return "I'm <strong>Caker</strong> — the official Cake SMP AI assistant.";
     if (msg.includes('help')) return "I can help with: joining, rules, shop status, accounts, applications and Discord.";
-    if (msg.includes('application') || msg.includes('apply') || msg.includes('staff') || msg.includes('mod')) {
-      return "Go to <strong>Features</strong> (you must be signed in). Scroll down to Staff Application, choose Mod, Event Manager, Discord Staff, Developer or Voice Actor, fill the form and send it.";
+    if (msg.includes('application') || msg.includes('apply') || msg.includes('admin') || msg.includes('staff') || msg.includes('mod')) {
+      return "Open <strong>Applications</strong> to apply for the one Admin opening by video, ticket, or website form. No website account is needed. Other staff roles are there, too.";
     }
 
     const fallbacks = [
